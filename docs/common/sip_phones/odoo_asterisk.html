@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Configure Asterisk to work with Odoo VoIP &#8212; OdooPBX 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Auto-Answer" href="../auto_answer.html" />
+    <link rel="prev" title="SIP phone connection troubleshooting" href="troubleshooting.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="configure-asterisk-to-work-with-odoo-voip">
+<h1>Configure Asterisk to work with Odoo VoIP<a class="headerlink" href="#configure-asterisk-to-work-with-odoo-voip" title="Permalink to this headline">¶</a></h1>
+<section id="asterisk-configuration">
+<h2>Asterisk configuration<a class="headerlink" href="#asterisk-configuration" title="Permalink to this headline">¶</a></h2>
+<section id="making-webrtc-work-with-asterisk">
+<h3>Making WebRTC work with Asterisk<a class="headerlink" href="#making-webrtc-work-with-asterisk" title="Permalink to this headline">¶</a></h3>
+<p>Making Asterisk work with WebRTC requires setting up correctly the Asterisk’s included web server.
+The server’s configuration is defined in <code class="docutils literal notranslate"><span class="pre">/etc/asterisk/http.conf</span></code>.
+For better security it’s recommended you generate a TLS keypair for Asterisk, or you can also use the keys
+provided by LetsEncrypt.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># /etc/asterisk/http.conf</span>
+<span class="p">[</span><span class="n">general</span><span class="p">]</span>
+<span class="n">enabled</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">enablestatic</span><span class="o">=</span><span class="n">no</span>
+<span class="n">servername</span><span class="o">=</span><span class="n">OdooPBX</span>
+<span class="n">bindaddr</span><span class="o">=</span><span class="mf">127.0.0.1</span>
+<span class="n">bindport</span><span class="o">=</span><span class="mi">8088</span>
+<span class="n">tlsenable</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">tlsbindaddr</span><span class="o">=</span><span class="mf">0.0.0.0</span><span class="p">:</span><span class="mi">8089</span>
+<span class="n">tlscertfile</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">odoopbx</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">current</span><span class="o">/</span><span class="n">fullchain</span><span class="o">-</span><span class="n">privkey</span><span class="o">.</span><span class="n">pem</span>
+</pre></div>
+</div>
+</section>
+<section id="create-webrtc-sip-peers-manually">
+<h3>Create WebRTC SIP Peers manually<a class="headerlink" href="#create-webrtc-sip-peers-manually" title="Permalink to this headline">¶</a></h3>
+<p>Edit <code class="docutils literal notranslate"><span class="pre">/etc/asterisk/sip.conf</span></code> and add the user’s configuration as shown below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">webrtc</span><span class="p">]</span> <span class="p">;</span> <span class="n">This</span> <span class="n">will</span> <span class="n">be</span> <span class="n">WebRTC</span> <span class="n">client</span>
+<span class="n">accountcode</span><span class="o">=</span><span class="n">user</span><span class="o">-</span><span class="mi">2</span>
+<span class="n">allow</span><span class="o">=</span><span class="nb">all</span>
+<span class="n">canreinvite</span><span class="o">=</span><span class="n">no</span>
+<span class="n">cancallforward</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">context</span><span class="o">=</span><span class="n">sip</span><span class="o">-</span><span class="n">peer</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">deny</span><span class="o">=</span><span class="mf">0.0.0.0</span><span class="o">/</span><span class="mf">0.0.0.0</span>
+<span class="n">host</span><span class="o">=</span><span class="n">dynamic</span>
+<span class="n">language</span><span class="o">=</span><span class="n">en</span>
+<span class="n">nat</span><span class="o">=</span><span class="n">force_rport</span><span class="p">,</span><span class="n">comedia</span>
+<span class="n">permit</span><span class="o">=</span><span class="mf">0.0.0.0</span><span class="o">/</span><span class="mf">0.0.0.0</span>
+<span class="n">secret</span><span class="o">=</span><span class="n">X1D2PAhwkG</span>
+<span class="nb">type</span><span class="o">=</span><span class="n">friend</span>
+<span class="n">disallow</span><span class="o">=</span><span class="nb">all</span>
+<span class="n">allow</span><span class="o">=</span><span class="n">g722</span><span class="p">,</span><span class="n">alaw</span><span class="p">,</span><span class="n">ulaw</span><span class="p">,</span><span class="n">vp8</span><span class="p">,</span><span class="n">h264</span><span class="p">,</span><span class="n">h263p</span><span class="p">,</span><span class="n">mpeg4</span>
+<span class="nb">type</span><span class="o">=</span><span class="n">friend</span>
+<span class="n">rtcp_mux</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">transport</span><span class="o">=</span><span class="n">wss</span>
+<span class="n">host</span><span class="o">=</span><span class="n">dynamic</span>
+<span class="n">encryption</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">avpf</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">force_avp</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">icesupport</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">nat</span><span class="o">=</span><span class="n">force_rport</span><span class="p">,</span><span class="n">comedia</span>
+<span class="n">directmedia</span><span class="o">=</span><span class="n">no</span>
+<span class="n">qualify</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">videosupport</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">dtlsverify</span><span class="o">=</span><span class="n">no</span>
+<span class="n">dtlsautogeneratecert</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">dtlssetup</span><span class="o">=</span><span class="n">actpass</span>
+<span class="n">dtlsenable</span><span class="o">=</span><span class="n">yes</span>
+</pre></div>
+</div>
+<p>For every peer, replace <code class="docutils literal notranslate"><span class="pre">[webrtc]</span></code> with the peer’s login. For example if the peer’s login needs to be
+<code class="docutils literal notranslate"><span class="pre">peer1</span></code>, the peer’s configuration needs to start with <code class="docutils literal notranslate"><span class="pre">[peer1]</span></code>. The <code class="docutils literal notranslate"><span class="pre">secret</span></code> field must also be updated.</p>
+</section>
+<section id="create-webrtc-sip-peers-using-asterisk-base-sip">
+<h3>Create WebRTC SIP Peers using Asterisk Base SIP<a class="headerlink" href="#create-webrtc-sip-peers-using-asterisk-base-sip" title="Permalink to this headline">¶</a></h3>
+<p>If you use the Asterisk Base SIP module, create your SIP peers meant for working with WebRTC using the WebRTC template
+as shown in the screenshot below.</p>
+<img alt="Modules hierarchy" class="align-center" src="../../_images/webrtc.png" />
+</section>
+</section>
+<section id="odoo-voip-credentials-setup">
+<h2>Odoo VoIP Credentials Setup<a class="headerlink" href="#odoo-voip-credentials-setup" title="Permalink to this headline">¶</a></h2>
+<p>This section describes setting up Odoo VoIP, which is a module available for Odoo Enterprise Edition.</p>
+<section id="asterisk-connection-setup">
+<h3>Asterisk connection setup<a class="headerlink" href="#asterisk-connection-setup" title="Permalink to this headline">¶</a></h3>
+<p>Go to <code class="docutils literal notranslate"><span class="pre">Settings</span> <span class="pre">-&gt;</span> <span class="pre">General</span> <span class="pre">Settings</span></code> and find the section named <code class="docutils literal notranslate"><span class="pre">Asterisk(VoIP)</span></code>. This section
+requires filling in the fields <code class="docutils literal notranslate"><span class="pre">PBX</span> <span class="pre">Server</span> <span class="pre">IP</span></code>, <code class="docutils literal notranslate"><span class="pre">Websocket</span></code> and <code class="docutils literal notranslate"><span class="pre">VoIP</span> <span class="pre">Environment</span></code>.</p>
+<p>The field <code class="docutils literal notranslate"><span class="pre">PBX</span> <span class="pre">Server</span> <span class="pre">IP</span></code> must be filled in with the Asterisk server’s hostname or IP address.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Websocket</span></code> uses the port 8089, configured above on the Asterisk server. If the port 8089 is
+published directly, the URL of the websocket will have the form <code class="docutils literal notranslate"><span class="pre">wss://asterisk_domain:8089/ws</span></code>.
+It’s also possible to use a reverse proxy as Nginx to forward the websocket. In that case the
+websocket address will be different depending on your setup.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">VoIP</span> <span class="pre">Environment</span></code> needs to be set to <strong>Production</strong>. When set to <strong>Demo</strong> no connections
+to the Asterisk server are being performed.</p>
+<img alt="Modules hierarchy" class="align-center" src="../../_images/voip_webrtc.png" />
+</section>
+<section id="user-credentials-setup">
+<h3>User credentials setup<a class="headerlink" href="#user-credentials-setup" title="Permalink to this headline">¶</a></h3>
+<p>For every user it’s mandatory to fill in the fields <code class="docutils literal notranslate"><span class="pre">SIP</span> <span class="pre">Login/Browser's</span> <span class="pre">Extension</span></code> and <code class="docutils literal notranslate"><span class="pre">SIP</span> <span class="pre">Password</span></code>.
+The Login and Password are taken from the SIP Peer’s configuration as described above.</p>
+<p>It’s possible to specify a handset extension. The incoming calls will be
+forwarded to the specified extension when the user is not connected or busy.</p>
+<p>When accessing Odoo from mobile, you can specify how to call the contacts - via the
+softphone included with Odoo or using the telephone itself. The field <code class="docutils literal notranslate"><span class="pre">Mobile</span> <span class="pre">Call</span></code>
+offers this functionality.</p>
+<p>Two additional checkboxes - <code class="docutils literal notranslate"><span class="pre">Always</span> <span class="pre">Redirect</span> <span class="pre">to</span> <span class="pre">Handset</span></code> and <code class="docutils literal notranslate"><span class="pre">Reject</span> <span class="pre">All</span> <span class="pre">Incoming</span> <span class="pre">Calls</span></code>
+describe the behaviour of the incoming calls.</p>
+<img alt="Modules hierarchy" class="align-center" src="../../_images/voip_user.png" />
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">OdooPBX</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../administration.html">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../common.html">Common</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../sip_trunking.html">SIP Trunking</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../sip_phones.html">SIP Phones</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="zoiper.html">Zoiper installation instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html">SIP phone connection troubleshooting</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Configure Asterisk to work with Odoo VoIP</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_answer.html">Auto-Answer</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../../common.html">Common</a><ul>
+  <li><a href="../sip_phones.html">SIP Phones</a><ul>
+      <li>Previous: <a href="troubleshooting.html" title="previous chapter">SIP phone connection troubleshooting</a></li>
+      <li>Next: <a href="../auto_answer.html" title="next chapter">Auto-Answer</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Odooist.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/common/sip_phones/odoo_asterisk.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

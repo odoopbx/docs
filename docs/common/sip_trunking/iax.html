@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>IAX2 interconnection &#8212; OdooPBX 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="SIP Phones" href="../sip_phones.html" />
+    <link rel="prev" title="How to set up Twilio Elastic SIP Trunking with Odoo PBX" href="twilio.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="iax2-interconnection">
+<h1>IAX2 interconnection<a class="headerlink" href="#iax2-interconnection" title="Permalink to this headline">¶</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes it is required to interconnect two Asterisk servers.</p>
+<p>Currently Asterisk Base does not support IAX2 peers (only SIP is supported by the UI).</p>
+<p>But this is no a problem at all as you always have the possibility to enter the .conf files
+and configure whatever is required.</p>
+<p>This document covers this topic.</p>
+</section>
+<section id="iax2-channel-configuration">
+<h2>IAX2 channel configuration<a class="headerlink" href="#iax2-channel-configuration" title="Permalink to this headline">¶</a></h2>
+<p>First you should tell Asterisk to load the chan_iax.so driver.</p>
+<section id="unmask-the-module">
+<h3>Unmask the module<a class="headerlink" href="#unmask-the-module" title="Permalink to this headline">¶</a></h3>
+<p>By default Asterisk Base has a <code class="docutils literal notranslate"><span class="pre">modules.conf</span></code> with <code class="docutils literal notranslate"><span class="pre">chan_iax2.so</span></code> loading masked:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">modules</span><span class="p">]</span>
+<span class="n">autoload</span><span class="o">=</span><span class="n">yes</span>
+<span class="o">...</span>
+<span class="n">noload</span> <span class="o">=&gt;</span> <span class="n">chan_iax2</span><span class="o">.</span><span class="n">so</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>You should either comment this line out and make like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">modules</span><span class="p">]</span>
+<span class="p">;</span> <span class="n">autoload</span><span class="o">=</span><span class="n">yes</span>
+<span class="o">...</span>
+<span class="n">noload</span> <span class="o">=&gt;</span> <span class="n">chan_iax2</span><span class="o">.</span><span class="n">so</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="create-the-iax2-conf-file">
+<h3>Create the IAX2 conf file<a class="headerlink" href="#create-the-iax2-conf-file" title="Permalink to this headline">¶</a></h3>
+<p>Go to <code class="docutils literal notranslate"><span class="pre">PBX</span> <span class="pre">-&gt;</span> <span class="pre">Files</span></code> and create a new file named <code class="docutils literal notranslate"><span class="pre">iax.conf</span></code> with the following content:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">general</span><span class="p">]</span>
+<span class="n">bindport</span><span class="o">=</span><span class="mi">4569</span>
+<span class="n">bindaddr</span><span class="o">=</span><span class="mf">0.0.0.0</span>
+<span class="n">delayreject</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">language</span><span class="o">=</span><span class="n">en</span>
+<span class="n">disallow</span><span class="o">=</span><span class="nb">all</span>
+<span class="n">allow</span><span class="o">=</span><span class="n">alaw</span>
+<span class="n">jitterbuffer</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">forcejitterbuffer</span><span class="o">=</span><span class="n">no</span>
+<span class="n">maxjitterbuffer</span><span class="o">=</span><span class="mi">200</span>
+<span class="n">resyncthreshold</span><span class="o">=</span><span class="mi">1000</span>
+<span class="n">maxjitterinterps</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">minregexpire</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="n">maxregexpire</span> <span class="o">=</span> <span class="mi">3600</span>
+<span class="n">qualifyfreqok</span><span class="o">=</span><span class="mi">60000</span>
+<span class="n">qualifyfreqnotok</span><span class="o">=</span><span class="mi">10000</span>
+<span class="n">iaxthreadcount</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">authdebug</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">tos</span><span class="o">=</span><span class="n">ef</span>
+<span class="n">autokill</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">codecpriority</span><span class="o">=</span><span class="n">caller</span>
+
+<span class="p">[</span><span class="n">guest</span><span class="p">]</span>
+<span class="nb">type</span><span class="o">=</span><span class="n">user</span>
+<span class="n">context</span><span class="o">=</span><span class="n">no</span><span class="o">-</span><span class="n">calls</span>
+<span class="n">callerid</span><span class="o">=</span><span class="s2">&quot;Guest IAX User&quot;</span>
+</pre></div>
+</div>
+<p>Make sure you have a <code class="docutils literal notranslate"><span class="pre">guest</span></code> section that has a context pointing to a non-routable dialplan, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[no-calls]
+exten =&gt; _X!,1,Hangup()
+</pre></div>
+</div>
+</section>
+</section>
+<section id="define-your-iax2-trunk">
+<h2>Define your IAX2 trunk<a class="headerlink" href="#define-your-iax2-trunk" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">techsupport</span><span class="p">]</span>
+<span class="n">host</span><span class="o">=</span><span class="n">iax2</span><span class="o">.</span><span class="n">virtualpbx</span><span class="o">.</span><span class="n">ru</span>
+<span class="nb">type</span><span class="o">=</span><span class="n">friend</span>
+<span class="n">context</span><span class="o">=</span><span class="n">from</span><span class="o">-</span><span class="n">techsupport</span>
+<span class="n">secret</span><span class="o">=</span><span class="n">customer_pass</span>
+<span class="n">username</span><span class="o">=</span><span class="n">customer_id</span>
+<span class="n">callgroup</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">pickupgroup</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">callerid</span><span class="o">=</span><span class="s2">&quot;Tech Support&quot;</span> <span class="o">&lt;</span><span class="mi">799</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">OdooPBX</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../administration.html">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../common.html">Common</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../sip_trunking.html">SIP Trunking</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="sipgate.html">SIPGate integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="twilio.html">How to set up Twilio Elastic SIP Trunking with Odoo PBX</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">IAX2 interconnection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../sip_phones.html">SIP Phones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_answer.html">Auto-Answer</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../../common.html">Common</a><ul>
+  <li><a href="../sip_trunking.html">SIP Trunking</a><ul>
+      <li>Previous: <a href="twilio.html" title="previous chapter">How to set up Twilio Elastic SIP Trunking with Odoo PBX</a></li>
+      <li>Next: <a href="../sip_phones.html" title="next chapter">SIP Phones</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Odooist.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/common/sip_trunking/iax.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
