@@ -8,7 +8,7 @@
 
     <title>Configuration &#8212; OdooPBX 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nameko.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
@@ -18,19 +18,35 @@
     <link rel="next" title="Tips and Tricks" href="tips.html" />
     <link rel="prev" title="Installation" href="installation.html" />
    
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Lora:400' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
   </head><body>
   
+  
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tips.html" title="Tips and Tricks"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">OdooPBX 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../administration.html" accesskey="U">Administration</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Configuration</a></li> 
+      </ul>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          
-
           <div class="body" role="main">
             
   <section id="configuration">
@@ -139,46 +155,60 @@ Different phones use different headers.</p>
 </section>
 
 
+            <div class="clearer"></div>
           </div>
-          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">OdooPBX</a></h1>
-
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Index</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../administration.html">Administration</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tips.html">Tips and Tricks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Configuration</a><ul>
+<li><a class="reference internal" href="#server">Server</a><ul>
+<li><a class="reference internal" href="#asterisk-system-account">Asterisk system account</a></li>
+<li><a class="reference internal" href="#country-settings">Country settings</a></li>
+<li><a class="reference internal" href="#minion-and-asterisk-ping">Minion and Asterisk ping</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../common.html">Common</a></li>
+<li><a class="reference internal" href="#settings">Settings</a><ul>
+<li><a class="reference internal" href="#general">General</a><ul>
+<li><a class="reference internal" href="#debug-mode">Debug mode</a></li>
 </ul>
-
-<div class="relations">
+</li>
+<li><a class="reference internal" href="#salt-master">Salt Master</a><ul>
+<li><a class="reference internal" href="#salt-api-url">Salt API URL</a></li>
+<li><a class="reference internal" href="#salt-api-user">Salt API User</a></li>
+<li><a class="reference internal" href="#salt-api-password">Salt API Password</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pbx-users">PBX Users</a><ul>
+<li><a class="reference internal" href="#channel">Channel</a></li>
+<li><a class="reference internal" href="#context">Context</a></li>
+<li><a class="reference internal" href="#originate">Originate</a></li>
+<li><a class="reference internal" href="#auto-answer-header">Auto-answer header</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Documentation index</a><ul>
   <li><a href="../administration.html">Administration</a><ul>
       <li>Previous: <a href="installation.html" title="previous chapter">Installation</a></li>
       <li>Next: <a href="tips.html" title="next chapter">Tips and Tricks</a></li>
   </ul></li>
   </ul></li>
 </ul>
-</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/administration/configuration.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
@@ -189,32 +219,10 @@ Different phones use different headers.</p>
     </div>
 </div>
 <script>$('#searchbox').show(0);</script>
-
-
-
-
-
-
-
-
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2021, Odooist.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-      |
-      <a href="../_sources/administration/configuration.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
-
-    
-
-    
+  
   </body>
 </html>
