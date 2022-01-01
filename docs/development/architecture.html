@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OdooPBX architecture &#8212; OdooPBX 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/nameko.css" />
@@ -49,9 +48,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="odoopbx-architecture">
+  <div class="section" id="odoopbx-architecture">
 <h1>OdooPBX architecture<a class="headerlink" href="#odoopbx-architecture" title="Permalink to this headline">¶</a></h1>
-<section id="introduction">
+<div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>As it comes from its name OdooPBX is a PBX platform built upon Odoo &amp; Asterisk.</p>
 <p>Odoo (former OpenERP / TinyERP) is a modern WEB business platform that rapidly spreads over the world.</p>
@@ -75,8 +74,8 @@ Sales, Events, etc.</p>
 integrating tight phone communications with places they happen.</p>
 <p>Finally a special middleware Agent is used to connect Odoo and Asterisk together in a proper way.</p>
 <p>Let’s dive into the details now.</p>
-</section>
-<section id="the-agent">
+</div>
+<div class="section" id="the-agent">
 <h2>The Agent<a class="headerlink" href="#the-agent" title="Permalink to this headline">¶</a></h2>
 <p>The Agent itself is built upon the Saltstack platform and performs the following functions:</p>
 <ul class="simple">
@@ -85,7 +84,7 @@ integrating tight phone communications with places they happen.</p>
 <li><p>Protects Asterisk from DDoS and password bruteforce attacks.</p></li>
 <li><p>Manages the installation &amp; upgrade process.</p></li>
 </ul>
-<section id="engines">
+<div class="section" id="engines">
 <h3>Engines<a class="headerlink" href="#engines" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://docs.saltproject.io/en/latest/topics/engines/index.html">Salt Engines</a>
 are long-running, external system processes that leverage Salt.</p>
@@ -95,7 +94,7 @@ are long-running, external system processes that leverage Salt.</p>
 <li><p>Asterisk WEB console engine (asterisk_cli);</p></li>
 <li><p>Odoo bus connector engine (odoo_connector);</p></li>
 </ul>
-<section id="ami-engine">
+<div class="section" id="ami-engine">
 <h4>AMI engine<a class="headerlink" href="#ami-engine" title="Permalink to this headline">¶</a></h4>
 <p>AMI (Asterisk Manager Interface) engine connects to the Asterisk AMI port (usually 5038) and
 forwards AMI events to Odoo according to the events map that is downloaded on the Agent startup.</p>
@@ -110,25 +109,25 @@ Example: <code class="docutils literal notranslate"><span class="pre">event['Res
 <li><p><strong>delay</strong> - an optional delay in seconds before sending the event to Odoo. Sometimes it is required to
 let previous event to be processed by Odoo. Example: <code class="docutils literal notranslate"><span class="pre">1.5</span></code>.</p></li>
 </ul>
-</section>
-</section>
-<section id="modules">
+</div>
+</div>
+<div class="section" id="modules">
 <h3>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h3>
-</section>
-<section id="states">
+</div>
+<div class="section" id="states">
 <h3>States<a class="headerlink" href="#states" title="Permalink to this headline">¶</a></h3>
-</section>
-</section>
-<section id="odoopbx-modules">
+</div>
+</div>
+<div class="section" id="odoopbx-modules">
 <h2>OdooPBX modules<a class="headerlink" href="#odoopbx-modules" title="Permalink to this headline">¶</a></h2>
-<section id="asterisk-base">
+<div class="section" id="asterisk-base">
 <h3>Asterisk Base<a class="headerlink" href="#asterisk-base" title="Permalink to this headline">¶</a></h3>
-</section>
-<section id="asterisk-calls">
+</div>
+<div class="section" id="asterisk-calls">
 <h3>Asterisk Calls<a class="headerlink" href="#asterisk-calls" title="Permalink to this headline">¶</a></h3>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
             <div class="clearer"></div>

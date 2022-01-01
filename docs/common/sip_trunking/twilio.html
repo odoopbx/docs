@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>How to set up Twilio Elastic SIP Trunking with Odoo PBX &#8212; OdooPBX 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/nameko.css" />
@@ -50,9 +49,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="how-to-set-up-twilio-elastic-sip-trunking-with-odoo-pbx">
+  <div class="section" id="how-to-set-up-twilio-elastic-sip-trunking-with-odoo-pbx">
 <h1>How to set up Twilio Elastic SIP Trunking with Odoo PBX<a class="headerlink" href="#how-to-set-up-twilio-elastic-sip-trunking-with-odoo-pbx" title="Permalink to this headline">¶</a></h1>
-<section id="twilio-configuration">
+<div class="section" id="twilio-configuration">
 <h2>Twilio Configuration<a class="headerlink" href="#twilio-configuration" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p>Go to Twilio website at twilio.com and log into your Twilio account. Click on the <em>All Products and Services</em> button and select <em>Elastic SIP Trunking</em>.</p></li>
@@ -85,8 +84,8 @@
 </ol>
 <p>You can choose a number you have already bought, buy a single number or buy multiple numbers in bulk.</p>
 <p>This finishes the trunk configuration on Twilio, next you have to go to your Odoo instance and configure the trunk.</p>
-</section>
-<section id="odoo-pbx-configuration">
+</div>
+<div class="section" id="odoo-pbx-configuration">
 <h2>Odoo PBX Configuration<a class="headerlink" href="#odoo-pbx-configuration" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p>Go to <em>PBX</em> -&gt; <em>Files</em> and click on <code class="docutils literal notranslate"><span class="pre">Create</span></code>. Set the file name to <code class="docutils literal notranslate"><span class="pre">sip_twilio.conf</span></code> and the desired server. Copy the contents of the file from below and paste them into the Content field.</p>
@@ -193,8 +192,8 @@ host=177.71.206.195
 <p><strong>Can reinvite</strong>: No</p>
 <p><strong>Route Groups</strong>: Incoming</p>
 <p>The trunk configuration is finished. Next you need to create incoming and outgoing routes for your users, so they could call and receive calls.</p>
-</section>
-<section id="creating-outgoing-and-incoming-routes-in-odoopbx">
+</div>
+<div class="section" id="creating-outgoing-and-incoming-routes-in-odoopbx">
 <h2>Creating outgoing and incoming routes in OdooPBX<a class="headerlink" href="#creating-outgoing-and-incoming-routes-in-odoopbx" title="Permalink to this headline">¶</a></h2>
 <p>First you need to create an outgoing route. Go to <em>PBX</em> -&gt; <em>Applications</em> -&gt; <em>Routes</em> and click on <code class="docutils literal notranslate"><span class="pre">Create</span></code>. Next fill in the fields:</p>
 <p><strong>Destination number</strong>: <code class="docutils literal notranslate"><span class="pre">_XXXXXXX</span></code>. This means that any phone number with more than 7 digits will be directed to the trunk</p>
@@ -204,13 +203,13 @@ host=177.71.206.195
 <p><strong>Dial Timeout</strong>: 60</p>
 <p><strong>Dial Options</strong>: T</p>
 <p><strong>Record Calls</strong>: Mark if you need the calls to be recorded</p>
-<section id="destination-number-translation">
+<div class="section" id="destination-number-translation">
 <h3>Destination number translation<a class="headerlink" href="#destination-number-translation" title="Permalink to this headline">¶</a></h3>
 <p>Twillio requires numbers to be sent in E.164 format (with +). So you need to create
 a translation rule that will prefix all numbers with +:</p>
 <img alt="Set up Destination Translation for Twilio" class="align-center" src="../../_images/dst_translation.png" />
-</section>
-<section id="source-number-translation">
+</div>
+<div class="section" id="source-number-translation">
 <h3>Source number translation<a class="headerlink" href="#source-number-translation" title="Permalink to this headline">¶</a></h3>
 <p>Next click on the <em>Number Translation</em> tab and click on <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">a</span> <span class="pre">line</span></code> for the Source Numbers field. After that click on <code class="docutils literal notranslate"><span class="pre">Create</span></code> and you will see the following form:</p>
 <img alt="Set up Source Translation for Twilio" class="align-center" src="../../_images/source_translation.png" />
@@ -219,9 +218,9 @@ a translation rule that will prefix all numbers with +:</p>
 <p><strong>Destination number</strong>: The phone number, without the + sign</p>
 <p><strong>Type</strong>: Can be Extension or Dialplan and select the dialplan or extension you want to redirect the call to.</p>
 <p>Click on Save and next on Apply Changes. Test the incoming and outgoing calls.</p>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
             <div class="clearer"></div>

@@ -115,5 +115,5 @@ It is possible to auto answer the 1-st call leg using special channel headers.
 Different phones use different headers.
 
 .. seealso::
-  For more details see :doc:`auto_answer`
+  For more details see :doc:`common/auto_answer`
 

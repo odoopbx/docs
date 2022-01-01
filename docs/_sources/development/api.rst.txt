@@ -4,10 +4,6 @@
 API 
 ===
 
-Channels
-========
-Channel represents a point of communication. 
-
 Fields
 ######
 .. autoattribute:: odoo.addons.asterisk_plus.models.channel.Channel.call

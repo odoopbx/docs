@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Developer Guide Introduction &#8212; OdooPBX 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/nameko.css" />
@@ -49,9 +48,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="developer-guide-introduction">
+  <div class="section" id="developer-guide-introduction">
 <h1>Developer Guide Introduction<a class="headerlink" href="#developer-guide-introduction" title="Permalink to this headline">¶</a></h1>
-<section id="introduction">
+<div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>OdooPBX platform stands on <strong>three</strong> whales:</p>
 <ul class="simple">
@@ -82,14 +81,14 @@ that can be used to extend Odoo’s communications with external world and make 
 extremely quicky to create and maintain.</p>
 <p>Here is a little more detailed picture on the OdooPBX architecture.</p>
 <img alt="../_images/odoopbx-architecture.png" src="../_images/odoopbx-architecture.png" />
-</section>
-<section id="the-pepper">
+</div>
+<div class="section" id="the-pepper">
 <h2>1. The pepper<a class="headerlink" href="#the-pepper" title="Permalink to this headline">¶</a></h2>
 <p>Salt and pepper are friends :-)</p>
 <p><a class="reference external" href="https://github.com/saltstack/pepper">Pepper</a> contains a Python library for accessing a remote <strong>salt-api</strong> instance.</p>
 <p>Using pepper Odoo communicates with Salt.</p>
-</section>
-<section id="salt-jobs">
+</div>
+<div class="section" id="salt-jobs">
 <h2>2. Salt jobs<a class="headerlink" href="#salt-jobs" title="Permalink to this headline">¶</a></h2>
 <p>Salt API process sends jobs to the Salt master which in turn submits them to connected minions (hello multi server ;).</p>
 <p>This is non-blocking process. So Odoo worker does not wait for any reply from the minion (Asterisk). And this
@@ -119,8 +118,8 @@ from <code class="docutils literal notranslate"><span class="pre">asteriskmod.py
 <p>This is how Odoo creates (originates) a call in Asterisk.</p>
 <p>Now check more then <a class="reference external" href="https://wiki.asterisk.org/wiki/display/AST/Asterisk+16+AMI+Actions">158 Asterisk Actions</a>
 and get the idea what can be integrated in your Odoo with few lines of code.</p>
-</section>
-<section id="remote-execution">
+</div>
+<div class="section" id="remote-execution">
 <h2>3. Remote execution<a class="headerlink" href="#remote-execution" title="Permalink to this headline">¶</a></h2>
 <p>Salt jobs are executed by minion. But the power comes also from the command line
 availability of all Salt execution modules.</p>
@@ -147,8 +146,8 @@ availability of all Salt execution modules.</p>
 </div>
 <p>So it’s also easy to get current channels or connected SIP peers and pass it to the
 <code class="docutils literal notranslate"><span class="pre">awk</span></code> or <code class="docutils literal notranslate"><span class="pre">grep</span></code> for crafting your own administrator scripts.</p>
-</section>
-<section id="events">
+</div>
+<div class="section" id="events">
 <h2>4. Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
 <p>Salt has <strong>two</strong> event buses :-)</p>
 <div class="admonition note">
@@ -221,8 +220,8 @@ salt/job/20211006210940034674/ret/asterisk      {
 }
 </pre></div>
 </div>
-</section>
-<section id="minion-s-connection-to-odoo">
+</div>
+<div class="section" id="minion-s-connection-to-odoo">
 <h2>5. Minion’s connection to Odoo<a class="headerlink" href="#minion-s-connection-to-odoo" title="Permalink to this headline">¶</a></h2>
 <p>Every minion is configured to an Odoo instance.</p>
 <p>When it executes a job its result is sent to Odoo.</p>
@@ -232,8 +231,8 @@ salt/job/20211006210940034674/ret/asterisk      {
 and send them to Odoo when it’s available. But some events are too late to be send.</p>
 <p>For example we want all CDR events but there is no sense to re-send SIP presense event as it’s
 not actual.</p>
-</section>
-<section id="ami-actions">
+</div>
+<div class="section" id="ami-actions">
 <h2>6. AMI Actions<a class="headerlink" href="#ami-actions" title="Permalink to this headline">¶</a></h2>
 <p>Here we should understand how salt job callback pattern works. As we use non-blocking calls
 Odoo method that calls AMI Originate is finished immediately after transmitting it to the Salt
@@ -272,8 +271,8 @@ master.</p>
 This response is delivered out of the <code class="docutils literal notranslate"><span class="pre">originate</span></code> function.</p>
 <p>This is so called <strong>callbacks pattern</strong>.  You call an action and specify what function will receive
 the result when it’s done.</p>
-</section>
-<section id="ami-events">
+</div>
+<div class="section" id="ami-events">
 <h2>7. AMI events<a class="headerlink" href="#ami-events" title="Permalink to this headline">¶</a></h2>
 <p>See full list of events <a class="reference external" href="https://wiki.asterisk.org/wiki/display/AST/Asterisk+16+AMI+Events">here</a>.</p>
 <p>Just create XML-data files with your desired events and write Odoo code to handle them.</p>
@@ -310,20 +309,20 @@ the result when it’s done.</p>
 </pre></div>
 </div>
 <p>That’s it. Now you have Asterisk call statistics in Odoo without programming anything outside Odoo.</p>
-</section>
-<section id="asterisk-console">
+</div>
+<div class="section" id="asterisk-console">
 <h2>8. Asterisk console<a class="headerlink" href="#asterisk-console" title="Permalink to this headline">¶</a></h2>
 <p>What is fun with OdooPBX is that you have a full featured color console right in your Odoo.</p>
 <p>You can enter Asterisk commands there or even enter ‘!’ and exit into Linux shell for deep
 debugging like running <code class="docutils literal notranslate"><span class="pre">sngrep</span></code> SIP sniffer for example or troubleshooting
 RTP with <code class="docutils literal notranslate"><span class="pre">tcpdump</span></code>.</p>
-</section>
-<section id="conclusion">
+</div>
+<div class="section" id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
 <p>It was a brief introduction to OdooPBX development.</p>
 <p>Check other developer documentation and have a fantastic experience with OdooPBX platform!</p>
-</section>
-</section>
+</div>
+</div>
 
 
             <div class="clearer"></div>

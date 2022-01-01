@@ -14,6 +14,13 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 import sphinx_nameko_theme
+import sys
+sys.path.append('/srv/odoo/14.0/src')
+import odoo
+odoo.addons.__path__.append('/srv/odoopbx/addons')
+odoo.addons.__path__.append('/srv/odoo/14.0/addons')
+odoo.addons.__path__.append('/srv/odoo/14.0/src/addons')
+import odoo.addons
 
 # -- Project information -----------------------------------------------------
 

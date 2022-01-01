@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Debugging &#8212; OdooPBX 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/nameko.css" />
@@ -49,13 +48,13 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="debugging">
+  <div class="section" id="debugging">
 <h1>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h1>
 <p>This guide is sharing some tips, tricks and configuration settings
 that are useful during development or issue solving.</p>
-<section id="tracing-salt-event-bus">
+<div class="section" id="tracing-salt-event-bus">
 <h2>Tracing Salt event bus<a class="headerlink" href="#tracing-salt-event-bus" title="Permalink to this headline">¶</a></h2>
-<section id="tracing-master-bus">
+<div class="section" id="tracing-master-bus">
 <h3>Tracing master bus<a class="headerlink" href="#tracing-master-bus" title="Permalink to this headline">¶</a></h3>
 <p>Odoo and Salt API communication via Salt master can be debugged using this:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>root@devmax:/srv/odoopbx/salt# salt-run state.event <span class="nv">pretty</span><span class="o">=</span>True
@@ -94,8 +93,8 @@ that are useful during development or issue solving.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-</section>
-<section id="tracing-minion-bus">
+</div>
+<div class="section" id="tracing-minion-bus">
 <h3>Tracing minion bus<a class="headerlink" href="#tracing-minion-bus" title="Permalink to this headline">¶</a></h3>
 <p>Minion bus can be traced like this:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>salt-call state.event <span class="nv">pretty</span><span class="o">=</span>True
@@ -123,9 +122,9 @@ that are useful during development or issue solving.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-</section>
-</section>
-<section id="tracing-ami-and-odoo-rpc">
+</div>
+</div>
+<div class="section" id="tracing-ami-and-odoo-rpc">
 <h2>Tracing AMI and Odoo RPC<a class="headerlink" href="#tracing-ami-and-odoo-rpc" title="Permalink to this headline">¶</a></h2>
 <p>These are configuration optio
 ns useful for debug and development:</p>
@@ -171,8 +170,8 @@ HTTP(S) method for connecting agent is still available.</p></td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="debug-the-code">
+</div>
+<div class="section" id="debug-the-code">
 <h2>Debug the code<a class="headerlink" href="#debug-the-code" title="Permalink to this headline">¶</a></h2>
 <p>In your module import <code class="docutils literal notranslate"><span class="pre">debug</span></code> method.  When debug is enabled in <code class="docutils literal notranslate"><span class="pre">PBX</span> <span class="pre">-&gt;</span> <span class="pre">Settings</span> <span class="pre">-&gt;</span> <span class="pre">General</span></code> Odoo will these messages
 in a special way that is handy to observe. Here is an example:</p>
@@ -189,10 +188,10 @@ in a special way that is handy to observe. Here is an example:</p>
 <span class="mi">2021</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">28</span> <span class="mi">13</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span><span class="mi">628</span> <span class="mi">26448</span> <span class="n">INFO</span> <span class="n">odoopbx_14</span> <span class="n">werkzeug</span><span class="p">:</span> <span class="mf">127.0.0.1</span> <span class="o">-</span> <span class="o">-</span> <span class="p">[</span><span class="mi">28</span><span class="o">/</span><span class="n">Sep</span><span class="o">/</span><span class="mi">2021</span> <span class="mi">13</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mi">23</span><span class="p">]</span> <span class="s2">&quot;POST /jsonrpc HTTP/1.1&quot;</span> <span class="mi">200</span> <span class="o">-</span> <span class="mi">21</span> <span class="mf">0.009</span> <span class="mf">0.244</span>
 </pre></div>
 </div>
-</section>
-<section id="using-vscode-ide">
+</div>
+<div class="section" id="using-vscode-ide">
 <h2>Using Vscode IDE<a class="headerlink" href="#using-vscode-ide" title="Permalink to this headline">¶</a></h2>
-<section id="using-the-debugger">
+<div class="section" id="using-the-debugger">
 <h3>Using the debugger<a class="headerlink" href="#using-the-debugger" title="Permalink to this headline">¶</a></h3>
 <p>With Vscode there is 2 debugging methods:</p>
 <ul class="simple">
@@ -286,8 +285,8 @@ back to previous normal work cycly of launch method.</p>
 </pre></div>
 </div>
 <p>Here is a short video demonstrating the workflow:</p>
-</section>
-<section id="increasing-file-monitor-setting">
+</div>
+<div class="section" id="increasing-file-monitor-setting">
 <h3>Increasing file monitor setting<a class="headerlink" href="#increasing-file-monitor-setting" title="Permalink to this headline">¶</a></h3>
 <p>If you see the following error after Vscode startup:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Unable</span> <span class="n">to</span> <span class="n">watch</span> <span class="k">for</span> <span class="n">file</span> <span class="n">changes</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">large</span> <span class="n">workspace</span> <span class="n">folder</span><span class="o">.</span> <span class="n">Please</span> <span class="n">follow</span> <span class="n">the</span> <span class="n">instructions</span> <span class="n">link</span> <span class="n">to</span> <span class="n">resolve</span> <span class="n">this</span> <span class="n">issue</span><span class="o">.</span>
@@ -302,9 +301,9 @@ back to previous normal work cycly of launch method.</p>
 </pre></div>
 </div>
 <p><em>You don’t have to enable it after reboot as it’s will be activated from the /etc/sysctl.conf.</em></p>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
             <div class="clearer"></div>

@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SIPGate integration &#8212; OdooPBX 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/nameko.css" />
@@ -50,9 +49,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="sipgate-integration">
+  <div class="section" id="sipgate-integration">
 <h1>SIPGate integration<a class="headerlink" href="#sipgate-integration" title="Permalink to this headline">¶</a></h1>
-<section id="trunk-configuration">
+<div class="section" id="trunk-configuration">
 <h2>Trunk configuration<a class="headerlink" href="#trunk-configuration" title="Permalink to this headline">¶</a></h2>
 <p>After you have created a Trunk using Sipgate’s interface and attached the
 required amount of phone numbers to it you will see the following block in the Trunk’s settings:</p>
@@ -75,10 +74,10 @@ required amount of phone numbers to it you will see the following block in the T
 <li><p>Can Reinvite: No</p></li>
 </ul>
 <img alt="../../_images/sipgate2.png" src="../../_images/sipgate2.png" />
-</section>
-<section id="routing-configuration">
+</div>
+<div class="section" id="routing-configuration">
 <h2>Routing Configuration<a class="headerlink" href="#routing-configuration" title="Permalink to this headline">¶</a></h2>
-<section id="outgoing-route">
+<div class="section" id="outgoing-route">
 <h3>Outgoing Route<a class="headerlink" href="#outgoing-route" title="Permalink to this headline">¶</a></h3>
 <p>Go to <code class="docutils literal notranslate"><span class="pre">PBX</span> <span class="pre">-&gt;</span> <span class="pre">Applications</span> <span class="pre">-&gt;</span> <span class="pre">Routes</span></code> and create a new route. Add the following fields:</p>
 <ul class="simple">
@@ -94,8 +93,8 @@ For example if user Demo needs to use the phone number +123456789 go to his peer
 <code class="docutils literal notranslate"><span class="pre">Applications</span> <span class="pre">-&gt;</span> <span class="pre">Peers</span></code> and click on the Advanced Settings tab and add the external
 number variable as shown below:</p>
 <img alt="../../_images/sipgate3.png" src="../../_images/sipgate3.png" />
-</section>
-<section id="incoming-route">
+</div>
+<div class="section" id="incoming-route">
 <h3>Incoming Route<a class="headerlink" href="#incoming-route" title="Permalink to this headline">¶</a></h3>
 <p>Go to <code class="docutils literal notranslate"><span class="pre">PBX</span> <span class="pre">-&gt;</span> <span class="pre">Applications</span> <span class="pre">-&gt;</span> <span class="pre">Routes</span></code> and click on Create. Next fill in the fields:</p>
 <ul class="simple">
@@ -103,9 +102,9 @@ number variable as shown below:</p>
 <li><p>Type: Can be Extension or Dialplan</p></li>
 <li><p>Select the dialplan or extension you want to redirect the call to.</p></li>
 </ul>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
             <div class="clearer"></div>

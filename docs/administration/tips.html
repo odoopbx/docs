@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tips and Tricks &#8212; OdooPBX 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/nameko.css" />
@@ -49,9 +48,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="tips-and-tricks">
+  <div class="section" id="tips-and-tricks">
 <h1>Tips and Tricks<a class="headerlink" href="#tips-and-tricks" title="Permalink to this headline">¶</a></h1>
-<section id="play-a-message-to-unknown-partners">
+<div class="section" id="play-a-message-to-unknown-partners">
 <h2>Play a message to unknown partners<a class="headerlink" href="#play-a-message-to-unknown-partners" title="Permalink to this headline">¶</a></h2>
 <p>Imagine a case when you accept calls only from your partners.</p>
 <p>So existing partners can be directly connected but new customers must first be
@@ -81,8 +80,8 @@ same =&gt; n(found),Playback(welcome-customer)
 same =&gt; n,Queue(support)
 </pre></div>
 </div>
-</section>
-<section id="dialplan-configuration">
+</div>
+<div class="section" id="dialplan-configuration">
 <h2>Dialplan configuration<a class="headerlink" href="#dialplan-configuration" title="Permalink to this headline">¶</a></h2>
 <p>Asterisk Plus exposes additional functionality by providing the following controllers:</p>
 <ol class="arabic simple">
@@ -172,8 +171,8 @@ exten =&gt; _XXXX,2,Dial(SIP/${EXTEN},30) ; Local users calling
 exten =&gt; _XXXXX.,2,Dial(SIP/provider/${EXTEN},30,TU(post-dial-send-dtmf) ; Outgoing calls pattern
 </pre></div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
             <div class="clearer"></div>
