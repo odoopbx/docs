@@ -39,9 +39,9 @@ mkdir _build
 cd _build/
 ln -s ../docs/ html
 cd .. 
-sphinx build -t html . docs/
+python3 -m sphinx  -t html . docs/
 ```
 In order to preview your docs use Sphinx serve:
 ```
-python3.7 -m sphinx_serve
+python3 -m sphinx_serve
 ```
