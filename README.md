@@ -27,6 +27,7 @@ python3 -m pip install --upgrade pip
 python3 -m pip install wheel
 python3 -m pip install odoo-15.0
 python3 -m pip install -r odoo-15.0/requirements.txt
+python3 -m pip install /srv/dev/addons/requirements.txt
 rm -rf 15.0 odoo-15.0
 ```
 ## Clone the docs repo
