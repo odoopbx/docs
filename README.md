@@ -24,6 +24,7 @@ cd /opt/
 wget https://github.com/odoo/odoo/archive/refs/heads/15.0.zip
 unzip 15.0.zip
 python3 -m pip install --upgrade pip
+python3 -m pip install wheel
 python3 -m pip install odoo-15.0
 python3 -m pip install -r odoo-15.0/requirements.txt
 rm -rf 15.0 odoo-15.0
