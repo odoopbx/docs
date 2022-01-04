@@ -19,11 +19,8 @@ DIR = os.path.dirname(__file__)
 sys.path.insert(
     0, os.path.abspath(
         os.path.join(DIR, '_extensions')))
-sys.path.append('/srv/odoo/14.0/src')
 import odoo
-odoo.addons.__path__.append('/srv/odoopbx/addons')
-odoo.addons.__path__.append('/srv/odoo/14.0/addons')
-odoo.addons.__path__.append('/srv/odoo/14.0/src/addons')
+odoo.addons.__path__.append('/srv/dev/addons')
 import odoo.addons
 
 
