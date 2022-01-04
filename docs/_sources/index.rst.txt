@@ -7,7 +7,6 @@ OdooPBX Documentation
 .. toctree::
     :titlesonly:
 
-    Index <self>
     administration
     development
     common

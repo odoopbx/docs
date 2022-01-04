@@ -1,6 +1,21 @@
 ============
 Installation
 ============
+There are different installation scenarios and types. Let's review them in order to understand what
+is the best for you.
+
+* **Demo / small company** - the quickest way to get started with OdooPBX is to get an all-in-one image that
+  contains all parts of OdooPBX in one place.
+* 
+
+
+Demo / Small company
+====================
+Demo setup is fully based on docker. It uses two images:
+
+* odoopbx/demo - contains Postgresql, Odoo, Nginx, Salt Agent.
+* `tiredofit/freepbx <https://github.com/tiredofit/docker-freepbx>`_ - the most popular FreePBX image.
+  Disclaimer: we do not maintain this FreePBX image.
 
 Introduction
 ============

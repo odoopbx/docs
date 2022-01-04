@@ -12,6 +12,7 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Configuration" href="configuration.html" />
@@ -50,6 +51,22 @@
             
   <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>There are different installation scenarios and types. Let’s review them in order to understand what
+is the best for you.</p>
+<ul class="simple">
+<li><p><strong>Demo / small company</strong> - the quickest way to get started with OdooPBX is to get an all-in-one image that
+contains all parts of OdooPBX in one place.</p></li>
+<li></li>
+</ul>
+<div class="section" id="demo-small-company">
+<h2>Demo / Small company<a class="headerlink" href="#demo-small-company" title="Permalink to this headline">¶</a></h2>
+<p>Demo setup is fully based on docker. It uses two images:</p>
+<ul class="simple">
+<li><p>odoopbx/demo - contains Postgresql, Odoo, Nginx, Salt Agent.</p></li>
+<li><p><a class="reference external" href="https://github.com/tiredofit/docker-freepbx">tiredofit/freepbx</a> - the most popular FreePBX image.
+Disclaimer: we do not maintain this FreePBX image.</p></li>
+</ul>
+</div>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>This guide assumes that both Odoo and Asterisk are already installed and running.</p>
@@ -388,9 +405,13 @@ exten =&gt; _XXXXX.,2,Dial(SIP/provider/${EXTEN},30,TU(post-dial-send-dtmf) ; Ou
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Installation</a><ul>
+<li><a class="reference internal" href="#demo-small-company">Demo / Small company</a></li>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#odoo-module-installation">Odoo module installation</a><ul>
 <li><a class="reference internal" href="#requirements">Requirements</a></li>
@@ -434,13 +455,6 @@ exten =&gt; _XXXXX.,2,Dial(SIP/provider/${EXTEN},30,TU(post-dial-send-dtmf) ; Ou
   </ul></li>
   </ul></li>
 </ul>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/administration/installation.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
