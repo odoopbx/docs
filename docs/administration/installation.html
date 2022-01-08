@@ -33,6 +33,9 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="configuration.html" title="Configuration"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -51,13 +54,19 @@
             
   <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<p>There are different installation scenarios and types. Let’s review them in order to understand what
-is the best for you.</p>
+<p>Depending on your current configuration, the following installation types are possible:</p>
 <ul class="simple">
-<li><p><strong>Demo / small company</strong> - the quickest way to get started with OdooPBX is to get an all-in-one image that
-contains all parts of OdooPBX in one place.</p></li>
-<li></li>
+<li><p><strong>Demo setup</strong> - Odoo, The OdooPBX Agent, Asterisk/FreePBX.</p></li>
+<li><p><strong>The Agent setup</strong> - You have both Odoo and Asterisk/FreePBX up and running.</p></li>
+<li><p><strong>PBX setup</strong> - You have only Odoo and require a PBX setup (Asterisk/FreePBX)</p></li>
+<li><p><strong>Odoo setup</strong> You have Asterisk/FreePBX and require Odoo/CRM setup.</p></li>
 </ul>
+<p>These configurations differ only in a set of installed components.
+Let’s take a closer look at them.</p>
+<div class="section" id="demo-setup">
+<h2>Demo setup<a class="headerlink" href="#demo-setup" title="Permalink to this headline">¶</a></h2>
+<p>The easiest and fastest way to start using OdooPBX is the docker based installation.</p>
+</div>
 <div class="section" id="demo-small-company">
 <h2>Demo / Small company<a class="headerlink" href="#demo-small-company" title="Permalink to this headline">¶</a></h2>
 <p>Demo setup is fully based on docker. It uses two images:</p>
@@ -411,6 +420,7 @@ exten =&gt; _XXXXX.,2,Dial(SIP/provider/${EXTEN},30,TU(post-dial-send-dtmf) ; Ou
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Installation</a><ul>
+<li><a class="reference internal" href="#demo-setup">Demo setup</a></li>
 <li><a class="reference internal" href="#demo-small-company">Demo / Small company</a></li>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#odoo-module-installation">Odoo module installation</a><ul>

@@ -33,6 +33,9 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="../development.html" title="Development"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -51,10 +54,9 @@
             
   <div class="section" id="troubleshooting">
 <h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="minion-id">
-<h2>Minion ID<a class="headerlink" href="#minion-id" title="Permalink to this headline">¶</a></h2>
-<p>If you try to ping the minion from Odoo and nothing happens (and you don’t see any changes in the
-minion’s log) check the minion ID as set in Odoo and <code class="docutils literal notranslate"><span class="pre">/etc/salt/minion_id</span></code>.</p>
+<div class="section" id="i-don-t-get-notifications">
+<h2>I don’t get notifications<a class="headerlink" href="#i-don-t-get-notifications" title="Permalink to this headline">¶</a></h2>
+<p>The most likely you the long polling mode is not enabled. Check <code class="docutils literal notranslate"><span class="pre">workers</span></code> settings in your <code class="docutils literal notranslate"><span class="pre">odoo.conf</span></code>.</p>
 </div>
 <div class="section" id="asterisk-connection">
 <h2>Asterisk connection<a class="headerlink" href="#asterisk-connection" title="Permalink to this headline">¶</a></h2>
@@ -90,7 +92,7 @@ This can be solved by running inside the Asterisk console the command <code clas
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Troubleshooting</a><ul>
-<li><a class="reference internal" href="#minion-id">Minion ID</a></li>
+<li><a class="reference internal" href="#i-don-t-get-notifications">I don’t get notifications</a></li>
 <li><a class="reference internal" href="#asterisk-connection">Asterisk connection</a></li>
 </ul>
 </li>

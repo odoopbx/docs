@@ -1,12 +1,25 @@
 ============
 Installation
 ============
-There are different installation scenarios and types. Let's review them in order to understand what
-is the best for you.
+Depending on your current configuration, the following installation types are possible:
 
-* **Demo / small company** - the quickest way to get started with OdooPBX is to get an all-in-one image that
-  contains all parts of OdooPBX in one place.
-* 
+* **Demo setup** - Odoo, The OdooPBX Agent, Asterisk/FreePBX.
+* **The Agent setup** - You have both Odoo and Asterisk/FreePBX up and running.
+* **PBX setup** - You have only Odoo and require a PBX setup (Asterisk/FreePBX)
+* **Odoo setup** You have Asterisk/FreePBX and require Odoo/CRM setup.
+
+These configurations differ only in a set of installed components.
+Let's take a closer look at them.
+
+Demo setup
+==========
+The easiest and fastest way to start using OdooPBX is the docker based installation.
+
+
+
+
+
+
 
 
 Demo / Small company

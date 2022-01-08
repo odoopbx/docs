@@ -2,10 +2,9 @@
 Troubleshooting
 ===============
 
-Minion ID
-=========
-If you try to ping the minion from Odoo and nothing happens (and you don't see any changes in the 
-minion's log) check the minion ID as set in Odoo and ``/etc/salt/minion_id``.
+I don't get notifications
+=========================
+The most likely you the long polling mode is not enabled. Check ``workers`` settings in your ``odoo.conf``.
 
 Asterisk connection
 ===================
