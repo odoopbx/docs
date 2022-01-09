@@ -44,7 +44,7 @@ extensions = [
 
 templates_path = ['_templates']
 
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'sphinx-env', 'docs']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'sphinx-env']
 
 html_theme = 'nameko'
 html_theme_path = [sphinx_nameko_theme.get_html_theme_path()]

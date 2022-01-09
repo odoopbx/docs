@@ -15,6 +15,21 @@ Demo setup
 ==========
 The easiest and fastest way to start using OdooPBX is the docker based installation.
 
+The Agent setup
+===============
+When Odoo & Asterisk / FreePBX exists you require only the OdooPBX Agent 
+setup (a middleware between Odoo & Asterisk).
+
+In this case you have a choice. You can use the docker image, or you can install the Agent directly. 
+You also need to have the Agent installed on the same server where Asterisk is running, 
+however, if you don't need Odoo call records, the Agent can be installed on any other computer,
+as it only requires AMI connection to Asterisk.
+
+Deploying the Agent in the docker is covered in the docker-deployment documentation.
+
+Installing the Agent on the server is discussed on the Agent page.
+
+
 
 
 

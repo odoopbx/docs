@@ -67,6 +67,17 @@ Let’s take a closer look at them.</p>
 <h2>Demo setup<a class="headerlink" href="#demo-setup" title="Permalink to this headline">¶</a></h2>
 <p>The easiest and fastest way to start using OdooPBX is the docker based installation.</p>
 </div>
+<div class="section" id="the-agent-setup">
+<h2>The Agent setup<a class="headerlink" href="#the-agent-setup" title="Permalink to this headline">¶</a></h2>
+<p>When Odoo &amp; Asterisk / FreePBX exists you require only the OdooPBX Agent
+setup (a middleware between Odoo &amp; Asterisk).</p>
+<p>In this case you have a choice. You can use the docker image, or you can install the Agent directly.
+You also need to have the Agent installed on the same server where Asterisk is running,
+however, if you don’t need Odoo call records, the Agent can be installed on any other computer,
+as it only requires AMI connection to Asterisk.</p>
+<p>Deploying the Agent in the docker is covered in the docker-deployment documentation.</p>
+<p>Installing the Agent on the server is discussed on the Agent page.</p>
+</div>
 <div class="section" id="demo-small-company">
 <h2>Demo / Small company<a class="headerlink" href="#demo-small-company" title="Permalink to this headline">¶</a></h2>
 <p>Demo setup is fully based on docker. It uses two images:</p>
@@ -421,6 +432,7 @@ exten =&gt; _XXXXX.,2,Dial(SIP/provider/${EXTEN},30,TU(post-dial-send-dtmf) ; Ou
   <ul>
 <li><a class="reference internal" href="#">Installation</a><ul>
 <li><a class="reference internal" href="#demo-setup">Demo setup</a></li>
+<li><a class="reference internal" href="#the-agent-setup">The Agent setup</a></li>
 <li><a class="reference internal" href="#demo-small-company">Demo / Small company</a></li>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#odoo-module-installation">Odoo module installation</a><ul>
