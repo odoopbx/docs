@@ -1,0 +1,33 @@
+===========================
+Settting up dev environment
+===========================
+Create a top folder that will contain all repos. We work with ``/srv/dev/`` folder.
+
+.. code:: sh
+
+    mkdir /srv/dev
+    cd /srv/dev
+
+Next clone the repos:
+
+.. code:: sh
+
+    # The OdooPBX module repo.
+    git clone git@github.com:odoopbx/addons.git
+    # Optional OdooPBX Enterprise addons repo.
+    git clone git@github.com:odoopbx/addons_ee.git
+    # The OdooPBX Agent repo.
+    git clone git@github.com:odoopbx/agent.git
+    # Optional documentation repo.
+    git clone git@github.com:odoopbx/docs.git
+    # OdooPBX core developers team should also clone the manage repo.
+    git clone git@github.com:odoopbx/manage.git
+
+
+Building the docker images
+==========================
+.. code:: sh
+
+    docker-compose -f docker-compose.dev.yml build
+    docker-compose -f docker-compose.dev.yml push
+

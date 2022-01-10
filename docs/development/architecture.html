@@ -57,37 +57,10 @@
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>As it comes from its name OdooPBX is a PBX platform built upon Odoo &amp; Asterisk.</p>
-<p>Odoo (former OpenERP / TinyERP) is a modern WEB business platform that rapidly spreads over the world.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Odoo as a WEB development platform has the following features:</p>
-<ul class="simple">
-<li><p>A modern architecture with clean separation of layers (MVC).
-UI is created in XML, business logic is programmed in Python, data is stored in PostgreSQL and accessed
-through ORM (object-relational mapper).</p></li>
-<li><p>Rapid application development - Odoo is a blazing fast development tool that allows building new
-apps like a lightning.</p></li>
-<li><p>Granular security system with row-level colum-level access.</p></li>
-<li><p>Safe upgrade framework give a possibility of reliable upgrades.</p></li>
-</ul>
-</div>
-<p>Odoo as a business platform comes with a plenty of ready to use business oriented modules like CRM, Projects, Warehouse,
-Sales, Events, etc.</p>
-<p>So from one side OdooPBX is a PBX management tool built upon Odoo WEB framework.</p>
-<p>From another side OdooPBX adds a telephony layer to existing business modules and by this
-integrating tight phone communications with places they happen.</p>
-<p>Finally a special middleware Agent is used to connect Odoo and Asterisk together in a proper way.</p>
 <p>Let’s dive into the details now.</p>
 </div>
 <div class="section" id="the-agent">
 <h2>The Agent<a class="headerlink" href="#the-agent" title="Permalink to this headline">¶</a></h2>
-<p>The Agent itself is built upon the Saltstack platform and performs the following functions:</p>
-<ul class="simple">
-<li><p>Forwards Asterisk events to Odoo according to the downloaded events map.</p></li>
-<li><p>Executes Asterisk actions received from Odoo.</p></li>
-<li><p>Protects Asterisk from DDoS and password bruteforce attacks.</p></li>
-<li><p>Manages the installation &amp; upgrade process.</p></li>
-</ul>
 <div class="section" id="engines">
 <h3>Engines<a class="headerlink" href="#engines" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://docs.saltproject.io/en/latest/topics/engines/index.html">Salt Engines</a>

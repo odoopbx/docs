@@ -15,40 +15,37 @@ Demo setup
 ==========
 The easiest and fastest way to start using OdooPBX is the docker based installation.
 
+You can take an example docker compose file to get demo up & running `here <https://github.com/odoopbx/docker/blob/master/docker-compose.yml>`_.
+
+Run either Asterisk or FrePBX service.
+
+.. code:: sh
+
+    docker-compose up odoo minion api freepbx
+
+Disclaimer: we do not maintain this FreePBX image. 
+We use `tiredofit/freepbx <https://github.com/tiredofit/docker-freepbx>`_ - 
+the most popular FreePBX image published on the docker.hub.
+You can replace it with any other FreePBX docker image of your choice.
+
 The Agent setup
 ===============
-When Odoo & Asterisk / FreePBX exists you require only the OdooPBX Agent 
-setup (a middleware between Odoo & Asterisk).
+This setup assumes that both Odoo and Asterisk are already installed and running.
 
-In this case you have a choice. You can use the docker image, or you can install the Agent directly. 
-You also need to have the Agent installed on the same server where Asterisk is running, 
-however, if you don't need Odoo call records, the Agent can be installed on any other computer,
-as it only requires AMI connection to Asterisk.
+When Odoo & Asterisk / FreePBX exists you require only the OdooPBX Agent
+setup (Agent is a middleware between Odoo & Asterisk).
 
-Deploying the Agent in the docker is covered in the docker-deployment documentation.
+In this case you have some choices:
 
-Installing the Agent on the server is discussed on the Agent page.
+* Docker or direct setup. You can use the docker image, or you can install the Agent 
+  directly on the PC.
+* Same machine or different. If you don't need call recordings in Odoo, the Agent can be 
+  installed on any other computer, as it only requires network AMI connection to Asterisk.
 
-
-
-
-
-
-
-
-
-Demo / Small company
-====================
-Demo setup is fully based on docker. It uses two images:
-
-* odoopbx/demo - contains Postgresql, Odoo, Nginx, Salt Agent.
-* `tiredofit/freepbx <https://github.com/tiredofit/docker-freepbx>`_ - the most popular FreePBX image.
-  Disclaimer: we do not maintain this FreePBX image.
 
 Introduction
 ============
-This guide assumes that both Odoo and Asterisk are already installed and running.
-
+This guide 
 Installation process consists of two parts:
 
 * Odoo module installation.
