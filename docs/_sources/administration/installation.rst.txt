@@ -27,9 +27,7 @@ We use docker compose to define and run the OdooPBX services. The following serv
 
 * **db** - PostgreSQL database used by Odoo.
 * **odoo** - Odoo server.
-* **api** - Salt API process that accepts connections from Odoo.
-* **master** - Salt master process that accepts requests from the salt-api process and forwards them to the minions.
-* **minion** - Salt minion process that is connected to Asterisk AMI and forwards AMI events to Odoo using Odoo RPC.
+* **agent** - Salt processes (salt-master, salt-minion, salt-api).
 * **asterisk** - a plain Asterisk PBX with minimal set of configuration files.
 * **freepbx** - We use `tiredofit/freepbx <https://github.com/tiredofit/docker-freepbx>`_ - 
   the most popular FreePBX image published on the docker.hub. *Disclaimer: we do not maintain this FreePBX image.
@@ -72,7 +70,7 @@ Run either Asterisk or FrePBX service.
 
 .. code:: sh
 
-    docker-compose up odoo minion api freepbx
+    docker-compose up odoo agent freepbx
 
 
 The Agent setup
@@ -89,7 +87,7 @@ To deploy the Agent in docker use this:
 
 .. code:: sh
 
-  docker-compose up minion api master
+  docker-compose up -d agent
 
 Also you have to provide your custom Odoo & Asterisk settings. This is done by using a volume mapping
 in your ``docker-compose.override.yml``:
