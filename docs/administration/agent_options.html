@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agent options &#8212; OdooPBX 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nameko.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Configuration" href="configuration.html" />
+    <link rel="prev" title="Installation" href="installation.html" />
+   
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Lora:400' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+  </head><body>
+  
+  
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="configuration.html" title="Configuration"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">OdooPBX 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../administration.html" accesskey="U">Administration</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Agent options</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="agent-options">
+<h1>Agent options<a class="headerlink" href="#agent-options" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The OdooPBX Agent configuration and data files are located in <code class="docutils literal notranslate"><span class="pre">/etc/odoopbx/</span></code>.</p>
+<p>The default options are located in <code class="docutils literal notranslate"><span class="pre">/etc/odoopbx/minion.d/default.conf</span></code>.</p>
+<p>Your local customized options are stored in <code class="docutils literal notranslate"><span class="pre">/etc/odoopbx/local.conf</span></code>.</p>
+<p>Most of local options can be set using <code class="docutils literal notranslate"><span class="pre">odoopbx</span></code> CLI utility.</p>
+<p>See <a class="reference internal" href="#working-with-configuration">Working with configuration</a> for more on this.</p>
+</div>
+<div class="section" id="working-with-configuration">
+<h2>Working with configuration<a class="headerlink" href="#working-with-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Instead of editing the <code class="docutils literal notranslate"><span class="pre">/etc/odoopbx/local.conf</span></code> file directly it is recommended to use the <code class="docutils literal notranslate"><span class="pre">odoopbx</span></code> utility.</p>
+<p>To use it without mistakes you should know that values passed to it are parsed
+as JSON so you can pass not only strings but lists,  dictionaries and boolean values.</p>
+<p>Below is a little video that demonstrates some tricks with settings config values.</p>
+<img alt="administration/media/odoopbx_config_set.gif" src="administration/media/odoopbx_config_set.gif" />
+</div>
+<div class="section" id="description-of-agent-modes-of-operation">
+<h2>Description of agent modes of operation<a class="headerlink" href="#description-of-agent-modes-of-operation" title="Permalink to this headline">¶</a></h2>
+<p>The agent can work in two modes of operation: HTTP mode and bus mode.
+The Odoo connector is launched by the <code class="docutils literal notranslate"><span class="pre">connector_enabled</span></code> option.</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 15%" />
+<col style="width: 65%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">connector_enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td><p>If True, the agent will connect to Odoo using either the bus or HTTP modes.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="bus-configuration-options">
+<h3>Bus configuration options<a class="headerlink" href="#bus-configuration-options" title="Permalink to this headline">¶</a></h3>
+<p>The bus mode requires that Odoo has longpolling properly configured. See the
+<code class="docutils literal notranslate"><span class="pre">Gevent</span> <span class="pre">process</span> <span class="pre">for</span> <span class="pre">longpolling</span></code> section in the Odoo configuration documentation.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><span class="xref std std-doc">odoo</span></p></li>
+</ul>
+</div>
+<p>In this mode, the agent uses the longpolling port of Odoo (which is usually on port 8072)
+to create long lasting connections. Every request from the agent is sent to the bus table in
+the database and after the request is processed, Odoo responds back using the initial connection.
+Just enabling the bus connector, along with correct authentication credentials for the Asterisk user
+in Odoo are sufficient.</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 15%" />
+<col style="width: 65%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">connector_bus_enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td><p>Enables or disables the bus connector.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-configuration-options">
+<h3>HTTP configuration options<a class="headerlink" href="#http-configuration-options" title="Permalink to this headline">¶</a></h3>
+<p>The configuration of the HTTP mode is more complex. The HTTP mode is used for instances where
+longpolling isn’t available, such as odoo.sh. The agent creates a web server on the 40000 port by
+default, and Odoo is configured to send there the responses to agent’s requests.</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 15%" />
+<col style="width: 65%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">connector_http_enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td><p>Enables or disables the HTTP connector.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">connector_port</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">40000</span></code></p></td>
+<td><p>The port on which the agent is listening for incoming connections.</p></td>
+</tr>
+</tbody>
+</table>
+<p>On the Odoo side, you need to configure the correct parameters for the Odoo’s connection to the agent,
+as shown in the screenshot below. To do that, go to <code class="docutils literal notranslate"><span class="pre">PBX</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Settings</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Agent</span></code>.</p>
+<img alt="HTTP mode configuration" class="align-center" src="administration/media/http_agent.png" />
+</div>
+</div>
+<div class="section" id="configuration-options">
+<h2>Configuration options<a class="headerlink" href="#configuration-options" title="Permalink to this headline">¶</a></h2>
+<p>This section is under construction that means not all options are documented yet.</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 15%" />
+<col style="width: 65%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">agent_listen_address</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code></p></td>
+<td><p>The IP address used by the agent</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">agent_ssl_key</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/etc/odoopbx/pki/current/privkey.pem</span></code></p></td>
+<td><p>The SSL key used by the agent. By default a new key is generated.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">agent_ssl_crt</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/etc/odoopbx/pki/current/fullchain.pem</span></code></p></td>
+<td><p>The certificate used by the agent. By default a self-signed certificate is generated based on the key generated above.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 15%" />
+<col style="width: 65%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ami_login</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">odoo</span></code></p></td>
+<td><p>Asterisk Manager Interface login as configured in <code class="docutils literal notranslate"><span class="pre">/etc/asterisk/manager.conf</span></code> (usually there).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ami_secret</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">odoo</span></code></p></td>
+<td><p>Asterisk Manager Interface secret as configured in <code class="docutils literal notranslate"><span class="pre">/etc/asterisk/manager.conf</span></code> (usually there).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ami_enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td><p>Start AMI connector when Agent starts.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ami_host</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">localhost</span></code></p></td>
+<td><p>Hostname or IP address of your Asterisk server</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ami_register_events</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'*'</span></code></p></td>
+<td><p>The list of events which should be registered by the agent. By default all the events are registered.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ami_trace_events</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td><p>Adds more detailed output about the events received from Asterisk via AMI</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ami_trace_actions</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td><p>Adds more detailed output about the actions sent to Asterisk via AMI</p></td>
+</tr>
+</tbody>
+</table>
+<p>This engine makes Asterisk console available from Odoo.</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 15%" />
+<col style="width: 65%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">asterisk_binary</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/usr/sbin/asterisk</span></code></p></td>
+<td><p>Asbsolute path to the Asterisk executable. The service runs this binary to connect to Asterisk command socket to send commands.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">asterisk_options</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-vvvvvr</span></code></p></td>
+<td><p>Options added when connecting to Asterisk binary, like default verbose level.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">asterisk_cli_port</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">30000</span></code></p></td>
+<td><p>TCP port to listen to. Odoo’s WEB console widget connects to this port using websocket method.
+Make sure this port is accessible from outside.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">asterisk_cli_enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td><p>Start the CLI service when Agent starts.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">asterisk_shell_enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td><p>Enable <code class="docutils literal notranslate"><span class="pre">!</span></code> command from Asterisk console to enter Linux shell.</p></td>
+</tr>
+</tbody>
+</table>
+<p>This engine starts a FastAGI server that can be used by Asterisk.</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 15%" />
+<col style="width: 65%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fastagi_enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td><p>FastAGI server is not enabled by default. Set this to <code class="docutils literal notranslate"><span class="pre">true</span></code> to start it up.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fastagi_tts_google_app_key_file</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/srv/odoopbx/google_key.json</span></code></p></td>
+<td><p>Path to Google API key. Read the <a class="reference internal" href="#"><span class="doc">Agent options</span></a> for more details.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fastagi_listen_address</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code></p></td>
+<td><p>FastAGI server listen inteface. Leave default if you don’t connect to it from another external Asterisk server.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fastagi_listen_port</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">4574</span></code></p></td>
+<td><p>FastAGI server listen port.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 15%" />
+<col style="width: 65%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">odoo_host</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">localhost</span></code></p></td>
+<td><p>Hostname or IP address of your Odoo server.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">odoo_port</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">8069</span></code></p></td>
+<td><p>Odoo port that is accessible to Agent. When you use a proxy server e.g. Nginx you should put <code class="docutils literal notranslate"><span class="pre">80</span></code> here or <code class="docutils literal notranslate"><span class="pre">443</span></code> if you use HTTPS.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">odoo_bus_port</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">8072</span></code></p></td>
+<td><p>Odoo longpolling port that is accessible to Agent. When you use a proxy server e.g. Nginx you should put <code class="docutils literal notranslate"><span class="pre">80</span></code> here or <code class="docutils literal notranslate"><span class="pre">443</span></code> if you use HTTPS.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">odoo_db</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">odoopbx_14</span></code></p></td>
+<td><p>The name of the Odoo database to which the agent connects. Fill in with your database’s name.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">odoo_user</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">asterisk</span></code></p></td>
+<td><p>The username used for connecting to Odoo.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">odoo_password</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">asterisk</span></code></p></td>
+<td><p>The password used for connecting to Odoo. Check the <a class="reference external" href="https://docs.odoopbx.com/installation/after_install.html#change-default-password">After Install Steps</a> document about changing the agent’s password.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">connector_enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td><p>Odoo connector engine process that enabled Odoo to send command to the Agent.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">odoo_use_ssl</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td><p>If set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, the agent will protect the connections with SSL/TLS and will not accept unprotected requests</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">odoo_single_db</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td><p>Set to True if you have db filter or only one database to save a query on every request.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">odoo_refresh_token_seconds</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">300</span></code></p></td>
+<td><p>Describes the frequency with which the agent updates its security token used for Odoo authentication.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">odoo_trace_rpc</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td><p>Adds more detailed output about the RPC calls sent from the Agent to Odoo.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">odoo_trace_ami</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td><p>Adds more detailed output about the AMI requests received from Odoo.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 15%" />
+<col style="width: 65%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">log_level</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">info</span></code></p></td>
+<td><p>Logging level. See <a class="reference external" href="https://docs.saltproject.io/en/latest/ref/configuration/logging/index.html#log-levels">Salt logging documentation</a> for details on valid field values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">log_file</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">file:///dev/log/LOG_LOCAL0</span></code></p></td>
+<td><p>File to which the agent logs are being sent</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">log_fmt_logfile</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'[%(levelname)-8s]</span> <span class="pre">%(name)s:%(lineno)s</span> <span class="pre">%(message)s'</span></code></p></td>
+<td><p>The format in which the logs are being sent to the log file. See <a class="reference external" href="https://docs.saltproject.io/en/latest/ref/configuration/logging/index.html#log-fmt-logfile">Salt documentation on log-fmt-logfile</a> for details on valid formatting options</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">log_fmt_console</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'%(asctime)s</span> <span class="pre">%(colorlevel)s</span> <span class="pre">%(name)s:%(lineno)s</span> <span class="pre">%(message)s'</span></code></p></td>
+<td><p>The format in which the logs are being sent to the log file. See <a class="reference external" href="https://docs.saltproject.io/en/latest/ref/configuration/logging/index.html#log-fmt-console">Salt documentation  on log-fmt-console</a> for details on valid formatting options</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Agent options</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#working-with-configuration">Working with configuration</a></li>
+<li><a class="reference internal" href="#description-of-agent-modes-of-operation">Description of agent modes of operation</a><ul>
+<li><a class="reference internal" href="#bus-configuration-options">Bus configuration options</a></li>
+<li><a class="reference internal" href="#http-configuration-options">HTTP configuration options</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configuration-options">Configuration options</a></li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation index</a><ul>
+  <li><a href="../administration.html">Administration</a><ul>
+      <li>Previous: <a href="installation.html" title="previous chapter">Installation</a></li>
+      <li>Next: <a href="configuration.html" title="next chapter">Configuration</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+  </body>
+</html>

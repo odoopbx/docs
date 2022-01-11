@@ -1,7 +1,9 @@
 ============
 Installation
 ============
-Depending on your current configuration, the following installation types are possible:
+OdooPBX installation is managed by the Agent as the Agent is not only the connection middleware but also a deployment manager.
+
+Depending on your current configuration, the following installation types can be reviewed. 
 
 * **Demo setup** - Odoo, The OdooPBX Agent, Asterisk/FreePBX.
 * **The Agent setup** - You have both Odoo and Asterisk/FreePBX up and running.
@@ -9,38 +11,188 @@ Depending on your current configuration, the following installation types are po
 * **Odoo setup** You have Asterisk/FreePBX and require Odoo/CRM setup.
 
 These configurations differ only in a set of installed components.
-Let's take a closer look at them.
+
+Also there are two deployment types:
+
+* **Docker** based deployment.
+* **Direct** host setup.
+
+Let's review these options in details.
+
+Docker based deployment
+=======================
+See the ``docker`` folder in Agent repository `here <https://github.com/odoopbx/agent/tree/master/docker>`_.
+
+We use docker compose to define and run the OdooPBX services. The following services are defined:
+
+* **db** - PostgreSQL database used by Odoo.
+* **odoo** - Odoo server.
+* **api** - Salt API process that accepts connections from Odoo.
+* **master** - Salt master process that accepts requests from the salt-api process and forwards them to the minions.
+* **minion** - Salt minion process that is connected to Asterisk AMI and forwards AMI events to Odoo using Odoo RPC.
+* **asterisk** - a plain Asterisk PBX with minimal set of configuration files.
+* **freepbx** - We use `tiredofit/freepbx <https://github.com/tiredofit/docker-freepbx>`_ - 
+  the most popular FreePBX image published on the docker.hub. *Disclaimer: we do not maintain this FreePBX image.
+  You can replace it with any other FreePBX docker image of your choice.* 
+
+You can take an example ``docker-compose.yml`` file to get demo up & running `here <https://github.com/odoopbx/docker/blob/master/docker-compose.yml>`_.
+
+Also please note the ``docker-compose.override.yml`` example on how to customize the defaults: `here <https://github.com/odoopbx/docker/blob/master/docker-compose.override.yml.example>`_.
+
+So depending on your requered setup you can choose which services to run.
+
+Direct installation
+===================
+We use Salt states files to install different OdooPBX components. The following components are available:
+
+* **odoo** - Odoo server.
+* **postgres** - PostgreSQL database.
+* **agent** - Salt minion, api and master processes.
+* **asterisk** - Asterisk PBX server.
+
+To install a compoment the following command is used:
+
+.. code:: sh
+
+    salt-call state.apply agent
+    salt-call state.apply postgres
+
+To install all compoments use this:
+
+.. code:: sh
+
+    salt-call state.apply odoopbx
 
 Demo setup
 ==========
-The easiest and fastest way to start using OdooPBX is the docker based installation.
+The easiest and fastest way to start using OdooPBX is the docker based installation. Full demo is available for direct setup only with Asterisk (direct setup does not 
+install FreePBX currently).
 
-You can take an example docker compose file to get demo up & running `here <https://github.com/odoopbx/docker/blob/master/docker-compose.yml>`_.
+Run either Asterisk or FrePBX service.
 
-Run either Asterisk or FrePBX service. 
+.. code:: sh
 
-Disclaimer: we do not maintain this FreePBX image. We use `tiredofit/freepbx <https://github.com/tiredofit/docker-freepbx>`_ - the most popular FreePBX image published 
-on the docker.hub.
+    docker-compose up odoo minion api freepbx
+
 
 The Agent setup
 ===============
 This setup assumes that both Odoo and Asterisk are already installed and running.
 
-When Odoo & Asterisk / FreePBX exists you require only the OdooPBX Agent  setup (a middleware between Odoo & Asterisk).
+When Odoo & Asterisk / FreePBX exists you require only the OdooPBX Agent
+setup (Agent is a middleware between Odoo & Asterisk).
 
-In this case you have a choice. You can use the docker image, or you can install the Agent directly on the same server where Asterisk is located.
-However, if you don't need Odoo call records, the Agent can be installed on any other computer, as it only requires AMI connection to Asterisk.
+Docker setup
+############
+
+To deploy the Agent in docker use this:
+
+.. code:: sh
+
+  docker-compose up minion api master
+
+Also you have to provide your custom Odoo & Asterisk settings. This is done by using a volume mapping
+in your ``docker-compose.override.yml``:
+
+.. code:: yml
+
+    version: '3.1'
+    services:
+
+    minion:    
+    volumes:
+      - ./minion_local.conf:/etc/salt/minion_local.conf
+
+So this maps ``minion_local.conf`` that will be automatically included by the minion.
+
+Below is an example of custom options. See the full list of possible options - :doc:`agent_options`.
+
+``minion_local.conf``:
+
+.. code:: yml
+
+    odoo_db: my_database
+    odoo_password: asterisk1password
+    odoo_port: 443
+    odoo_use_ssl: True
+    ami_login: odoo
+    ami_secret: dfghj5678b
+    ami_port: 5038
+    ami_host: asterisk.host
+
+Direct setup
+############
+The best place to install the Agent is the same server where Asterisk is running because in this case
+it has direct access to local file system  and can access call recordings. 
+
+If you don't need call recordings in Odoo you can setup the Asterisk agent on a different computer but
+it is advised to place it near the Asterisk server.
+
+.. note:: 
+    Please note that the Agent requires root privileges. The commands below must be run as the **root** user.
+
+Installation on Ubuntu and Debian
++++++++++++++++++++++++++++++++++
+
+.. code::
+
+    apt update && apt -y install python3-pip python3-setproctitle
+    pip3 install odoopbx
+
+Installation on CentOS
+++++++++++++++++++++++
+
+Versions 6&7
+++++++++++++
+First, you should enable and install Python3 and pip.
+
+There are at least `3 ways to install the latest Python3 package on CentOS <https://www.2daygeek.com/install-python-3-on-centos-6/>`_. 
+
+Below is one of them (IUS).
+
+.. code:: 
+
+    curl 'https://setup.ius.io/' -o setup-ius.sh
+    sh setup-ius.sh
+    yum --enablerepo=ius install python36 python36-pip python36-setproctitle
+    pip3 install odoopbx
+
+.. warning::
+
+   Please note that if you are using FreePBX, which is based on Centos 7, it has a different Python3 naming schema,
+   similar to ius, but using Sangoma's own repositories. You shouldn't try to use 3rd party repositories,
+   simply run ``yum makecache`` to get latest information from Sangoma's repositories and install Python3 by running 
+   ``yum install python36u python36u-pip``
+
+Version 8
++++++++++
+Latest CentOS is quite ready for Python3. So here are the installation steps:
+
+.. code::
+
+    yum install python3 python3-pip python3-devel
+    pip3 install odoopbx
 
 
-Introduction
-============
-This guide 
-Installation process consists of two parts:
+Sangoma Linux release 7.8
++++++++++++++++++++++++++
 
-* Odoo module installation.
-* Asterisk Agent installation.
+.. code::
 
-First install & configure the Odoo module and then install the Asterisk agent.
+    yum install python36u python36u-pip python36u-devel
+    pip3.6 install odoopbx
+    
+
+Installation errors
+###################
+During ``odoopbx install agent`` execution the following log lines are expected and they are normal:
+
+.. code::
+ 
+ 14:16:12 - salt.loaded.ext.module.asteriskmod:40 - ERROR - ipsetpy lib not found, asterisk module not available.
+ 14:16:12 - salt.loaded.ext.module.odoomod:23 - INFO - OdooRPC lib not found, odoo module not available.
+
+This is because these packages are going to be installed exactly during this operation.
 
 Odoo module installation
 ========================
@@ -130,95 +282,6 @@ Here is an example of such a configuration line:
 .. code::
 
     server_wide_modules = web,asterisk_plus
-
-The Asterisk Agent installation
-===============================
-The best place to install the Agent is the same server where Asterisk is running because in this case
-it has direct access to local file system  and can access call recordings. 
-
-If you don't need call recordings in Odoo you can setup the Asterisk agent on a different computer but
-it is advised to place it near the Asterisk server.
-
-It is also possible install the Agent into a virtual environment.
-
-.. note:: 
-    Please note that the Agent requires root privileges. The commands below must be run as the **root** user.
-
-Installation on Ubuntu and Debian
-#################################
-
-.. code::
-
-    apt update && apt -y install python3-pip python3-setproctitle
-    pip3 install odoopbx
-
-Installation on CentOS
-######################
-
-Versions 6&7
-++++++++++++
-First, you should enable and install Python3 and pip.
-
-There are at least `3 ways to install the latest Python3 package on CentOS <https://www.2daygeek.com/install-python-3-on-centos-6/>`_. 
-
-Below is one of them (IUS).
-
-.. code:: 
-
-    curl 'https://setup.ius.io/' -o setup-ius.sh
-    sh setup-ius.sh
-    yum --enablerepo=ius install python36 python36-pip python36-setproctitle
-    pip3 install odoopbx
-
-.. warning::
-
-   Please note that if you are using FreePBX, which is based on Centos 7, it has a different Python3 naming schema,
-   similar to ius, but using Sangoma's own repositories. You shouldn't try to use 3rd party repositories,
-   simply run ``yum makecache`` to get latest information from Sangoma's repositories and install Python3 by running 
-   ``yum install python36u python36u-pip``
-
-Version 8
-+++++++++
-Latest CentOS is quite ready for Python3. So here are the installation steps:
-
-.. code::
-
-    yum install python3 python3-pip python3-devel
-    pip3 install odoopbx
-
-
-Sangoma Linux release 7.8
-#########################
-
-.. code::
-
-    yum install python36u python36u-pip python36u-devel
-    pip3.6 install odoopbx
-    
-
-Installation error
-##################
-During ``odoopbx install agent`` execution the following log lines are expected and they are normal:
-
-.. code::
- 
- 14:16:12 - salt.loaded.ext.module.asteriskmod:40 - ERROR - ipsetpy lib not found, asterisk module not available.
- 14:16:12 - salt.loaded.ext.module.odoomod:23 - INFO - OdooRPC lib not found, odoo module not available.
-
-This is because these packages are going to be installed exactly during this operation.
-
-The Asterisk Agent initialization
-=================================
-After odoopbx utility has been installed it is necessary to initilize the Asterisk Agent.
-
-.. code:: sh
-
-    root@dev# odoopbx init
-    Initializing salt minion ID [760e0474-dd50-4cf9-8f04-26b3ee4a4245]
-    Minion [760e0474-dd50-4cf9-8f04-26b3ee4a4245] ready to go
-
-    
-
 
 Asterisk AMI configuration
 ==========================

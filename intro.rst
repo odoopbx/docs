@@ -55,4 +55,27 @@ extremely quicky to create and maintain.
 
 Read the `Developers guide <../development>`_ for more information on how to build telephony applications on the OdooPBX platform.
 
-Back to the `contents <../>`_.
+OdooPBX modules
+===============
+As OdooPBX is based on Odoo it has modular architecture. 
+
+The main module that is inherited by all other modules is called ``asterisk_plus``. 
+
+Asterisk plus module has the following features:
+
+* Built-in WebRTC phone.
+* Click to call from Partner form.
+* Partners calls history with consolidation on parent company with grouping  by partner employees.            
+* Call recording, sharing and discussion.
+* Automatic opening of partner's form on call.
+* Set phone's caller ID name from Odoo partners database.
+* Normalize your phone numbers database.
+* Get caller's salesperson SIP channel and connect customers directly to their managers.
+* Organize differentiated telephone customer service by quering customer tags from Asterisk dialplan
+  (e.g. put VIP customers in the VIP queue or in first place).
+* SIP client agnostic - you can connect Odoo VoIP WebRTC client or any other SIP softphone or hardphone.            
+* Partner creation from active call or call history.
+* Advanced call history analytics.
+* Automatic call & recordings archiving.
+
+For more information on modules visit the `addons repository <https://github.com/odoopbx/addons>`_.
