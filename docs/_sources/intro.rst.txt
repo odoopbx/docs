@@ -78,4 +78,5 @@ Asterisk plus module has the following features:
 * Advanced call history analytics.
 * Automatic call & recordings archiving.
 
+
 For more information on modules visit the `addons repository <https://github.com/odoopbx/addons>`_.
