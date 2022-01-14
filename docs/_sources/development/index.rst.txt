@@ -30,6 +30,14 @@ it is defined.
     With OdooPBX you create phone applications writing 100% Odoo code.
 
 
+OdooPBX is **extremely adaptable and extensible** because Odoo is very adaptable
+by its prominent `inheritance architecture <https://www.odoo.com/documentation/14.0/developer/howtos/rdtraining/13_inheritance.html>`__
+and Salt is extensible because it is built to be that.
+
+The Saltstack platform has tons of ready to use building boxes called `execution modules <https://docs.saltproject.io/en/latest/ref/modules/all/index.html>`__
+that can be used to extend Odoo's communications with external world and make it
+extremely quicky to create and maintain.
+
 Here is a little more detailed picture on the OdooPBX architecture.
 
 .. image:: media/odoopbx-architecture.png
