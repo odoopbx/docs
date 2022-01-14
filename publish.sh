@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+git checkout public
+rm -rf docs
+cp -r _build docs
+[ -e docs/html ] && rm docs/html
+touch docs/.nojekyll
+git add docs
+git commit docs -m "Docs updated"
+git push
+git checkout master
