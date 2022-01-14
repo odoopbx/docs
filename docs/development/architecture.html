@@ -4,88 +4,45 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OdooPBX architecture &#8212; OdooPBX 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nameko.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="API" href="api.html" />
     <link rel="prev" title="Developer Guide Introduction" href="index.html" />
    
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Lora:400' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head><body>
   
-  
-
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="api.html" title="API"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="Developer Guide Introduction"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">OdooPBX 1.0 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../development.html" accesskey="U">Development</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">OdooPBX architecture</a></li> 
-      </ul>
-    </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <section id="odoopbx-architecture">
+  <div class="section" id="odoopbx-architecture">
 <h1>OdooPBX architecture<a class="headerlink" href="#odoopbx-architecture" title="Permalink to this headline">¶</a></h1>
-<section id="introduction">
+<div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>As it comes from its name OdooPBX is a PBX platform built upon Odoo &amp; Asterisk.</p>
-<p>Odoo (former OpenERP / TinyERP) is a modern WEB business platform that rapidly spreads over the world.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Odoo as a WEB development platform has the following features:</p>
-<ul class="simple">
-<li><p>A modern architecture with clean separation of layers (MVC).
-UI is created in XML, business logic is programmed in Python, data is stored in PostgreSQL and accessed
-through ORM (object-relational mapper).</p></li>
-<li><p>Rapid application development - Odoo is a blazing fast development tool that allows building new
-apps like a lightning.</p></li>
-<li><p>Granular security system with row-level colum-level access.</p></li>
-<li><p>Safe upgrade framework give a possibility of reliable upgrades.</p></li>
-</ul>
-</div>
-<p>Odoo as a business platform comes with a plenty of ready to use business oriented modules like CRM, Projects, Warehouse,
-Sales, Events, etc.</p>
-<p>So from one side OdooPBX is a PBX management tool built upon Odoo WEB framework.</p>
-<p>From another side OdooPBX adds a telephony layer to existing business modules and by this
-integrating tight phone communications with places they happen.</p>
-<p>Finally a special middleware Agent is used to connect Odoo and Asterisk together in a proper way.</p>
 <p>Let’s dive into the details now.</p>
-</section>
-<section id="the-agent">
+</div>
+<div class="section" id="the-agent">
 <h2>The Agent<a class="headerlink" href="#the-agent" title="Permalink to this headline">¶</a></h2>
-<p>The Agent itself is built upon the Saltstack platform and performs the following functions:</p>
-<ul class="simple">
-<li><p>Forwards Asterisk events to Odoo according to the downloaded events map.</p></li>
-<li><p>Executes Asterisk actions received from Odoo.</p></li>
-<li><p>Protects Asterisk from DDoS and password bruteforce attacks.</p></li>
-<li><p>Manages the installation &amp; upgrade process.</p></li>
-</ul>
-<section id="engines">
+<div class="section" id="engines">
 <h3>Engines<a class="headerlink" href="#engines" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://docs.saltproject.io/en/latest/topics/engines/index.html">Salt Engines</a>
 are long-running, external system processes that leverage Salt.</p>
@@ -95,7 +52,7 @@ are long-running, external system processes that leverage Salt.</p>
 <li><p>Asterisk WEB console engine (asterisk_cli);</p></li>
 <li><p>Odoo bus connector engine (odoo_connector);</p></li>
 </ul>
-<section id="ami-engine">
+<div class="section" id="ami-engine">
 <h4>AMI engine<a class="headerlink" href="#ami-engine" title="Permalink to this headline">¶</a></h4>
 <p>AMI (Asterisk Manager Interface) engine connects to the Asterisk AMI port (usually 5038) and
 forwards AMI events to Odoo according to the events map that is downloaded on the Agent startup.</p>
@@ -110,70 +67,72 @@ Example: <code class="docutils literal notranslate"><span class="pre">event['Res
 <li><p><strong>delay</strong> - an optional delay in seconds before sending the event to Odoo. Sometimes it is required to
 let previous event to be processed by Odoo. Example: <code class="docutils literal notranslate"><span class="pre">1.5</span></code>.</p></li>
 </ul>
-</section>
-</section>
-<section id="modules">
+</div>
+</div>
+<div class="section" id="modules">
 <h3>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h3>
-</section>
-<section id="states">
+</div>
+<div class="section" id="states">
 <h3>States<a class="headerlink" href="#states" title="Permalink to this headline">¶</a></h3>
-</section>
-</section>
-<section id="odoopbx-modules">
+</div>
+</div>
+<div class="section" id="odoopbx-modules">
 <h2>OdooPBX modules<a class="headerlink" href="#odoopbx-modules" title="Permalink to this headline">¶</a></h2>
-<section id="asterisk-base">
+<div class="section" id="asterisk-base">
 <h3>Asterisk Base<a class="headerlink" href="#asterisk-base" title="Permalink to this headline">¶</a></h3>
-</section>
-<section id="asterisk-calls">
+</div>
+<div class="section" id="asterisk-calls">
 <h3>Asterisk Calls<a class="headerlink" href="#asterisk-calls" title="Permalink to this headline">¶</a></h3>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
-            <div class="clearer"></div>
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">OdooPBX architecture</a><ul>
-<li><a class="reference internal" href="#introduction">Introduction</a></li>
-<li><a class="reference internal" href="#the-agent">The Agent</a><ul>
-<li><a class="reference internal" href="#engines">Engines</a><ul>
-<li><a class="reference internal" href="#ami-engine">AMI engine</a></li>
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">OdooPBX</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../administration.html">Administration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html">Developer Guide Introduction</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">OdooPBX architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui_actions.html">User interface actions API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="env.html">Settting up dev environment</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#modules">Modules</a></li>
-<li><a class="reference internal" href="#states">States</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common.html">Common</a></li>
 </ul>
-</li>
-<li><a class="reference internal" href="#odoopbx-modules">OdooPBX modules</a><ul>
-<li><a class="reference internal" href="#asterisk-base">Asterisk Base</a></li>
-<li><a class="reference internal" href="#asterisk-calls">Asterisk Calls</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="../index.html">Documentation index</a><ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="../development.html">Development</a><ul>
       <li>Previous: <a href="index.html" title="previous chapter">Developer Guide Introduction</a></li>
       <li>Next: <a href="api.html" title="next chapter">API</a></li>
   </ul></li>
   </ul></li>
 </ul>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/development/architecture.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
+</div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
@@ -184,10 +143,29 @@ let previous event to be processed by Odoo. Example: <code class="docutils liter
     </div>
 </div>
 <script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-  
+    <div class="footer">
+      &copy;2022, Odooist.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
   </body>
 </html>
