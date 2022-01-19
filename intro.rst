@@ -32,7 +32,7 @@ So from one side OdooPBX is a PBX management tool built upon Odoo WEB framework.
 From another side OdooPBX adds a telephony layer to existing business modules and by this
 integrating tight phone communications with places they happen.
 
-.. note:: 
+.. important:: 
 
     With OdooPBX you create phone applications writing 100% Odoo code.
 
@@ -79,3 +79,5 @@ Asterisk plus module has the following features:
 * Automatic call & recordings archiving.
 
 For more information on modules visit the `addons repository <https://github.com/odoopbx/addons>`_.
+
+Next read the `Installtion guide <installation>`.

@@ -8,6 +8,7 @@ OdooPBX Documentation
     :titlesonly:
 
     intro
+    install/install
     administration
     development
     common
