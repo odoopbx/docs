@@ -15,8 +15,8 @@
     <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Standard installation" href="standard.html" />
-    <link rel="prev" title="Installation" href="install.html" />
+    <link rel="next" title="Demo setup" href="demo.html" />
+    <link rel="prev" title="Standard installation" href="standard.html" />
    
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Lora:400' rel='stylesheet' type='text/css'>
@@ -36,10 +36,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="standard.html" title="Standard installation"
+          <a href="demo.html" title="Demo setup"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="install.html" title="Installation"
+          <a href="standard.html" title="Standard installation"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">OdooPBX 1.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="install.html" accesskey="U">Installation</a> &#187;</li>
@@ -64,9 +64,10 @@
 the most popular FreePBX image published on the docker.hub. <em>Disclaimer: we do not maintain this FreePBX image.
 You can replace it with any other FreePBX docker image of your choice.</em></p></li>
 </ul>
-<p>You can take an example of <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> file  from the Agent repo <a class="reference external" href="https://github.com/odoopbx/docker/blob/master/docker-compose.yml">here</a>.</p>
-<p>Also please note the <code class="docutils literal notranslate"><span class="pre">docker-compose.override.yml</span></code> example on how to customize the defaults: <a class="reference external" href="https://github.com/odoopbx/docker/blob/master/docker-compose.override.yml.example">here</a>.</p>
-<p>So depending on your requered setup you can choose which services to run.</p>
+<p>You can take an example of <a class="reference external" href="https://github.com/odoopbx/docker/blob/master/docker-compose.yml">docker-compose.yml file  from the Agent repo</a>.</p>
+<p>Also please note the <a class="reference external" href="https://github.com/odoopbx/docker/blob/master/docker-compose.override.yml.example">docker-compose.override.yml example</a>
+on how to customize the defaults (save this file under <code class="docutils literal notranslate"><span class="pre">docker-compose.override.yml</span></code> name.)</p>
+<p>So depending on your required setup you can choose which services to run.</p>
 <p>Below you will find some snippets for different environments.</p>
 <div class="section" id="only-agent-setup">
 <h2>Only Agent setup<a class="headerlink" href="#only-agent-setup" title="Permalink to this headline">¶</a></h2>
@@ -83,7 +84,7 @@ ami_port: 5038
 ami_host: asterisk.host
 </pre></div>
 </div>
-<p><em>Below is an example of custom options. See the full list of possible options</em> - <span class="xref std std-doc">agent_options</span>.</p>
+<p><em>Below is an example of custom options. See the full list of possible options</em> - <a class="reference internal" href="../administration/agent_options.html"><span class="doc">Agent options</span></a>.</p>
 <p>Next you need to map this file in <code class="docutils literal notranslate"><span class="pre">docker-compose.override.yml</span></code>:</p>
 <div class="highlight-yml notranslate"><div class="highlight"><pre><span></span>version: &#39;3.1&#39;
 services:
@@ -102,6 +103,14 @@ volumes:
 </pre></div>
 </div>
 </div>
+<div class="section" id="odoo">
+<h2>Odoo<a class="headerlink" href="#odoo" title="Permalink to this headline">¶</a></h2>
+<p>Coming soon.</p>
+</div>
+<div class="section" id="asterisk">
+<h2>Asterisk<a class="headerlink" href="#asterisk" title="Permalink to this headline">¶</a></h2>
+<p>Coming soon.</p>
+</div>
 </div>
 
 
@@ -118,6 +127,8 @@ volumes:
   <ul>
 <li><a class="reference internal" href="#">Docker based deployment</a><ul>
 <li><a class="reference internal" href="#only-agent-setup">Only Agent setup</a></li>
+<li><a class="reference internal" href="#odoo">Odoo</a></li>
+<li><a class="reference internal" href="#asterisk">Asterisk</a></li>
 </ul>
 </li>
 </ul>
@@ -125,8 +136,8 @@ volumes:
 <ul>
   <li><a href="../index.html">Documentation index</a><ul>
   <li><a href="install.html">Installation</a><ul>
-      <li>Previous: <a href="install.html" title="previous chapter">Installation</a></li>
-      <li>Next: <a href="standard.html" title="next chapter">Standard installation</a></li>
+      <li>Previous: <a href="standard.html" title="previous chapter">Standard installation</a></li>
+      <li>Next: <a href="demo.html" title="next chapter">Demo setup</a></li>
   </ul></li>
   </ul></li>
 </ul>

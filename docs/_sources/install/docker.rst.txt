@@ -11,11 +11,12 @@ We use docker compose to define and run the OdooPBX services. The following serv
   the most popular FreePBX image published on the docker.hub. *Disclaimer: we do not maintain this FreePBX image.
   You can replace it with any other FreePBX docker image of your choice.* 
 
-You can take an example of ``docker-compose.yml`` file  from the Agent repo `here <https://github.com/odoopbx/docker/blob/master/docker-compose.yml>`_.
+You can take an example of `docker-compose.yml file  from the Agent repo <https://github.com/odoopbx/docker/blob/master/docker-compose.yml>`_.
 
-Also please note the ``docker-compose.override.yml`` example on how to customize the defaults: `here <https://github.com/odoopbx/docker/blob/master/docker-compose.override.yml.example>`_.
+Also please note the `docker-compose.override.yml example <https://github.com/odoopbx/docker/blob/master/docker-compose.override.yml.example>`_ 
+on how to customize the defaults (save this file under ``docker-compose.override.yml`` name.)
 
-So depending on your requered setup you can choose which services to run.
+So depending on your required setup you can choose which services to run.
 
 Below you will find some snippets for different environments.
 
@@ -38,7 +39,7 @@ So when Odoo & Asterisk / FreePBX exists you require to supply a configuration f
     ami_port: 5038
     ami_host: asterisk.host
 
-*Below is an example of custom options. See the full list of possible options* - :doc:`agent_options`.
+*Below is an example of custom options. See the full list of possible options* - :doc:`../administration/agent_options`.
 
 Next you need to map this file in ``docker-compose.override.yml``:
 
@@ -64,4 +65,11 @@ Check the output. If there is no error messages, press CTRL+C and restart the Ag
     docker-compose up -d agent
 
 
+Odoo
+====
+Coming soon.
+
+Asterisk
+========
+Coming soon.
 

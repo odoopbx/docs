@@ -56,14 +56,6 @@
 <h1>Standard installation<a class="headerlink" href="#standard-installation" title="Permalink to this headline">¶</a></h1>
 <p>This method describes how to install OdooPBX on a Linux server.</p>
 <p>Also the previous step <a class="reference internal" href="system.html"><span class="doc">System requirements</span></a> must be done.</p>
-<p>Here is an example of the spell that will install a full <strong>all-in-one</strong> demo system:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip3 install odoopbx
-salt-call state.apply full
-</pre></div>
-</div>
-<p>But in order to make this spell valid some requirements must be installed. On different systems these packages
-have different name. So we support the most popular Linux distributions. If something does not work for you
-it’s ok to send us <cite>cat /etc/*release</cite> | mail <a class="reference external" href="mailto:reports&#37;&#52;&#48;odoopbx&#46;com">reports<span>&#64;</span>odoopbx<span>&#46;</span>com</a> so that we could add support to your system.</p>
 <p>OdooPBX has the following components:</p>
 <ul class="simple">
 <li><p>Odoo &amp; PostgreSQL</p></li>
@@ -71,6 +63,14 @@ it’s ok to send us <cite>cat /etc/*release</cite> | mail <a class="reference e
 <li><p>The Agent.</p></li>
 </ul>
 <p>Let review them in more details.</p>
+<div class="section" id="all-in-one-demo">
+<h2>All-in-one demo<a class="headerlink" href="#all-in-one-demo" title="Permalink to this headline">¶</a></h2>
+<p>Below commands will install a full <strong>all-in-one</strong> demo system:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip3 install odoopbx
+salt-call state.apply full
+</pre></div>
+</div>
+</div>
 <div class="section" id="the-agent">
 <h2>The Agent<a class="headerlink" href="#the-agent" title="Permalink to this headline">¶</a></h2>
 <p>This is where all starts. To start your OdooPBX journey you must first install the OdooPBX Agent.</p>
@@ -92,9 +92,14 @@ The following components are available:</p>
 <li><p><strong>asterisk</strong> - Asterisk PBX server.</p></li>
 <li><p><strong>nginx</strong> - the Nginx proxy server.</p></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please note that the Agent requires root privileges. The commands below must be run as the <strong>root</strong> user.</p>
+</div>
 <p>To install a compoment the following command is used:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>salt-call state.apply agent
 salt-call state.apply odoo
+salt-call state.apply addons
 salt-call state.apply asterisk
 salt-call state.apply nginx
 </pre></div>
@@ -104,8 +109,9 @@ salt-call state.apply nginx
 </pre></div>
 </div>
 <p>Different components can be installed into different servers and be interconnected easily.</p>
-<p>Actually it’s not a good idea to put all eggs in one busket.</p>
-<p>The most common setup uses two servers:</p>
+<p>But it’s not a good idea to put all eggs in one busket, especially the PBX egg that is actually
+a real-time application that likes dedicated resources.</p>
+<p>So the most common setup uses two servers:</p>
 <ul class="simple">
 <li><p>1: Odoo, PostgreSQL, Nginx.</p></li>
 <li><p>2: Asterisk, The Agent.</p></li>
@@ -115,37 +121,31 @@ it has direct access to local file system  and can access call recordings.</p>
 <p>If you don’t need call recordings in Odoo you can setup the Asterisk agent on a different computer but
 it is advised to place it at least near the Asterisk server. But depending on your company size you can also
 have your Asterisk in America and Odoo in Europe datacenter.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Please note that the Agent requires root privileges. The commands below must be run as the <strong>root</strong> user.</p>
-</div>
-</div>
-<div class="section" id="odoo-modules-installation">
-<h2>Odoo modules installation<a class="headerlink" href="#odoo-modules-installation" title="Permalink to this headline">¶</a></h2>
-<p>Install <a class="reference external" href="https://github.com/odoopbx/addons">addons</a> in the same way you install any other Odoo module.</p>
-<p>Do a database backup before installation or upgrade and also make a backup of previous version of the module
-if you have it (just in case to be able to restore quicky).</p>
-<div class="section" id="requirements">
-<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h3>
-<p>The module dependencies are localed in <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file located in the module folder.</p>
-<p>If you use odoo.sh make sure you copy the requirements to your modules top folder so that odoo.sh can
-install the required dependencies.</p>
-<p>If you use python virtualenv make sure you install the requirements there and not system wide.</p>
-</div>
 </div>
 <div class="section" id="odoo-installation">
 <h2>Odoo installation<a class="headerlink" href="#odoo-installation" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>salt-call state.apply odoo
+<p>If you don’t have Odoo installed you can use the Agent to deploy Odoo on the current host.
+.. code:: sh</p>
+<blockquote>
+<div><p>salt-call state.apply odoo</p>
+</div></blockquote>
+<p>This will install Odoo in a system wide python path with configuration file in <code class="docutils literal notranslate"><span class="pre">/etc/odoo/odoo.conf</span></code>.</p>
+<p>You can start Odoo with:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>systemctl start odoo
 </pre></div>
 </div>
-<div class="section" id="configuration">
-<h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
+<p>To see the Odoo log do:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>journalctl -u odoo -f
+</pre></div>
+</div>
+</div>
+<div class="section" id="odoo-configuration">
+<h2>Odoo configuration<a class="headerlink" href="#odoo-configuration" title="Permalink to this headline">¶</a></h2>
 <p>Odoo should be configured in the right way in order to be ready for Asterisk Plus.</p>
-<p>Usually Odoo configuration file is located in <code class="docutils literal notranslate"><span class="pre">/etc/odoo/odoo.conf</span></code> but make sure
-to use your environment configuration file.</p>
-<p>Make sure that <code class="docutils literal notranslate"><span class="pre">addons_path</span></code> is set correctly to include Asterisk Plus modules.</p>
+<p>When the Agent is used to install Odoo all is setup automatically by it. Read below only if you have
+your own Odoo server deployed somewhere.</p>
 <div class="section" id="workers">
-<h4>Workers<a class="headerlink" href="#workers" title="Permalink to this headline">¶</a></h4>
+<h3>Workers<a class="headerlink" href="#workers" title="Permalink to this headline">¶</a></h3>
 <p>Workers are Odoo processes that handle requests.</p>
 <p>Asterisk modules make many short-running requests.</p>
 <p>So your Odoo should be configured with at least 2 workers
@@ -155,8 +155,8 @@ to use your environment configuration file.</p>
 <p>If you use odoo.sh with 1 worker configured it is possible to get issues related to performance.</p>
 </div>
 </div>
-<div class="section" id="gevent-process-for-long-polling">
-<h4>Gevent process for long polling<a class="headerlink" href="#gevent-process-for-long-polling" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="long-polling">
+<h3>Long polling<a class="headerlink" href="#long-polling" title="Permalink to this headline">¶</a></h3>
 <p>Internal gevent-based server must be enabled (aka long polling) for popup notifications
 and live channels reload to work.</p>
 <p>When you enable workers gevent server is also enabled.</p>
@@ -167,7 +167,7 @@ and live channels reload to work.</p>
 <p>on your Odoo server.</p>
 <p>If you don’t use a proxy (apache / nginx / etc) then you should open Odoo
 on gevent’s port e.g.: <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8072/web</span></code>.</p>
-<p>If you run Odoo behind a proxy be sure to add a different proxy handler for /longpolling/poll URL.</p>
+<p>If you run Odoo behind a proxy be sure to add a different proxy handler for the <code class="docutils literal notranslate"><span class="pre">/longpolling/poll</span></code> URL.</p>
 <p>Here is a snippet for Nginx:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">location</span> <span class="o">/</span><span class="n">longpolling</span><span class="o">/</span><span class="n">poll</span> <span class="p">{</span>
   <span class="n">proxy_pass</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">8072</span><span class="p">;</span>
@@ -178,23 +178,45 @@ on gevent’s port e.g.: <code class="docutils literal notranslate"><span class=
 did not set long polling right.</p>
 </div>
 <div class="section" id="single-multi-database-setup">
-<h4>Single / multi database setup<a class="headerlink" href="#single-multi-database-setup" title="Permalink to this headline">¶</a></h4>
+<h3>Single / multi database setup<a class="headerlink" href="#single-multi-database-setup" title="Permalink to this headline">¶</a></h3>
 <p>There is one thing your should know.</p>
 <p>It’s a good configuration when your Odoo is limited to just one database with dbfilter
 configuration option and list_db set to False.</p>
 <p>But when you run Odoo with multiple databases some special configuration must be enabled.</p>
-<p>You should add asterisk_plus to <strong>server_wide_modules</strong> parameter in order to be able
+<p>You should add asterisk_plus to <code class="docutils literal notranslate"><span class="pre">server_wide_modules</span></code> parameter in order to be able
 to make CURL requests from the Asterisk dialplan (see below).</p>
 <p>Here is an example of such a configuration line:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">server_wide_modules</span> <span class="o">=</span> <span class="n">web</span><span class="p">,</span><span class="n">asterisk_plus</span>
 </pre></div>
 </div>
+<p>If your Odoo is in a single-mode setup there is no need to configure the <code class="docutils literal notranslate"><span class="pre">server_wide_modules</span></code> parameter.</p>
 </div>
 </div>
+<div class="section" id="addons">
+<h2>Addons<a class="headerlink" href="#addons" title="Permalink to this headline">¶</a></h2>
+<p>To install the OdooPBX public addons use:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>salt-call state.apply addons
+</pre></div>
 </div>
-<div class="section" id="asterisk-ami-configuration">
-<h2>Asterisk AMI configuration<a class="headerlink" href="#asterisk-ami-configuration" title="Permalink to this headline">¶</a></h2>
-<p>You should prepare an Asterisk Manager Interface (AMI) account to allow the Agent to connect to Asterisk.</p>
+<p>Or follow this instruction to copy OdooPBX addons to your custom Odoo server.</p>
+<p>Install <a class="reference external" href="https://github.com/odoopbx/addons">addons</a> in the same way you install any other Odoo module.</p>
+<p>Do a database backup before installation or upgrade and also make a backup of previous version of the module
+if you have it (just in case to be able to restore quicky).</p>
+<p>Make sure that <code class="docutils literal notranslate"><span class="pre">addons_path</span></code> is set correctly to include OdooPBX addons.</p>
+<p>The module dependencies are localed in <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file located in the addons folder.</p>
+<p>If you use odoo.sh make sure you copy the requirements to your modules top folder so that odoo.sh can
+install the required dependencies.</p>
+<p>If you use python virtualenv make sure you install the requirements there and not system wide.</p>
+</div>
+<div class="section" id="asterisk">
+<h2>Asterisk<a class="headerlink" href="#asterisk" title="Permalink to this headline">¶</a></h2>
+<p>To install Asterisk on the current server run:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>salt-call state.apply asterisk
+</pre></div>
+</div>
+<p>This will build Asterisk from the sources and also create default OdooPBX related configuration files.</p>
+<p>If you use your own Asterisk server read the below instuction.</p>
+<p>Prepare an Asterisk Manager Interface (AMI) account to allow the Agent to connect to Asterisk.</p>
 <p>Vanilla Asterisk requires editing the  <code class="docutils literal notranslate"><span class="pre">manager.conf</span></code> file, which is usually found in <code class="docutils literal notranslate"><span class="pre">/etc/asterisk</span></code>.</p>
 <p>A sample configuration is provided below, which lets the Agent to connect
 to your Asterisk server AMI port (usually 5038) using the login <code class="docutils literal notranslate"><span class="pre">odoo</span></code> with the password <code class="docutils literal notranslate"><span class="pre">odoo</span></code>.</p>
@@ -246,11 +268,10 @@ Change permit option to IP address of your Asterisk server if agent is not start
 </div>
 <div class="section" id="asterisk-ami-settings">
 <h3>Asterisk AMI settings<a class="headerlink" href="#asterisk-ami-settings" title="Permalink to this headline">¶</a></h3>
-<p>Next we should configure the Agent for Asterisk connection.
+<p>Configure the Agent for Asterisk connection.
 Make sure you applied the Asterisk manager configuration first.</p>
-<p>Once you are sure the Odoo AMI user is operational run the following commands
-to configure the Agent’s connection
-to your Asterisk:</p>
+<p>Once you are sure the Odoo AMI user is operational add the following options
+to configure the Agent’s connection to your Asterisk:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ami_host</span><span class="p">:</span> <span class="mf">127.0.0.1</span>
 <span class="n">ami_port</span><span class="p">:</span> <span class="mi">5038</span>
 <span class="n">ami_login</span><span class="p">:</span> <span class="n">odoo</span> <span class="c1"># Put here AMI user name you created in manager.conf.</span>
@@ -384,21 +405,17 @@ exten =&gt; _XXXXX.,2,Dial(SIP/provider/${EXTEN},30,TU(post-dial-send-dtmf) ; Ou
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Standard installation</a><ul>
+<li><a class="reference internal" href="#all-in-one-demo">All-in-one demo</a></li>
 <li><a class="reference internal" href="#the-agent">The Agent</a></li>
-<li><a class="reference internal" href="#odoo-modules-installation">Odoo modules installation</a><ul>
-<li><a class="reference internal" href="#requirements">Requirements</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#odoo-installation">Odoo installation</a><ul>
-<li><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li><a class="reference internal" href="#odoo-installation">Odoo installation</a></li>
+<li><a class="reference internal" href="#odoo-configuration">Odoo configuration</a><ul>
 <li><a class="reference internal" href="#workers">Workers</a></li>
-<li><a class="reference internal" href="#gevent-process-for-long-polling">Gevent process for long polling</a></li>
+<li><a class="reference internal" href="#long-polling">Long polling</a></li>
 <li><a class="reference internal" href="#single-multi-database-setup">Single / multi database setup</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a class="reference internal" href="#asterisk-ami-configuration">Asterisk AMI configuration</a></li>
+<li><a class="reference internal" href="#addons">Addons</a></li>
+<li><a class="reference internal" href="#asterisk">Asterisk</a></li>
 <li><a class="reference internal" href="#the-agent-configuration">The Agent Configuration</a><ul>
 <li><a class="reference internal" href="#odoo-settings">Odoo settings</a></li>
 <li><a class="reference internal" href="#asterisk-ami-settings">Asterisk AMI settings</a></li>
