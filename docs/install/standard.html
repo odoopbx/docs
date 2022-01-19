@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Installation &#8212; OdooPBX 1.0 documentation</title>
+    <title>Standard installation &#8212; OdooPBX 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/nameko.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -15,8 +15,8 @@
     <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Agent options" href="agent_options.html" />
-    <link rel="prev" title="Administration" href="../administration.html" />
+    <link rel="next" title="Docker based deployment" href="docker.html" />
+    <link rel="prev" title="System requirements" href="system.html" />
    
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Lora:400' rel='stylesheet' type='text/css'>
@@ -36,14 +36,14 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="agent_options.html" title="Agent options"
+          <a href="docker.html" title="Docker based deployment"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../administration.html" title="Administration"
+          <a href="system.html" title="System requirements"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">OdooPBX 1.0 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../administration.html" accesskey="U">Administration</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Installation</a></li> 
+          <li class="nav-item nav-item-1"><a href="install.html" accesskey="U">Installation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Standard installation</a></li> 
       </ul>
     </div>  
 
@@ -52,180 +52,77 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
+  <div class="section" id="standard-installation">
+<h1>Standard installation<a class="headerlink" href="#standard-installation" title="Permalink to this headline">¶</a></h1>
+<p>This method describes how to install OdooPBX on a Linux server.</p>
+<p>Also the previous step <a class="reference internal" href="system.html"><span class="doc">System requirements</span></a> must be done.</p>
+<p>Here is an example of the spell that will install a full <strong>all-in-one</strong> demo system:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip3 install odoopbx
+salt-call state.apply full
+</pre></div>
 </div>
-<div class="sidebar">
-<p class="sidebar-title">Optional Sidebar Title</p>
-<p class="sidebar-subtitle">Optional Sidebar Subtitle</p>
-<p>Subsequent indented lines comprise
-the body of the sidebar, and are
-interpreted as body elements.</p>
-</div>
-<p>OdooPBX installation is managed by the Agent as the Agent is not only the connection middleware but also a deployment manager.</p>
-<p>Depending on your current configuration, the following installation types can be reviewed.</p>
+<p>But in order to make this spell valid some requirements must be installed. On different systems these packages
+have different name. So we support the most popular Linux distributions. If something does not work for you
+it’s ok to send us <cite>cat /etc/*release</cite> | mail <a class="reference external" href="mailto:reports&#37;&#52;&#48;odoopbx&#46;com">reports<span>&#64;</span>odoopbx<span>&#46;</span>com</a> so that we could add support to your system.</p>
+<p>OdooPBX has the following components:</p>
 <ul class="simple">
-<li><p><strong>Demo setup</strong> - Odoo, The OdooPBX Agent, Asterisk/FreePBX.</p></li>
-<li><p><strong>The Agent setup</strong> - You have both Odoo and Asterisk/FreePBX up and running.</p></li>
-<li><p><strong>PBX setup</strong> - You have only Odoo and require a PBX setup (Asterisk/FreePBX)</p></li>
-<li><p><strong>Odoo setup</strong> You have Asterisk/FreePBX and require Odoo/CRM setup.</p></li>
+<li><p>Odoo &amp; PostgreSQL</p></li>
+<li><p>Asterisk PBX</p></li>
+<li><p>The Agent.</p></li>
 </ul>
-<p>These configurations differ only in a set of installed components.</p>
-<p>Also there are two deployment types:</p>
+<p>Let review them in more details.</p>
+<div class="section" id="the-agent">
+<h2>The Agent<a class="headerlink" href="#the-agent" title="Permalink to this headline">¶</a></h2>
+<p>This is where all starts. To start your OdooPBX journey you must first install the OdooPBX Agent.</p>
+<p>The Agent does the following jobs:</p>
 <ul class="simple">
-<li><p><strong>Docker</strong> based deployment.</p></li>
-<li><p><strong>Direct</strong> host setup.</p></li>
+<li><p>Forwards Asterisk events to Odoo according to the downloaded events map.</p></li>
+<li><p>Executes Asterisk actions received from Odoo.</p></li>
+<li><p>Protects Asterisk from DDoS and password bruteforce attacks.</p></li>
+<li><p>Manages the installation &amp; upgrade process.</p></li>
 </ul>
-<p>Let’s review these options in details.</p>
-<div class="section" id="docker-based-deployment">
-<h2>Docker based deployment<a class="headerlink" href="#docker-based-deployment" title="Permalink to this headline">¶</a></h2>
-<p>See the <code class="docutils literal notranslate"><span class="pre">docker</span></code> folder in Agent repository <a class="reference external" href="https://github.com/odoopbx/agent/tree/master/docker">here</a>.</p>
-<p>We use docker compose to define and run the OdooPBX services. The following services are defined:</p>
-<ul class="simple">
-<li><p><strong>db</strong> - PostgreSQL database used by Odoo.</p></li>
-<li><p><strong>odoo</strong> - Odoo server.</p></li>
-<li><p><strong>agent</strong> - Salt processes (salt-master, salt-minion, salt-api).</p></li>
-<li><p><strong>asterisk</strong> - a plain Asterisk PBX with minimal set of configuration files.</p></li>
-<li><p><strong>freepbx</strong> - We use <a class="reference external" href="https://github.com/tiredofit/docker-freepbx">tiredofit/freepbx</a> -
-the most popular FreePBX image published on the docker.hub. <em>Disclaimer: we do not maintain this FreePBX image.
-You can replace it with any other FreePBX docker image of your choice.</em></p></li>
-</ul>
-<p>You can take an example <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> file to get demo up &amp; running <a class="reference external" href="https://github.com/odoopbx/docker/blob/master/docker-compose.yml">here</a>.</p>
-<p>Also please note the <code class="docutils literal notranslate"><span class="pre">docker-compose.override.yml</span></code> example on how to customize the defaults: <a class="reference external" href="https://github.com/odoopbx/docker/blob/master/docker-compose.override.yml.example">here</a>.</p>
-<p>So depending on your requered setup you can choose which services to run.</p>
-</div>
-<div class="section" id="direct-installation">
-<h2>Direct installation<a class="headerlink" href="#direct-installation" title="Permalink to this headline">¶</a></h2>
-<p>We use Salt states files to install different OdooPBX components. The following components are available:</p>
+<p>The Agent itself is built upon the Saltstack platform. So if you come the Salt world - welcome home, dude!</p>
+<p>The Agent uses Salt states files to install different OdooPBX components.
+The following components are available:</p>
 <ul class="simple">
 <li><p><strong>odoo</strong> - Odoo server.</p></li>
+<li><p><strong>addons</strong> - <a class="reference external" href="https://github.com/odoopbx/addons">Public OdooPBX modules</a>.</p></li>
 <li><p><strong>postgres</strong> - PostgreSQL database.</p></li>
 <li><p><strong>agent</strong> - Salt minion, api and master processes.</p></li>
 <li><p><strong>asterisk</strong> - Asterisk PBX server.</p></li>
+<li><p><strong>nginx</strong> - the Nginx proxy server.</p></li>
 </ul>
 <p>To install a compoment the following command is used:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>salt-call state.apply agent
-salt-call state.apply postgres
+salt-call state.apply odoo
+salt-call state.apply asterisk
+salt-call state.apply nginx
 </pre></div>
 </div>
 <p>To install all compoments use this:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>salt-call state.apply odoopbx
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>salt-call state.apply full
 </pre></div>
 </div>
-</div>
-<div class="section" id="demo-setup">
-<h2>Demo setup<a class="headerlink" href="#demo-setup" title="Permalink to this headline">¶</a></h2>
-<p>The easiest and fastest way to start using OdooPBX is the docker based installation. Full demo is available for direct setup only with Asterisk (direct setup does not
-install FreePBX currently).</p>
-<p>Run either Asterisk or FrePBX service.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>docker-compose up odoo agent freepbx
-</pre></div>
-</div>
-</div>
-<div class="section" id="the-agent-setup">
-<h2>The Agent setup<a class="headerlink" href="#the-agent-setup" title="Permalink to this headline">¶</a></h2>
-<p>This setup assumes that both Odoo and Asterisk are already installed and running.</p>
-<p>When Odoo &amp; Asterisk / FreePBX exists you require only the OdooPBX Agent
-setup (Agent is a middleware between Odoo &amp; Asterisk).</p>
-<div class="section" id="docker-setup">
-<h3>Docker setup<a class="headerlink" href="#docker-setup" title="Permalink to this headline">¶</a></h3>
-<p>To deploy the Agent in docker use this:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>docker-compose up -d agent
-</pre></div>
-</div>
-<p>Also you have to provide your custom Odoo &amp; Asterisk settings. This is done by using a volume mapping
-in your <code class="docutils literal notranslate"><span class="pre">docker-compose.override.yml</span></code>:</p>
-<div class="highlight-yml notranslate"><div class="highlight"><pre><span></span>version: &#39;3.1&#39;
-services:
-
-minion:
-volumes:
-  - ./minion_local.conf:/etc/salt/minion_local.conf
-</pre></div>
-</div>
-<p>So this maps <code class="docutils literal notranslate"><span class="pre">minion_local.conf</span></code> that will be automatically included by the minion.</p>
-<p>Below is an example of custom options. See the full list of possible options - <a class="reference internal" href="agent_options.html"><span class="doc">Agent options</span></a>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">minion_local.conf</span></code>:</p>
-<div class="highlight-yml notranslate"><div class="highlight"><pre><span></span>odoo_db: my_database
-odoo_password: asterisk1password
-odoo_port: 443
-odoo_use_ssl: True
-ami_login: odoo
-ami_secret: dfghj5678b
-ami_port: 5038
-ami_host: asterisk.host
-</pre></div>
-</div>
-</div>
-<div class="section" id="direct-setup">
-<h3>Direct setup<a class="headerlink" href="#direct-setup" title="Permalink to this headline">¶</a></h3>
-<p>The best place to install the Agent is the same server where Asterisk is running because in this case
+<p>Different components can be installed into different servers and be interconnected easily.</p>
+<p>Actually it’s not a good idea to put all eggs in one busket.</p>
+<p>The most common setup uses two servers:</p>
+<ul class="simple">
+<li><p>1: Odoo, PostgreSQL, Nginx.</p></li>
+<li><p>2: Asterisk, The Agent.</p></li>
+</ul>
+<p>The best place to install the Agent is the same server where Asterisk runs because in this case
 it has direct access to local file system  and can access call recordings.</p>
 <p>If you don’t need call recordings in Odoo you can setup the Asterisk agent on a different computer but
-it is advised to place it near the Asterisk server.</p>
+it is advised to place it at least near the Asterisk server. But depending on your company size you can also
+have your Asterisk in America and Odoo in Europe datacenter.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Please note that the Agent requires root privileges. The commands below must be run as the <strong>root</strong> user.</p>
 </div>
-<div class="section" id="installation-on-ubuntu-and-debian">
-<h4>Installation on Ubuntu and Debian<a class="headerlink" href="#installation-on-ubuntu-and-debian" title="Permalink to this headline">¶</a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apt</span> <span class="n">update</span> <span class="o">&amp;&amp;</span> <span class="n">apt</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span> <span class="n">python3</span><span class="o">-</span><span class="n">setproctitle</span>
-<span class="n">pip3</span> <span class="n">install</span> <span class="n">odoopbx</span>
-</pre></div>
 </div>
-</div>
-<div class="section" id="installation-on-centos">
-<h4>Installation on CentOS<a class="headerlink" href="#installation-on-centos" title="Permalink to this headline">¶</a></h4>
-</div>
-<div class="section" id="versions-6-7">
-<h4>Versions 6&amp;7<a class="headerlink" href="#versions-6-7" title="Permalink to this headline">¶</a></h4>
-<p>First, you should enable and install Python3 and pip.</p>
-<p>There are at least <a class="reference external" href="https://www.2daygeek.com/install-python-3-on-centos-6/">3 ways to install the latest Python3 package on CentOS</a>.</p>
-<p>Below is one of them (IUS).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="s1">&#39;https://setup.ius.io/&#39;</span> <span class="o">-</span><span class="n">o</span> <span class="n">setup</span><span class="o">-</span><span class="n">ius</span><span class="o">.</span><span class="n">sh</span>
-<span class="n">sh</span> <span class="n">setup</span><span class="o">-</span><span class="n">ius</span><span class="o">.</span><span class="n">sh</span>
-<span class="n">yum</span> <span class="o">--</span><span class="n">enablerepo</span><span class="o">=</span><span class="n">ius</span> <span class="n">install</span> <span class="n">python36</span> <span class="n">python36</span><span class="o">-</span><span class="n">pip</span> <span class="n">python36</span><span class="o">-</span><span class="n">setproctitle</span>
-<span class="n">pip3</span> <span class="n">install</span> <span class="n">odoopbx</span>
-</pre></div>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Please note that if you are using FreePBX, which is based on Centos 7, it has a different Python3 naming schema,
-similar to ius, but using Sangoma’s own repositories. You shouldn’t try to use 3rd party repositories,
-simply run <code class="docutils literal notranslate"><span class="pre">yum</span> <span class="pre">makecache</span></code> to get latest information from Sangoma’s repositories and install Python3 by running
-<code class="docutils literal notranslate"><span class="pre">yum</span> <span class="pre">install</span> <span class="pre">python36u</span> <span class="pre">python36u-pip</span></code></p>
-</div>
-</div>
-<div class="section" id="version-8">
-<h4>Version 8<a class="headerlink" href="#version-8" title="Permalink to this headline">¶</a></h4>
-<p>Latest CentOS is quite ready for Python3. So here are the installation steps:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yum</span> <span class="n">install</span> <span class="n">python3</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span> <span class="n">python3</span><span class="o">-</span><span class="n">devel</span>
-<span class="n">pip3</span> <span class="n">install</span> <span class="n">odoopbx</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="sangoma-linux-release-7-8">
-<h4>Sangoma Linux release 7.8<a class="headerlink" href="#sangoma-linux-release-7-8" title="Permalink to this headline">¶</a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yum</span> <span class="n">install</span> <span class="n">python36u</span> <span class="n">python36u</span><span class="o">-</span><span class="n">pip</span> <span class="n">python36u</span><span class="o">-</span><span class="n">devel</span>
-<span class="n">pip3</span><span class="mf">.6</span> <span class="n">install</span> <span class="n">odoopbx</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="section" id="installation-errors">
-<h3>Installation errors<a class="headerlink" href="#installation-errors" title="Permalink to this headline">¶</a></h3>
-<p>During <code class="docutils literal notranslate"><span class="pre">odoopbx</span> <span class="pre">install</span> <span class="pre">agent</span></code> execution the following log lines are expected and they are normal:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">14</span><span class="p">:</span><span class="mi">16</span><span class="p">:</span><span class="mi">12</span> <span class="o">-</span> <span class="n">salt</span><span class="o">.</span><span class="n">loaded</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">asteriskmod</span><span class="p">:</span><span class="mi">40</span> <span class="o">-</span> <span class="n">ERROR</span> <span class="o">-</span> <span class="n">ipsetpy</span> <span class="n">lib</span> <span class="ow">not</span> <span class="n">found</span><span class="p">,</span> <span class="n">asterisk</span> <span class="n">module</span> <span class="ow">not</span> <span class="n">available</span><span class="o">.</span>
-<span class="mi">14</span><span class="p">:</span><span class="mi">16</span><span class="p">:</span><span class="mi">12</span> <span class="o">-</span> <span class="n">salt</span><span class="o">.</span><span class="n">loaded</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">odoomod</span><span class="p">:</span><span class="mi">23</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">OdooRPC</span> <span class="n">lib</span> <span class="ow">not</span> <span class="n">found</span><span class="p">,</span> <span class="n">odoo</span> <span class="n">module</span> <span class="ow">not</span> <span class="n">available</span><span class="o">.</span>
-</pre></div>
-</div>
-<p>This is because these packages are going to be installed exactly during this operation.</p>
-</div>
-</div>
-<div class="section" id="odoo-module-installation">
-<h2>Odoo module installation<a class="headerlink" href="#odoo-module-installation" title="Permalink to this headline">¶</a></h2>
-<p>Install Asterisk Plus module in the same way you install any other Odoo module.</p>
+<div class="section" id="odoo-modules-installation">
+<h2>Odoo modules installation<a class="headerlink" href="#odoo-modules-installation" title="Permalink to this headline">¶</a></h2>
+<p>Install <a class="reference external" href="https://github.com/odoopbx/addons">addons</a> in the same way you install any other Odoo module.</p>
 <p>Do a database backup before installation or upgrade and also make a backup of previous version of the module
 if you have it (just in case to be able to restore quicky).</p>
 <div class="section" id="requirements">
@@ -234,6 +131,12 @@ if you have it (just in case to be able to restore quicky).</p>
 <p>If you use odoo.sh make sure you copy the requirements to your modules top folder so that odoo.sh can
 install the required dependencies.</p>
 <p>If you use python virtualenv make sure you install the requirements there and not system wide.</p>
+</div>
+</div>
+<div class="section" id="odoo-installation">
+<h2>Odoo installation<a class="headerlink" href="#odoo-installation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>salt-call state.apply odoo
+</pre></div>
 </div>
 <div class="section" id="configuration">
 <h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
@@ -332,14 +235,12 @@ Change permit option to IP address of your Asterisk server if agent is not start
 <div class="section" id="odoo-settings">
 <h3>Odoo settings<a class="headerlink" href="#odoo-settings" title="Permalink to this headline">¶</a></h3>
 <p>First configure the Agent’s connection to Odoo:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">odoopbx</span> <span class="n">config</span> <span class="nb">set</span> <span class="n">odoo_host</span> <span class="mf">1.2.3.4</span> <span class="c1"># Put IP address or hostname here.</span>
-<span class="n">odoopbx</span> <span class="n">config</span> <span class="nb">set</span> <span class="n">odoo_port</span> <span class="mi">8069</span> <span class="c1"># If your Odoo is behind a proxy put 80 or 443 here.</span>
-<span class="n">odoopbx</span> <span class="n">config</span> <span class="nb">set</span> <span class="n">odoo_bus_port</span> <span class="mi">8072</span> <span class="c1"># If your Odoo is behind a proxy put 80 or 443 here.</span>
-<span class="n">odoopbx</span> <span class="n">config</span> <span class="nb">set</span> <span class="n">odoo_db</span> <span class="n">demo</span> <span class="c1"># Put your database here</span>
-<span class="n">odoopbx</span> <span class="n">config</span> <span class="nb">set</span> <span class="n">odoo_user</span> <span class="n">asterisk</span> <span class="c1"># It&#39;s ok to leave the default user name.</span>
-<span class="n">odoopbx</span> <span class="n">config</span> <span class="nb">set</span> <span class="n">odoo_password</span> <span class="n">asterisk</span> <span class="c1"># This is the default password set on addon installation. CHANGE IT!!!</span>
-<span class="n">odoopbx</span> <span class="n">config</span> <span class="nb">set</span> <span class="n">odoo_single_db</span> <span class="n">false</span> <span class="c1"># Set to true if you have dbfilter or just one db.</span>
-<span class="n">odoopbx</span> <span class="n">config</span> <span class="nb">set</span> <span class="n">odoo_use_ssl</span> <span class="n">false</span> <span class="c1"># Set to true if your proxy servers HTTPS requests.</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">odoo_host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">odoo</span> <span class="c1"># Put IP address or hostname here.</span>
+<span class="nt">odoo_port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">8069</span> <span class="c1"># If your Odoo is behind a proxy put 80 or 443 here.</span>
+<span class="nt">odoo_user</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">asterisk1</span> <span class="c1"># It&#39;s ok to leave the default user name.</span>
+<span class="nt">odoo_password</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">asterisk1</span> <span class="c1"># This is the default password set on addon installation. CHANGE IT!!!</span>
+<span class="nt">odoo_use_ssl</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span> <span class="c1"># Set to true if your proxy servers HTTPS requests.</span>
+<span class="nt">odoo_db</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">odoopbx_14</span> <span class="c1"># Put your database here</span>
 </pre></div>
 </div>
 </div>
@@ -350,13 +251,13 @@ Make sure you applied the Asterisk manager configuration first.</p>
 <p>Once you are sure the Odoo AMI user is operational run the following commands
 to configure the Agent’s connection
 to your Asterisk:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">odoopbx</span> <span class="n">config</span> <span class="nb">set</span> <span class="n">ami_host</span> <span class="mf">127.0.0.1</span>
-<span class="n">odoopbx</span> <span class="n">config</span> <span class="nb">set</span> <span class="n">ami_port</span> <span class="mi">5038</span>
-<span class="n">odoopbx</span> <span class="n">config</span> <span class="nb">set</span> <span class="n">ami_login</span> <span class="n">odoo</span> <span class="c1"># Put here AMI user name you created in manager.conf.</span>
-<span class="n">odoopbx</span> <span class="n">config</span> <span class="nb">set</span> <span class="n">ami_secret</span> <span class="n">odoo</span> <span class="c1"># Put here AMI user password.</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ami_host</span><span class="p">:</span> <span class="mf">127.0.0.1</span>
+<span class="n">ami_port</span><span class="p">:</span> <span class="mi">5038</span>
+<span class="n">ami_login</span><span class="p">:</span> <span class="n">odoo</span> <span class="c1"># Put here AMI user name you created in manager.conf.</span>
+<span class="n">ami_secret</span><span class="p">:</span> <span class="n">odoo</span> <span class="c1"># Put here AMI user password.</span>
 </pre></div>
 </div>
-<p>See <code class="docutils literal notranslate"><span class="pre">/etc/salt/minion_local.conf</span></code> to check that everything looks like expected.</p>
+<p>Check <code class="docutils literal notranslate"><span class="pre">/etc/salt/minion_local.conf</span></code> to check that everything looks like expected.</p>
 </div>
 </div>
 <div class="section" id="agent-test-run">
@@ -482,25 +383,13 @@ exten =&gt; _XXXXX.,2,Dial(SIP/provider/${EXTEN},30,TU(post-dial-send-dtmf) ; Ou
             </a></p>
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Installation</a><ul>
-<li><a class="reference internal" href="#docker-based-deployment">Docker based deployment</a></li>
-<li><a class="reference internal" href="#direct-installation">Direct installation</a></li>
-<li><a class="reference internal" href="#demo-setup">Demo setup</a></li>
-<li><a class="reference internal" href="#the-agent-setup">The Agent setup</a><ul>
-<li><a class="reference internal" href="#docker-setup">Docker setup</a></li>
-<li><a class="reference internal" href="#direct-setup">Direct setup</a><ul>
-<li><a class="reference internal" href="#installation-on-ubuntu-and-debian">Installation on Ubuntu and Debian</a></li>
-<li><a class="reference internal" href="#installation-on-centos">Installation on CentOS</a></li>
-<li><a class="reference internal" href="#versions-6-7">Versions 6&amp;7</a></li>
-<li><a class="reference internal" href="#version-8">Version 8</a></li>
-<li><a class="reference internal" href="#sangoma-linux-release-7-8">Sangoma Linux release 7.8</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#installation-errors">Installation errors</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#odoo-module-installation">Odoo module installation</a><ul>
+<li><a class="reference internal" href="#">Standard installation</a><ul>
+<li><a class="reference internal" href="#the-agent">The Agent</a></li>
+<li><a class="reference internal" href="#odoo-modules-installation">Odoo modules installation</a><ul>
 <li><a class="reference internal" href="#requirements">Requirements</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#odoo-installation">Odoo installation</a><ul>
 <li><a class="reference internal" href="#configuration">Configuration</a><ul>
 <li><a class="reference internal" href="#workers">Workers</a></li>
 <li><a class="reference internal" href="#gevent-process-for-long-polling">Gevent process for long polling</a></li>
@@ -523,9 +412,9 @@ exten =&gt; _XXXXX.,2,Dial(SIP/provider/${EXTEN},30,TU(post-dial-send-dtmf) ; Ou
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation index</a><ul>
-  <li><a href="../administration.html">Administration</a><ul>
-      <li>Previous: <a href="../administration.html" title="previous chapter">Administration</a></li>
-      <li>Next: <a href="agent_options.html" title="next chapter">Agent options</a></li>
+  <li><a href="install.html">Installation</a><ul>
+      <li>Previous: <a href="system.html" title="previous chapter">System requirements</a></li>
+      <li>Next: <a href="docker.html" title="next chapter">Docker based deployment</a></li>
   </ul></li>
   </ul></li>
 </ul>

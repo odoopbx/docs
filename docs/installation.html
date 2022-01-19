@@ -6,17 +6,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Installation &#8212; OdooPBX 1.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nameko.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <link rel="shortcut icon" href="../_static/logo.png"/>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Agent options" href="agent_options.html" />
-    <link rel="prev" title="Administration" href="../administration.html" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nameko.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/logo.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Administration" href="administration.html" />
+    <link rel="prev" title="Introduction" href="intro.html" />
    
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Lora:400' rel='stylesheet' type='text/css'>
@@ -30,19 +30,18 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
+          <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
+          <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="agent_options.html" title="Agent options"
+          <a href="administration.html" title="Administration"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../administration.html" title="Administration"
+          <a href="intro.html" title="Introduction"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">OdooPBX 1.0 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../administration.html" accesskey="U">Administration</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">OdooPBX 1.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Installation</a></li> 
       </ul>
     </div>  
@@ -145,7 +144,7 @@ volumes:
 </pre></div>
 </div>
 <p>So this maps <code class="docutils literal notranslate"><span class="pre">minion_local.conf</span></code> that will be automatically included by the minion.</p>
-<p>Below is an example of custom options. See the full list of possible options - <a class="reference internal" href="agent_options.html"><span class="doc">Agent options</span></a>.</p>
+<p>Below is an example of custom options. See the full list of possible options - <span class="xref std std-doc">agent_options</span>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">minion_local.conf</span></code>:</p>
 <div class="highlight-yml notranslate"><div class="highlight"><pre><span></span>odoo_db: my_database
 odoo_password: asterisk1password
@@ -477,10 +476,10 @@ exten =&gt; _XXXXX.,2,Dial(SIP/provider/${EXTEN},30,TU(post-dial-send-dtmf) ; Ou
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="../index.html">
-              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
             </a></p>
-  <h3><a href="../index.html">Table of Contents</a></h3>
+  <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Installation</a><ul>
 <li><a class="reference internal" href="#docker-based-deployment">Docker based deployment</a></li>
@@ -522,17 +521,15 @@ exten =&gt; _XXXXX.,2,Dial(SIP/provider/${EXTEN},30,TU(post-dial-send-dtmf) ; Ou
 </ul>
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="../index.html">Documentation index</a><ul>
-  <li><a href="../administration.html">Administration</a><ul>
-      <li>Previous: <a href="../administration.html" title="previous chapter">Administration</a></li>
-      <li>Next: <a href="agent_options.html" title="next chapter">Agent options</a></li>
-  </ul></li>
+  <li><a href="index.html">Documentation index</a><ul>
+      <li>Previous: <a href="intro.html" title="previous chapter">Introduction</a></li>
+      <li>Next: <a href="administration.html" title="next chapter">Administration</a></li>
   </ul></li>
 </ul>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
+    <form class="search" action="search.html" method="get">
       <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>

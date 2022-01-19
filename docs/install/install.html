@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SIP Trunking &#8212; OdooPBX 1.0 documentation</title>
+    <title>Installation &#8212; OdooPBX 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/nameko.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -15,8 +15,8 @@
     <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="SIPGate integration" href="sip_trunking/sipgate.html" />
-    <link rel="prev" title="Common" href="../common.html" />
+    <link rel="next" title="System requirements" href="system.html" />
+    <link rel="prev" title="Introduction" href="../intro.html" />
    
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Lora:400' rel='stylesheet' type='text/css'>
@@ -36,14 +36,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="sip_trunking/sipgate.html" title="SIPGate integration"
+          <a href="system.html" title="System requirements"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../common.html" title="Common"
+          <a href="../intro.html" title="Introduction"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">OdooPBX 1.0 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../common.html" accesskey="U">Common</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">SIP Trunking</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Installation</a></li> 
       </ul>
     </div>  
 
@@ -52,13 +51,38 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="sip-trunking">
-<h1>SIP Trunking<a class="headerlink" href="#sip-trunking" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<dl class="simple">
+<dt>OdooPBX installation is managed by the OdooPBX Agent as it’s not only the connection middleware</dt><dd><p>but also a deployment manager.</p>
+</dd>
+</dl>
+<p>As you already might know, OdooPBX has the following components:</p>
+<ul class="simple">
+<li><p>Odoo / PostgreSQL</p></li>
+<li><p>Odoo addons</p></li>
+<li><p>Asterisk PBX</p></li>
+<li><p>The Agent</p></li>
+</ul>
+<p>So, depending on your environment, you have to install the missing parts or everything is you start from zero.</p>
+<p>In any case, the first step that must be done is downloading and installing the Agent.</p>
+<p>Also, there are two different types of deployment:</p>
+<ul class="simple">
+<li><p>Docker deployment</p></li>
+<li><p>Standard installation</p></li>
+</ul>
+<p>What type of installation to choose - you decide, use docker if you know what it is
+and direct installation in the other case.</p>
+<p>Also you could have a look at the demo setup instruction.</p>
+<p>Next:</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="sip_trunking/sipgate.html">SIPGate integration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sip_trunking/twilio.html">How to set up Twilio Elastic SIP Trunking with Odoo PBX</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sip_trunking/iax.html">IAX2 interconnection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system.html">System requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="standard.html">Standard installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker based deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo.html">Demo setup</a></li>
 </ul>
 </div>
 </div>
@@ -75,10 +99,8 @@
             </a></p><h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation index</a><ul>
-  <li><a href="../common.html">Common</a><ul>
-      <li>Previous: <a href="../common.html" title="previous chapter">Common</a></li>
-      <li>Next: <a href="sip_trunking/sipgate.html" title="next chapter">SIPGate integration</a></li>
-  </ul></li>
+      <li>Previous: <a href="../intro.html" title="previous chapter">Introduction</a></li>
+      <li>Next: <a href="system.html" title="next chapter">System requirements</a></li>
   </ul></li>
 </ul>
 <div id="searchbox" style="display: none" role="search">
