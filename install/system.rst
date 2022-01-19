@@ -3,8 +3,13 @@ System requirements
 ===================
 OdooPBX is based mainly on Python 3. So it must be properly installed.
 
-On different systems same packages have different names.  So gather and describe here the proper
-words on different Linux distributions.
+On different systems same packages have different names.
+
+We support the most popular Linux distributions.
+
+If something does not work for you it's ok to send us ``cat /etc/*release | mail reports@odoopbx.com`` so 
+that we could add support to your system.
+
 
 Ubuntu and Debian
 =================
@@ -54,3 +59,5 @@ Sangoma Linux release 7.8
     yum install python36u python36u-pip python36u-devel
     pip3.6 install odoopbx
     
+
+Next - :doc:`standard` or :doc:`docker`.

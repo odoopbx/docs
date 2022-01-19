@@ -5,7 +5,7 @@ Installation
 .. toctree::
 
 OdooPBX installation is managed by the OdooPBX Agent as it's not only the connection middleware
- but also a deployment manager.
+but also a deployment manager.
 
 As you already might know, OdooPBX has the following components:
 
