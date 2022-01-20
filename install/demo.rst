@@ -10,3 +10,6 @@ Run either Asterisk or FrePBX service.
 
     docker-compose up odoo agent freepbx
 
+
+See :doc:`docker` for details.
+
