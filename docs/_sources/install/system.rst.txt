@@ -3,6 +3,8 @@ System requirements
 ===================
 OdooPBX is based mainly on Python 3. So it must be properly installed.
 
+If you have Py3 installed you can skip this section.
+
 On different systems same packages have different names.
 
 We support the most popular Linux distributions.
@@ -17,7 +19,6 @@ Ubuntu and Debian
 .. code::
 
     apt update && apt -y install python3-pip python3-setproctitle
-    pip3 install odoopbx
 
 CentOS Versions 6&7
 ===================
@@ -32,7 +33,6 @@ Below is one of them (IUS).
     curl 'https://setup.ius.io/' -o setup-ius.sh
     sh setup-ius.sh
     yum --enablerepo=ius install python36 python36-pip python36-setproctitle
-    pip3 install odoopbx
 
 .. warning::
 
@@ -47,8 +47,7 @@ Latest CentOS is quite ready for Python3. So here are the installation steps:
 
 .. code::
 
-    yum install python3 python3-pip python3-devel
-    pip3 install odoopbx
+    yum install python3 python3-pip python3-devel    
 
 
 Sangoma Linux release 7.8
@@ -57,7 +56,6 @@ Sangoma Linux release 7.8
 .. code::
 
     yum install python36u python36u-pip python36u-devel
-    pip3.6 install odoopbx
     
 
 Next - :doc:`standard` or :doc:`docker`.
