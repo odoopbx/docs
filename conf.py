@@ -13,7 +13,6 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
-import sphinx_nameko_theme
 import os,sys
 DIR = os.path.dirname(__file__)
 sys.path.insert(
@@ -46,8 +45,6 @@ templates_path = ['_templates']
 
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'sphinx-env']
 
-html_theme = 'nameko'
-html_theme_path = [sphinx_nameko_theme.get_html_theme_path()]
 html_static_path = ['_static']
 html_logo = "_static/logo.png"
 html_favicon = "_static/logo.png"
