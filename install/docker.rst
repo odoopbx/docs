@@ -24,9 +24,17 @@ Only Agent setup
 ================
 This setup assumes that both Odoo and Asterisk are already installed and running outside docker.
 
-So when Odoo & Asterisk / FreePBX exists you require to supply a configuration file for Odoo & Asterisk. Here is an example:
+So in this case you should do the following steps:
 
-``minion_local.conf``:
+* Forward Salt API port (default 48008) from your host machine to the agent container.
+* Supply a configuration file for Odoo & Asterisk.
+* Change the default Sapt API password.
+
+Let review these steps in more details.
+
+Custom minion configuration file
+################################
+Here is an example of  ``minion_local.conf``:
 
 .. code:: yml
 
@@ -39,18 +47,37 @@ So when Odoo & Asterisk / FreePBX exists you require to supply a configuration f
     ami_port: 5038
     ami_host: asterisk.host
 
-*Below is an example of custom options. See the full list of possible options* - :doc:`../administration/agent_options`.
+*This is an example of custom options. See the full list of possible options* - :doc:`../administration/agent_options`.
 
-Next you need to map this file in ``docker-compose.override.yml``:
+Change the default Salt API password
+####################################
+The Salt API password is stored in ``/etc/salt/auth`` file. Generate a new password like that:
+
+.. code:: bash
+
+  echo -n "salt-api-new-pass" | md5sum
+
+Save this password in ``auth`` file:
+
+..code::
+
+  odoo|bf67d5d35021cb370bcbfb046f6c437f
+
+Create docker-compose.override.yml
+##################################
+Next you need to map all these in ``docker-compose.override.yml``:
 
 .. code:: yml
 
     version: '3.1'
     services:
 
-    minion:    
-    volumes:
-      - ./minion_local.conf:/etc/salt/minion_local.conf
+    agent:
+      ports:
+        - "0.0.0.0:48008:48008"
+      volumes:
+        - ./minion_local.conf:/etc/salt/minion_local.conf
+        - ./auth:/etc/salt/auth
 
 Now your are ready for a test run:
 
@@ -63,6 +90,35 @@ Check the output. If there is no error messages, press CTRL+C and restart the Ag
 .. code:: sh
 
     docker-compose up -d agent
+
+Debug the Agent connection
+##########################
+Agent is built-up from three processes:
+
+* Salt API
+* Salt master
+* Salt minion
+
+The processes are started in a `tmux <https://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/>`__ session.
+
+So in order to debug a process you first have to enter the container using ``docker-compose exec agent bash`` command
+and then re-connect to a tmux session using ``tmux a`` command.
+
+After that you can switch between three consoles:
+
+*  ``CTRL+b 0`` - the Salt master
+*  ``CTRL+b 1`` - the Salt API
+*  ``CTRL+b 2`` - the Salt minion
+
+You can press ``CTRL+C`` to terminate the process and restart it in in debug mode. For example, to 
+start the salt minion in debug mode go console #2 and enter:
+
+.. code::
+
+  CTRL+C
+  salt-minion -l debug
+
+To exit from tmux enter ``CTRL+B d``. Then you can exit the container with ``CTRL+d``.
 
 
 Odoo
