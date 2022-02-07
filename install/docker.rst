@@ -38,14 +38,14 @@ Here is an example of  ``minion_local.conf``:
 
 .. code:: yml
 
-    odoo_db: my_database
-    odoo_password: asterisk1password
+    odoo_db: my_database # Replace to your real Odoo database name.
+    odoo_password: asterisk1password # Find in Settings -> Users asterisk1 user and set him a new password.
     odoo_port: 443
     odoo_use_ssl: True
     ami_login: odoo
     ami_secret: dfghj5678b
     ami_port: 5038
-    ami_host: asterisk.host
+    ami_host: asterisk.host # Your Asterisk host. Most common value is 127.0.0.1.
 
 *This is an example of custom options. See the full list of possible options* - :doc:`../administration/agent_options`.
 
@@ -59,7 +59,7 @@ The Salt API password is stored in ``/etc/salt/auth`` file. Generate a new passw
 
 Save this password in ``auth`` file:
 
-..code::
+.. code::
 
   odoo|bf67d5d35021cb370bcbfb046f6c437f
 
@@ -101,10 +101,19 @@ Agent is built-up from three processes:
 
 The processes are started in a `tmux <https://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/>`__ session.
 
-So in order to debug a process you first have to enter the container using ``docker-compose exec agent bash`` command
-and then re-connect to a tmux session using ``tmux a`` command.
+So in order to debug a process you first have to enter the container using
 
-After that you can switch between three consoles:
+.. code::
+  
+  docker-compose exec agent bash
+  
+command and then re-connect to a tmux session using
+
+.. code::
+  
+  tmux a
+
+command.  After that you can switch between three consoles:
 
 *  ``CTRL+b 0`` - the Salt master
 *  ``CTRL+b 1`` - the Salt API
