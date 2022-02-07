@@ -53,26 +53,51 @@ on how to customize the defaults (save this file under <code class="docutils lit
 <div class="section" id="only-agent-setup">
 <h2>Only Agent setup<a class="headerlink" href="#only-agent-setup" title="Permalink to this headline">¶</a></h2>
 <p>This setup assumes that both Odoo and Asterisk are already installed and running outside docker.</p>
-<p>So when Odoo &amp; Asterisk / FreePBX exists you require to supply a configuration file for Odoo &amp; Asterisk. Here is an example:</p>
-<p><code class="docutils literal notranslate"><span class="pre">minion_local.conf</span></code>:</p>
-<div class="highlight-yml notranslate"><div class="highlight"><pre><span></span>odoo_db: my_database
-odoo_password: asterisk1password
+<p>So in this case you should do the following steps:</p>
+<ul class="simple">
+<li><p>Forward Salt API port (default 48008) from your host machine to the agent container.</p></li>
+<li><p>Supply a configuration file for Odoo &amp; Asterisk.</p></li>
+<li><p>Change the default Sapt API password.</p></li>
+</ul>
+<p>Let review these steps in more details.</p>
+<div class="section" id="custom-minion-configuration-file">
+<h3>Custom minion configuration file<a class="headerlink" href="#custom-minion-configuration-file" title="Permalink to this headline">¶</a></h3>
+<p>Here is an example of  <code class="docutils literal notranslate"><span class="pre">minion_local.conf</span></code>:</p>
+<div class="highlight-yml notranslate"><div class="highlight"><pre><span></span>odoo_db: my_database # Replace to your real Odoo database name.
+odoo_password: asterisk1password # Find in Settings -&gt; Users asterisk1 user and set him a new password.
 odoo_port: 443
 odoo_use_ssl: True
 ami_login: odoo
 ami_secret: dfghj5678b
 ami_port: 5038
-ami_host: asterisk.host
+ami_host: asterisk.host # Your Asterisk host. Most common value is 127.0.0.1.
 </pre></div>
 </div>
-<p><em>Below is an example of custom options. See the full list of possible options</em> - <a class="reference internal" href="../administration/agent_options.html"><span class="doc">Agent options</span></a>.</p>
-<p>Next you need to map this file in <code class="docutils literal notranslate"><span class="pre">docker-compose.override.yml</span></code>:</p>
+<p><em>This is an example of custom options. See the full list of possible options</em> - <a class="reference internal" href="../administration/agent_options.html"><span class="doc">Agent options</span></a>.</p>
+</div>
+<div class="section" id="change-the-default-salt-api-password">
+<h3>Change the default Salt API password<a class="headerlink" href="#change-the-default-salt-api-password" title="Permalink to this headline">¶</a></h3>
+<p>The Salt API password is stored in <code class="docutils literal notranslate"><span class="pre">/etc/salt/auth</span></code> file. Generate a new password like that:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> -n <span class="s2">&quot;salt-api-new-pass&quot;</span> <span class="p">|</span> md5sum
+</pre></div>
+</div>
+<p>Save this password in <code class="docutils literal notranslate"><span class="pre">auth</span></code> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">odoo</span><span class="o">|</span><span class="n">bf67d5d35021cb370bcbfb046f6c437f</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-docker-compose-override-yml">
+<h3>Create docker-compose.override.yml<a class="headerlink" href="#create-docker-compose-override-yml" title="Permalink to this headline">¶</a></h3>
+<p>Next you need to map all these in <code class="docutils literal notranslate"><span class="pre">docker-compose.override.yml</span></code>:</p>
 <div class="highlight-yml notranslate"><div class="highlight"><pre><span></span>version: &#39;3.1&#39;
 services:
 
-minion:
-volumes:
-  - ./minion_local.conf:/etc/salt/minion_local.conf
+agent:
+  ports:
+    - &quot;0.0.0.0:48008:48008&quot;
+  volumes:
+    - ./minion_local.conf:/etc/salt/minion_local.conf
+    - ./auth:/etc/salt/auth
 </pre></div>
 </div>
 <p>Now your are ready for a test run:</p>
@@ -82,6 +107,38 @@ volumes:
 <p>Check the output. If there is no error messages, press CTRL+C and restart the Agent in background mode:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>docker-compose up -d agent
 </pre></div>
+</div>
+</div>
+<div class="section" id="debug-the-agent-connection">
+<h3>Debug the Agent connection<a class="headerlink" href="#debug-the-agent-connection" title="Permalink to this headline">¶</a></h3>
+<p>Agent is built-up from three processes:</p>
+<ul class="simple">
+<li><p>Salt API</p></li>
+<li><p>Salt master</p></li>
+<li><p>Salt minion</p></li>
+</ul>
+<p>The processes are started in a <a class="reference external" href="https://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/">tmux</a> session.</p>
+<p>So in order to debug a process you first have to enter the container using</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">exec</span> <span class="n">agent</span> <span class="n">bash</span>
+</pre></div>
+</div>
+<p>command and then re-connect to a tmux session using</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tmux</span> <span class="n">a</span>
+</pre></div>
+</div>
+<p>command.  After that you can switch between three consoles:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CTRL+b</span> <span class="pre">0</span></code> - the Salt master</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CTRL+b</span> <span class="pre">1</span></code> - the Salt API</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CTRL+b</span> <span class="pre">2</span></code> - the Salt minion</p></li>
+</ul>
+<p>You can press <code class="docutils literal notranslate"><span class="pre">CTRL+C</span></code> to terminate the process and restart it in in debug mode. For example, to
+start the salt minion in debug mode go console #2 and enter:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CTRL</span><span class="o">+</span><span class="n">C</span>
+<span class="n">salt</span><span class="o">-</span><span class="n">minion</span> <span class="o">-</span><span class="n">l</span> <span class="n">debug</span>
+</pre></div>
+</div>
+<p>To exit from tmux enter <code class="docutils literal notranslate"><span class="pre">CTRL+B</span> <span class="pre">d</span></code>. Then you can exit the container with <code class="docutils literal notranslate"><span class="pre">CTRL+d</span></code>.</p>
 </div>
 </div>
 <div class="section" id="odoo">
