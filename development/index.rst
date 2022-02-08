@@ -170,7 +170,7 @@ To spy on master's event run:
 
 And you will get:
 
-.. code:: json
+.. code-block:: json
 
     20211006210940034674    {
         "_stamp": "2021-10-06T21:09:40.035997",

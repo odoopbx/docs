@@ -80,4 +80,4 @@ Asterisk plus module has the following features:
 
 For more information on modules visit the `addons repository <https://github.com/odoopbx/addons>`_.
 
-Next read the `Installtion guide <installation>`_.
+Next read the :doc:`install/install`.
