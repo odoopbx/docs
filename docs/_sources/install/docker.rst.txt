@@ -36,7 +36,7 @@ Custom minion configuration file
 ################################
 Here is an example of  ``minion_local.conf``:
 
-.. code:: yml
+.. code:: yaml
 
     odoo_db: my_database # Replace to your real Odoo database name.
     odoo_password: asterisk1password # Find in Settings -> Users asterisk1 user and set him a new password.
@@ -67,7 +67,7 @@ Create docker-compose.override.yml
 ##################################
 Next you need to map all these in ``docker-compose.override.yml``:
 
-.. code:: yml
+.. code:: yaml
 
     version: '3.1'
     services:
