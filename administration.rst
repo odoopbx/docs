@@ -5,7 +5,8 @@ Administration
 .. toctree::
    :titlesonly:
    
-   administration/agent_options
    administration/configuration
+   administration/reactor
+   administration/params
    administration/tips
    administration/troubleshooting

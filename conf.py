@@ -38,7 +38,7 @@ extensions = [
     'html_domain',
     'redirects',    
     'sphinx.ext.napoleon',
-
+    'sphinxcontrib.autoyaml',
 ]
 
 templates_path = ['_templates']
