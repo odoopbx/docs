@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Demo setup &#8212; OdooPBX 1.0 documentation</title>
+    <title>Quick Start &#8212; OdooPBX 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -15,8 +15,8 @@
     <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Administration" href="../administration.html" />
-    <link rel="prev" title="Docker based deployment" href="docker.html" />
+    <link rel="next" title="System requirements" href="system.html" />
+    <link rel="prev" title="Installation" href="install.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -33,15 +33,29 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="demo-setup">
-<h1>Demo setup<a class="headerlink" href="#demo-setup" title="Permalink to this headline">¶</a></h1>
-<p>The easiest and fastest way to start using OdooPBX is the docker based installation. Full demo is available for direct setup only with Asterisk (direct setup does not
-install FreePBX currently).</p>
-<p>Run either Asterisk or FrePBX service.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>docker-compose up odoo agent freepbx
+  <div class="section" id="quick-start">
+<h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h1>
+<p>This guide will help you to setup everything running inside Docker containers.
+So install docker and docker-compose, refer to  <a class="reference external" href="https://docs.docker.com/engine/install/">oficial documentation</a> for help.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Minimum 2GB RAM is required</p>
+</div>
+<p>Create odoopbx directory, put inside docker-compose.yml from <a class="reference external" href="https://github.com/odoopbx/agent">https://github.com/odoopbx/agent</a> and run docker-compose:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir odoopbx
+<span class="nb">cd</span> odoopbx
+wget https://raw.githubusercontent.com/odoopbx/agent/master/docker/docker-compose.yml
+docker-compose up -d odoo asterisk agent
 </pre></div>
 </div>
-<p>See <a class="reference internal" href="docker.html"><span class="doc">Docker based deployment</span></a> for details.</p>
+<p>You may check with <code class="docutils literal notranslate"><span class="pre">docker-commpose</span> <span class="pre">ps</span></code> if everything is ok.</p>
+<p>Odoo listens at port <code class="docutils literal notranslate"><span class="pre">8072</span></code> by default.
+Point your browser to <a class="reference external" href="http://your.server.address:8072">http://your.server.address:8072</a> and enter admin/admin as username/password.</p>
+<p>Navigate to <code class="docutils literal notranslate"><span class="pre">Apps</span></code> menu in the top-left and search for <code class="docutils literal notranslate"><span class="pre">asterisk</span></code> in the search-box.
+Choose <code class="docutils literal notranslate"><span class="pre">Asterisk</span> <span class="pre">Plus</span></code> and press <code class="docutils literal notranslate"><span class="pre">Install</span></code> button.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Asterisk</span> <span class="pre">Plus</span></code> module adds <code class="docutils literal notranslate"><span class="pre">PBX</span></code> menu into top-left button.
+All our PBX stuff lives here.</p>
+<p>Navigate to <code class="docutils literal notranslate"><span class="pre">Settings</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Server</span></code>, press <code class="docutils literal notranslate"><span class="pre">Minion</span> <span class="pre">Ping</span></code>, <code class="docutils literal notranslate"><span class="pre">Asterisk</span> <span class="pre">Ping</span></code> buttons to check connectivity with Agent and Asterisk.</p>
 </div>
 
 
@@ -67,11 +81,11 @@ install FreePBX currently).</p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="install.html">Installation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Quick Start</a></li>
 <li class="toctree-l2"><a class="reference internal" href="system.html">System requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="standard.html">Standard installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="docker.html">Docker based deployment</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Demo setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo.html">Demo setup</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../administration.html">Administration</a></li>
@@ -84,8 +98,8 @@ install FreePBX currently).</p>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="install.html">Installation</a><ul>
-      <li>Previous: <a href="docker.html" title="previous chapter">Docker based deployment</a></li>
-      <li>Next: <a href="../administration.html" title="next chapter">Administration</a></li>
+      <li>Previous: <a href="install.html" title="previous chapter">Installation</a></li>
+      <li>Next: <a href="system.html" title="next chapter">System requirements</a></li>
   </ul></li>
   </ul></li>
 </ul>

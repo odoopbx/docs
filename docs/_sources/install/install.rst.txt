@@ -4,35 +4,25 @@ Installation
 
 .. toctree::
 
-OdooPBX installation is managed by the OdooPBX Agent as it's not only the connection middleware
-but also a deployment manager.
+OdooPBX installation is managed by the Saltstack configuration management software and includes formulas for installing all needed components:
 
-As you already might know, OdooPBX has the following components:
-
-* Odoo / PostgreSQL
-* Odoo addons
-* Asterisk PBX
-* The Agent
+* PostgreSQL database for Odoo
+* Odoo with our ``Asterisk Plus`` addons module
+* Asterisk IP-PBX
+* Agent
+* Nginx frontend
+* Letsencrypt based PKI management
   
-So, depending on your environment, you have to install the missing parts or everything is you start from zero.
+Probably you already have some of components already running in your environment.
+Then choose from menu below for instuctions to install what is missing. 
 
-In any case, the first step that must be done is downloading and installing the Agent.
+If you need to setup everything from scratch check our :doc:`quickstart` guide.
 
-Also, there are two different types of deployment:
-
-* Docker deployment
-* Standard installation
-
-What type of installation to choose - you decide, use docker if you know what it is
-and direct installation in the other case.
-
-Also you could have a look at the demo setup instruction.
-
-Next:
 
 .. toctree::
     :titlesonly:
 
+    quickstart
     system
     standard
     docker    

@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="System requirements" href="system.html" />
+    <link rel="next" title="Quick Start" href="quickstart.html" />
     <link rel="prev" title="Introduction" href="../intro.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -37,28 +37,21 @@
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<p>OdooPBX installation is managed by the OdooPBX Agent as it’s not only the connection middleware
-but also a deployment manager.</p>
-<p>As you already might know, OdooPBX has the following components:</p>
+<p>OdooPBX installation is managed by the Saltstack configuration management software and includes formulas for installing all needed components:</p>
 <ul class="simple">
-<li><p>Odoo / PostgreSQL</p></li>
-<li><p>Odoo addons</p></li>
-<li><p>Asterisk PBX</p></li>
-<li><p>The Agent</p></li>
+<li><p>PostgreSQL database for Odoo</p></li>
+<li><p>Odoo with our <code class="docutils literal notranslate"><span class="pre">Asterisk</span> <span class="pre">Plus</span></code> addons module</p></li>
+<li><p>Asterisk IP-PBX</p></li>
+<li><p>Agent</p></li>
+<li><p>Nginx frontend</p></li>
+<li><p>Letsencrypt based PKI management</p></li>
 </ul>
-<p>So, depending on your environment, you have to install the missing parts or everything is you start from zero.</p>
-<p>In any case, the first step that must be done is downloading and installing the Agent.</p>
-<p>Also, there are two different types of deployment:</p>
-<ul class="simple">
-<li><p>Docker deployment</p></li>
-<li><p>Standard installation</p></li>
-</ul>
-<p>What type of installation to choose - you decide, use docker if you know what it is
-and direct installation in the other case.</p>
-<p>Also you could have a look at the demo setup instruction.</p>
-<p>Next:</p>
+<p>Probably you already have some of components already running in your environment.
+Then choose from menu below for instuctions to install what is missing.</p>
+<p>If you need to setup everything from scratch check our <a class="reference internal" href="quickstart.html"><span class="doc">Quick Start</span></a> guide.</p>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="system.html">System requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="standard.html">Standard installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docker.html">Docker based deployment</a></li>
@@ -90,6 +83,7 @@ and direct installation in the other case.</p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
 <li class="toctree-l2"><a class="reference internal" href="system.html">System requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="standard.html">Standard installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="docker.html">Docker based deployment</a></li>
@@ -106,7 +100,7 @@ and direct installation in the other case.</p>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
       <li>Previous: <a href="../intro.html" title="previous chapter">Introduction</a></li>
-      <li>Next: <a href="system.html" title="next chapter">System requirements</a></li>
+      <li>Next: <a href="quickstart.html" title="next chapter">Quick Start</a></li>
   </ul></li>
 </ul>
 </div>
@@ -136,7 +130,7 @@ and direct installation in the other case.</p>
       &copy;2022, Odooist.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

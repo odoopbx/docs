@@ -37,92 +37,20 @@
 <h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="fields">
 <h2>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h2>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="odoo.addons.asterisk_plus.models.channel.Channel.call">
-<span class="sig-prename descclassname"><span class="pre">Channel.</span></span><span class="sig-name descname"><span class="pre">call</span></span><a class="headerlink" href="#odoo.addons.asterisk_plus.models.channel.Channel.call" title="Permalink to this definition">¶</a></dt>
-<dd><p>Call of the channel</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="odoo.addons.asterisk_plus.models.channel.Channel.server">
-<span class="sig-prename descclassname"><span class="pre">Channel.</span></span><span class="sig-name descname"><span class="pre">server</span></span><a class="headerlink" href="#odoo.addons.asterisk_plus.models.channel.Channel.server" title="Permalink to this definition">¶</a></dt>
-<dd><p>Server of the channel. When server is removed all channels are deleted.</p>
-</dd></dl>
-
 </div>
 <div class="section" id="methods">
 <h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
-<dl class="py method">
-<dt class="sig sig-object py" id="odoo.addons.asterisk_plus.models.channel.Channel.on_ami_new_channel">
-<span class="sig-prename descclassname"><span class="pre">Channel.</span></span><span class="sig-name descname"><span class="pre">on_ami_new_channel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#odoo.addons.asterisk_plus.models.channel.Channel.on_ami_new_channel" title="Permalink to this definition">¶</a></dt>
-<dd><p>AMI NewChannel event is processed to create a new channel in Odoo.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="odoo.addons.asterisk_plus.models.channel.Channel.on_ami_update_channel_state">
-<span class="sig-prename descclassname"><span class="pre">Channel.</span></span><span class="sig-name descname"><span class="pre">on_ami_update_channel_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#odoo.addons.asterisk_plus.models.channel.Channel.on_ami_update_channel_state" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="odoo.addons.asterisk_plus.models.channel.Channel.on_ami_hangup">
-<span class="sig-prename descclassname"><span class="pre">Channel.</span></span><span class="sig-name descname"><span class="pre">on_ami_hangup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#odoo.addons.asterisk_plus.models.channel.Channel.on_ami_hangup" title="Permalink to this definition">¶</a></dt>
-<dd><p>Summary line.</p>
-<p>Extended description of function.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>arg1</strong> (<em>int</em>) – Description of arg1</p></li>
-<li><p><strong>arg2</strong> (<em>str</em>) – Description of arg2</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Description of return value
-pass</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<div class="section" id="module-odoo.addons.asterisk_plus.models.server">
-<span id="servers"></span><h3>Servers<a class="headerlink" href="#module-odoo.addons.asterisk_plus.models.server" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="servers">
+<h3>Servers<a class="headerlink" href="#servers" title="Permalink to this headline">¶</a></h3>
 </div>
-<div class="section" id="module-odoo.addons.asterisk_plus.models.user_channel">
-<span id="channels"></span><h3>Channels<a class="headerlink" href="#module-odoo.addons.asterisk_plus.models.user_channel" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="channels">
+<h3>Channels<a class="headerlink" href="#channels" title="Permalink to this headline">¶</a></h3>
 </div>
 <div class="section" id="res-users">
 <h3>Res Users<a class="headerlink" href="#res-users" title="Permalink to this headline">¶</a></h3>
-<dl class="py method">
-<dt class="sig sig-object py" id="odoo.addons.asterisk_plus.models.res_users.ResUser.asterisk_plus_notify">
-<span class="sig-prename descclassname"><span class="pre">ResUser.</span></span><span class="sig-name descname"><span class="pre">asterisk_plus_notify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'PBX'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sticky</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#odoo.addons.asterisk_plus.models.res_users.ResUser.asterisk_plus_notify" title="Permalink to this definition">¶</a></dt>
-<dd><p>Send a notification to logged in Odoo user.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>message</strong> (<em>str</em>) – Notification message.</p></li>
-<li><p><strong>title</strong> (<em>str</em>) – Notification title. If not specified: PBX.</p></li>
-<li><p><strong>uid</strong> (<em>int</em>) – Odoo user UID to send notification to. If not specified: calling user UID.</p></li>
-<li><p><strong>sticky</strong> (<em>boolean</em>) – Make a notiication message sticky (shown until closed). Default: False.</p></li>
-<li><p><strong>warning</strong> (<em>boolean</em>) – Make a warning notification type. Default: False.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Always True.</p>
-</dd>
-</dl>
-</dd></dl>
-
 </div>
 <div class="section" id="pbx-user">
 <h3>PBX User<a class="headerlink" href="#pbx-user" title="Permalink to this headline">¶</a></h3>
-<dl class="py method">
-<dt class="sig sig-object py" id="odoo.addons.asterisk_plus.models.user.PbxUser.has_asterisk_plus_group">
-<span class="sig-prename descclassname"><span class="pre">PbxUser.</span></span><span class="sig-name descname"><span class="pre">has_asterisk_plus_group</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#odoo.addons.asterisk_plus.models.user.PbxUser.has_asterisk_plus_group" title="Permalink to this definition">¶</a></dt>
-<dd><p>Used from notification.js to check if Odoo user is enabled to
-use Asterisk applications in order to start a bus listener.</p>
-</dd></dl>
-
 </div>
 </div>
 </div>
@@ -200,7 +128,7 @@ use Asterisk applications in order to start a bus listener.</p>
       &copy;2022, Odooist.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

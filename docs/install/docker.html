@@ -63,14 +63,14 @@ on how to customize the defaults (save this file under <code class="docutils lit
 <div class="section" id="custom-minion-configuration-file">
 <h3>Custom minion configuration file<a class="headerlink" href="#custom-minion-configuration-file" title="Permalink to this headline">¶</a></h3>
 <p>Here is an example of  <code class="docutils literal notranslate"><span class="pre">minion_local.conf</span></code>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">odoo_db</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my_database</span> <span class="c1"># Replace to your real Odoo database name.</span>
-<span class="nt">odoo_password</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">asterisk1password</span> <span class="c1"># Find in Settings -&gt; Users asterisk1 user and set him a new password.</span>
-<span class="nt">odoo_port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">443</span>
-<span class="nt">odoo_use_ssl</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
-<span class="nt">ami_login</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">odoo</span>
-<span class="nt">ami_secret</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">dfghj5678b</span>
-<span class="nt">ami_port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5038</span>
-<span class="nt">ami_host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">asterisk.host</span> <span class="c1"># Your Asterisk host. Most common value is 127.0.0.1.</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">odoo_db</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_database</span><span class="w"> </span><span class="c1"># Replace to your real Odoo database name.</span><span class="w"></span>
+<span class="nt">odoo_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">asterisk1password</span><span class="w"> </span><span class="c1"># Find in Settings -&gt; Users asterisk1 user and set him a new password.</span><span class="w"></span>
+<span class="nt">odoo_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">443</span><span class="w"></span>
+<span class="nt">odoo_use_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
+<span class="nt">ami_login</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">odoo</span><span class="w"></span>
+<span class="nt">ami_secret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dfghj5678b</span><span class="w"></span>
+<span class="nt">ami_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5038</span><span class="w"></span>
+<span class="nt">ami_host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">asterisk.host</span><span class="w"> </span><span class="c1"># Your Asterisk host. Most common value is 127.0.0.1.</span><span class="w"></span>
 </pre></div>
 </div>
 <p><em>This is an example of custom options. See the full list of possible options</em> - <a class="reference internal" href="../administration/agent_options.html"><span class="doc">Agent options</span></a>.</p>
@@ -89,15 +89,15 @@ on how to customize the defaults (save this file under <code class="docutils lit
 <div class="section" id="create-docker-compose-override-yml">
 <h3>Create docker-compose.override.yml<a class="headerlink" href="#create-docker-compose-override-yml" title="Permalink to this headline">¶</a></h3>
 <p>Next you need to map all these in <code class="docutils literal notranslate"><span class="pre">docker-compose.override.yml</span></code>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span> <span class="s">&#39;3.1&#39;</span>
-<span class="nt">services</span><span class="p">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.1&#39;</span><span class="w"></span>
+<span class="nt">services</span><span class="p">:</span><span class="w"></span>
 
-<span class="nt">agent</span><span class="p">:</span>
-  <span class="nt">ports</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="s">&quot;0.0.0.0:48008:48008&quot;</span>
-  <span class="nt">volumes</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">./minion_local.conf:/etc/salt/minion_local.conf</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">./auth:/etc/salt/auth</span>
+<span class="nt">agent</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;0.0.0.0:48008:48008&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">volumes</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./minion_local.conf:/etc/salt/minion_local.conf</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./auth:/etc/salt/auth</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Now your are ready for a test run:</p>
@@ -174,6 +174,7 @@ start the salt minion in debug mode go console #2 and enter:</p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="install.html">Installation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
 <li class="toctree-l2"><a class="reference internal" href="system.html">System requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="standard.html">Standard installation</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Docker based deployment</a></li>
@@ -222,7 +223,7 @@ start the salt minion in debug mode go console #2 and enter:</p>
       &copy;2022, Odooist.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
