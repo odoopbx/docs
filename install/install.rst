@@ -16,12 +16,13 @@ OdooPBX installation is managed by the Saltstack configuration management softwa
 Probably you already have some of components already running in your environment.
 Then choose from menu below for instuctions to install what is missing. 
 
-If you need to setup everything from scratch check our Quick Start guide.
+If you need to setup everything from scratch check our :doc:`quickstart` guide.
 
 
 .. toctree::
     :titlesonly:
 
+    quickstart
     system
     standard
     docker    
