@@ -294,13 +294,9 @@ Agent test run
 
 .. code::
 
-    ; Stop the Agent service
-    odoopbx stop agent
-    ; Run in foreground
-    odoopbx run agent
+    salt-minion -l info
 
-Check the Agent output printed on the screen. There should be no errors on start.
-
+Check the output printed on the screen. There should be no errors on start. 
 You should see messages that confirm both Odoo connection and Asterisk connection as shown below:
 
 .. code::
@@ -309,6 +305,12 @@ You should see messages that confirm both Odoo connection and Asterisk connectio
    * * *
    [INFO    ] salt.loaded.ext.engines.asterisk_ami:69 AMI connecting to odoo@127.0.0.1:5038...
    [INFO    ] salt.loaded.ext.engines.asterisk_ami:72 Registering for AMI event *
+
+Now stop it with CTRL+C and run it as a service:
+
+.. code::
+
+    systemctl start salt-minion
 
 Asterisk Dialplan configuration
 ===============================

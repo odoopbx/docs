@@ -6,9 +6,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Standard installation &#8212; OdooPBX 1.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -238,12 +238,12 @@ Change permit option to IP address of your Asterisk server if agent is not start
 <div class="section" id="odoo-settings">
 <h3>Odoo settings<a class="headerlink" href="#odoo-settings" title="Permalink to this headline">¶</a></h3>
 <p>First configure the Agent’s connection to Odoo:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">odoo_host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">odoo</span><span class="w"> </span><span class="c1"># Put IP address or hostname here.</span><span class="w"></span>
-<span class="nt">odoo_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8069</span><span class="w"> </span><span class="c1"># If your Odoo is behind a proxy put 80 or 443 here.</span><span class="w"></span>
-<span class="nt">odoo_user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">asterisk1</span><span class="w"> </span><span class="c1"># It&#39;s ok to leave the default user name.</span><span class="w"></span>
-<span class="nt">odoo_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">asterisk1</span><span class="w"> </span><span class="c1"># This is the default password set on addon installation. CHANGE IT!!!</span><span class="w"></span>
-<span class="nt">odoo_use_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"> </span><span class="c1"># Set to true if your proxy servers HTTPS requests.</span><span class="w"></span>
-<span class="nt">odoo_db</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">odoopbx_14</span><span class="w"> </span><span class="c1"># Put your database here</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">odoo_host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">odoo</span> <span class="c1"># Put IP address or hostname here.</span>
+<span class="nt">odoo_port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">8069</span> <span class="c1"># If your Odoo is behind a proxy put 80 or 443 here.</span>
+<span class="nt">odoo_user</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">asterisk1</span> <span class="c1"># It&#39;s ok to leave the default user name.</span>
+<span class="nt">odoo_password</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">asterisk1</span> <span class="c1"># This is the default password set on addon installation. CHANGE IT!!!</span>
+<span class="nt">odoo_use_ssl</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span> <span class="c1"># Set to true if your proxy servers HTTPS requests.</span>
+<span class="nt">odoo_db</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">odoopbx_14</span> <span class="c1"># Put your database here</span>
 </pre></div>
 </div>
 </div>
@@ -264,18 +264,19 @@ to configure the Agent’s connection to your Asterisk:</p>
 </div>
 <div class="section" id="agent-test-run">
 <h2>Agent test run<a class="headerlink" href="#agent-test-run" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">;</span> <span class="n">Stop</span> <span class="n">the</span> <span class="n">Agent</span> <span class="n">service</span>
-<span class="n">odoopbx</span> <span class="n">stop</span> <span class="n">agent</span>
-<span class="p">;</span> <span class="n">Run</span> <span class="ow">in</span> <span class="n">foreground</span>
-<span class="n">odoopbx</span> <span class="n">run</span> <span class="n">agent</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">salt</span><span class="o">-</span><span class="n">minion</span> <span class="o">-</span><span class="n">l</span> <span class="n">info</span>
 </pre></div>
 </div>
-<p>Check the Agent output printed on the screen. There should be no errors on start.</p>
-<p>You should see messages that confirm both Odoo connection and Asterisk connection as shown below:</p>
+<p>Check the output printed on the screen. There should be no errors on start.
+You should see messages that confirm both Odoo connection and Asterisk connection as shown below:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">INFO</span>    <span class="p">]</span> <span class="n">salt</span><span class="o">.</span><span class="n">loaded</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">odoo_executor</span><span class="p">:</span><span class="mi">48</span> <span class="n">Logged</span> <span class="n">into</span> <span class="n">Odoo</span><span class="o">.</span>
 <span class="o">*</span> <span class="o">*</span> <span class="o">*</span>
 <span class="p">[</span><span class="n">INFO</span>    <span class="p">]</span> <span class="n">salt</span><span class="o">.</span><span class="n">loaded</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">asterisk_ami</span><span class="p">:</span><span class="mi">69</span> <span class="n">AMI</span> <span class="n">connecting</span> <span class="n">to</span> <span class="n">odoo</span><span class="o">@</span><span class="mf">127.0.0.1</span><span class="p">:</span><span class="mf">5038.</span><span class="o">..</span>
 <span class="p">[</span><span class="n">INFO</span>    <span class="p">]</span> <span class="n">salt</span><span class="o">.</span><span class="n">loaded</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">engines</span><span class="o">.</span><span class="n">asterisk_ami</span><span class="p">:</span><span class="mi">72</span> <span class="n">Registering</span> <span class="k">for</span> <span class="n">AMI</span> <span class="n">event</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>Now stop it with CTRL+C and run it as a service:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">systemctl</span> <span class="n">start</span> <span class="n">salt</span><span class="o">-</span><span class="n">minion</span>
 </pre></div>
 </div>
 </div>
@@ -423,7 +424,7 @@ exten =&gt; _XXXXX.,2,Dial(SIP/provider/${EXTEN},30,TU(post-dial-send-dtmf) ; Ou
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -445,7 +446,7 @@ exten =&gt; _XXXXX.,2,Dial(SIP/provider/${EXTEN},30,TU(post-dial-send-dtmf) ; Ou
       &copy;2022, Odooist.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
