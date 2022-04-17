@@ -41,6 +41,8 @@ extensions = [
     'sphinxcontrib.autoyaml',
 ]
 
+autoyaml_level = 2
+
 templates_path = ['_templates']
 
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'sphinx-env']
