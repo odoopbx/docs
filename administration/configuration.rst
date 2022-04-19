@@ -17,11 +17,6 @@ Though the permissions of this Asterisk user account are very limited (it belong
 it is **strictly recommended** to change the default password of this account after installation is finished
 (don't forget to update ``odoo_password`` setting on the Agent).
 
-Here is a short video demonstration how to do this:
-
-.. image:: media/change_odoo_password.gif
-  :alt: Change password
-
 Country settings
 ----------------
 It is important to set the correct country for the Asterisk server because it is required to
@@ -49,21 +44,30 @@ When it is required to trace some issue enable the debug mode.
 When debug mode is enabled 
 
 
-Salt Master
------------
-In single Asterisk setup the Salt master process is run on the same server with Asterisk.
-
+Salt
+----
+Here the Salt connection is configured. In the common setup all three Salt processes (master, api and minion) are running on the same server.
 
 Salt API URL
 ++++++++++++
-URL of the Salt Master. 
+URL of the Salt Master. By default ``https://agent:48008``. Replace ``agent`` with the hostname of your Agent.
 
-Salt API User
-+++++++++++++
+Salt API User & Password
+++++++++++++++++++++++++
+To generate new password use the following command:
 
-Salt API Password
-+++++++++++++++++
+.. code:: bash
 
+  echo -n my-new-pass | md5sum
+  7ee84110eed69ed3d366eb85e017b508  -
+
+Now use this hash to edit ``/etc/salt/auth`` file and put it there:
+
+.. code::
+
+  odoo|7ee84110eed69ed3d366eb85e017b508
+
+After that restart the salt minion service (``systemctl restart salt-minion``). Now set username ``odoo`` and password ``my-new-pass`` as Salt credentials in Odoo.
 
 PBX Users
 =========
@@ -90,12 +94,12 @@ Let's review channel settings:
 
 Channel
 -------
-Asterisk channel, e.g. SIP/101 or SIP/max_lit.
+Asterisk channel, e.g. SIP/101 or SIP/mypeername
 
 Context
 -------
 Asterisk context to use to place the outgoing call. In FreePBX  related systems it is usually ``from-internal``.
-Some other systems define individual context for each user. 
+Some other systems define individual context for each user.
 
 Originate
 ---------
@@ -115,5 +119,5 @@ It is possible to auto answer the 1-st call leg using special channel headers.
 Different phones use different headers.
 
 .. seealso::
-  For more details see :doc:`common/auto_answer`
+  For more details see :doc:`../common/auto_answer`
 
