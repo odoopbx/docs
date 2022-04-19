@@ -31,7 +31,6 @@ release = '1.0'
 extensions_path = '_extensions'
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.autosectionlabel',
     'sphinx.ext.ifconfig',
     'sphinx.ext.todo',
     'embedded_video',

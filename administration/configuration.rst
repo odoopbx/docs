@@ -17,11 +17,6 @@ Though the permissions of this Asterisk user account are very limited (it belong
 it is **strictly recommended** to change the default password of this account after installation is finished
 (don't forget to update ``odoo_password`` setting on the Agent).
 
-Here is a short video demonstration how to do this:
-
-.. image:: media/change_odoo_password.gif
-  :alt: Change password
-
 Country settings
 ----------------
 It is important to set the correct country for the Asterisk server because it is required to
@@ -99,12 +94,12 @@ Let's review channel settings:
 
 Channel
 -------
-Asterisk channel, e.g. SIP/101 or SIP/max_lit.
+Asterisk channel, e.g. SIP/101 or SIP/mypeername
 
 Context
 -------
 Asterisk context to use to place the outgoing call. In FreePBX  related systems it is usually ``from-internal``.
-Some other systems define individual context for each user. 
+Some other systems define individual context for each user.
 
 Originate
 ---------
@@ -124,5 +119,5 @@ It is possible to auto answer the 1-st call leg using special channel headers.
 Different phones use different headers.
 
 .. seealso::
-  For more details see :doc:`common/auto_answer`
+  For more details see :doc:`../common/auto_answer`
 
