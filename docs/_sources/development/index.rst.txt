@@ -170,7 +170,7 @@ To spy on master's event run:
 
 And you will get:
 
-.. code-block:: json
+.. code::
 
     20211006210940034674    {
         "_stamp": "2021-10-06T21:09:40.035997",
@@ -203,7 +203,7 @@ And you will get:
         "success": true
     }
 
-5. Minion's connection to Odoo
+1. Minion's connection to Odoo
 ------------------------------
 Every minion is configured to an Odoo instance.
 

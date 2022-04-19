@@ -47,7 +47,7 @@ Here is an example of  ``minion_local.conf``:
     ami_port: 5038
     ami_host: asterisk.host # Your Asterisk host. Most common value is 127.0.0.1.
 
-*This is an example of custom options. See the full list of possible options* - :doc:`../administration/agent_options`.
+*This is an example of custom options. See the full list of possible options* - :doc:`../administration/params`.
 
 Change the default Salt API password
 ####################################

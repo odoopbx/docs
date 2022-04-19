@@ -35,13 +35,21 @@
             
   <div class="section" id="security-reactor">
 <h1>Security Reactor<a class="headerlink" href="#security-reactor" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>In order to protect the Asterisk server a Security Reactor is implmented.</p>
+<div class="section" id="reactor-introduction">
+<h2>Reactor Introduction<a class="headerlink" href="#reactor-introduction" title="Permalink to this headline">¶</a></h2>
+<p>In order to protect the Asterisk server a Security Reactor is implemented.</p>
 <p>As most of the installations (at least for now) use an external Asterisk / FreePBX server the
 security reactor is not enabled by default.</p>
 <p>To enable the reactor add <code class="docutils literal notranslate"><span class="pre">ami_reactor_enabled:</span> <span class="pre">True</span></code> to <code class="docutils literal notranslate"><span class="pre">/etc/salt/minion_local.conf</span></code> and restart
 the minion.</p>
+<p>Make sure that a <code class="docutils literal notranslate"><span class="pre">voip</span></code> chain is created in iptables and that the necessary <code class="docutils literal notranslate"><span class="pre">ipsets</span></code> are created:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>iptables -nL INPUT <span class="p">|</span> grep voip
+ipset list
+</pre></div>
+</div>
+<p>When the reactor is enabled all unsuccessful SIP registrations will cause the incoming IP address to be added to the <code class="docutils literal notranslate"><span class="pre">banned</span></code> ipset.</p>
+<p>You can check that manually using <code class="docutils literal notranslate"><span class="pre">ipset</span> <span class="pre">list</span> <span class="pre">banned</span></code> or though the Odoo UI in <code class="docutils literal notranslate"><span class="pre">Settins</span> <span class="pre">-&gt;</span> <span class="pre">Security</span> <span class="pre">-&gt;</span> <span class="pre">Banned</span></code> menu (use the Refresh button to first load the
+entries from the Agent).</p>
 </div>
 </div>
 

@@ -4,11 +4,11 @@ Introduction
 
 What is OdooPBX?
 ================
-OdooPBX is a PBX platform built upon Odoo & Asterisk using Saltstack API as a middleware layer.
+OdooPBX is a telephony platform built upon Odoo & Asterisk using Saltstack API as a middleware layer:
 
 * `Odoo <https://odoo.com>`_ (former OpenERP / TinyERP) is a modern WEB business platform that rapidly spreads over the world.
-* `Asterisk PBX <https://asterisk.org>`_ is the most popular world open source PBX software.
-* `Saltstack <https://docs.saltproject.io/en/latest/>`__ is automation, infrastructure management, remote execution, 
+* `Asterisk PBX <https://asterisk.org>`_ is the most popular open source PBX software.
+* `Saltstack <https://docs.saltproject.io/en/latest/>`__ is an automation, infrastructure management, remote execution, 
   configuration management, data-driven orchestration, and so much more.
 
 .. note::
@@ -18,8 +18,8 @@ OdooPBX is a PBX platform built upon Odoo & Asterisk using Saltstack API as a mi
   * A modern architecture with clean separation of layers.
     UI is created in XML, business logic is programmed in Python, data is stored in PostgreSQL and accessed
     through an ORM (object-relational mapper).
-  * Rapid application development - Odoo is a blazing fast development tool that allows building new
-    apps like a lightning.
+  * Rapid application development - Odoo is a blazing fast development tool that lets you create new
+    apps like lightning.
   * Granular security system with row-level colum-level access.
   * Safe upgrade framework give a possibility of reliable upgrades.
 
@@ -29,8 +29,8 @@ Sales, Events, etc.
 
 So from one side OdooPBX is a PBX management tool built upon Odoo WEB framework.
 
-From another side OdooPBX adds a telephony layer to existing business modules and by this
-integrating tight phone communications with places they happen.
+On the other hand, OdooPBX adds a layer of telephony to existing business modules and thus integrates 
+close telephone communication with the places where it takes place.
 
 .. important:: 
 
@@ -44,6 +44,7 @@ Finally a special middleware Agent is used to connect Odoo and Asterisk together
 * Executes Asterisk actions received from Odoo.
 * Protects Asterisk from DDoS and password bruteforce attacks.
 * Manages the installation & upgrade process.
+* Provides a server for a WEB based Asterisk CLI.
 
 OdooPBX is **extremely adaptable and extensible** because Odoo is very adaptable
 by its prominent `inheritance architecture <https://www.odoo.com/documentation/14.0/developer/howtos/rdtraining/13_inheritance.html>`__

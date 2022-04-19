@@ -31,7 +31,7 @@ Below is the list of default parameters and their meanings.
 
 Master and API configuration
 ============================
-Master and API configuration is defined in ``/etc/salt/master''.
+Master and API configuration is defined in ``/etc/salt/master``.
 
 You can override or add your configuration parameters in ``/etc/salt/master_local.conf``.
 

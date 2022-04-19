@@ -167,41 +167,41 @@ availability of all Salt execution modules.</p>
 </pre></div>
 </div>
 <p>And you will get:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>20211006210940034674    {
-    &quot;_stamp&quot;: &quot;2021-10-06T21:09:40.035997&quot;,
-    &quot;minions&quot;: [
-        &quot;asterisk&quot;
-    ]
-}
-salt/job/20211006210940034674/new       {
-    &quot;_stamp&quot;: &quot;2021-10-06T21:09:40.036804&quot;,
-    &quot;arg&quot;: [],
-    &quot;fun&quot;: &quot;test.ping&quot;,
-    &quot;jid&quot;: &quot;20211006210940034674&quot;,
-    &quot;minions&quot;: [
-        &quot;asterisk&quot;
-    ],
-    &quot;missing&quot;: [],
-    &quot;tgt&quot;: &quot;asterisk&quot;,
-    &quot;tgt_type&quot;: &quot;glob&quot;,
-    &quot;user&quot;: &quot;odoo&quot;
-}
-salt/job/20211006210940034674/ret/asterisk      {
-    &quot;_stamp&quot;: &quot;2021-10-06T21:09:40.187263&quot;,
-    &quot;cmd&quot;: &quot;_return&quot;,
-    &quot;fun&quot;: &quot;test.ping&quot;,
-    &quot;fun_args&quot;: [],
-    &quot;id&quot;: &quot;asterisk&quot;,
-    &quot;jid&quot;: &quot;20211006210940034674&quot;,
-    &quot;retcode&quot;: 0,
-    &quot;return&quot;: true,
-    &quot;success&quot;: true
-}
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">20211006210940034674</span>    <span class="p">{</span>
+    <span class="s2">&quot;_stamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2021-10-06T21:09:40.035997&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;minions&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;asterisk&quot;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+<span class="n">salt</span><span class="o">/</span><span class="n">job</span><span class="o">/</span><span class="mi">20211006210940034674</span><span class="o">/</span><span class="n">new</span>       <span class="p">{</span>
+    <span class="s2">&quot;_stamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2021-10-06T21:09:40.036804&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;arg&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">&quot;fun&quot;</span><span class="p">:</span> <span class="s2">&quot;test.ping&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;jid&quot;</span><span class="p">:</span> <span class="s2">&quot;20211006210940034674&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;minions&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;asterisk&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;missing&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">&quot;tgt&quot;</span><span class="p">:</span> <span class="s2">&quot;asterisk&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;tgt_type&quot;</span><span class="p">:</span> <span class="s2">&quot;glob&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="s2">&quot;odoo&quot;</span>
+<span class="p">}</span>
+<span class="n">salt</span><span class="o">/</span><span class="n">job</span><span class="o">/</span><span class="mi">20211006210940034674</span><span class="o">/</span><span class="n">ret</span><span class="o">/</span><span class="n">asterisk</span>      <span class="p">{</span>
+    <span class="s2">&quot;_stamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2021-10-06T21:09:40.187263&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cmd&quot;</span><span class="p">:</span> <span class="s2">&quot;_return&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;fun&quot;</span><span class="p">:</span> <span class="s2">&quot;test.ping&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;fun_args&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;asterisk&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;jid&quot;</span><span class="p">:</span> <span class="s2">&quot;20211006210940034674&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;retcode&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;return&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="minion-s-connection-to-odoo">
-<h2>5. Minion’s connection to Odoo<a class="headerlink" href="#minion-s-connection-to-odoo" title="Permalink to this headline">¶</a></h2>
+<h2>1. Minion’s connection to Odoo<a class="headerlink" href="#minion-s-connection-to-odoo" title="Permalink to this headline">¶</a></h2>
 <p>Every minion is configured to an Odoo instance.</p>
 <p>When it executes a job its result is sent to Odoo.</p>
 <p>As a developer you could ask what happens if Odoo is down.</p>
