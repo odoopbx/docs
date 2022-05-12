@@ -40,7 +40,7 @@
 <p>In order to protect the Asterisk server a Security Reactor is implemented.</p>
 <p>As most of the installations (at least for now) use an external Asterisk / FreePBX server the
 security reactor is not enabled by default.</p>
-<p>To enable the reactor add <code class="docutils literal notranslate"><span class="pre">ami_reactor_enabled:</span> <span class="pre">True</span></code> to <code class="docutils literal notranslate"><span class="pre">/etc/salt/minion_local.conf</span></code> and restart
+<p>To enable the reactor add <code class="docutils literal notranslate"><span class="pre">security_reactor_enabled:</span> <span class="pre">True</span></code> to <code class="docutils literal notranslate"><span class="pre">/etc/salt/minion_local.conf</span></code> and restart
 the minion.</p>
 <p>Make sure that a <code class="docutils literal notranslate"><span class="pre">voip</span></code> chain is created in iptables and that the necessary <code class="docutils literal notranslate"><span class="pre">ipsets</span></code> are created:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>iptables -nL INPUT <span class="p">|</span> grep voip
@@ -74,7 +74,9 @@ entries from the Agent).</p>
 
 <h3>Navigation</h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">What is OdooPBX?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#odoopbx-apps">OdooPBX Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#installation-types">Installation types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install/install.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../administration.html">Administration</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="configuration.html">Configuration</a></li>

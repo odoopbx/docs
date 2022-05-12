@@ -9,7 +9,7 @@ In order to protect the Asterisk server a Security Reactor is implemented.
 As most of the installations (at least for now) use an external Asterisk / FreePBX server the 
 security reactor is not enabled by default.
 
-To enable the reactor add ``ami_reactor_enabled: True`` to ``/etc/salt/minion_local.conf`` and restart
+To enable the reactor add ``security_reactor_enabled: True`` to ``/etc/salt/minion_local.conf`` and restart
 the minion.
 
 Make sure that a ``voip`` chain is created in iptables and that the necessary ``ipsets`` are created:
