@@ -48,7 +48,7 @@
 <h2>All-in-one demo<a class="headerlink" href="#all-in-one-demo" title="Permalink to this headline">¶</a></h2>
 <p>Below commands will install a full <strong>all-in-one</strong> demo system:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip3 install odoopbx
-salt-call state.apply full
+salt-call --local state.highstate
 </pre></div>
 </div>
 </div>
@@ -86,7 +86,7 @@ salt-call state.apply nginx
 </pre></div>
 </div>
 <p>To install all compoments use this:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>salt-call state.apply full
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>salt-call --local state.highstate
 </pre></div>
 </div>
 <p>Different components can be installed into different servers and be interconnected easily.</p>

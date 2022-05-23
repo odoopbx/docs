@@ -20,7 +20,7 @@ Below commands will install a full **all-in-one** demo system:
 .. code:: sh
 
     pip3 install odoopbx
-    salt-call state.apply full
+    salt-call --local state.highstate
 
 The Agent
 =========
@@ -62,7 +62,7 @@ To install all compoments use this:
 
 .. code:: sh
 
-    salt-call state.apply full
+    salt-call --local state.highstate
 
 
 Different components can be installed into different servers and be interconnected easily.
