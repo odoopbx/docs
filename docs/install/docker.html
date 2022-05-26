@@ -39,8 +39,8 @@
 <ul class="simple">
 <li><p><strong>db</strong> - PostgreSQL database used by Odoo.</p></li>
 <li><p><strong>odoo</strong> - Odoo server.</p></li>
-<li><p><strong>agent</strong> - Salt processes (salt-master, salt-minion, salt-api).</p></li>
-<li><p><strong>asterisk</strong> - a plain Asterisk PBX with minimal set of configuration files.</p></li>
+<li><p><strong>pbx</strong> - A universal image with Asterisk amd Salt processes (salt-master, salt-minion, salt-api).
+The processeses are managed by Supervisor.</p></li>
 <li><p><strong>freepbx</strong> - We use <a class="reference external" href="https://github.com/tiredofit/docker-freepbx">tiredofit/freepbx</a> -
 the most popular FreePBX image published on the docker.hub. <em>Disclaimer: we do not maintain this FreePBX image.
 You can replace it with any other FreePBX docker image of your choice.</em></p></li>
@@ -48,6 +48,8 @@ You can replace it with any other FreePBX docker image of your choice.</em></p><
 <p>You can take an example of <a class="reference external" href="https://github.com/odoopbx/agent/blob/master/docker/docker-compose.yml">docker-compose.yml file  from the Agent repo</a>.</p>
 <p>Also please note the <a class="reference external" href="https://github.com/odoopbx/agent/blob/master/docker/docker-compose.override.yml.example">docker-compose.override.yml example</a>
 on how to customize the defaults (save this file under <code class="docutils literal notranslate"><span class="pre">docker-compose.override.yml</span></code> name.)</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">network_mode:</span> <span class="pre">host</span></code> is used to connect the services to the host network so you can connect
+to the localhost from inside containers.(usually Asterisk AMI is bound to 127.0.0.1:5038 that is good).</p>
 <p>So depending on your required setup you can choose which services to run.</p>
 <p>Below you will find some snippets for different environments.</p>
 <div class="section" id="only-agent-setup">
@@ -55,9 +57,8 @@ on how to customize the defaults (save this file under <code class="docutils lit
 <p>This setup assumes that both Odoo and Asterisk are already installed and running outside docker.</p>
 <p>So in this case you should do the following steps:</p>
 <ul class="simple">
-<li><p>Forward Salt API port (default 48008) from your host machine to the agent container.</p></li>
-<li><p>Supply a configuration file for Odoo &amp; Asterisk.</p></li>
-<li><p>Change the default Sapt API password.</p></li>
+<li><p>Supply a configuration file for Odoo &amp; Asterisk (see below).</p></li>
+<li><p>Change the default Sapt API password (not required but strictly recommended).</p></li>
 </ul>
 <p>Let review these steps in more details.</p>
 <div class="section" id="custom-minion-configuration-file">
@@ -70,7 +71,7 @@ on how to customize the defaults (save this file under <code class="docutils lit
 <span class="nt">ami_login</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">odoo</span>
 <span class="nt">ami_secret</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">dfghj5678b</span>
 <span class="nt">ami_port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5038</span>
-<span class="nt">ami_host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">asterisk.host</span> <span class="c1"># Your Asterisk host. Most common value is 127.0.0.1.</span>
+<span class="nt">ami_host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">localhost</span> <span class="c1"># Your Asterisk host. Most common value is 127.0.0.1.</span>
 </pre></div>
 </div>
 <p><em>This is an example of custom options. See the full list of possible options</em> - <a class="reference internal" href="../administration/params.html"><span class="doc">Configuration parameters</span></a>.</p>
@@ -89,23 +90,23 @@ on how to customize the defaults (save this file under <code class="docutils lit
 <div class="section" id="create-docker-compose-override-yml">
 <h3>Create docker-compose.override.yml<a class="headerlink" href="#create-docker-compose-override-yml" title="Permalink to this headline">¶</a></h3>
 <p>Next you need to map all these in <code class="docutils literal notranslate"><span class="pre">docker-compose.override.yml</span></code>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span> <span class="s">&#39;3.1&#39;</span>
-<span class="nt">services</span><span class="p">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span>  <span class="nt">version</span><span class="p">:</span> <span class="s">&#39;3.1&#39;</span>
+  <span class="nt">services</span><span class="p">:</span>
 
-<span class="nt">agent</span><span class="p">:</span>
-  <span class="nt">ports</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="s">&quot;0.0.0.0:48008:48008&quot;</span>
-  <span class="nt">volumes</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">./minion_local.conf:/etc/salt/minion_local.conf</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">./auth:/etc/salt/auth</span>
+<span class="nt">pbx</span><span class="p">:</span>
+    <span class="nt">volumes</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">./minion_local.conf:/etc/salt/minion_local.conf</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">./auth:/etc/salt/auth</span>
+    <span class="nt">environment</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ASTERISK_AUTOSTART=false</span>
 </pre></div>
 </div>
 <p>Now your are ready for a test run:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>docker-compose up agent
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>docker-compose up pbx
 </pre></div>
 </div>
 <p>Check the output. If there is no error messages, press CTRL+C and restart the Agent in background mode:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>docker-compose up -d agent
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>docker-compose up -d pbx
 </pre></div>
 </div>
 </div>
@@ -117,28 +118,24 @@ on how to customize the defaults (save this file under <code class="docutils lit
 <li><p>Salt master</p></li>
 <li><p>Salt minion</p></li>
 </ul>
-<p>The processes are started in a <a class="reference external" href="https://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/">tmux</a> session.</p>
+<p>The processes are started by the Supervisor daemon.</p>
 <p>So in order to debug a process you first have to enter the container using</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">exec</span> <span class="n">agent</span> <span class="n">bash</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">exec</span> <span class="n">pbx</span> <span class="n">bash</span>
 </pre></div>
 </div>
-<p>command and then re-connect to a tmux session using</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tmux</span> <span class="n">a</span>
-</pre></div>
-</div>
-<p>command.  After that you can switch between three consoles:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">CTRL+b</span> <span class="pre">0</span></code> - the Salt master</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">CTRL+b</span> <span class="pre">1</span></code> - the Salt API</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">CTRL+b</span> <span class="pre">2</span></code> - the Salt minion</p></li>
-</ul>
-<p>You can press <code class="docutils literal notranslate"><span class="pre">CTRL+C</span></code> to terminate the process and restart it in in debug mode. For example, to
-start the salt minion in debug mode go console #2 and enter:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CTRL</span><span class="o">+</span><span class="n">C</span>
+<p>Now stop the required process. Usually we want to debug the salt-minion process so we stop it and
+run in debug mode:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">supervisorctl</span> <span class="n">stop</span> <span class="n">salt</span><span class="o">-</span><span class="n">minion</span>
 <span class="n">salt</span><span class="o">-</span><span class="n">minion</span> <span class="o">-</span><span class="n">l</span> <span class="n">debug</span>
 </pre></div>
 </div>
-<p>To exit from tmux enter <code class="docutils literal notranslate"><span class="pre">CTRL+B</span> <span class="pre">d</span></code>. Then you can exit the container with <code class="docutils literal notranslate"><span class="pre">CTRL+d</span></code>.</p>
+<p>You can press <code class="docutils literal notranslate"><span class="pre">CTRL+C</span></code> to terminate the process and restart again in normal mode:
+.. code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CTRL</span><span class="o">+</span><span class="n">C</span>
+<span class="n">supervisorctl</span> <span class="n">stort</span> <span class="n">salt</span><span class="o">-</span><span class="n">minion</span>
+</pre></div>
+</div>
+<p>Then you can exit the container with <code class="docutils literal notranslate"><span class="pre">CTRL+d</span></code>.</p>
 </div>
 </div>
 <div class="section" id="odoo">
