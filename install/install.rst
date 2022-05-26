@@ -17,11 +17,10 @@ and includes formulas for installing all needed components:
 Probably you already have some of components already running in your environment.
 In this case you need to install the missing parts.
 
-.. toctree::
-    :titlesonly:
+Next:
 
-    demo (Quick all-in-one demo setup).
-    system (system requirements)
-    standard (preffered when Asterisk / Odoo should be installed).
-    docker (most simple to connect to existing Odoo / Asterisk).
-    freepbx (FreePBX is also possible to be run).
+* :doc:`demo` (Quick all-in-one demo setup).
+* :doc:`system` (system requirements)
+* :doc:`standard` (preffered when Asterisk / Odoo should be installed).
+* :doc:`docker` (most simple to connect to existing Odoo / Asterisk).
+* :doc:`freepbx` (FreePBX is also possible to be run).
