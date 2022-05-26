@@ -20,7 +20,7 @@ Below commands will install a full **all-in-one** demo system:
 .. code:: sh
 
     pip3 install odoopbx
-    salt-call --local state.highstate
+    odoopbx install odoopbx
 
 The Agent
 =========
@@ -52,17 +52,17 @@ To install a compoment the following command is used:
 
 .. code:: sh
 
-    salt-call state.apply agent
-    salt-call state.apply odoo
-    salt-call state.apply addons
-    salt-call state.apply asterisk
-    salt-call state.apply nginx
+    odoopbx install agent
+    odoopbx install odoo
+    odoopbx install addons
+    odoopbx install asterisk
+    odoopbx install nginx
 
 To install all compoments use this:
 
 .. code:: sh
 
-    salt-call --local state.highstate
+    odoopbx install odoopbx
 
 
 Different components can be installed into different servers and be interconnected easily.
@@ -87,7 +87,7 @@ Odoo installation
 If you don't have Odoo installed you can use the Agent to deploy Odoo on the current host.
 .. code:: sh
     
-    salt-call state.apply odoo
+    odoopbx install odoo
 
 This will install Odoo in a system wide python path with configuration file in ``/etc/odoo/odoo.conf``.
 
@@ -181,7 +181,7 @@ To install the OdooPBX public addons use:
 
 .. code:: sh
 
-    salt-call state.apply addons
+    odoopbx install addons
 
 Or follow this instruction to copy OdooPBX addons to your custom Odoo server.
 
@@ -205,7 +205,7 @@ To install Asterisk on the current server run:
 
 .. code:: sh 
 
-    salt-call state.apply asterisk
+    odoopbx install asterisk
 
 This will build Asterisk from the sources and also create default OdooPBX related configuration files.
 
