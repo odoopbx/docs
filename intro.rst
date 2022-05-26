@@ -68,6 +68,9 @@ If you have Asterisk running then you should install the Agent on the Asterisk s
 
 Finally, you might start from zero and would want to install everything from scratch. 
 
-Also there is two ways to deploy OdooPBX: server wide and docker based.
+Also there are two ways to deploy OdooPBX:
+
+* Server wide
+* Docker based
 
 All these topics are covered in the :doc:`install/install` section.
