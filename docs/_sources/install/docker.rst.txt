@@ -78,6 +78,9 @@ Next you need to map all these in ``docker-compose.override.yml``:
       volumes:
         - ./minion_local.conf:/etc/salt/minion_local.conf
         - ./auth:/etc/salt/auth
+        - /var/spool/asterisk:/var/spool/asterisk
+        - /etc/asterisk:/etc/asterisk
+        - /var/run/asterisk:/var/run/asterisk
       environment:
         - ASTERISK_AUTOSTART=false
 

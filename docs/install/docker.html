@@ -97,6 +97,9 @@ to the localhost from inside containers.(usually Asterisk AMI is bound to 127.0.
     <span class="nt">volumes</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">./minion_local.conf:/etc/salt/minion_local.conf</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">./auth:/etc/salt/auth</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/var/spool/asterisk:/var/spool/asterisk</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/etc/asterisk:/etc/asterisk</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/var/run/asterisk:/var/run/asterisk</span>
     <span class="nt">environment</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ASTERISK_AUTOSTART=false</span>
 </pre></div>
