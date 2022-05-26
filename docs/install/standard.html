@@ -48,7 +48,7 @@
 <h2>All-in-one demo<a class="headerlink" href="#all-in-one-demo" title="Permalink to this headline">¶</a></h2>
 <p>Below commands will install a full <strong>all-in-one</strong> demo system:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip3 install odoopbx
-salt-call --local state.highstate
+odoopbx install odoopbx
 </pre></div>
 </div>
 </div>
@@ -78,15 +78,15 @@ The following components are available:</p>
 <p>Please note that the Agent requires root privileges. The commands below must be run as the <strong>root</strong> user.</p>
 </div>
 <p>To install a compoment the following command is used:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>salt-call state.apply agent
-salt-call state.apply odoo
-salt-call state.apply addons
-salt-call state.apply asterisk
-salt-call state.apply nginx
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>odoopbx install agent
+odoopbx install odoo
+odoopbx install addons
+odoopbx install asterisk
+odoopbx install nginx
 </pre></div>
 </div>
 <p>To install all compoments use this:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>salt-call --local state.highstate
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>odoopbx install odoopbx
 </pre></div>
 </div>
 <p>Different components can be installed into different servers and be interconnected easily.</p>
@@ -108,7 +108,7 @@ have your Asterisk in America and Odoo in Europe datacenter.</p>
 <p>If you don’t have Odoo installed you can use the Agent to deploy Odoo on the current host.
 .. code:: sh</p>
 <blockquote>
-<div><p>salt-call state.apply odoo</p>
+<div><p>odoopbx install odoo</p>
 </div></blockquote>
 <p>This will install Odoo in a system wide python path with configuration file in <code class="docutils literal notranslate"><span class="pre">/etc/odoo/odoo.conf</span></code>.</p>
 <p>You can start Odoo with:</p>
@@ -176,7 +176,7 @@ to make CURL requests from the Asterisk dialplan (see below).</p>
 <div class="section" id="addons">
 <h2>Addons<a class="headerlink" href="#addons" title="Permalink to this headline">¶</a></h2>
 <p>To install the OdooPBX public addons use:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>salt-call state.apply addons
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>odoopbx install addons
 </pre></div>
 </div>
 <p>Or follow this instruction to copy OdooPBX addons to your custom Odoo server.</p>
@@ -192,7 +192,7 @@ install the required dependencies.</p>
 <div class="section" id="asterisk">
 <h2>Asterisk<a class="headerlink" href="#asterisk" title="Permalink to this headline">¶</a></h2>
 <p>To install Asterisk on the current server run:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>salt-call state.apply asterisk
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>odoopbx install asterisk
 </pre></div>
 </div>
 <p>This will build Asterisk from the sources and also create default OdooPBX related configuration files.</p>
