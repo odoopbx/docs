@@ -8,7 +8,7 @@ OdooPBX installation is managed by the Saltstack configuration management tool
 and includes formulas for installing all needed components:
 
 * PostgreSQL database for Odoo;
-* Odoo with the ``Asterisk Plus`` module;
+* Odoo with the ``Asterisk Plus`` modules;
 * Asterisk IP-PBX;
 * Agent;
 * Nginx frontend;
@@ -17,14 +17,11 @@ and includes formulas for installing all needed components:
 Probably you already have some of components already running in your environment.
 In this case you need to install the missing parts.
 
-If you need to setup everything check our :doc:`quickstart` guide.
-
-
 .. toctree::
     :titlesonly:
 
-    quickstart
-    system
-    standard
-    docker    
-    demo
+    demo (Quick all-in-one demo setup).
+    system (system requirements)
+    standard (preffered when Asterisk / Odoo should be installed).
+    docker (most simple to connect to existing Odoo / Asterisk).
+    freepbx (FreePBX is also possible to be run).

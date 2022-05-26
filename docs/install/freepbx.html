@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Demo setup &#8212; OdooPBX 1.0 documentation</title>
+    <title>FreePBX setup &#8212; OdooPBX 1.0 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -31,35 +31,13 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="demo-setup">
-<h1>Demo setup<a class="headerlink" href="#demo-setup" title="Permalink to this headline">¶</a></h1>
-<p>This guide will help you to setup everything running inside Docker containers.
-So install docker and docker-compose, refer to  <a class="reference external" href="https://docs.docker.com/engine/install/">oficial documentation</a> for help.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Minimum 2GB RAM is required</p>
-</div>
-<p>Steps to setup a new project:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/odoopbx/agent/blob/master/docker/docker-compose.yml">Get docker-compose.yml</a>.</p></li>
-<li><p>Run it.</p></li>
-</ul>
-<p>Commands to copy &amp; run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir /srv/odoopbx
-<span class="nb">cd</span> /srv/odoopbx
-wget https://raw.githubusercontent.com/odoopbx/agent/master/docker/docker-compose.yml
-docker-compose up -d odoo pbx
+  <div class="section" id="freepbx-setup">
+<h1>FreePBX setup<a class="headerlink" href="#freepbx-setup" title="Permalink to this headline">¶</a></h1>
+<p>The following will run a FreePBX based instance.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>docker-compose up odoo pbx freepbx
 </pre></div>
 </div>
-<p>You may check with <code class="docutils literal notranslate"><span class="pre">docker-commpose</span> <span class="pre">ps</span></code> if everything is ok.</p>
-<p>Odoo listens at port <code class="docutils literal notranslate"><span class="pre">8072</span></code> by default.
-Point your browser to <a class="reference external" href="http://your.server.address:8072">http://your.server.address:8072</a> and enter admin/admin as username/password.</p>
-<p>Navigate to <code class="docutils literal notranslate"><span class="pre">Apps</span></code> menu in the top-left and search for <code class="docutils literal notranslate"><span class="pre">asterisk</span></code> in the search-box.
-Choose <code class="docutils literal notranslate"><span class="pre">Asterisk</span> <span class="pre">Plus</span></code> and press <code class="docutils literal notranslate"><span class="pre">Install</span></code> button.</p>
-<p><code class="docutils literal notranslate"><span class="pre">Asterisk</span> <span class="pre">Plus</span></code> module adds <code class="docutils literal notranslate"><span class="pre">PBX</span></code> menu into top-left button.
-All our PBX stuff lives here.</p>
-<p>Navigate to <code class="docutils literal notranslate"><span class="pre">Settings</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Server</span></code>, press <code class="docutils literal notranslate"><span class="pre">Minion</span> <span class="pre">Ping</span></code>, <code class="docutils literal notranslate"><span class="pre">Asterisk</span> <span class="pre">Ping</span></code> buttons to check connectivity with Agent and Asterisk.</p>
-<p>Enjoy!</p>
+<p>See <a class="reference internal" href="docker.html"><span class="doc">Docker based deployment</span></a> for details.</p>
 </div>
 
 
