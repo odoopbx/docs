@@ -11,9 +11,11 @@ We use docker compose to define and run the OdooPBX services. The following serv
   the most popular FreePBX image published on the docker.hub. *Disclaimer: we do not maintain this FreePBX image.
   You can replace it with any other FreePBX docker image of your choice.* 
 
-You can take an example of `docker-compose.yml file  from the Agent repo <https://github.com/odoopbx/agent/blob/master/docker/docker-compose.yml>`_.
+.. note::
 
-Also please note the `docker-compose.override.yml example <https://github.com/odoopbx/agent/blob/master/docker/docker-compose.override.yml.example>`_ 
+  Take the `docker-compose.yml file  from the Agent repo <https://github.com/odoopbx/agent/blob/master/docker/docker-compose.yml>`_.
+
+Also have a look at the `docker-compose.override.yml example <https://github.com/odoopbx/agent/blob/master/docker/docker-compose.override.yml.example>`_ 
 on how to customize the defaults (save this file under ``docker-compose.override.yml`` name.)
 
 Note that ``network_mode: host`` is used to connect the services to the host network so you can connect
