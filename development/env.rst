@@ -28,7 +28,7 @@ Running
 .. code:: sh
 
     cd /srv/dev/agent/docker
-    ODOO_VERSION=14 ODOO_DB=odoopbx_14 docker-compose up odoo asterisk minion api master
+    ODOO_VERSION=14 ODOO_DB=odoopbx_14 docker-compose up odoo pbx
  
 
 Building the docker images
