@@ -3,6 +3,14 @@ Installation
 ============
 
 .. toctree::
+   :titlesonly:
+
+   install/demo
+   install/system
+   install/standard
+   install/docker
+   install/freepbx
+
 
 OdooPBX installation is managed by the Saltstack configuration management tool
 and includes formulas for installing all needed components:
@@ -24,3 +32,6 @@ Next:
 * :doc:`standard` (preffered when Asterisk / Odoo should be installed).
 * :doc:`docker` (most simple to connect to existing Odoo / Asterisk).
 * :doc:`freepbx` (FreePBX is also possible to be run).
+
+
+
