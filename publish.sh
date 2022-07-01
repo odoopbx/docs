@@ -13,3 +13,5 @@ git add docs
 git commit docs -m "Docs updated"
 git push
 git checkout master
+git push
+

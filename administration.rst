@@ -5,7 +5,9 @@ Administration
 .. toctree::
    :titlesonly:
    
-   administration/configuration
+   administration/server
+   administration/settings
+   administration/users
    administration/reactor
    administration/params
    administration/tips

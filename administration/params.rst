@@ -1,6 +1,6 @@
-========================
-Configuration parameters
-========================
+==============================
+Agent Configuration parameters
+==============================
 
 Introduction
 ============
