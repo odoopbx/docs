@@ -8,6 +8,7 @@ Administration
    administration/server
    administration/settings
    administration/users
+   administration/tts
    administration/reactor
    administration/params
    administration/tips
