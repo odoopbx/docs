@@ -1,42 +1,93 @@
-
 <!DOCTYPE html>
-
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Configuration parameters &#8212; OdooPBX 1.0 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Configuration parameters &mdash; OdooPBX 1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Tips and Tricks" href="tips.html" />
-    <link rel="prev" title="Security Reactor" href="reactor.html" />
-   
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+    <link rel="prev" title="Security Reactor" href="reactor.html" /> 
+</head>
 
-  </head><body>
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> OdooPBX
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">What is OdooPBX?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#odoopbx-apps">OdooPBX Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#installation-types">Installation types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../administration.html">Administration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="server.html">Asterisk Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users.html">PBX Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tts.html">Text-to-speech</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reactor.html">Security Reactor</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Agent Configuration parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tips.html">Tips and Tricks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common.html">Common</a></li>
+</ul>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          
+        </div>
+      </div>
+    </nav>
 
-          <div class="body" role="main">
-            
-  <div class="section" id="configuration-parameters">
-<h1>Configuration parameters<a class="headerlink" href="#configuration-parameters" title="Permalink to this headline">¶</a></h1>
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">OdooPBX</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../administration.html">Administration</a></li>
+      <li class="breadcrumb-item active">Agent Configuration parameters</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="agent-configuration-parameters">
+<h1>Agent Configuration parameters<a class="headerlink" href="#agent-configuration-parameters" title="Permalink to this heading"></a></h1>
 <div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
 <p>As you already know The OdooPBX Asterisk connection middleware is based on the Saltstack pltaform.</p>
 <ul class="simple">
 <li><p>Odoo connects to the salt-api.</p></li>
@@ -48,32 +99,20 @@
 <p>Below we review the options we use in order to configure it all.</p>
 </div>
 <div class="section" id="minion-configuration">
-<h2>Minion configuration<a class="headerlink" href="#minion-configuration" title="Permalink to this headline">¶</a></h2>
+<h2>Minion configuration<a class="headerlink" href="#minion-configuration" title="Permalink to this heading"></a></h2>
 <p>The main minion’s configuration file is <code class="docutils literal notranslate"><span class="pre">/etc/salt/minion</span></code>.</p>
 <p>The defaults are located in <code class="docutils literal notranslate"><span class="pre">/etc/salt/minion.d/odoopbx.conf</span></code>.</p>
-<p>Instead of changing the defaults just add a required option to <code class="docutils literal notranslate"><span class="pre">/etc/salt/minion_local.conf</span></code>.</p>
+<p>Instead of changing the defaults just add a required option to <code class="docutils literal notranslate"><span class="pre">/etc/salt/odoopbx/minion.conf</span></code>.</p>
 <p>You must restat the minion process after making changes to its configuration using.</p>
 <p>Below is the list of default parameters and their meanings.</p>
 <dl class="simple">
-<dt>odoo_host</dt><dd><p>Odoo hostname or IP address to connect to, default <code class="docutils literal notranslate"><span class="pre">odoo</span></code>.</p>
+<dt>ami_login</dt><dd><p>Asterisk Manager Interface login name. Default is <code class="docutils literal notranslate"><span class="pre">odoo</span></code>. Env AMI_LOGIN</p>
 </dd>
-<dt>odoo_port</dt><dd><p>Odoo port to connect, default <code class="docutils literal notranslate"><span class="pre">8069</span></code>.</p>
+<dt>ami_secret</dt><dd><p>Asterisk Manager Interface secret. Default is <code class="docutils literal notranslate"><span class="pre">odoo</span></code>. Env AMI_SECRET</p>
 </dd>
-<dt>odoo_user</dt><dd><p>Odoo account for Asterisk server, default <code class="docutils literal notranslate"><span class="pre">asterisk1</span></code>.</p>
+<dt>ami_host</dt><dd><p>Hostname or IP address of Asterisk server. Default is <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code>. Env AMI_HOST</p>
 </dd>
-<dt>odoo_password</dt><dd><p>Odoo account password for Asterisk server, default <code class="docutils literal notranslate"><span class="pre">asterisk1</span></code>.</p>
-</dd>
-<dt>odoo_use_ssl</dt><dd><p>Set to True if your Odoo is behind a proxy with HTTPS enabled. Default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
-</dd>
-<dt>odoo_db</dt><dd><p>Odoo database, default is <code class="docutils literal notranslate"><span class="pre">odoopbx_15</span></code>, replace to your value.</p>
-</dd>
-<dt>ami_login</dt><dd><p>Asterisk Manager Interface login as configured in <code class="docutils literal notranslate"><span class="pre">/etc/asterisk/manager.conf</span></code> (usually there). Default is <code class="docutils literal notranslate"><span class="pre">odoo</span></code>.</p>
-</dd>
-<dt>ami_secret</dt><dd><p>Asterisk Manager Interface secret as configured in <code class="docutils literal notranslate"><span class="pre">/etc/asterisk/manager.conf</span></code> (usually there). Default is <code class="docutils literal notranslate"><span class="pre">odoo</span></code>.</p>
-</dd>
-<dt>ami_host</dt><dd><p>Hostname or IP address of your Asterisk server. Default is <code class="docutils literal notranslate"><span class="pre">asterisk</span></code>.</p>
-</dd>
-<dt>ami_port</dt><dd><p>Asterisk manager interface port, default <code class="docutils literal notranslate"><span class="pre">5038</span></code>.</p>
+<dt>ami_port</dt><dd><p>Asterisk manager interface port, default <code class="docutils literal notranslate"><span class="pre">5038</span></code>. Env AMI_PORT.</p>
 </dd>
 <dt>ami_register_events</dt><dd><p>List of AMI events to subscribe using register_event panoramisk call. Default is <code class="docutils literal notranslate"><span class="pre">['*']</span></code>.</p>
 </dd>
@@ -111,15 +150,17 @@
 </dd>
 <dt>fastagi_listen_port</dt><dd><p>FastAGI engine listen port, default <code class="docutils literal notranslate"><span class="pre">4574</span></code>.</p>
 </dd>
+<dt>odoo_trace_rpc</dt><dd><p>Trace Odoo RPC calls</p>
+</dd>
 </dl>
 </div>
 <div class="section" id="master-and-api-configuration">
-<h2>Master and API configuration<a class="headerlink" href="#master-and-api-configuration" title="Permalink to this headline">¶</a></h2>
+<h2>Master and API configuration<a class="headerlink" href="#master-and-api-configuration" title="Permalink to this heading"></a></h2>
 <p>Master and API configuration is defined in <code class="docutils literal notranslate"><span class="pre">/etc/salt/master</span></code>.</p>
-<p>You can override or add your configuration parameters in <code class="docutils literal notranslate"><span class="pre">/etc/salt/master_local.conf</span></code>.</p>
+<p>It’s better to create <code class="docutils literal notranslate"><span class="pre">*.conf</span></code> files inside <code class="docutils literal notranslate"><span class="pre">/etc/salt/master.d/</span></code> directory
+in case you want to modify Salt Master settings.
+It will keep your settings when you upgrade the agent.</p>
 <dl class="simple">
-<dt>include</dt><dd><p>Include master_*.conf in Salt config directory to override defaults or add new params.</p>
-</dd>
 <dt>interface</dt><dd><p>Salt master listen address.</p>
 </dd>
 <dt>log_level</dt><dd><p>Log level, default <code class="docutils literal notranslate"><span class="pre">info</span></code>.</p>
@@ -159,86 +200,31 @@
 </div>
 
 
+           </div>
           </div>
-          
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="reactor.html" class="btn btn-neutral float-left" title="Security Reactor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tips.html" class="btn btn-neutral float-right" title="Tips and Tricks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Odooist.</p>
+  </div>
+
+   
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="../index.html">
-              <img class="logo" src="../_static/logo.png" alt="Logo"/>
-            </a></p>
-<h1 class="logo"><a href="../index.html">OdooPBX</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../intro.html">What is OdooPBX?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../intro.html#odoopbx-apps">OdooPBX Apps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../intro.html#installation-types">Installation types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../install/install.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../administration.html">Administration</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="configuration.html">Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reactor.html">Security Reactor</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Configuration parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tips.html">Tips and Tricks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../common.html">Common</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="../administration.html">Administration</a><ul>
-      <li>Previous: <a href="reactor.html" title="previous chapter">Security Reactor</a></li>
-      <li>Next: <a href="tips.html" title="next chapter">Tips and Tricks</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2022, Odooist.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>

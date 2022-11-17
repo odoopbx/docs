@@ -1,38 +1,88 @@
-
 <!DOCTYPE html>
-
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Standard installation &#8212; OdooPBX 1.0 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Standard installation &mdash; OdooPBX 1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-   
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+    <link rel="next" title="Docker based deployment" href="docker.html" />
+    <link rel="prev" title="System requirements" href="system.html" /> 
+</head>
 
-  </head><body>
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> OdooPBX
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">What is OdooPBX?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#odoopbx-apps">OdooPBX Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#installation-types">Installation types</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../install.html">Installation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="demo.html">Demo setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system.html">System requirements</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Standard installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html">Docker based deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="freepbx.html">FreePBX setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../administration.html">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common.html">Common</a></li>
+</ul>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          
+        </div>
+      </div>
+    </nav>
 
-          <div class="body" role="main">
-            
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">OdooPBX</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../install.html">Installation</a></li>
+      <li class="breadcrumb-item active">Standard installation</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <div class="section" id="standard-installation">
-<h1>Standard installation<a class="headerlink" href="#standard-installation" title="Permalink to this headline">¶</a></h1>
+<h1>Standard installation<a class="headerlink" href="#standard-installation" title="Permalink to this heading"></a></h1>
 <p>This method describes how to install OdooPBX on a Linux server.</p>
 <p>Also the previous step <a class="reference internal" href="system.html"><span class="doc">System requirements</span></a> must be done.</p>
 <p>OdooPBX has the following components:</p>
@@ -43,7 +93,7 @@
 </ul>
 <p>Let review them in more details.</p>
 <div class="section" id="all-in-one-demo">
-<h2>All-in-one demo<a class="headerlink" href="#all-in-one-demo" title="Permalink to this headline">¶</a></h2>
+<h2>All-in-one demo<a class="headerlink" href="#all-in-one-demo" title="Permalink to this heading"></a></h2>
 <p>Below commands will install a full <strong>all-in-one</strong> demo system:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip3 install odoopbx
 odoopbx install odoopbx
@@ -51,7 +101,7 @@ odoopbx install odoopbx
 </div>
 </div>
 <div class="section" id="the-agent">
-<h2>The Agent<a class="headerlink" href="#the-agent" title="Permalink to this headline">¶</a></h2>
+<h2>The Agent<a class="headerlink" href="#the-agent" title="Permalink to this heading"></a></h2>
 <p>This is where all starts. To start your OdooPBX journey you must first install the OdooPBX Agent.</p>
 <p>The Agent does the following jobs:</p>
 <ul class="simple">
@@ -102,7 +152,7 @@ it is advised to place it at least near the Asterisk server. But depending on yo
 have your Asterisk in America and Odoo in Europe datacenter.</p>
 </div>
 <div class="section" id="odoo-installation">
-<h2>Odoo installation<a class="headerlink" href="#odoo-installation" title="Permalink to this headline">¶</a></h2>
+<h2>Odoo installation<a class="headerlink" href="#odoo-installation" title="Permalink to this heading"></a></h2>
 <p>If you don’t have Odoo installed you can use the Agent to deploy Odoo on the current host.
 .. code:: sh</p>
 <blockquote>
@@ -119,12 +169,12 @@ have your Asterisk in America and Odoo in Europe datacenter.</p>
 </div>
 </div>
 <div class="section" id="odoo-configuration">
-<h2>Odoo configuration<a class="headerlink" href="#odoo-configuration" title="Permalink to this headline">¶</a></h2>
+<h2>Odoo configuration<a class="headerlink" href="#odoo-configuration" title="Permalink to this heading"></a></h2>
 <p>Odoo should be configured in the right way in order to be ready for Asterisk Plus.</p>
 <p>When the Agent is used to install Odoo all is setup automatically by it. Read below only if you have
 your own Odoo server deployed somewhere.</p>
 <div class="section" id="workers">
-<h3>Workers<a class="headerlink" href="#workers" title="Permalink to this headline">¶</a></h3>
+<h3>Workers<a class="headerlink" href="#workers" title="Permalink to this heading"></a></h3>
 <p>Workers are Odoo processes that handle requests.</p>
 <p>Asterisk modules make many short-running requests.</p>
 <p>So your Odoo should be configured with at least 2 workers
@@ -135,7 +185,7 @@ your own Odoo server deployed somewhere.</p>
 </div>
 </div>
 <div class="section" id="long-polling">
-<h3>Long polling<a class="headerlink" href="#long-polling" title="Permalink to this headline">¶</a></h3>
+<h3>Long polling<a class="headerlink" href="#long-polling" title="Permalink to this heading"></a></h3>
 <p>Internal gevent-based server must be enabled (aka long polling) for popup notifications
 and live channels reload to work.</p>
 <p>When you enable workers gevent server is also enabled.</p>
@@ -157,7 +207,7 @@ on gevent’s port e.g.: <code class="docutils literal notranslate"><span class=
 did not set long polling right.</p>
 </div>
 <div class="section" id="single-multi-database-setup">
-<h3>Single / multi database setup<a class="headerlink" href="#single-multi-database-setup" title="Permalink to this headline">¶</a></h3>
+<h3>Single / multi database setup<a class="headerlink" href="#single-multi-database-setup" title="Permalink to this heading"></a></h3>
 <p>There is one thing your should know.</p>
 <p>It’s a good configuration when your Odoo is limited to just one database with dbfilter
 configuration option and list_db set to False.</p>
@@ -172,7 +222,7 @@ to make CURL requests from the Asterisk dialplan (see below).</p>
 </div>
 </div>
 <div class="section" id="addons">
-<h2>Addons<a class="headerlink" href="#addons" title="Permalink to this headline">¶</a></h2>
+<h2>Addons<a class="headerlink" href="#addons" title="Permalink to this heading"></a></h2>
 <p>To install the OdooPBX public addons use:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>odoopbx install addons
 </pre></div>
@@ -188,7 +238,7 @@ install the required dependencies.</p>
 <p>If you use python virtualenv make sure you install the requirements there and not system wide.</p>
 </div>
 <div class="section" id="asterisk">
-<h2>Asterisk<a class="headerlink" href="#asterisk" title="Permalink to this headline">¶</a></h2>
+<h2>Asterisk<a class="headerlink" href="#asterisk" title="Permalink to this heading"></a></h2>
 <p>To install Asterisk on the current server run:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>odoopbx install asterisk
 </pre></div>
@@ -229,24 +279,24 @@ Change permit option to IP address of your Asterisk server if agent is not start
 </div>
 </div>
 <div class="section" id="the-agent-configuration">
-<h2>The Agent Configuration<a class="headerlink" href="#the-agent-configuration" title="Permalink to this headline">¶</a></h2>
+<h2>The Agent Configuration<a class="headerlink" href="#the-agent-configuration" title="Permalink to this heading"></a></h2>
 <p>The Agent local configuration file is located in <code class="docutils literal notranslate"><span class="pre">/etc/salt/minion_local.conf</span></code>.</p>
 <p>The defaults are located in <code class="docutils literal notranslate"><span class="pre">/etc/salt/minion.d/odoopbx.conf</span></code>.</p>
 <p>When you add an option to the local configuration it overwrites the default value.</p>
 <div class="section" id="odoo-settings">
-<h3>Odoo settings<a class="headerlink" href="#odoo-settings" title="Permalink to this headline">¶</a></h3>
+<h3>Odoo settings<a class="headerlink" href="#odoo-settings" title="Permalink to this heading"></a></h3>
 <p>First configure the Agent’s connection to Odoo:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">odoo_host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">odoo</span> <span class="c1"># Put IP address or hostname here.</span>
-<span class="nt">odoo_port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">8069</span> <span class="c1"># If your Odoo is behind a proxy put 80 or 443 here.</span>
-<span class="nt">odoo_user</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">asterisk1</span> <span class="c1"># It&#39;s ok to leave the default user name.</span>
-<span class="nt">odoo_password</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">asterisk1</span> <span class="c1"># This is the default password set on addon installation. CHANGE IT!!!</span>
-<span class="nt">odoo_use_ssl</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span> <span class="c1"># Set to true if your proxy servers HTTPS requests.</span>
-<span class="nt">odoo_db</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">odoopbx_14</span> <span class="c1"># Put your database here</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">odoo_host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">odoo</span><span class="w"> </span><span class="c1"># Put IP address or hostname here.</span><span class="w"></span>
+<span class="nt">odoo_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8069</span><span class="w"> </span><span class="c1"># If your Odoo is behind a proxy put 80 or 443 here.</span><span class="w"></span>
+<span class="nt">odoo_user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">asterisk1</span><span class="w"> </span><span class="c1"># It&#39;s ok to leave the default user name.</span><span class="w"></span>
+<span class="nt">odoo_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">asterisk1</span><span class="w"> </span><span class="c1"># This is the default password set on addon installation. CHANGE IT!!!</span><span class="w"></span>
+<span class="nt">odoo_use_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"> </span><span class="c1"># Set to true if your proxy servers HTTPS requests.</span><span class="w"></span>
+<span class="nt">odoo_db</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">odoopbx_14</span><span class="w"> </span><span class="c1"># Put your database here</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="asterisk-ami-settings">
-<h3>Asterisk AMI settings<a class="headerlink" href="#asterisk-ami-settings" title="Permalink to this headline">¶</a></h3>
+<h3>Asterisk AMI settings<a class="headerlink" href="#asterisk-ami-settings" title="Permalink to this heading"></a></h3>
 <p>Configure the Agent for Asterisk connection.
 Make sure you applied the Asterisk manager configuration first.</p>
 <p>Once you are sure the Odoo AMI user is operational add the following options
@@ -261,7 +311,7 @@ to configure the Agent’s connection to your Asterisk:</p>
 </div>
 </div>
 <div class="section" id="agent-test-run">
-<h2>Agent test run<a class="headerlink" href="#agent-test-run" title="Permalink to this headline">¶</a></h2>
+<h2>Agent test run<a class="headerlink" href="#agent-test-run" title="Permalink to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">salt</span><span class="o">-</span><span class="n">minion</span> <span class="o">-</span><span class="n">l</span> <span class="n">info</span>
 </pre></div>
 </div>
@@ -279,7 +329,7 @@ You should see messages that confirm both Odoo connection and Asterisk connectio
 </div>
 </div>
 <div class="section" id="asterisk-dialplan-configuration">
-<h2>Asterisk Dialplan configuration<a class="headerlink" href="#asterisk-dialplan-configuration" title="Permalink to this headline">¶</a></h2>
+<h2>Asterisk Dialplan configuration<a class="headerlink" href="#asterisk-dialplan-configuration" title="Permalink to this heading"></a></h2>
 <p>Asterisk Plus exposes additional functionality by providing the following controllers:</p>
 <ol class="arabic simple">
 <li><p>You can get the contact’s name by accessing <code class="docutils literal notranslate"><span class="pre">asterisk_plus/get_caller_name?number=${CALLERID(number)}</span></code></p></li>
@@ -373,75 +423,31 @@ exten =&gt; _XXXXX.,2,Dial(SIP/provider/${EXTEN},30,TU(post-dial-send-dtmf) ; Ou
 </div>
 
 
+           </div>
           </div>
-          
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="system.html" class="btn btn-neutral float-left" title="System requirements" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="docker.html" class="btn btn-neutral float-right" title="Docker based deployment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Odooist.</p>
+  </div>
+
+   
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="../index.html">
-              <img class="logo" src="../_static/logo.png" alt="Logo"/>
-            </a></p>
-<h1 class="logo"><a href="../index.html">OdooPBX</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../intro.html">What is OdooPBX?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../intro.html#odoopbx-apps">OdooPBX Apps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../intro.html#installation-types">Installation types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../administration.html">Administration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../common.html">Common</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2022, Odooist.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>
