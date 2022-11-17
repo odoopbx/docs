@@ -1,105 +1,46 @@
-
 <!DOCTYPE html>
-
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Settings &#8212; OdooPBX 1.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings &mdash; OdooPBX 1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="PBX Users" href="users.html" />
-    <link rel="prev" title="Asterisk Server" href="server.html" />
-   
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+    <link rel="prev" title="Asterisk Server" href="server.html" /> 
+</head>
 
-  </head><body>
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          
-
-          <div class="body" role="main">
-            
-  <div class="section" id="settings">
-<h1>Settings<a class="headerlink" href="#settings" title="Permalink to this heading">¶</a></h1>
-<div class="section" id="admin-user">
-<h2>Admin user<a class="headerlink" href="#admin-user" title="Permalink to this heading">¶</a></h2>
-<p>During the installation process the <code class="docutils literal notranslate"><span class="pre">admin</span></code> user is automatically added to Asterisk Admin security group.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Do not add <code class="docutils literal notranslate"><span class="pre">admin</span></code> to Asterisk User security group!</p>
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> OdooPBX
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
 </div>
-</div>
-<div class="section" id="pbx-settings">
-<h2>PBX Settings<a class="headerlink" href="#pbx-settings" title="Permalink to this heading">¶</a></h2>
-<div class="section" id="general">
-<h3>General<a class="headerlink" href="#general" title="Permalink to this heading">¶</a></h3>
-<div class="section" id="debug-mode">
-<h4>Debug mode<a class="headerlink" href="#debug-mode" title="Permalink to this heading">¶</a></h4>
-<p>When it is required to trace some issue enable the debug mode.</p>
-<p>When debug mode is enabled</p>
-</div>
-</div>
-<div class="section" id="salt">
-<h3>Salt<a class="headerlink" href="#salt" title="Permalink to this heading">¶</a></h3>
-<p>Here the Salt connection is configured. In the common setup all three Salt processes (master, api and minion) are running on the same server.</p>
-<div class="section" id="salt-api-url">
-<h4>Salt API URL<a class="headerlink" href="#salt-api-url" title="Permalink to this heading">¶</a></h4>
-<p>URL of the Salt Master. By default <code class="docutils literal notranslate"><span class="pre">https://agent:48008</span></code>. Replace <code class="docutils literal notranslate"><span class="pre">agent</span></code> with the hostname of your Agent.</p>
-</div>
-<div class="section" id="salt-api-user-password">
-<h4>Salt API User &amp; Password<a class="headerlink" href="#salt-api-user-password" title="Permalink to this heading">¶</a></h4>
-<p>To generate new password use the following command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> -n my-new-pass <span class="p">|</span> md5sum
-7ee84110eed69ed3d366eb85e017b508  -
-</pre></div>
-</div>
-<p>Now use this hash to edit <code class="docutils literal notranslate"><span class="pre">/etc/salt/auth</span></code> file and put it there:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">odoo</span><span class="o">|</span><span class="mi">7</span><span class="n">ee84110eed69ed3d366eb85e017b508</span>
-</pre></div>
-</div>
-<p>After that restart the salt minion service (<code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">salt-minion</span></code>). Now set username <code class="docutils literal notranslate"><span class="pre">odoo</span></code> and password <code class="docutils literal notranslate"><span class="pre">my-new-pass</span></code> as Salt credentials in Odoo.</p>
-</div>
-</div>
-</div>
-</div>
-
-
-          </div>
-          
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="../index.html">
-              <img class="logo" src="../_static/logo.png" alt="Logo"/>
-            </a></p>
-<h1 class="logo"><a href="../index.html">OdooPBX</a></h1>
-
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<ul class="current">
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">What is OdooPBX?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro.html#odoopbx-apps">OdooPBX Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro.html#installation-types">Installation types</a></li>
@@ -119,50 +60,100 @@
 <li class="toctree-l1"><a class="reference internal" href="../common.html">Common</a></li>
 </ul>
 
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="../administration.html">Administration</a><ul>
-      <li>Previous: <a href="server.html" title="previous chapter">Asterisk Server</a></li>
-      <li>Next: <a href="users.html" title="next chapter">PBX Users</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
-
-
-
-
-
-
-
-
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2022, Odooist.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">OdooPBX</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../administration.html">Administration</a></li>
+      <li class="breadcrumb-item active">Settings</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="settings">
+<h1>Settings<a class="headerlink" href="#settings" title="Permalink to this heading"></a></h1>
+<div class="section" id="admin-user">
+<h2>Admin user<a class="headerlink" href="#admin-user" title="Permalink to this heading"></a></h2>
+<p>During the installation process the <code class="docutils literal notranslate"><span class="pre">admin</span></code> user is automatically added to Asterisk Admin security group.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Do not add <code class="docutils literal notranslate"><span class="pre">admin</span></code> to Asterisk User security group!</p>
+</div>
+</div>
+<div class="section" id="pbx-settings">
+<h2>PBX Settings<a class="headerlink" href="#pbx-settings" title="Permalink to this heading"></a></h2>
+<div class="section" id="general">
+<h3>General<a class="headerlink" href="#general" title="Permalink to this heading"></a></h3>
+<div class="section" id="debug-mode">
+<h4>Debug mode<a class="headerlink" href="#debug-mode" title="Permalink to this heading"></a></h4>
+<p>When it is required to trace some issue enable the debug mode.</p>
+<p>When debug mode is enabled</p>
+</div>
+</div>
+<div class="section" id="salt">
+<h3>Salt<a class="headerlink" href="#salt" title="Permalink to this heading"></a></h3>
+<p>Here the Salt connection is configured. In the common setup all three Salt processes (master, api and minion) are running on the same server.</p>
+<div class="section" id="salt-api-url">
+<h4>Salt API URL<a class="headerlink" href="#salt-api-url" title="Permalink to this heading"></a></h4>
+<p>URL of the Salt Master. By default <code class="docutils literal notranslate"><span class="pre">https://agent:48008</span></code>. Replace <code class="docutils literal notranslate"><span class="pre">agent</span></code> with the hostname of your Agent.</p>
+</div>
+<div class="section" id="salt-api-user-password">
+<h4>Salt API User &amp; Password<a class="headerlink" href="#salt-api-user-password" title="Permalink to this heading"></a></h4>
+<p>To generate new password use the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> -n my-new-pass <span class="p">|</span> md5sum
+7ee84110eed69ed3d366eb85e017b508  -
+</pre></div>
+</div>
+<p>Now use this hash to edit <code class="docutils literal notranslate"><span class="pre">/etc/salt/auth</span></code> file and put it there:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">odoo</span><span class="o">|</span><span class="mi">7</span><span class="n">ee84110eed69ed3d366eb85e017b508</span>
+</pre></div>
+</div>
+<p>After that restart the salt minion service (<code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">salt-minion</span></code>). Now set username <code class="docutils literal notranslate"><span class="pre">odoo</span></code> and password <code class="docutils literal notranslate"><span class="pre">my-new-pass</span></code> as Salt credentials in Odoo.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="server.html" class="btn btn-neutral float-left" title="Asterisk Server" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="users.html" class="btn btn-neutral float-right" title="PBX Users" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
-    
+  <hr/>
 
-    
-  </body>
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Odooist.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

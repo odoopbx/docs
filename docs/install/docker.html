@@ -1,42 +1,88 @@
-
 <!DOCTYPE html>
-
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Docker based deployment &#8212; OdooPBX 1.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docker based deployment &mdash; OdooPBX 1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="FreePBX setup" href="freepbx.html" />
-    <link rel="prev" title="Standard installation" href="standard.html" />
-   
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+    <link rel="prev" title="Standard installation" href="standard.html" /> 
+</head>
 
-  </head><body>
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> OdooPBX
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">What is OdooPBX?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#odoopbx-apps">OdooPBX Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#installation-types">Installation types</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../install.html">Installation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="demo.html">Demo setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system.html">System requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="standard.html">Standard installation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Docker based deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="freepbx.html">FreePBX setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../administration.html">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common.html">Common</a></li>
+</ul>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          
+        </div>
+      </div>
+    </nav>
 
-          <div class="body" role="main">
-            
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">OdooPBX</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../install.html">Installation</a></li>
+      <li class="breadcrumb-item active">Docker based deployment</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <div class="section" id="docker-based-deployment">
-<h1>Docker based deployment<a class="headerlink" href="#docker-based-deployment" title="Permalink to this heading">¶</a></h1>
+<h1>Docker based deployment<a class="headerlink" href="#docker-based-deployment" title="Permalink to this heading"></a></h1>
 <p>We use docker compose to define and run the OdooPBX services. The following services are defined:</p>
 <ul class="simple">
 <li><p><strong>db</strong> - PostgreSQL database used by Odoo.</p></li>
@@ -58,7 +104,7 @@ to the localhost from inside containers.(usually Asterisk AMI is bound to 127.0.
 <p>So depending on your required setup you can choose which services to run.</p>
 <p>Below you will find some snippets for different environments.</p>
 <div class="section" id="only-agent-setup">
-<h2>Only Agent setup<a class="headerlink" href="#only-agent-setup" title="Permalink to this heading">¶</a></h2>
+<h2>Only Agent setup<a class="headerlink" href="#only-agent-setup" title="Permalink to this heading"></a></h2>
 <p>This setup assumes that both Odoo and Asterisk are already installed and running outside docker.</p>
 <p>So in this case you should do the following steps:</p>
 <ul class="simple">
@@ -67,7 +113,7 @@ to the localhost from inside containers.(usually Asterisk AMI is bound to 127.0.
 </ul>
 <p>Let review these steps in more details.</p>
 <div class="section" id="custom-minion-configuration-file">
-<h3>Custom minion configuration file<a class="headerlink" href="#custom-minion-configuration-file" title="Permalink to this heading">¶</a></h3>
+<h3>Custom minion configuration file<a class="headerlink" href="#custom-minion-configuration-file" title="Permalink to this heading"></a></h3>
 <p>Here is an example of  <code class="docutils literal notranslate"><span class="pre">minion_local.conf</span></code>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">odoo_db</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_database</span><span class="w"> </span><span class="c1"># Replace to your real Odoo database name.</span><span class="w"></span>
 <span class="nt">odoo_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">asterisk1password</span><span class="w"> </span><span class="c1"># Find in Settings -&gt; Users asterisk1 user and set him a new password.</span><span class="w"></span>
@@ -82,7 +128,7 @@ to the localhost from inside containers.(usually Asterisk AMI is bound to 127.0.
 <p><em>This is an example of custom options. See the full list of possible options</em> - <a class="reference internal" href="../administration/params.html"><span class="doc">Agent Configuration parameters</span></a>.</p>
 </div>
 <div class="section" id="change-the-default-salt-api-password">
-<h3>Change the default Salt API password<a class="headerlink" href="#change-the-default-salt-api-password" title="Permalink to this heading">¶</a></h3>
+<h3>Change the default Salt API password<a class="headerlink" href="#change-the-default-salt-api-password" title="Permalink to this heading"></a></h3>
 <p>The Salt API password is stored in <code class="docutils literal notranslate"><span class="pre">/etc/salt/auth</span></code> file. Generate a new password like that:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> -n <span class="s2">&quot;salt-api-new-pass&quot;</span> <span class="p">|</span> md5sum
 </pre></div>
@@ -93,7 +139,7 @@ to the localhost from inside containers.(usually Asterisk AMI is bound to 127.0.
 </div>
 </div>
 <div class="section" id="create-docker-compose-override-yml">
-<h3>Create docker-compose.override.yml<a class="headerlink" href="#create-docker-compose-override-yml" title="Permalink to this heading">¶</a></h3>
+<h3>Create docker-compose.override.yml<a class="headerlink" href="#create-docker-compose-override-yml" title="Permalink to this heading"></a></h3>
 <p>Next you need to map all these in <code class="docutils literal notranslate"><span class="pre">docker-compose.override.yml</span></code>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.1&#39;</span><span class="w"></span>
 <span class="w">  </span><span class="nt">services</span><span class="p">:</span><span class="w"></span>
@@ -119,7 +165,7 @@ to the localhost from inside containers.(usually Asterisk AMI is bound to 127.0.
 </div>
 </div>
 <div class="section" id="debug-the-agent-connection">
-<h3>Debug the Agent connection<a class="headerlink" href="#debug-the-agent-connection" title="Permalink to this heading">¶</a></h3>
+<h3>Debug the Agent connection<a class="headerlink" href="#debug-the-agent-connection" title="Permalink to this heading"></a></h3>
 <p>Agent is built-up from three processes:</p>
 <ul class="simple">
 <li><p>Salt API</p></li>
@@ -147,96 +193,41 @@ run in debug mode:</p>
 </div>
 </div>
 <div class="section" id="odoo">
-<h2>Odoo<a class="headerlink" href="#odoo" title="Permalink to this heading">¶</a></h2>
+<h2>Odoo<a class="headerlink" href="#odoo" title="Permalink to this heading"></a></h2>
 <p>Coming soon.</p>
 </div>
 <div class="section" id="asterisk">
-<h2>Asterisk<a class="headerlink" href="#asterisk" title="Permalink to this heading">¶</a></h2>
+<h2>Asterisk<a class="headerlink" href="#asterisk" title="Permalink to this heading"></a></h2>
 <p>Coming soon.</p>
 </div>
 </div>
 
 
+           </div>
           </div>
-          
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="standard.html" class="btn btn-neutral float-left" title="Standard installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="freepbx.html" class="btn btn-neutral float-right" title="FreePBX setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Odooist.</p>
+  </div>
+
+   
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="../index.html">
-              <img class="logo" src="../_static/logo.png" alt="Logo"/>
-            </a></p>
-<h1 class="logo"><a href="../index.html">OdooPBX</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../intro.html">What is OdooPBX?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../intro.html#odoopbx-apps">OdooPBX Apps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../intro.html#installation-types">Installation types</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../install.html">Installation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="demo.html">Demo setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="system.html">System requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="standard.html">Standard installation</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Docker based deployment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="freepbx.html">FreePBX setup</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../administration.html">Administration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../common.html">Common</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="../install.html">Installation</a><ul>
-      <li>Previous: <a href="standard.html" title="previous chapter">Standard installation</a></li>
-      <li>Next: <a href="freepbx.html" title="next chapter">FreePBX setup</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2022, Odooist.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>

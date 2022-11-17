@@ -1,42 +1,88 @@
-
 <!DOCTYPE html>
-
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>System requirements &#8212; OdooPBX 1.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System requirements &mdash; OdooPBX 1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Standard installation" href="standard.html" />
-    <link rel="prev" title="Demo setup" href="demo.html" />
-   
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+    <link rel="prev" title="Demo setup" href="demo.html" /> 
+</head>
 
-  </head><body>
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> OdooPBX
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">What is OdooPBX?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#odoopbx-apps">OdooPBX Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#installation-types">Installation types</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../install.html">Installation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="demo.html">Demo setup</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">System requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="standard.html">Standard installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html">Docker based deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="freepbx.html">FreePBX setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../administration.html">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common.html">Common</a></li>
+</ul>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          
+        </div>
+      </div>
+    </nav>
 
-          <div class="body" role="main">
-            
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">OdooPBX</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../install.html">Installation</a></li>
+      <li class="breadcrumb-item active">System requirements</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <div class="section" id="system-requirements">
-<h1>System requirements<a class="headerlink" href="#system-requirements" title="Permalink to this heading">¶</a></h1>
+<h1>System requirements<a class="headerlink" href="#system-requirements" title="Permalink to this heading"></a></h1>
 <p>OdooPBX is based mainly on Python 3. So it must be properly installed.</p>
 <p>If you have Py3 installed you can skip this section.</p>
 <p>On different systems same packages have different names.</p>
@@ -44,13 +90,13 @@
 <p>If something does not work for you it’s ok to send us <code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">/etc/*release</span> <span class="pre">|</span> <span class="pre">mail</span> <span class="pre">reports&#64;odoopbx.com</span></code> so
 that we could add support to your system.</p>
 <div class="section" id="ubuntu-and-debian">
-<h2>Ubuntu and Debian<a class="headerlink" href="#ubuntu-and-debian" title="Permalink to this heading">¶</a></h2>
+<h2>Ubuntu and Debian<a class="headerlink" href="#ubuntu-and-debian" title="Permalink to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apt</span> <span class="n">update</span> <span class="o">&amp;&amp;</span> <span class="n">apt</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span> <span class="n">python3</span><span class="o">-</span><span class="n">setproctitle</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="centos-versions-6-7">
-<h2>CentOS Versions 6&amp;7<a class="headerlink" href="#centos-versions-6-7" title="Permalink to this heading">¶</a></h2>
+<h2>CentOS Versions 6&amp;7<a class="headerlink" href="#centos-versions-6-7" title="Permalink to this heading"></a></h2>
 <p>First, you should enable and install Python3 and pip.</p>
 <p>There are at least <a class="reference external" href="https://www.2daygeek.com/install-python-3-on-centos-6/">3 ways to install the latest Python3 package on CentOS</a>.</p>
 <p>Below is one of them (IUS).</p>
@@ -68,14 +114,14 @@ simply run <code class="docutils literal notranslate"><span class="pre">yum</spa
 </div>
 </div>
 <div class="section" id="centos-version-8">
-<h2>CentOS Version 8<a class="headerlink" href="#centos-version-8" title="Permalink to this heading">¶</a></h2>
+<h2>CentOS Version 8<a class="headerlink" href="#centos-version-8" title="Permalink to this heading"></a></h2>
 <p>Latest CentOS is quite ready for Python3. So here are the installation steps:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yum</span> <span class="n">install</span> <span class="n">python3</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span> <span class="n">python3</span><span class="o">-</span><span class="n">devel</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="sangoma-linux-release-7-8">
-<h2>Sangoma Linux release 7.8<a class="headerlink" href="#sangoma-linux-release-7-8" title="Permalink to this heading">¶</a></h2>
+<h2>Sangoma Linux release 7.8<a class="headerlink" href="#sangoma-linux-release-7-8" title="Permalink to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yum</span> <span class="n">install</span> <span class="n">python36u</span> <span class="n">python36u</span><span class="o">-</span><span class="n">pip</span> <span class="n">python36u</span><span class="o">-</span><span class="n">devel</span>
 </pre></div>
 </div>
@@ -84,86 +130,31 @@ simply run <code class="docutils literal notranslate"><span class="pre">yum</spa
 </div>
 
 
+           </div>
           </div>
-          
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="demo.html" class="btn btn-neutral float-left" title="Demo setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="standard.html" class="btn btn-neutral float-right" title="Standard installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Odooist.</p>
+  </div>
+
+   
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="../index.html">
-              <img class="logo" src="../_static/logo.png" alt="Logo"/>
-            </a></p>
-<h1 class="logo"><a href="../index.html">OdooPBX</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../intro.html">What is OdooPBX?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../intro.html#odoopbx-apps">OdooPBX Apps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../intro.html#installation-types">Installation types</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../install.html">Installation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="demo.html">Demo setup</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">System requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="standard.html">Standard installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docker.html">Docker based deployment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="freepbx.html">FreePBX setup</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../administration.html">Administration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../common.html">Common</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="../install.html">Installation</a><ul>
-      <li>Previous: <a href="demo.html" title="previous chapter">Demo setup</a></li>
-      <li>Next: <a href="standard.html" title="next chapter">Standard installation</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2022, Odooist.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>

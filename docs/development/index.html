@@ -1,44 +1,90 @@
-
 <!DOCTYPE html>
-
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Developer Guide Introduction &#8212; OdooPBX 1.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Developer Guide Introduction &mdash; OdooPBX 1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="API" href="api.html" />
-    <link rel="prev" title="Development" href="../development.html" />
-   
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+    <link rel="prev" title="Development" href="../development.html" /> 
+</head>
 
-  </head><body>
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> OdooPBX
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">What is OdooPBX?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#odoopbx-apps">OdooPBX Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#installation-types">Installation types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../administration.html">Administration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development.html">Development</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Developer Guide Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui_actions.html">User interface actions API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="env.html">Settting up dev environment</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../common.html">Common</a></li>
+</ul>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          
+        </div>
+      </div>
+    </nav>
 
-          <div class="body" role="main">
-            
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">OdooPBX</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../development.html">Development</a></li>
+      <li class="breadcrumb-item active">Developer Guide Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <div class="section" id="developer-guide-introduction">
-<h1>Developer Guide Introduction<a class="headerlink" href="#developer-guide-introduction" title="Permalink to this heading">¶</a></h1>
+<h1>Developer Guide Introduction<a class="headerlink" href="#developer-guide-introduction" title="Permalink to this heading"></a></h1>
 <div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
 <p>OdooPBX platform stands on <strong>three</strong> whales:</p>
 <ul class="simple">
 <li><p>Odoo</p></li>
@@ -64,13 +110,13 @@ it is defined.</p>
 <img alt="../_images/odoopbx-architecture.png" src="../_images/odoopbx-architecture.png" />
 </div>
 <div class="section" id="the-pepper">
-<h2>1. The pepper<a class="headerlink" href="#the-pepper" title="Permalink to this heading">¶</a></h2>
+<h2>1. The pepper<a class="headerlink" href="#the-pepper" title="Permalink to this heading"></a></h2>
 <p>Salt and pepper are friends :-)</p>
 <p><a class="reference external" href="https://github.com/saltstack/pepper">Pepper</a> contains a Python library for accessing a remote <strong>salt-api</strong> instance.</p>
 <p>Using pepper Odoo communicates with Salt.</p>
 </div>
 <div class="section" id="salt-jobs">
-<h2>2. Salt jobs<a class="headerlink" href="#salt-jobs" title="Permalink to this heading">¶</a></h2>
+<h2>2. Salt jobs<a class="headerlink" href="#salt-jobs" title="Permalink to this heading"></a></h2>
 <p>Salt API process sends jobs to the Salt master which in turn submits them to connected minions (hello multi server ;).</p>
 <p>This is non-blocking process. So Odoo worker does not wait for any reply from the minion (Asterisk). And this
 is a very important pattern as Odoo cannot be affected by Asterisk outages.
@@ -101,7 +147,7 @@ from <code class="docutils literal notranslate"><span class="pre">asteriskmod.py
 and get the idea what can be integrated in your Odoo with few lines of code.</p>
 </div>
 <div class="section" id="remote-execution">
-<h2>3. Remote execution<a class="headerlink" href="#remote-execution" title="Permalink to this heading">¶</a></h2>
+<h2>3. Remote execution<a class="headerlink" href="#remote-execution" title="Permalink to this heading"></a></h2>
 <p>Salt jobs are executed by minion. But the power comes also from the command line
 availability of all Salt execution modules.</p>
 <p>That means you can call your modules not only from Odoo code but from the command line.</p>
@@ -129,7 +175,7 @@ availability of all Salt execution modules.</p>
 <code class="docutils literal notranslate"><span class="pre">awk</span></code> or <code class="docutils literal notranslate"><span class="pre">grep</span></code> for crafting your own administrator scripts.</p>
 </div>
 <div class="section" id="events">
-<h2>4. Events<a class="headerlink" href="#events" title="Permalink to this heading">¶</a></h2>
+<h2>4. Events<a class="headerlink" href="#events" title="Permalink to this heading"></a></h2>
 <p>Salt has <strong>two</strong> event buses :-)</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -203,7 +249,7 @@ availability of all Salt execution modules.</p>
 </div>
 </div>
 <div class="section" id="minion-s-connection-to-odoo">
-<h2>1. Minion’s connection to Odoo<a class="headerlink" href="#minion-s-connection-to-odoo" title="Permalink to this heading">¶</a></h2>
+<h2>1. Minion’s connection to Odoo<a class="headerlink" href="#minion-s-connection-to-odoo" title="Permalink to this heading"></a></h2>
 <p>Every minion is configured to an Odoo instance.</p>
 <p>When it executes a job its result is sent to Odoo.</p>
 <p>As a developer you could ask what happens if Odoo is down.</p>
@@ -214,7 +260,7 @@ and send them to Odoo when it’s available. But some events are too late to be 
 not actual.</p>
 </div>
 <div class="section" id="ami-actions">
-<h2>6. AMI Actions<a class="headerlink" href="#ami-actions" title="Permalink to this heading">¶</a></h2>
+<h2>6. AMI Actions<a class="headerlink" href="#ami-actions" title="Permalink to this heading"></a></h2>
 <p>Here we should understand how salt job callback pattern works. As we use non-blocking calls
 Odoo method that calls AMI Originate is finished immediately after transmitting it to the Salt
 master.</p>
@@ -254,7 +300,7 @@ This response is delivered out of the <code class="docutils literal notranslate"
 the result when it’s done.</p>
 </div>
 <div class="section" id="ami-events">
-<h2>7. AMI events<a class="headerlink" href="#ami-events" title="Permalink to this heading">¶</a></h2>
+<h2>7. AMI events<a class="headerlink" href="#ami-events" title="Permalink to this heading"></a></h2>
 <p>See full list of events <a class="reference external" href="https://wiki.asterisk.org/wiki/display/AST/Asterisk+16+AMI+Events">here</a>.</p>
 <p>Just create XML-data files with your desired events and write Odoo code to handle them.</p>
 <div class="highlight-XML notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;record</span> <span class="na">id=</span><span class="s">&quot;cdr&quot;</span> <span class="na">model=</span><span class="s">&quot;asterisk_plus.event&quot;</span><span class="nt">&gt;</span>
@@ -292,100 +338,45 @@ the result when it’s done.</p>
 <p>That’s it. Now you have Asterisk call statistics in Odoo without programming anything outside Odoo.</p>
 </div>
 <div class="section" id="asterisk-console">
-<h2>8. Asterisk console<a class="headerlink" href="#asterisk-console" title="Permalink to this heading">¶</a></h2>
+<h2>8. Asterisk console<a class="headerlink" href="#asterisk-console" title="Permalink to this heading"></a></h2>
 <p>What is fun with OdooPBX is that you have a full featured color console right in your Odoo.</p>
 <p>You can enter Asterisk commands there or even enter ‘!’ and exit into Linux shell for deep
 debugging like running <code class="docutils literal notranslate"><span class="pre">sngrep</span></code> SIP sniffer for example or troubleshooting
 RTP with <code class="docutils literal notranslate"><span class="pre">tcpdump</span></code>.</p>
 </div>
 <div class="section" id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">¶</a></h2>
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading"></a></h2>
 <p>It was a brief introduction to OdooPBX development.</p>
 <p>Check other developer documentation and have a fantastic experience with OdooPBX platform!</p>
 </div>
 </div>
 
 
+           </div>
           </div>
-          
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../development.html" class="btn btn-neutral float-left" title="Development" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api.html" class="btn btn-neutral float-right" title="API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Odooist.</p>
+  </div>
+
+   
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="../index.html">
-              <img class="logo" src="../_static/logo.png" alt="Logo"/>
-            </a></p>
-<h1 class="logo"><a href="../index.html">OdooPBX</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../intro.html">What is OdooPBX?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../intro.html#odoopbx-apps">OdooPBX Apps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../intro.html#installation-types">Installation types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../administration.html">Administration</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../development.html">Development</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Developer Guide Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html">API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ui_actions.html">User interface actions API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="debug.html">Debugging</a></li>
-<li class="toctree-l2"><a class="reference internal" href="env.html">Settting up dev environment</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../common.html">Common</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="../development.html">Development</a><ul>
-      <li>Previous: <a href="../development.html" title="previous chapter">Development</a></li>
-      <li>Next: <a href="api.html" title="next chapter">API</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2022, Odooist.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>
