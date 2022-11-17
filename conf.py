@@ -19,7 +19,7 @@ sys.path.insert(
     0, os.path.abspath(
         os.path.join(DIR, '_extensions')))
 import odoo
-odoo.addons.__path__.append('/srv/dev/addons')
+odoo.addons.__path__.append('/srv/addons')
 import odoo.addons
 
 
@@ -51,3 +51,4 @@ html_logo = "_static/logo.png"
 html_favicon = "_static/logo.png"
 html_show_sphinx = False
 html_show_sourcelink = False
+html_theme = 'sphinx_rtd_theme'

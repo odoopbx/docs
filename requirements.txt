@@ -1,1 +1,3 @@
 sphinxcontrib-autoyaml
+sphinx-rtd-theme
+sphinx-serve

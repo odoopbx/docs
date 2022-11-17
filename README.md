@@ -1,13 +1,52 @@
-# Odoo PBX documentation
-The OdooPBX documentation is published here - https://odoopbx.github.io/docs.
+# OdooPBX Documentation
+This repository contains the sources for the OdooPBX documentation available here: https://docs.odoopbx.com.
 
-In order to develop OdooPBX documentation you must roll out the developer environment.
 
-The documentation is built on Sphinx. It uses autodoc module to generate API from the source code so Odoo & Asterisk Plus addons must be installed. 
 
-Below is a short instruction how to prepare the environment on Ubuntu 20.04.
+It is powered by [Sphinx documentation](https://docs.odoopbx.com) and
+uses autodoc module to generate parts of the documentation from the source code of [addons](https://github.com/odoopbx/addons) and [pbx](https://github.com/odoopbx/pbx) repositories.
 
-## System libs installation
+
+It means that in order to successfully build OdooPBX documentation you will have to setup a developer environment.
+
+
+
+## Docker Development Environment
+Prepair the environment:
+```
+docker pull odoopbx/odoo:15.0
+git checkout https://github.com/odoopbx/docs.git
+git checkout https://github.com/odoopbx/addons.git
+git checkout https://github.com/odoopbx/pbx.git
+docker run -d -u 0 -p 8081:8081/tcp \
+  -v $PWD/docs:/srv/docs \
+  -v $PWD/addons:/srv/addons \
+  -v $PWD/pbx:/srv/pbx \
+  --name docs odoopbx/odoo:15.0 sleep 100d
+```
+
+Now you have a container named `docs` ready to build the docs.
+Install the requirements as `root`:
+```
+docker exec -u 0 docs pip3 install -r /srv/docs/requirements.txt
+```
+
+`docs` container is ready to build the docs:
+```
+docker exec -u $UID -it docs bash
+cd /srv/docs
+sphinx-build . _build/html
+```
+
+Point your browser _build/html/index.html file inside docs repository.
+
+On a remote machine you can run `sphinx-serve` command from `/srv/docs` and point your prowser to port `8081` at the host running docker container.
+
+
+## Ubuntu 20.04 Development Environment
+Below is an instruction on how to prepare the environment under Ubuntu 20.04.
+
+### System libs installation
 Install deps for Odoo 15.0 libs:
 ```
 apt update
@@ -18,7 +57,7 @@ apt install -y git python3-pip build-essential wget python3-dev python3-venv \
     liblcms2-dev libwebp-dev libharfbuzz-dev libfribidi-dev libxcb1-dev
 ```
 
-## Odoo 15.0 libs installation
+### Odoo 15.0 libs installation
 ```
 cd /opt/
 wget https://github.com/odoo/odoo/archive/refs/heads/15.0.zip
@@ -30,7 +69,7 @@ python3 -m pip install -r odoo-15.0/requirements.txt
 python3 -m pip install /srv/dev/addons/requirements.txt
 rm -rf 15.0 odoo-15.0
 ```
-## Clone the docs repo
+### Clone the docs repo
 ```
 python3 -m pip install sphinx sphinx-serve sphinx_nameko_theme
 cd /srv
