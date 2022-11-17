@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agent Configuration parameters &#8212; OdooPBX 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tips and Tricks" href="tips.html" />
+    <link rel="prev" title="Security Reactor" href="reactor.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="agent-configuration-parameters">
+<h1>Agent Configuration parameters<a class="headerlink" href="#agent-configuration-parameters" title="Permalink to this heading">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h2>
+<p>As you already know The OdooPBX Asterisk connection middleware is based on the Saltstack pltaform.</p>
+<ul class="simple">
+<li><p>Odoo connects to the salt-api.</p></li>
+<li><p>The salt-api forwards requests to the salt-master.</p></li>
+<li><p>The salt-master sends requests to the connected salt-minion.</p></li>
+<li><p>The salt-minion is connected to the Asterisk via AMI port.</p></li>
+</ul>
+<p>All configuration is located in <code class="docutils literal notranslate"><span class="pre">/etc/salt</span></code> folder.</p>
+<p>Below we review the options we use in order to configure it all.</p>
+</div>
+<div class="section" id="minion-configuration">
+<h2>Minion configuration<a class="headerlink" href="#minion-configuration" title="Permalink to this heading">¶</a></h2>
+<p>The main minion’s configuration file is <code class="docutils literal notranslate"><span class="pre">/etc/salt/minion</span></code>.</p>
+<p>The defaults are located in <code class="docutils literal notranslate"><span class="pre">/etc/salt/minion.d/odoopbx.conf</span></code>.</p>
+<p>Instead of changing the defaults just add a required option to <code class="docutils literal notranslate"><span class="pre">/etc/salt/odoopbx/minion.conf</span></code>.</p>
+<p>You must restat the minion process after making changes to its configuration using.</p>
+<p>Below is the list of default parameters and their meanings.</p>
+<dl class="simple">
+<dt>ami_login</dt><dd><p>Asterisk Manager Interface login name. Default is <code class="docutils literal notranslate"><span class="pre">odoo</span></code>. Env AMI_LOGIN</p>
+</dd>
+<dt>ami_secret</dt><dd><p>Asterisk Manager Interface secret. Default is <code class="docutils literal notranslate"><span class="pre">odoo</span></code>. Env AMI_SECRET</p>
+</dd>
+<dt>ami_host</dt><dd><p>Hostname or IP address of Asterisk server. Default is <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code>. Env AMI_HOST</p>
+</dd>
+<dt>ami_port</dt><dd><p>Asterisk manager interface port, default <code class="docutils literal notranslate"><span class="pre">5038</span></code>. Env AMI_PORT.</p>
+</dd>
+<dt>ami_register_events</dt><dd><p>List of AMI events to subscribe using register_event panoramisk call. Default is <code class="docutils literal notranslate"><span class="pre">['*']</span></code>.</p>
+</dd>
+<dt>ami_trace_actions</dt><dd><p>True or list of AMI actions to print to console output. Default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p>
+</dd>
+<dt>asterisk_binary</dt><dd><p>Path to the Asterisk binary if not common, defaults to <code class="docutils literal notranslate"><span class="pre">/usr/sbin/asterisk</span></code>.</p>
+</dd>
+<dt>asterisk_options</dt><dd><p>Default arguments to pass to the Asterisk binary when connecting to the CLI, default is <code class="docutils literal notranslate"><span class="pre">-vvvvvr</span></code>.</p>
+</dd>
+<dt>asterisk_cli_port</dt><dd><p>Asterisk Web CLI engine listen port, default is <code class="docutils literal notranslate"><span class="pre">30000</span></code>.</p>
+</dd>
+<dt>asterisk_cli_listen_address</dt><dd><p>Asterisk WEB CLI engine listen address, default is <code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code>.</p>
+</dd>
+<dt>asterisk_cli_ssl_key</dt><dd><p>Asterisk CLI SSL key, default <code class="docutils literal notranslate"><span class="pre">/etc/pki/current/privkey.pem</span></code>.</p>
+</dd>
+<dt>asterisk_cli_ssl_crt</dt><dd><p>Asterisk WEB CLI SSL certificate, default <code class="docutils literal notranslate"><span class="pre">/etc/pki/current/fullchain.pem</span></code>.</p>
+</dd>
+<dt>asterisk_shell_enabled</dt><dd><p>Enable ! command from the Asterisk CLI, default <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt>security_reactor_enabled</dt><dd><p>AMI Security reactor, replaces fail2ban. See Documentation for details. Default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt>security_reactor_events</dt><dd><p>List of AMI events passed to salt-minion event bus, default is <code class="docutils literal notranslate"><span class="pre">['ChallengeSent',</span> <span class="pre">'SuccessfulAuth',</span> <span class="pre">'InvalidPassword',</span> <span class="pre">'InvalidAccountID',</span> <span class="pre">'ChallengeResponseFailed']</span></code>.</p>
+</dd>
+<dt>security_ports_udp</dt><dd><p>Security reactor UDP ports, default <code class="docutils literal notranslate"><span class="pre">5060,65060</span></code>.</p>
+</dd>
+<dt>security_ports_tcp</dt><dd><p>Security reactor TCP ports, default: <code class="docutils literal notranslate"><span class="pre">5038,5039,5060,5061,65060,8088,8089</span></code>.</p>
+</dd>
+<dt>security_banned_timeout</dt><dd><p>Security reactor ban timeout in seconds, default <code class="docutils literal notranslate"><span class="pre">3600</span></code>.</p>
+</dd>
+<dt>security_expire_short_timeout</dt><dd><p>Timeout in seconds for registration confirmation SIP messages, default <code class="docutils literal notranslate"><span class="pre">60</span></code>.</p>
+</dd>
+<dt>security_expire_long_timeout</dt><dd><p>Timeout in seconds for confirmed SIP registrations, default <code class="docutils literal notranslate"><span class="pre">3600</span></code>.</p>
+</dd>
+<dt>fastagi_listen_address</dt><dd><p>FastAGI engine listen address, default <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code>.</p>
+</dd>
+<dt>fastagi_listen_port</dt><dd><p>FastAGI engine listen port, default <code class="docutils literal notranslate"><span class="pre">4574</span></code>.</p>
+</dd>
+<dt>odoo_trace_rpc</dt><dd><p>Trace Odoo RPC calls</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="master-and-api-configuration">
+<h2>Master and API configuration<a class="headerlink" href="#master-and-api-configuration" title="Permalink to this heading">¶</a></h2>
+<p>Master and API configuration is defined in <code class="docutils literal notranslate"><span class="pre">/etc/salt/master</span></code>.</p>
+<p>It’s better to create <code class="docutils literal notranslate"><span class="pre">*.conf</span></code> files inside <code class="docutils literal notranslate"><span class="pre">/etc/salt/master.d/</span></code> directory
+in case you want to modify Salt Master settings.
+It will keep your settings when you upgrade the agent.</p>
+<dl class="simple">
+<dt>interface</dt><dd><p>Salt master listen address.</p>
+</dd>
+<dt>log_level</dt><dd><p>Log level, default <code class="docutils literal notranslate"><span class="pre">info</span></code>.</p>
+</dd>
+<dt>log_file</dt><dd><p>Log file, default /var/log/salt/master</p>
+</dd>
+<dt>rest_cherrypy</dt><dd><dl class="simple">
+<p><a class="reference external" href="https://docs.saltproject.io/en/latest/ref/netapi/all/salt.netapi.rest_cherrypy.html">REST CherryPy</a> HTTP(S) Salt API server.</p>
+<dt>address</dt><dd><p>API server listen address, default <code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code>.</p>
+</dd>
+<dt>port</dt><dd><p>API server listen port, default <code class="docutils literal notranslate"><span class="pre">48008</span></code>.</p>
+</dd>
+<dt>disable_ssl</dt><dd><p>Disable connection SSL, default <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt>ssl_crt</dt><dd><p>SSL certificate path, default <code class="docutils literal notranslate"><span class="pre">/etc/pki/current/fullchain.pem</span></code>.</p>
+</dd>
+<dt>ssl_key</dt><dd><p>SSL private key path, default <code class="docutils literal notranslate"><span class="pre">/etc/pki/current/privkey.pem</span></code>.</p>
+</dd>
+<dt>log_access_file</dt><dd><p>Access log file path, default <code class="docutils literal notranslate"><span class="pre">/var/log/salt/api_access</span></code>.</p>
+</dd>
+<dt>log_error_file</dt><dd><p>Error log file path, <code class="docutils literal notranslate"><span class="pre">/var/log/salt/api_errors</span></code>.</p>
+</dd>
+<dt>debug</dt><dd><p>Debug mode, default <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt>max_request_body_size</dt><dd><p>Maximum request body size in bytes, default <code class="docutils literal notranslate"><span class="pre">1048576</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt>reactor_niceness</dt><dd><p>Master reactor processes priority, default <code class="docutils literal notranslate"><span class="pre">9</span></code>.</p>
+</dd>
+<dt>reactor_worker_threads</dt><dd><p>Master reactor threads, default <code class="docutils literal notranslate"><span class="pre">64</span></code>.</p>
+</dd>
+<dt>reactor</dt><dd><p>List of reactor patterns. See <a class="reference external" href="https://docs.saltproject.io/en/latest/topics/reactor/index.html">Salt reactor docs</a> for details.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">OdooPBX</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">What is OdooPBX?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#odoopbx-apps">OdooPBX Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#installation-types">Installation types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../administration.html">Administration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="server.html">Asterisk Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users.html">PBX Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tts.html">Text-to-speech</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reactor.html">Security Reactor</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Agent Configuration parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tips.html">Tips and Tricks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common.html">Common</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../administration.html">Administration</a><ul>
+      <li>Previous: <a href="reactor.html" title="previous chapter">Security Reactor</a></li>
+      <li>Next: <a href="tips.html" title="next chapter">Tips and Tricks</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Odooist.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

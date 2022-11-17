@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PBX Users &#8212; OdooPBX 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Text-to-speech" href="tts.html" />
+    <link rel="prev" title="Settings" href="settings.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="pbx-users">
+<h1>PBX Users<a class="headerlink" href="#pbx-users" title="Permalink to this heading">¶</a></h1>
+<p>PBX Users are Odoo users connected to Asterisk channels and extensions.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This mapping is used in the following cases:</p>
+<ul class="simple">
+<li><p>When Odoo user clicks to call a number on a form - the system must know which SIP user channel
+to dial in order to connect the call.</p></li>
+<li><p>When call events come into Odoo it must decide which user is related to the event.</p></li>
+</ul>
+</div>
+<p>Odoo user can have multiple channels defined for him. In a typical scenario user
+has a hardware deskphone and also a softphone with a headset.</p>
+<p>Normally user receives incoming calls on his desk phone.</p>
+<p>But when a user wants to make a series of calls to partners it’s much handy to use a headset and click to dial
+function instead of manual phone number dialing.</p>
+<p>Let’s review channel settings:</p>
+<div class="section" id="channel">
+<h2>Channel<a class="headerlink" href="#channel" title="Permalink to this heading">¶</a></h2>
+<p>Asterisk channel, e.g. SIP/101 or SIP/mypeername</p>
+</div>
+<div class="section" id="context">
+<h2>Context<a class="headerlink" href="#context" title="Permalink to this heading">¶</a></h2>
+<p>Asterisk context to use to place the outgoing call. In FreePBX  related systems it is usually <code class="docutils literal notranslate"><span class="pre">from-internal</span></code>.
+Some other systems define individual context for each user.</p>
+</div>
+<div class="section" id="originate">
+<h2>Originate<a class="headerlink" href="#originate" title="Permalink to this heading">¶</a></h2>
+<p>If Originate slider is <code class="docutils literal notranslate"><span class="pre">on</span></code> the channel will be used on click to dial operation. Usually when user a deskphone
+and a softphone only softphone channel has <code class="docutils literal notranslate"><span class="pre">Originate</span></code> enabled so that when click to dial is used the deskphone
+does not ring.</p>
+</div>
+<div class="section" id="auto-answer-header">
+<h2>Auto-answer header<a class="headerlink" href="#auto-answer-header" title="Permalink to this heading">¶</a></h2>
+<p>Auto answer is a very important business feature.</p>
+<p>When click to dial is used to originate call to a partner Asterisk first makes
+a call to user (1-st call leg) and after user answered his phone the 2-nd call leg
+is originated to the partner number.</p>
+<p>It is possible to auto answer the 1-st call leg using special channel headers.
+Different phones use different headers.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For more details see <a class="reference internal" href="../common/auto_answer.html"><span class="doc">Auto-Answer</span></a></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">OdooPBX</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">What is OdooPBX?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#odoopbx-apps">OdooPBX Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#installation-types">Installation types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../administration.html">Administration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="server.html">Asterisk Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">PBX Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tts.html">Text-to-speech</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reactor.html">Security Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="params.html">Agent Configuration parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tips.html">Tips and Tricks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common.html">Common</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../administration.html">Administration</a><ul>
+      <li>Previous: <a href="settings.html" title="previous chapter">Settings</a></li>
+      <li>Next: <a href="tts.html" title="next chapter">Text-to-speech</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Odooist.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

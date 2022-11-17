@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How to set up Twilio Elastic SIP Trunking with Odoo PBX &#8212; OdooPBX 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <link rel="shortcut icon" href="../../_static/logo.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="IAX2 interconnection" href="iax.html" />
+    <link rel="prev" title="SIPGate integration" href="sipgate.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="how-to-set-up-twilio-elastic-sip-trunking-with-odoo-pbx">
+<h1>How to set up Twilio Elastic SIP Trunking with Odoo PBX<a class="headerlink" href="#how-to-set-up-twilio-elastic-sip-trunking-with-odoo-pbx" title="Permalink to this heading">¶</a></h1>
+<div class="section" id="twilio-configuration">
+<h2>Twilio Configuration<a class="headerlink" href="#twilio-configuration" title="Permalink to this heading">¶</a></h2>
+<ol class="arabic">
+<li><p>Go to Twilio website at twilio.com and log into your Twilio account. Click on the <em>All Products and Services</em> button and select <em>Elastic SIP Trunking</em>.</p></li>
+<li><p>On the Trunk Dashboard page go to the Trunks section and add a new trunk by clicking on the <em>plus sign in the blue circle</em> as shown in the screenshot below.</p>
+<img alt="Sample Twilio trunk" class="align-center" src="../../_images/Twilio_trunk.png" />
+</li>
+<li><p>You will see a “Create a New SIP Trunk” form, that asks for the new trunk’s friendly name.</p>
+<img alt="Form for creating new trunk in Twilio" class="align-center" src="../../_images/new_trunk.png" />
+</li>
+<li><p>After you click on the <code class="docutils literal notranslate"><span class="pre">Create</span></code> button, the settings page for a new trunk is opened. Go to the <em>Termination</em> page. There you’ll be asked for the Termination SIP URI. You need to add an unique name for your trunk, for example <code class="docutils literal notranslate"><span class="pre">odoopbxdocs</span></code></p>
+<img alt="Sample termination URI: odoopbxdocs.pstn.twilio.com" class="align-center" src="../../_images/new_termination.png" />
+<p>This is the global termination URI - <code class="docutils literal notranslate"><span class="pre">odoopbxdocs.pstn.twilio.com</span></code>. Twilio generates local termination URIs for different regions, as shown when clicking on <em>Show Localized URIs</em> button.</p>
+</li>
+<li><p>Scroll down to the <em>Authentication</em> section. There you need to create at least an authentication list: either an <em>IP Access Control List</em> or a <em>Credential List</em>. The <em>IP Access Control List</em> is used when your PBX has a fixed IP address. If you set only the <em>IP Access Control List</em>, you can connect only from the IP addresses included there. Also, if you set only a <em>Credential List</em>, the Trunk connection is performed using a username and a password.</p>
+<img alt="Sample authentication by using IP Access Control Lists" class="align-center" src="../../_images/authentication.png" />
+<p>You can click on the plus sign on the right to create either one. For an IP Access Control List you need to add a friendly name, an IP address or a subnet and a friendly name for that address or subnet.</p>
+<img alt="Creation of a new IP Access Control List" class="align-center" src="../../_images/demo_ip_acl.png" />
+<p>For a Credential List you need to write a friendly name, a username and a password.</p>
+<img alt="Creation of a new Credentials Access Control List" class="align-center" src="../../_images/demo_pw_acl.png" />
+<p>You can also access the Credentials page from Twilio homepage by going to <em>All Products and Services</em> -&gt; <em>Elastic SIP Trunking</em> -&gt; <em>Authentication</em>.</p>
+</li>
+<li><p>Go to the <em>Origination</em> page. There you need to set up the URI from which the calls will come.</p>
+<img alt="List of Originations in Twilio" class="align-center" src="../../_images/originations.png" />
+<p>Click on the plus sign to add a new origination URI. This is the URI you use for logging in to your server. In case you are using a non-standard SIP port, add the port as well. For example, with the domain <code class="docutils literal notranslate"><span class="pre">demo.odoopbx.com</span></code>, port <code class="docutils literal notranslate"><span class="pre">6053</span></code>, you need to set the URI to <code class="docutils literal notranslate"><span class="pre">sip:demo.odoopbx.com:6053</span></code></p>
+<img alt="Adding an Origination URI in Twilio" class="align-center" src="../../_images/origination_uri.png" />
+</li>
+<li><p>Go to the <em>Numbers</em> page to add a number to the trunk.</p>
+<img alt="Numbers list in Twilio" class="align-center" src="../../_images/numbers.png" />
+</li>
+</ol>
+<p>You can choose a number you have already bought, buy a single number or buy multiple numbers in bulk.</p>
+<p>This finishes the trunk configuration on Twilio, next you have to go to your Odoo instance and configure the trunk.</p>
+</div>
+<div class="section" id="odoo-pbx-configuration">
+<h2>Odoo PBX Configuration<a class="headerlink" href="#odoo-pbx-configuration" title="Permalink to this heading">¶</a></h2>
+<ol class="arabic">
+<li><p>Go to <em>PBX</em> -&gt; <em>Files</em> and click on <code class="docutils literal notranslate"><span class="pre">Create</span></code>. Set the file name to <code class="docutils literal notranslate"><span class="pre">sip_twilio.conf</span></code> and the desired server. Copy the contents of the file from below and paste them into the Content field.</p>
+<img alt="Twilio SIP config in Odoo" class="align-center" src="../../_images/sip_twilio.png" />
+<p>Save the file. File contents:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[twilio-trunk](!)
+type=peer
+context=route-group-1
+dtmfmode=rfc2833
+canreinivite=no
+disallow=all
+allow=opus,ulaw
+insecure=port,invite
+
+; Ireland Signalling Gateways
+[twilio1](twilio-trunk)
+host=54.171.127.192
+[twilio2](twilio-trunk)
+host=54.171.127.193
+[twilio3](twilio-trunk)
+host=54.171.127.194
+[twilio4](twilio-trunk)
+host=54.171.127.195
+; North America Virginia Signalling Gateways
+[twilio5](twilio-trunk)
+host=54.172.60.0
+[twilio6](twilio-trunk)
+host=54.172.60.1
+[twilio7](twilio-trunk)
+host=54.172.60.2
+[twilio8](twilio-trunk)
+host=54.172.60.3
+; North America Oregon Signalling Gateways
+[twilio9](twilio-trunk)
+host=54.244.51.0
+[twilio10](twilio-trunk)
+host=54.244.51.1
+[twilio11](twilio-trunk)
+host=54.244.51.2
+[twilio12](twilio-trunk)
+host=54.244.51.3
+; Europe Frankfurt Signalling Gateways
+[twilio13](twilio-trunk)
+host=35.156.191.128
+[twilio14](twilio-trunk)
+host=35.156.191.129
+[twilio15](twilio-trunk)
+host=35.156.191.130
+[twilio16](twilio-trunk)
+host=35.156.191.131
+; Asia Pacific Tokyo gateways
+[twilio17](twilio-trunk)
+host=54.65.63.192
+[twilio18](twilio-trunk)
+host=54.65.63.193
+[twilio19](twilio-trunk)
+host=54.65.63.194
+[twilio20](twilio-trunk)
+host=54.65.63.195
+; Asia Pacific Singapore gateways
+[twilio21](twilio-trunk)
+host=54.169.127.128
+[twilio22](twilio-trunk)
+host=54.169.127.129
+[twilio23](twilio-trunk)
+host=54.169.127.130
+[twilio24](twilio-trunk)
+host=54.169.127.131
+; Asia Pacific Disney gateways
+[twilio25](twilio-trunk)
+host=54.252.254.64
+[twilio26](twilio-trunk)
+host=54.252.254.65
+[twilio27](twilio-trunk)
+host=54.252.254.66
+[twilio28](twilio-trunk)
+host=54.252.254.67
+; South America Sao Paulo gateways
+[twilio29](twilio-trunk)
+host=177.71.206.192
+[twilio30](twilio-trunk)
+host=177.71.206.193
+[twilio31](twilio-trunk)
+host=177.71.206.194
+[twilio32](twilio-trunk)
+host=177.71.206.195
+</pre></div>
+</div>
+</li>
+<li><p>Go to <em>PBX</em> -&gt; <em>Files</em>, remove the <code class="docutils literal notranslate"><span class="pre">Updated</span></code> filter and search for sip.conf. To the end of the file add the line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#tryinclude sip_twillio.conf`</span>
+</pre></div>
+</div>
+</li>
+<li><p>Go to <em>PBX</em> -&gt; <em>Applications</em> -&gt; <em>Trunks</em> and create a new trunk with the following fields:</p></li>
+</ol>
+<p><strong>Host</strong>: Select the closest to you Termination URI from the Twilio website (<em>All Products and Services</em> -&gt; <em>Elastic SIP Trunking</em> -&gt; <em>Trunks</em> -&gt; choose your trunk -&gt; <em>Termination</em>).</p>
+<p><strong>From user</strong>: The username from Twilio’s <em>Credential List</em>, if you have set it up. Otherwise leave empty</p>
+<p><strong>SIP Secret</strong>: The password from Twilio’s <em>Credential List</em>. Leave empty if not set.</p>
+<p><strong>DMTF mode</strong>: RFC2833</p>
+<p><strong>Allow Codecs</strong>: opus,ulaw (Only ulaw is supported by default but you can ask Twilio to enable Opus and a few other codecs)</p>
+<p><strong>Disallow Codecs</strong>: All</p>
+<p><strong>NAT</strong>: No</p>
+<p><strong>Can reinvite</strong>: No</p>
+<p><strong>Route Groups</strong>: Incoming</p>
+<p>The trunk configuration is finished. Next you need to create incoming and outgoing routes for your users, so they could call and receive calls.</p>
+</div>
+<div class="section" id="creating-outgoing-and-incoming-routes-in-odoopbx">
+<h2>Creating outgoing and incoming routes in OdooPBX<a class="headerlink" href="#creating-outgoing-and-incoming-routes-in-odoopbx" title="Permalink to this heading">¶</a></h2>
+<p>First you need to create an outgoing route. Go to <em>PBX</em> -&gt; <em>Applications</em> -&gt; <em>Routes</em> and click on <code class="docutils literal notranslate"><span class="pre">Create</span></code>. Next fill in the fields:</p>
+<p><strong>Destination number</strong>: <code class="docutils literal notranslate"><span class="pre">_XXXXXXX</span></code>. This means that any phone number with more than 7 digits will be directed to the trunk</p>
+<p><strong>Prio</strong>: 0</p>
+<p><strong>Type</strong>: SIP Trunk</p>
+<p><strong>SIP Trunk</strong>: the name of the trunk created above</p>
+<p><strong>Dial Timeout</strong>: 60</p>
+<p><strong>Dial Options</strong>: T</p>
+<p><strong>Record Calls</strong>: Mark if you need the calls to be recorded</p>
+<div class="section" id="destination-number-translation">
+<h3>Destination number translation<a class="headerlink" href="#destination-number-translation" title="Permalink to this heading">¶</a></h3>
+<p>Twillio requires numbers to be sent in E.164 format (with +). So you need to create
+a translation rule that will prefix all numbers with +:</p>
+<img alt="Set up Destination Translation for Twilio" class="align-center" src="../../_images/dst_translation.png" />
+</div>
+<div class="section" id="source-number-translation">
+<h3>Source number translation<a class="headerlink" href="#source-number-translation" title="Permalink to this heading">¶</a></h3>
+<p>Next click on the <em>Number Translation</em> tab and click on <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">a</span> <span class="pre">line</span></code> for the Source Numbers field. After that click on <code class="docutils literal notranslate"><span class="pre">Create</span></code> and you will see the following form:</p>
+<img alt="Set up Source Translation for Twilio" class="align-center" src="../../_images/source_translation.png" />
+<p>Click on the <em>User</em> field and choose what user you need to use the trunk number. Next in the Replace field enter the number in E.164 international format starting with <code class="docutils literal notranslate"><span class="pre">+</span></code>.</p>
+<p>Next you need to create an incoming route, denoting the receiver of the incoming calls. Go to <em>PBX</em> -&gt; <em>Applications</em> -&gt; <em>Routes</em> and click on <code class="docutils literal notranslate"><span class="pre">Create</span></code> and fill in the fields:</p>
+<p><strong>Destination number</strong>: The phone number, without the + sign</p>
+<p><strong>Type</strong>: Can be Extension or Dialplan and select the dialplan or extension you want to redirect the call to.</p>
+<p>Click on Save and next on Apply Changes. Test the incoming and outgoing calls.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">OdooPBX</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">What is OdooPBX?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html#odoopbx-apps">OdooPBX Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html#installation-types">Installation types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../administration.html">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../common.html">Common</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../sip_trunking.html">SIP Trunking</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="sipgate.html">SIPGate integration</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to set up Twilio Elastic SIP Trunking with Odoo PBX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="iax.html">IAX2 interconnection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../sip_phones.html">SIP Phones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_answer.html">Auto-Answer</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../../common.html">Common</a><ul>
+  <li><a href="../sip_trunking.html">SIP Trunking</a><ul>
+      <li>Previous: <a href="sipgate.html" title="previous chapter">SIPGate integration</a></li>
+      <li>Next: <a href="iax.html" title="next chapter">IAX2 interconnection</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Odooist.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

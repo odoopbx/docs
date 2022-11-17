@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asterisk Server &#8212; OdooPBX 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Settings" href="settings.html" />
+    <link rel="prev" title="Administration" href="../administration.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="asterisk-server">
+<h1>Asterisk Server<a class="headerlink" href="#asterisk-server" title="Permalink to this heading">¶</a></h1>
+<div class="section" id="buttons">
+<h2>Buttons<a class="headerlink" href="#buttons" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Minion and Asterisk ping</strong> - to check the connection between Odoo and Asterisk use the following buttons:</p></li>
+<li><p><strong>Console</strong> - open WEB console in a separate browser tab. Make sure that your browser settings do not block new tabs.</p></li>
+<li><p><strong>Upload .conf files</strong> - send the .conf files to the Asterisk server from Odoo. All existing on Asterisk .conf files will be overwritten.</p></li>
+<li><p><strong>Download .conf files</strong> - download the .conf files from the Asterisk server to Odoo. All existing in Odoo .conf will be overwritten.</p></li>
+<li><p><strong>Reload</strong> - issue the <code class="docutils literal notranslate"><span class="pre">reload</span></code> command to the Asterisk server.</p></li>
+<li><p><strong>Restart</strong> - reboot the Asterisk server.</p></li>
+</ul>
+</div>
+<div class="section" id="settings">
+<h2>Settings<a class="headerlink" href="#settings" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="asterisk-system-account">
+<h3>Asterisk system account<a class="headerlink" href="#asterisk-system-account" title="Permalink to this heading">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>During the installation process <strong>a new odoo account is created</strong> named <code class="docutils literal notranslate"><span class="pre">asterisk1</span></code> with default password <code class="docutils literal notranslate"><span class="pre">asterisk1</span></code>.</p>
+</div>
+<p>This account is used by the Agent to connect to your Odoo instance. Don’t use this account for anything else!</p>
+<p>Though the permissions of this Asterisk user account are very limited (it belongs to the Portal group)
+it is <strong>strictly recommended</strong> to change the default password of this account after installation is finished
+(don’t forget to update <code class="docutils literal notranslate"><span class="pre">odoo_password</span></code> setting on the Agent).</p>
+<p>You can change the password of the Asterisk account by entering a new value in the <code class="docutils literal notranslate"><span class="pre">Password</span></code> field.</p>
+</div>
+<div class="section" id="country-settings-and-timezone">
+<h3>Country settings and timezone<a class="headerlink" href="#country-settings-and-timezone" title="Permalink to this heading">¶</a></h3>
+<p>It is important to set the correct country for the Asterisk server because it is required to
+correctly process caller ID numbers that usually come in local format.</p>
+<p>Internally all partner numbers in Odoo are stored in E.164 format. So country settings are used to
+correctly transform numbers from local to E.164 format.</p>
+<p>Also server’s timezone must be correctly set in order to correctly process times in calls.</p>
+</div>
+<div class="section" id="console-url">
+<h3>Console URL<a class="headerlink" href="#console-url" title="Permalink to this heading">¶</a></h3>
+<p>In order to connect to the Asterisk console you need to set the correct Agent WEB console URL.</p>
+<p>The WEB console service is provided by the <code class="docutils literal notranslate"><span class="pre">asterisk_cli</span></code> engine of the salt-minion process.
+So in the host part of the URL enter your Agent hostname or IP address.</p>
+<p>By default port 30000 is used and self-signed certificates are generated. So if you use the defaults
+you need to allow this self-signed certificate in your browser by opening first the console URL in
+your browser and adding the permission.</p>
+</div>
+<div class="section" id="server-startup">
+<h3>Server startup<a class="headerlink" href="#server-startup" title="Permalink to this heading">¶</a></h3>
+<p>When Asterisk server is started its configuration files need to be syncronized with Odoo.</p>
+<p>When the Asterisk server is connected to Odoo for the first time all its .conf files are sent to Odoo and <code class="docutils literal notranslate"><span class="pre">Initial</span> <span class="pre">Update</span> <span class="pre">Done</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.
+If Odoo already has a file with the same name that is being sent, that file is not overwritten.</p>
+<p>After the initial configuration is done the correct update direction option must be set.</p>
+<ul class="simple">
+<li><p><strong>Odoo</strong> -&gt; Asterisk (Odoo is the source of configuration) - usually when you use a vanilla Asterisk server you manage this server from Odoo.</p></li>
+<li><p><strong>Asterisk</strong> -&gt; Odoo (Asterisk is the source of configuration) - when you use a third-party Asterisk distibution (for example, FreePBX based) it has its own management UI ahat generates .conf files.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="commands">
+<h2>Commands<a class="headerlink" href="#commands" title="Permalink to this heading">¶</a></h2>
+<p>This feature is for advanced users only :-)</p>
+<p>It is possible to execute Salt commands on the Asterisk server. In order to do it you should enter
+the edit mode of the server form and issue a command and use <code class="docutils literal notranslate"><span class="pre">Tab</span></code> button to take of the focus.</p>
+<p>Then the command is sent to the Salt minion and the result is displayed in the Reply field.</p>
+<p>You can try the following commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ps</span><span class="o">.</span><span class="n">cpu_percent</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">disk_usage</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">netstat</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">netstat</span> <span class="n">name</span><span class="o">=</span><span class="n">asterisk</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">top</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">psaux</span> <span class="n">name</span><span class="o">=</span><span class="n">salt</span>
+<span class="n">network</span><span class="o">.</span><span class="n">get_fqdn</span>
+<span class="n">network</span><span class="o">.</span><span class="n">ping</span> <span class="n">host</span><span class="o">=</span><span class="n">odoopbx</span><span class="o">.</span><span class="n">com</span>
+<span class="n">network</span><span class="o">.</span><span class="n">interface</span> <span class="n">iface</span><span class="o">=</span><span class="n">eth0</span>
+</pre></div>
+</div>
+<p>The full list of possible commands can be found <a class="reference external" href="https://docs.saltproject.io/en/latest/ref/modules/all/index.html">here</a>.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">OdooPBX</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">What is OdooPBX?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#odoopbx-apps">OdooPBX Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#installation-types">Installation types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../administration.html">Administration</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Asterisk Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users.html">PBX Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tts.html">Text-to-speech</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reactor.html">Security Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="params.html">Agent Configuration parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tips.html">Tips and Tricks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common.html">Common</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../administration.html">Administration</a><ul>
+      <li>Previous: <a href="../administration.html" title="previous chapter">Administration</a></li>
+      <li>Next: <a href="settings.html" title="next chapter">Settings</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Odooist.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

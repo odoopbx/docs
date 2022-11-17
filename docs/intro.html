@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>What is OdooPBX? &#8212; OdooPBX 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="shortcut icon" href="_static/logo.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="install.html" />
+    <link rel="prev" title="OdooPBX Documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#what-is-odoopbx" id="id1">What is OdooPBX?</a></p></li>
+<li><p><a class="reference internal" href="#odoopbx-apps" id="id2">OdooPBX Apps</a></p></li>
+<li><p><a class="reference internal" href="#installation-types" id="id3">Installation types</a></p></li>
+</ul>
+</div>
+<div class="section" id="what-is-odoopbx">
+<h1><a class="toc-backref" href="#id1">What is OdooPBX?</a><a class="headerlink" href="#what-is-odoopbx" title="Permalink to this heading">¶</a></h1>
+<p>OdooPBX is a telephony platform built upon Odoo &amp; Asterisk using Saltstack API as a middleware layer:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://odoo.com">Odoo</a> (former OpenERP / TinyERP) is a modern WEB business platform that rapidly spreads over the world.</p></li>
+<li><p><a class="reference external" href="https://asterisk.org">Asterisk PBX</a> is the most popular open source PBX software.</p></li>
+<li><p><a class="reference external" href="https://docs.saltproject.io/en/latest/">Saltstack</a> is an automation, infrastructure management, remote execution,
+configuration management, data-driven orchestration, and so much more.</p></li>
+</ul>
+<p>Odoo as a business platform comes with a plenty of ready to use business oriented modules like CRM, Projects, Warehouse,
+Sales, Events, Website and much more.</p>
+<p>OdooPBX adds a layer of telephony to these business modules and thus integrates close telephone communication with the places where it takes place.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>With OdooPBX you create phone applications writing 100% Odoo code.</p>
+</div>
+<p>Finally, a special middleware <strong>Agent</strong> is used to connect Odoo and Asterisk together in a proper way.</p>
+<p>The Agent itself is built upon the Saltstack platform and performs the following functions:</p>
+<ul class="simple">
+<li><p>Forwards Asterisk AMI events to Odoo according to the downloaded events map.</p></li>
+<li><p>Executes Asterisk AMI actions received from Odoo.</p></li>
+<li><p>Protects Asterisk from DDoS and password bruteforce attacks.</p></li>
+<li><p>Manages the installation &amp; upgrade process.</p></li>
+<li><p>Provides a server for a WEB based Asterisk CLI.</p></li>
+</ul>
+<p>Here is high level architecture diagram if OdooPBX:</p>
+<img alt="_images/odoopbx.png" src="_images/odoopbx.png" />
+<p>OdooPBX is <strong>extremely adaptable and extensible</strong> because Odoo is very adaptable
+by its <a class="reference external" href="https://www.odoo.com/documentation/14.0/developer/howtos/rdtraining/13_inheritance.html">inheritance architecture</a>
+and Salt is extensible because it is built to be that.</p>
+<p>The Saltstack platform has tons of ready to use building blocks called <a class="reference external" href="https://docs.saltproject.io/en/latest/ref/modules/all/index.html">execution modules</a>
+that can be used to extend Odoo’s communications with external world and make it
+extremely quicky to create and maintain.</p>
+<p>Read the <a class="reference external" href="../development">Developers guide</a> for more information on how to build telephony applications on the OdooPBX platform.</p>
+</div>
+<div class="section" id="odoopbx-apps">
+<h1><a class="toc-backref" href="#id2">OdooPBX Apps</a><a class="headerlink" href="#odoopbx-apps" title="Permalink to this heading">¶</a></h1>
+<p>As OdooPBX is based on Odoo it has modular architecture.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The list of modules can be found here: <span class="xref std std-doc">apps</span>.</p>
+</div>
+<p>The main module is named <strong>Asterisk Plus</strong> and it is inherited by all other OdooPBX modules.</p>
+<p>Other modules add some integration between Asterisk Plus module and different Odoo componoents. For example, Asterisk Plus CRM app requires CRM module to be installed
+and brings the integration of CRM and telephony.</p>
+</div>
+<div class="section" id="installation-types">
+<h1><a class="toc-backref" href="#id3">Installation types</a><a class="headerlink" href="#installation-types" title="Permalink to this heading">¶</a></h1>
+<p>Depending on your existing environment there can be different installation types.</p>
+<p>If you have Odoo &amp; Asterisk already running you need to install the OdooPBX agent and configure it for your Odoo and Asterisk instances.</p>
+<p>If you have only Odoo running then you need to also install Asterisk and the Agent.</p>
+<p>If you have Asterisk running then you should install the Agent on the Asterisk server and also install an Odoo instance near it.</p>
+<p>Finally, you might start from zero and would want to install everything from scratch.</p>
+<p>Also there are two ways to deploy OdooPBX:</p>
+<ul class="simple">
+<li><p>Server wide</p></li>
+<li><p>Docker based</p></li>
+</ul>
+<p>All these topics are covered in the <span class="xref std std-doc">install/install</span> section.</p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="index.html">OdooPBX</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">What is OdooPBX?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#odoopbx-apps">OdooPBX Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#installation-types">Installation types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="administration.html">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="common.html">Common</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">OdooPBX Documentation</a></li>
+      <li>Next: <a href="install.html" title="next chapter">Installation</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Odooist.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
