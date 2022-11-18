@@ -74,10 +74,10 @@ cd docs
 ```
 
 ## Change, Build, Repeat
-`build.sh` is a tiny script which utilizes sphinx module to create HTML files inside `_build/` subdirectory. 
-It's output should look like on image below:
-
-![build.sh output][build_sh]
+`build.sh` is a tiny script which utilizes sphinx module to create HTML files inside `_build/` subdirectory. After successfull build it prints out finally:
+```
+The HTML pages are in srv/docs/_build.
+```
 
 We reapeat `./build.sh` after making changes to re-generate HTML files.
 
@@ -92,5 +92,3 @@ I have no name!@f2559b118194:/srv/docs$ sphinx-serve
 :: Serving documentation at http://0.0.0.0:8081
 :: Terminate with Ctrl-C
 ```
-
-[build_sh]: ./_static/build.sh_output.png

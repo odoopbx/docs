@@ -2,8 +2,10 @@
 
 set -e
 
-rm -rf _build
-python3 -m sphinx -t html . _build
-cd _build
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+rm -rf $DIR/_build
+python3 -m sphinx -t html $DIR $DIR/_build
+cd $DIR/_build
 # Create a link for sphinx-serve
-ln -s . html
+ln -s . $DIR/_build/html
