@@ -48,7 +48,7 @@ As OdooPBX is based on Odoo it has modular architecture.
 
 .. note::
 
-  The list of modules can be found here: :doc:`apps`.
+  The list of modules can be found in `addons repo <https://github.com/odoopbx/addons>`_
 
 
 The main module is named **Asterisk Plus** and it is inherited by all other OdooPBX modules. 
@@ -73,4 +73,4 @@ Also there are two ways to deploy OdooPBX:
 * Server wide
 * Docker based
 
-All these topics are covered in the :doc:`install/install` section.
+All these topics are covered in the :doc:`install` section.

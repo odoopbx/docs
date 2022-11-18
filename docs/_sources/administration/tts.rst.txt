@@ -14,7 +14,7 @@ API Key
 Download the Google TTS API key and save it to ``/etc/google_tts_key.json`` file. 
 Or you can save it in any place and configure ``tts_google_key_file``  in ``minion_local.conf``. 
 
-You can find some instructions on how to download the key file `here https://www.youtube.com/results?search_query=Get+API+Key+text-to-speech`__.
+You can find some instructions on how to download the key file `here <https://www.youtube.com/results?search_query=Get+API+Key+text-to-speech>`__.
 
 Usage example
 =============
