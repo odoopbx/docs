@@ -86,23 +86,27 @@
              
   <div class="section" id="agent-parameters">
 <h1>Agent Parameters<a class="headerlink" href="#agent-parameters" title="Permalink to this heading"></a></h1>
-<p>OdooPBX Agent consists of three services:</p>
+<p>OdooPBX Agent consists of three Saltstack daemons:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>salt-api: provides the salt API at TCP port <code class="docutils literal notranslate"><span class="pre">48000</span></code> by default.</p></li>
-<li><p>salt-master: Pub/Sub message bus based on ZeroMQ. more on [Salt architecture](<a class="reference external" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html)_">https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html)_</a></p></li>
-<li><p>salt-minion:  boosted with <code class="docutils literal notranslate"><span class="pre">asterisk_ami.py</span></code> and <code class="docutils literal notranslate"><span class="pre">odoo_executor.py</span></code> engines.</p></li>
+<li><p>API: provides the salt API at TCP port <code class="docutils literal notranslate"><span class="pre">48000</span></code> by default.</p></li>
+<li><p>Master: provides Pub/Sub message bus based on ZeroMQ. More on <a class="reference external" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html">Salt architecture</a></p></li>
+<li><p>Minion: boosted with custom engines Minion serves as an agent between Asterisk and Odoo.</p></li>
 </ul>
 </div></blockquote>
-<p>OdooPBX Agent is designed to be as much auto provisioned as possible.
-What you basically need is to run all these 3 services with <code class="docutils literal notranslate"><span class="pre">ODOO_URL</span></code>
-environment variable pointing to Odoo server with Asterisk Plus module installed.</p>
+<p>OdooPBX Agent is designed to be as much auto-provisioned as possible.
+Minion reads <code class="docutils literal notranslate"><span class="pre">ODOO_URL</span></code> environment variable pointing to Odoo server
+with Asterisk Plus module installed and initializes itself on first startup.
+New passwords are generated and saved both at Odoo and Agent sides during initialization.</p>
 <div class="section" id="minion-configuration">
 <h2>Minion configuration<a class="headerlink" href="#minion-configuration" title="Permalink to this heading"></a></h2>
-<p>The main minion’s configuration file is <code class="docutils literal notranslate"><span class="pre">/etc/salt/minion</span></code>.</p>
-<p>The defaults are located in <code class="docutils literal notranslate"><span class="pre">/etc/salt/minion.d/odoopbx.conf</span></code>.</p>
-<p>Instead of changing the defaults just add a required option to <code class="docutils literal notranslate"><span class="pre">/etc/salt/odoopbx/minion.conf</span></code>.</p>
-<p>You must restat the minion process after making changes to its configuration using.</p>
+<p>Minion reads by default it’s configuration from <code class="docutils literal notranslate"><span class="pre">/etc/salt/minion</span></code> file and
+<code class="docutils literal notranslate"><span class="pre">/etc/salt/minion.d/*.conf</span></code> directory.</p>
+<p>Default settings for the agent are located in <code class="docutils literal notranslate"><span class="pre">/etc/salt/minion.d/odoopbx.conf</span></code>.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">`odoopbx</span> <span class="pre">config</span> <span class="pre">set</span></code> command in order to change defaults.
+Your settings will be saved into <code class="docutils literal notranslate"><span class="pre">/etc/salt/odoopbx/minion.conf</span></code> file.
+This file overrides defaults and is kept untouched during agent upgrade.</p>
+<p>You must restat the minion process after making changes to its configuration.</p>
 <p>Below is the list of default parameters and their meanings.</p>
 <dl class="simple">
 <dt>odoo_url</dt><dd><p>Substitutes used earlier <code class="docutils literal notranslate"><span class="pre">odoo_db</span></code>, <code class="docutils literal notranslate"><span class="pre">odoo_host</span></code>, <code class="docutils literal notranslate"><span class="pre">odoo_port</span></code>, <code class="docutils literal notranslate"><span class="pre">odoo_use_ssl</span></code> parameters when defined.
@@ -174,7 +178,7 @@ Env <code class="docutils literal notranslate"><span class="pre">ODOO_PASSWORD</
 </div>
 <div class="section" id="master-and-api-configuration">
 <h2>Master and API configuration<a class="headerlink" href="#master-and-api-configuration" title="Permalink to this heading"></a></h2>
-<p>Master and API configuration is defined in <code class="docutils literal notranslate"><span class="pre">/etc/salt/master</span></code>.</p>
+<p>Master and API daemons use settings defined in <code class="docutils literal notranslate"><span class="pre">/etc/salt/master</span></code>.</p>
 <p>It’s better to create <code class="docutils literal notranslate"><span class="pre">*.conf</span></code> files inside <code class="docutils literal notranslate"><span class="pre">/etc/salt/master.d/</span></code> directory
 in case you want to modify Salt Master settings.
 It will keep your settings when you upgrade the agent.</p>
