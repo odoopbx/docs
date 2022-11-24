@@ -1,19 +1,16 @@
 ==============================
-Agent Configuration parameters
+Agent Parameters
 ==============================
+OdooPBX Agent consists of three services:
 
-Introduction
-============
-As you already know The OdooPBX Asterisk connection middleware is based on the Saltstack pltaform.
+ * salt-api: provides the salt API at TCP port ``48000`` by default.
+ * salt-master: Pub/Sub message bus based on ZeroMQ. more on [Salt architecture](https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html)_
+ * salt-minion:  boosted with ``asterisk_ami.py`` and ``odoo_executor.py`` engines.
 
-* Odoo connects to the salt-api.
-* The salt-api forwards requests to the salt-master.
-* The salt-master sends requests to the connected salt-minion.
-* The salt-minion is connected to the Asterisk via AMI port.
+OdooPBX Agent is designed to be as much auto provisioned as possible.
+What you basically need is to run all these 3 services with ``ODOO_URL``
+environment variable pointing to Odoo server with Asterisk Plus module installed.
 
-All configuration is located in ``/etc/salt`` folder.
-
-Below we review the options we use in order to configure it all.
 
 Minion configuration
 ====================
@@ -28,6 +25,7 @@ You must restat the minion process after making changes to its configuration usi
 Below is the list of default parameters and their meanings.
 
 .. autoyaml:: /pbx/salt/agent/files/etc/minion.d/odoopbx.conf
+
 
 Master and API configuration
 ============================

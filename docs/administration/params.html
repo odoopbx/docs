@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agent Configuration parameters &mdash; OdooPBX 1.0 documentation</title>
+  <title>Agent Parameters &mdash; OdooPBX 1.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/logo.png"/>
@@ -20,8 +20,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Tips and Tricks" href="tips.html" />
-    <link rel="prev" title="Security Reactor" href="reactor.html" /> 
+    <link rel="next" title="Asterisk Server" href="server.html" />
+    <link rel="prev" title="Administration" href="../administration.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,12 +46,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../intro.html#installation-types">Installation types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../administration.html">Administration</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Agent Parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="server.html">Asterisk Server</a></li>
 <li class="toctree-l2"><a class="reference internal" href="settings.html">Settings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="users.html">PBX Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tts.html">Text-to-speech</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reactor.html">Security Reactor</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Agent Configuration parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tips.html">Tips and Tricks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
 </ul>
@@ -75,7 +75,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a></li>
           <li class="breadcrumb-item"><a href="../administration.html">Administration</a></li>
-      <li class="breadcrumb-item active">Agent Configuration parameters</li>
+      <li class="breadcrumb-item active">Agent Parameters</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -84,20 +84,19 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="agent-configuration-parameters">
-<h1>Agent Configuration parameters<a class="headerlink" href="#agent-configuration-parameters" title="Permalink to this heading"></a></h1>
-<div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
-<p>As you already know The OdooPBX Asterisk connection middleware is based on the Saltstack pltaform.</p>
-<ul class="simple">
-<li><p>Odoo connects to the salt-api.</p></li>
-<li><p>The salt-api forwards requests to the salt-master.</p></li>
-<li><p>The salt-master sends requests to the connected salt-minion.</p></li>
-<li><p>The salt-minion is connected to the Asterisk via AMI port.</p></li>
+  <div class="section" id="agent-parameters">
+<h1>Agent Parameters<a class="headerlink" href="#agent-parameters" title="Permalink to this heading"></a></h1>
+<p>OdooPBX Agent consists of three services:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>salt-api: provides the salt API at TCP port <code class="docutils literal notranslate"><span class="pre">48000</span></code> by default.</p></li>
+<li><p>salt-master: Pub/Sub message bus based on ZeroMQ. more on [Salt architecture](<a class="reference external" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html)_">https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html)_</a></p></li>
+<li><p>salt-minion:  boosted with <code class="docutils literal notranslate"><span class="pre">asterisk_ami.py</span></code> and <code class="docutils literal notranslate"><span class="pre">odoo_executor.py</span></code> engines.</p></li>
 </ul>
-<p>All configuration is located in <code class="docutils literal notranslate"><span class="pre">/etc/salt</span></code> folder.</p>
-<p>Below we review the options we use in order to configure it all.</p>
-</div>
+</div></blockquote>
+<p>OdooPBX Agent is designed to be as much auto provisioned as possible.
+What you basically need is to run all these 3 services with <code class="docutils literal notranslate"><span class="pre">ODOO_URL</span></code>
+environment variable pointing to Odoo server with Asterisk Plus module installed.</p>
 <div class="section" id="minion-configuration">
 <h2>Minion configuration<a class="headerlink" href="#minion-configuration" title="Permalink to this heading"></a></h2>
 <p>The main minion’s configuration file is <code class="docutils literal notranslate"><span class="pre">/etc/salt/minion</span></code>.</p>
@@ -106,13 +105,34 @@
 <p>You must restat the minion process after making changes to its configuration using.</p>
 <p>Below is the list of default parameters and their meanings.</p>
 <dl class="simple">
-<dt>ami_login</dt><dd><p>Asterisk Manager Interface login name. Default is <code class="docutils literal notranslate"><span class="pre">odoo</span></code>. Env AMI_LOGIN</p>
+<dt>odoo_url</dt><dd><p>Substitutes used earlier <code class="docutils literal notranslate"><span class="pre">odoo_db</span></code>, <code class="docutils literal notranslate"><span class="pre">odoo_host</span></code>, <code class="docutils literal notranslate"><span class="pre">odoo_port</span></code>, <code class="docutils literal notranslate"><span class="pre">odoo_use_ssl</span></code> parameters when defined.
+Not defined by default. Example: <code class="docutils literal notranslate"><span class="pre">https://odoo.example.com/?db=demo</span></code>.
+Env <code class="docutils literal notranslate"><span class="pre">ODOO_URL</span></code>.</p>
 </dd>
-<dt>ami_secret</dt><dd><p>Asterisk Manager Interface secret. Default is <code class="docutils literal notranslate"><span class="pre">odoo</span></code>. Env AMI_SECRET</p>
+<dt>odoo_db</dt><dd><p>Odoo database name, default value is not defined. Env <code class="docutils literal notranslate"><span class="pre">ODOO_DB</span></code>.</p>
 </dd>
-<dt>ami_host</dt><dd><p>Hostname or IP address of Asterisk server. Default is <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code>. Env AMI_HOST</p>
+<dt>odoo_host</dt><dd><p>Odoo hostname or IP address to connect to, default <code class="docutils literal notranslate"><span class="pre">odoo</span></code>.</p>
 </dd>
-<dt>ami_port</dt><dd><p>Asterisk manager interface port, default <code class="docutils literal notranslate"><span class="pre">5038</span></code>. Env AMI_PORT.</p>
+<dt>odoo_port</dt><dd><p>Odoo port to connect, default <code class="docutils literal notranslate"><span class="pre">8069</span></code>.</p>
+</dd>
+<dt>odoo_use_ssl</dt><dd><p>Set to True if your Odoo is behind a proxy with HTTPS enabled. Default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt>odoo_user</dt><dd><p>Odoo account login for Asterisk server, default <code class="docutils literal notranslate"><span class="pre">asterisk1</span></code>. Env <code class="docutils literal notranslate"><span class="pre">ODOO_USER</span></code>.</p>
+</dd>
+<dt>odoo_password</dt><dd><p>Odoo account password for <code class="docutils literal notranslate"><span class="pre">odoo_user</span></code>, default is not defined.
+If not defined Agent will generate a new one and try to initialize itself connecting to <code class="docutils literal notranslate"><span class="pre">odoo_url</span></code>.
+Odoo must have <code class="docutils literal notranslate"><span class="pre">Initialize</span> <span class="pre">Mode</span> <span class="pre">Open</span></code> checked in PBX -&gt; Settings -&gt; Server to allow initialization.
+Env <code class="docutils literal notranslate"><span class="pre">ODOO_PASSWORD</span></code>.</p>
+</dd>
+<dt>odoo_trace_rpc</dt><dd><p>Trace Odoo RPC calls, default <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt>ami_login</dt><dd><p>Asterisk Manager Interface login name. Default is <code class="docutils literal notranslate"><span class="pre">odoo</span></code>. Env <code class="docutils literal notranslate"><span class="pre">AMI_LOGIN</span></code>.</p>
+</dd>
+<dt>ami_secret</dt><dd><p>Asterisk Manager Interface secret. Default is <code class="docutils literal notranslate"><span class="pre">odoo</span></code>. Env <code class="docutils literal notranslate"><span class="pre">AMI_SECRET</span></code>.</p>
+</dd>
+<dt>ami_host</dt><dd><p>Hostname or IP address of Asterisk server. Default is <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code>. Env <code class="docutils literal notranslate"><span class="pre">AMI_HOST</span></code>.</p>
+</dd>
+<dt>ami_port</dt><dd><p>Asterisk manager interface port, default <code class="docutils literal notranslate"><span class="pre">5038</span></code>. Env <code class="docutils literal notranslate"><span class="pre">AMI_PORT</span></code>.</p>
 </dd>
 <dt>ami_register_events</dt><dd><p>List of AMI events to subscribe using register_event panoramisk call. Default is <code class="docutils literal notranslate"><span class="pre">['*']</span></code>.</p>
 </dd>
@@ -149,8 +169,6 @@
 <dt>fastagi_listen_address</dt><dd><p>FastAGI engine listen address, default <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code>.</p>
 </dd>
 <dt>fastagi_listen_port</dt><dd><p>FastAGI engine listen port, default <code class="docutils literal notranslate"><span class="pre">4574</span></code>.</p>
-</dd>
-<dt>odoo_trace_rpc</dt><dd><p>Trace Odoo RPC calls</p>
 </dd>
 </dl>
 </div>
@@ -203,8 +221,8 @@ It will keep your settings when you upgrade the agent.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="reactor.html" class="btn btn-neutral float-left" title="Security Reactor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="tips.html" class="btn btn-neutral float-right" title="Tips and Tricks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../administration.html" class="btn btn-neutral float-left" title="Administration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="server.html" class="btn btn-neutral float-right" title="Asterisk Server" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
