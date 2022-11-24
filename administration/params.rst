@@ -1,26 +1,30 @@
 ==============================
 Agent Parameters
 ==============================
-OdooPBX Agent consists of three services:
+OdooPBX Agent consists of three Saltstack daemons:
 
- * salt-api: provides the salt API at TCP port ``48000`` by default.
- * salt-master: Pub/Sub message bus based on ZeroMQ. more on [Salt architecture](https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html)_
- * salt-minion:  boosted with ``asterisk_ami.py`` and ``odoo_executor.py`` engines.
+ * API: provides the salt API at TCP port ``48000`` by default.
+ * Master: provides Pub/Sub message bus based on ZeroMQ. More on `Salt architecture <https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html>`_
+ * Minion: boosted with custom engines Minion serves as an agent between Asterisk and Odoo.
 
-OdooPBX Agent is designed to be as much auto provisioned as possible.
-What you basically need is to run all these 3 services with ``ODOO_URL``
-environment variable pointing to Odoo server with Asterisk Plus module installed.
+OdooPBX Agent is designed to be as much auto-provisioned as possible.
+Minion reads ``ODOO_URL`` environment variable pointing to Odoo server
+with Asterisk Plus module installed and initializes itself on first startup.
+New passwords are generated and saved both at Odoo and Agent sides during initialization.
 
 
 Minion configuration
 ====================
-The main minion's configuration file is ``/etc/salt/minion``.
+Minion reads by default it's configuration from ``/etc/salt/minion`` file and
+``/etc/salt/minion.d/*.conf`` directory.
 
-The defaults are located in ``/etc/salt/minion.d/odoopbx.conf``.
+Default settings for the agent are located in ``/etc/salt/minion.d/odoopbx.conf``.
 
-Instead of changing the defaults just add a required option to ``/etc/salt/odoopbx/minion.conf``.
+Use ``odoopbx config set`` command in order to change defaults.
+Your settings will be saved into ``/etc/salt/odoopbx/minion.conf`` file.
+This file overrides defaults and is kept untouched during agent upgrade.
 
-You must restat the minion process after making changes to its configuration using.
+You must restat the minion process after making changes to its configuration.
 
 Below is the list of default parameters and their meanings.
 
@@ -29,7 +33,7 @@ Below is the list of default parameters and their meanings.
 
 Master and API configuration
 ============================
-Master and API configuration is defined in ``/etc/salt/master``.
+Master and API daemons use settings defined in ``/etc/salt/master``.
 
 It's better to create ``*.conf`` files inside ``/etc/salt/master.d/`` directory
 in case you want to modify Salt Master settings.
