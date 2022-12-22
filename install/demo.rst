@@ -2,37 +2,120 @@
 ==========
 Demo setup
 ==========
-This guide will help you to setup everything running inside Docker containers.
-So install docker and docker-compose, refer to  `oficial documentation <https://docs.docker.com/engine/install/>`_ for help.
 
 .. important::
-   Minimum 2GB RAM is required
+   Minimum 4GB RAM is required.
 
-Steps to setup a new project:
 
-*  `Get docker-compose.yml <https://github.com/odoopbx/agent/blob/master/docker/docker-compose.yml>`__.
-*  Run it.
+Create the following docker-commpose.yml file:
 
-Commands to copy & run:
+.. code:: yml
 
-.. code:: bash
+    version: '3.2'
+    services:
 
-    mkdir /srv/odoopbx
-    cd /srv/odoopbx
-    wget https://raw.githubusercontent.com/odoopbx/agent/master/docker/docker-compose.yml
-    docker-compose up -d odoo pbx
+    agent:
+        image: odoopbx/middleware
+        restart: unless-stopped
+        depends_on:
+        - rabbitmq
+        # To manipulate host's ipsets.    
+        privileged: true
+        network_mode: host 
+        volumes:
+        - asterisk_etc:/etc/asterisk/
+        - asterisk_spool:/var/spool/asterisk
+        - asterisk_run:/var/run/asterisk
+        environment:
+        - ODOO_URL=http://localhost:8069
+        - ODOO_DB=odoopbx_15
+        - ODOO_USER=asterisk1
+        - ODOO_PASSWORD=asterisk1
+        - AMI_USER=odoo
+        - AMI_PASS=odoo
+        - ASTERISK_AMI_HOST=localhost
+        - TZ=Europe/London
 
-You may check with ``docker-commpose ps`` if everything is ok.
+    asterisk:
+        image: odoopbx/asterisk
+        restart: unless-stopped
+        network_mode: host
+        volumes:
+        - asterisk_etc:/etc/asterisk/
+        - asterisk_spool:/var/spool/asterisk/
+        - asterisk_run:/var/run/asterisk/
 
-Odoo listens at port ``8072`` by default.
+    npm:
+        image: odoopbx/npm
+        restart: unless-stopped
+        ports:
+        - 80:80
+        - 81:81
+        - 443:443
+        volumes:
+        - npm_data:/data
+        - letsencrypt:/etc/letsencrypt
+
+    odoo:
+        image: odoopbx/odoo:15.0
+        restart: unless-stopped
+        depends_on:
+        - db
+        ports:
+        - 8069:8069
+        - 8072:8072
+        volumes:
+        - odoo_data:/var/lib/odoo
+        environment:
+        - USER=odoo
+        - PASSWORD=odoo
+
+    db:
+        image: postgres:12
+        volumes:
+        - db_data:/var/lib/postgresql/data/pgdata
+        environment:
+        - POSTGRES_USER=odoo
+        - POSTGRES_PASSWORD=odoo
+        - PGDATA=/var/lib/postgresql/data/pgdata
+
+    rabbitmq:
+        image: rabbitmq
+        ports:
+        - 127.0.0.1:5672:5672 # Bind to the localhost!
+
+    volumes:
+    asterisk_etc:
+    asterisk_spool:
+    asterisk_run:
+    letsencrypt:
+    npm_data:
+    odoo_data:
+    db_data:
+
+    networks:
+    default:
+        driver: bridge
+        ipam:
+        config:
+        - subnet: 172.172.0.0/16
+
+
+Enter ``docker-compose up`` and wait about 5-10 minutes until all services roll out and enter a normal working state.
+
+Odoo listens at port ``8072``.
+
 Point your browser to http://your.server.address:8072 and enter admin/admin as username/password.
 
-Navigate to ``Apps`` menu in the top-left and search for ``asterisk`` in the search-box.
-Choose ``Asterisk Plus`` and press ``Install`` button.
+In PBX -> Server set the following ``Agent`` and ``Console`` settings:
 
-``Asterisk Plus`` module adds ``PBX`` menu into top-left button.
-All our PBX stuff lives here.
+* Agent URL: https://172.172.0.1:48000
+* Console URL: https://x.x.x.x:48001, where x.x.x.x - is the IP of your server where you installed the demo.
 
-Navigate to ``Settings`` -> ``Server``, press ``Minion Ping``, ``Asterisk Ping`` buttons to check connectivity with Agent and Asterisk.
+Now press ``Minion Ping``, ``Asterisk Ping`` buttons to check connectivity with Agent and Asterisk.
+
+Finally, click the ``Sync Now`` button in the bottom left corner of the server's form.
 
 Enjoy!
+
+P.S. You can also open your browser at https://x.x.x.x:81 and create a production SSL based deploy.
