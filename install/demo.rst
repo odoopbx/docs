@@ -116,6 +116,8 @@ Now press ``Minion Ping``, ``Asterisk Ping`` buttons to check connectivity with 
 
 Finally, click the ``Sync Now`` button in the bottom left corner of the server's form.
 
+What's next? You are invited to install other Asterisk Plus modules, and play with it!
+
 Enjoy!
 
 P.S. You can also open your browser at https://your.server.address:81 and create a production SSL based deploy.
