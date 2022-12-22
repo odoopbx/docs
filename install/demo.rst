@@ -110,7 +110,7 @@ Point your browser to http://your.server.address:8072 and enter admin/admin as u
 In PBX -> Server set the following ``Agent`` and ``Console`` settings:
 
 * Agent URL: https://172.172.0.1:48000
-* Console URL: https://x.x.x.x:48001, where x.x.x.x - is the IP of your server where you installed the demo.
+* Console URL: https://your.server.address:48001, where your.server.address - is the IP or hostname of your server where you installed the demo.
 
 Now press ``Minion Ping``, ``Asterisk Ping`` buttons to check connectivity with Agent and Asterisk.
 
@@ -118,4 +118,4 @@ Finally, click the ``Sync Now`` button in the bottom left corner of the server's
 
 Enjoy!
 
-P.S. You can also open your browser at https://x.x.x.x:81 and create a production SSL based deploy.
+P.S. You can also open your browser at https://your.server.address:81 and create a production SSL based deploy.
