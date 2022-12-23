@@ -4,13 +4,13 @@ Security Reactor
 
 Reactor Introduction
 ====================
-In order to protect the Asterisk server a Security Reactor is implemented.
+In order to protect the Asterisk server a Security Reactor is implemented and enabled by default.
 
-As most of the installations (at least for now) use an external Asterisk / FreePBX server the 
-security reactor is not enabled by default.
+If any SIP user enters a wrong password his IP address is immediatly blocked on the firewall.
 
-To enable the reactor add ``security_reactor_enabled: True`` to ``/etc/salt/minion_local.conf`` and restart
-the minion.
+The Reactor is managed from the Odoo PBX -> Settings -> Security menu.
+
+To disable the reactor set ``ASTERISK_SECURITY_ENABLED`` environment variable to ``no`` and restart the Agent.
 
 Make sure that a ``voip`` chain is created in iptables and that the necessary ``ipsets`` are created:
 

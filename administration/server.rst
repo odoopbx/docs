@@ -3,7 +3,7 @@ Asterisk Server
 ===============
 Buttons
 =======
-* **Minion and Asterisk ping** - to check the connection between Odoo and Asterisk use the following buttons:
+* **Test and Asterisk ping** - to check the connection between Odoo and Asterisk use these buttons.
 * **Console** - open WEB console in a separate browser tab. Make sure that your browser settings do not block new tabs.
 * **Upload .conf files** - send the .conf files to the Asterisk server from Odoo. All existing on Asterisk .conf files will be overwritten.
 * **Download .conf files** - download the .conf files from the Asterisk server to Odoo. All existing in Odoo .conf will be overwritten.
@@ -39,12 +39,11 @@ Console URL
 -----------
 In order to connect to the Asterisk console you need to set the correct Agent WEB console URL. 
 
-The WEB console service is provided by the ``asterisk_cli`` engine of the salt-minion process. 
-So in the host part of the URL enter your Agent hostname or IP address.
+The WEB console service is provided by the Agent middleware service. 
 
-By default port 30000 is used and self-signed certificates are generated. So if you use the defaults
-you need to allow this self-signed certificate in your browser by opening first the console URL in
-your browser and adding the permission.
+By default port 48001 is used. It is strictly recommended to use SSL proxy of the console port.
+
+To disable the console service set ``CONSOLE_DISABLED=yes`` in your docker compose file.
 
 Server startup
 --------------
@@ -57,29 +56,3 @@ After the initial configuration is done the correct update direction option must
 
 * **Odoo** -> Asterisk (Odoo is the source of configuration) - usually when you use a vanilla Asterisk server you manage this server from Odoo.
 * **Asterisk** -> Odoo (Asterisk is the source of configuration) - when you use a third-party Asterisk distibution (for example, FreePBX based) it has its own management UI ahat generates .conf files.
-
-Commands
-========
-This feature is for advanced users only :-)
-
-It is possible to execute Salt commands on the Asterisk server. In order to do it you should enter
-the edit mode of the server form and issue a command and use ``Tab`` button to take of the focus.
-
-Then the command is sent to the Salt minion and the result is displayed in the Reply field.
-
-You can try the following commands:
-
-.. code::
-    
-    ps.cpu_percent
-    ps.disk_usage
-    ps.netstat
-    ps.netstat name=asterisk
-    ps.top
-    ps.psaux name=salt
-    network.get_fqdn
-    network.ping host=odoopbx.com
-    network.interface iface=eth0
-
-The full list of possible commands can be found `here <https://docs.saltproject.io/en/latest/ref/modules/all/index.html>`__.
-
