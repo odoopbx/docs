@@ -4,122 +4,33 @@ Debugging
 This guide is sharing some tips, tricks and configuration settings 
 that are useful during development or issue solving.
 
-Tracing Salt event bus
-======================
-
-Tracing master bus
+Tracing the Agent middleware
+============================
+Tracing Nameko bus
 ------------------
-Odoo and Salt API communication via Salt master can be debugged using this:
+Enter Nameko shell:
 
 .. code:: sh
   
-  root@devmax:/srv/odoopbx/salt# salt-run state.event pretty=True
+  cd /services
+  nameko shell -c config.yml
 
-For example if you ping a server from Odoo you will see the following output:
-
-.. code::
-
-  20210929105513985451    {
-      "_stamp": "2021-09-29T10:55:13.985729",
-      "minions": [
-          "asterisk"
-      ]
-  }
-  salt/job/20210929105513985451/new       {
-      "_stamp": "2021-09-29T10:55:13.987694",
-      "arg": [],
-      "fun": "test.ping",
-      "jid": "20210929105513985451",
-      "minions": [
-          "asterisk"
-      ],
-      "missing": [],
-      "tgt": "asterisk",
-      "tgt_type": "glob",
-      "user": "odoo"
-  }
-  salt/job/20210929105513985451/ret/asterisk      {
-      "_stamp": "2021-09-29T10:55:14.154594",
-      "cmd": "_return",
-      "fun": "test.ping",
-      "fun_args": [],
-      "id": "asterisk",
-      "jid": "20210929105513985451",
-      "retcode": 0,
-      "return": true,
-      "success": true
-  }
-
-Tracing minion bus
-------------------
-Minion bus can be traced like this:
-
-.. code:: sh
-
-  salt-call state.event pretty=True
-
-If we make an Asterisk ping from Odoo we get:
+For example, you can send Ping action to Asterisk:
 
 .. code::
 
-    ami_action      {
-        "Action": "Ping",
-        "_stamp": "2021-09-29T10:59:06.018927",
-        "as_list": null,
-        "reply_channel": "689977e98a5444bdadc74c9ae00948f9",
-        "timeout": 5
-    }
-    ami_reply/689977e98a5444bdadc74c9ae00948f9      {
-        "Reply": [
-            {
-                "ActionID": "action/38073b0b-df2b-43e6-a254-a0b192739339/2/6035",
-                "Ping": "Pong",
-                "Response": "Success",
-                "Timestamp": "1632913146.031481",
-                "content": ""
-            }
-        ],
-        "_stamp": "2021-09-29T10:59:06.034391"
-    }  
+  n.rpc.asterisk.manager_action({'Action':'Ping'})
+  
 
 Tracing AMI and Odoo RPC
 =========================
-These are configuration optio
-ns useful for debug and development:
+See LOGGING section in ``/services/config.yml``. You can activate more or less levels there.
+
+*Note: the LOGGING option cannot be passed in environment value.*
 
 
-.. list-table::
-   :widths: 20 15 65
-   :header-rows: 1
-
-   * - Option
-     - Default
-     - Description
-   * - ``odoo_trace_rpc``
-     - ``False``
-     - Make odoo_connector log RPC requests to Odoo and responses received
-   * - ``ami_trace_actions``
-     - ``False``
-     - Make asterisk_ami log ``Action`` sent to Asterisk through AMI.
-       Can be a list of actions or ``True`` to log all actions.
-   * - ``odoo_trace_ami``
-     - ``False``
-     - Make asterisk_ami log all ``Event`` sent to Odoo
-   * - ``ami_ping_interval``
-     - ``10``
-     - interval in seconds between ``Ping`` actions sent to Asterisk.
-       Nice to set it e.g. 10000 during developement.
-   * - ``connector_bus_enabled``
-     - ``True``
-     - if ``False`` Odoo long_polling mechanism is disabled.
-       HTTP(S) method for connecting agent is still available.
-   * - ``odoo_raise_exceptions``
-     - ``False``
-     - Raise python Exceptions when it occures.
-
-
-Debug the code
-==============
+Debug the Odoo code
+===================
 In your module import ``debug`` method.  When debug is enabled in ``PBX -> Settings -> General`` Odoo will these messages
 in a special way that is handy to observe. Here is an example:
 

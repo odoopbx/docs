@@ -5,8 +5,6 @@ The OdooPBX Agent has a built-in support for Google Text-to-speech API.
 
 For documentation on Google TTS API follow this `link <https://cloud.google.com/text-to-speech>`__.
 
-For customization see `asteriskmod.py <https://github.com/odoopbx/agent/blob/master/salt/agent/files/etc/extensions/modules/asteriskmod.py#L284>`__ salt module.
-
 You must prepare your server where the Agent & Asterisk run as described below.
 
 API Key
@@ -18,7 +16,7 @@ You can find some instructions on how to download the key file `here <https://ww
 
 Usage example
 =============
-Use ``asterisk.tts_create_sound`` function that accepts the following parameters:
+Use ``file.tts_create_sound`` function that accepts the following parameters:
 
 * **result_file** - file name of the target sound file, plased in the result_file_folder directory (see below).
 * **text** - text that should be sent to Google TTS API.
