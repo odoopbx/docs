@@ -191,6 +191,8 @@ Use the following ``docker-compose.yml`` file to deploy:
             - ODOO_DB=odoopbx_15
             - ODOO_USER=asterisk1
             - ODOO_PASSWORD=asterisk1
+            # - ODOO_IP=1.2.3.4 # Optionally restrict access to only Odoo's IP address.
+            - ASTERISK_SECURITY_ENABLED=yes  # Can be disabled if you want to use your fail2ban package.
             - AMI_USER=odoo
             - AMI_PASS=odoo
             - ASTERISK_AMI_HOST=localhost
