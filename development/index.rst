@@ -19,12 +19,6 @@ The **AMI Events** that are sent to Odoo by the agent are **configured** in Aste
 So the only one requirement that needs to be done in order to start handling AMI events in Odoo is an **XML data** where
 it is defined.
 
-Here is a little more detailed picture on the OdooPBX architecture.
-
-.. image:: media/odoopbx-architecture.png
-
-
-------------
 Odoo sends jobs to the Agent which in turn submits them to connected Asterisk.
 
 This is non-blocking process. So Odoo worker does not wait for any reply from the Asterisk. And this
