@@ -92,8 +92,7 @@ and forwards AMI messages to Odoo.</p>
 <p>The <strong>AMI Events</strong> that are sent to Odoo by the agent are <strong>configured</strong> in Asterisk Plus settings.
 So the only one requirement that needs to be done in order to start handling AMI events in Odoo is an <strong>XML data</strong> where
 it is defined.</p>
-<p>Here is a little more detailed picture on the OdooPBX architecture.</p>
-<img alt="../_images/odoopbx-architecture.png" src="../_images/odoopbx-architecture.png" />
+<p>Odoo sends jobs to the Agent which in turn submits them to connected Asterisk.</p>
 <p>This is non-blocking process. So Odoo worker does not wait for any reply from the Asterisk. And this
 is a very important pattern as Odoo cannot be affected by Asterisk outages.
 When something wrong happens with the connection with Asterisk Odoo just works as normal.</p>
