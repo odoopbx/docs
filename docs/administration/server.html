@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asterisk Server &mdash; OdooPBX 1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="../_static/logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Settings" href="settings.html" />
+    <link rel="prev" title="Administration" href="../administration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> OdooPBX<img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">What is OdooPBX?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#odoopbx-apps">OdooPBX Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#installation-types">Installation types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../administration.html">Administration</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Asterisk Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users.html">PBX Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tts.html">Text-to-speech</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reactor.html">Security Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tips.html">Tips and Tricks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common.html">Common</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">OdooPBX</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../administration.html">Administration</a></li>
+      <li class="breadcrumb-item active">Asterisk Server</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="asterisk-server">
+<h1>Asterisk Server<a class="headerlink" href="#asterisk-server" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="buttons">
+<h2>Buttons<a class="headerlink" href="#buttons" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Test and Asterisk ping</strong> - to check the connection between Odoo and Asterisk use these buttons.</p></li>
+<li><p><strong>Console</strong> - open WEB console in a separate browser tab. Make sure that your browser settings do not block new tabs.</p></li>
+<li><p><strong>Upload .conf files</strong> - send the .conf files to the Asterisk server from Odoo. All existing on Asterisk .conf files will be overwritten.</p></li>
+<li><p><strong>Download .conf files</strong> - download the .conf files from the Asterisk server to Odoo. All existing in Odoo .conf will be overwritten.</p></li>
+<li><p><strong>Reload</strong> - issue the <code class="docutils literal notranslate"><span class="pre">reload</span></code> command to the Asterisk server.</p></li>
+<li><p><strong>Restart</strong> - reboot the Asterisk server.</p></li>
+</ul>
+</div>
+<div class="section" id="settings">
+<h2>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="asterisk-system-account">
+<h3>Asterisk system account<a class="headerlink" href="#asterisk-system-account" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>During the installation process <strong>a new odoo account is created</strong> named <code class="docutils literal notranslate"><span class="pre">asterisk1</span></code> with default password <code class="docutils literal notranslate"><span class="pre">asterisk1</span></code>.</p>
+</div>
+<p>This account is used by the Agent to connect to your Odoo instance. Don’t use this account for anything else!</p>
+<p>Though the permissions of this Asterisk user account are very limited (it belongs to the Portal group)
+it is <strong>strictly recommended</strong> to change the default password of this account after installation is finished
+(don’t forget to update <code class="docutils literal notranslate"><span class="pre">odoo_password</span></code> setting on the Agent).</p>
+<p>You can change the password of the Asterisk account by entering a new value in the <code class="docutils literal notranslate"><span class="pre">Password</span></code> field.</p>
+</div>
+<div class="section" id="country-settings-and-timezone">
+<h3>Country settings and timezone<a class="headerlink" href="#country-settings-and-timezone" title="Permalink to this headline">¶</a></h3>
+<p>It is important to set the correct country for the Asterisk server because it is required to
+correctly process caller ID numbers that usually come in local format.</p>
+<p>Internally all partner numbers in Odoo are stored in E.164 format. So country settings are used to
+correctly transform numbers from local to E.164 format.</p>
+<p>Also server’s timezone must be correctly set in order to correctly process times in calls.</p>
+</div>
+<div class="section" id="console-url">
+<h3>Console URL<a class="headerlink" href="#console-url" title="Permalink to this headline">¶</a></h3>
+<p>In order to connect to the Asterisk console you need to set the correct Agent WEB console URL.</p>
+<p>The WEB console service is provided by the Agent middleware service.</p>
+<p>By default port 48001 is used. It is strictly recommended to use SSL proxy of the console port.</p>
+<p>To disable the console service set <code class="docutils literal notranslate"><span class="pre">CONSOLE_DISABLED=yes</span></code> in your docker compose file.</p>
+</div>
+<div class="section" id="server-startup">
+<h3>Server startup<a class="headerlink" href="#server-startup" title="Permalink to this headline">¶</a></h3>
+<p>When Asterisk server is started its configuration files need to be syncronized with Odoo.</p>
+<p>When the Asterisk server is connected to Odoo for the first time all its .conf files are sent to Odoo and <code class="docutils literal notranslate"><span class="pre">Initial</span> <span class="pre">Update</span> <span class="pre">Done</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.
+If Odoo already has a file with the same name that is being sent, that file is not overwritten.</p>
+<p>After the initial configuration is done the correct update direction option must be set.</p>
+<ul class="simple">
+<li><p><strong>Odoo</strong> -&gt; Asterisk (Odoo is the source of configuration) - usually when you use a vanilla Asterisk server you manage this server from Odoo.</p></li>
+<li><p><strong>Asterisk</strong> -&gt; Odoo (Asterisk is the source of configuration) - when you use a third-party Asterisk distibution (for example, FreePBX based) it has its own management UI ahat generates .conf files.</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../administration.html" class="btn btn-neutral float-left" title="Administration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="settings.html" class="btn btn-neutral float-right" title="Settings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Odooist.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

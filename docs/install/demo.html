@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo setup &mdash; OdooPBX 1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="../_static/logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The OdooPBX middlware Agent installation" href="middleware.html" />
+    <link rel="prev" title="Installation" href="../install.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> OdooPBX<img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">What is OdooPBX?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#odoopbx-apps">OdooPBX Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html#installation-types">Installation types</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../install.html">Installation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Demo setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="middleware.html">The OdooPBX middlware Agent installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="freepbx.html">FreePBX setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../administration.html">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common.html">Common</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">OdooPBX</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../install.html">Installation</a></li>
+      <li class="breadcrumb-item active">Demo setup</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="demo-setup">
+<h1>Demo setup<a class="headerlink" href="#demo-setup" title="Permalink to this headline">¶</a></h1>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Minimum 4GB RAM is required.</p>
+</div>
+<p>Create the following docker-commpose.yml file:</p>
+<div class="highlight-yml notranslate"><div class="highlight"><pre><span></span>version: &#39;3.2&#39;
+services:
+
+agent:
+    image: odoopbx/middleware
+    restart: unless-stopped
+    depends_on:
+    - rabbitmq
+    # To manipulate host&#39;s ipsets.
+    privileged: true
+    network_mode: host
+    volumes:
+    - asterisk_etc:/etc/asterisk/
+    - asterisk_spool:/var/spool/asterisk
+    - asterisk_run:/var/run/asterisk
+    environment:
+    - ODOO_URL=http://localhost:8069
+    - ODOO_DB=odoopbx_15
+    - ODOO_USER=asterisk1
+    - ODOO_PASSWORD=asterisk1
+    - AMI_USER=odoo
+    - AMI_PASS=odoo
+    - ASTERISK_AMI_HOST=localhost
+    - TZ=Europe/London
+
+asterisk:
+    image: odoopbx/asterisk
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+    - asterisk_etc:/etc/asterisk/
+    - asterisk_spool:/var/spool/asterisk/
+    - asterisk_run:/var/run/asterisk/
+
+npm:
+    image: odoopbx/npm
+    restart: unless-stopped
+    ports:
+    - 80:80
+    - 81:81
+    - 443:443
+    volumes:
+    - npm_data:/data
+    - letsencrypt:/etc/letsencrypt
+
+odoo:
+    image: odoopbx/odoo:15.0
+    restart: unless-stopped
+    depends_on:
+    - db
+    ports:
+    - 8069:8069
+    - 8072:8072
+    volumes:
+    - odoo_data:/var/lib/odoo
+    environment:
+    - USER=odoo
+    - PASSWORD=odoo
+
+db:
+    image: postgres:12
+    volumes:
+    - db_data:/var/lib/postgresql/data/pgdata
+    environment:
+    - POSTGRES_USER=odoo
+    - POSTGRES_PASSWORD=odoo
+    - PGDATA=/var/lib/postgresql/data/pgdata
+
+rabbitmq:
+    image: rabbitmq
+    ports:
+    - 127.0.0.1:5672:5672 # Bind to the localhost!
+
+volumes:
+asterisk_etc:
+asterisk_spool:
+asterisk_run:
+letsencrypt:
+npm_data:
+odoo_data:
+db_data:
+
+networks:
+default:
+    driver: bridge
+    ipam:
+    config:
+    - subnet: 172.172.0.0/16
+</pre></div>
+</div>
+<p>Enter <code class="docutils literal notranslate"><span class="pre">docker-compose</span> <span class="pre">up</span></code> and wait about 5-10 minutes until all services roll out and enter a normal working state.</p>
+<p>Odoo listens at port <code class="docutils literal notranslate"><span class="pre">8072</span></code>.</p>
+<p>Point your browser to <a class="reference external" href="http://your.server.address:8072">http://your.server.address:8072</a> and enter admin/admin as username/password.</p>
+<p>In PBX -&gt; Server set the following <code class="docutils literal notranslate"><span class="pre">Agent</span></code> and <code class="docutils literal notranslate"><span class="pre">Console</span></code> settings:</p>
+<ul class="simple">
+<li><p>Agent URL: <a class="reference external" href="https://172.172.0.1:48000">https://172.172.0.1:48000</a></p></li>
+<li><p>Console URL: <a class="reference external" href="https://your.server.address:48001">https://your.server.address:48001</a>, where your.server.address - is the IP or hostname of your server where you installed the demo.</p></li>
+</ul>
+<p>Now press <code class="docutils literal notranslate"><span class="pre">Minion</span> <span class="pre">Ping</span></code>, <code class="docutils literal notranslate"><span class="pre">Asterisk</span> <span class="pre">Ping</span></code> buttons to check connectivity with Agent and Asterisk.</p>
+<p>Finally, click the <code class="docutils literal notranslate"><span class="pre">Sync</span> <span class="pre">Now</span></code> button in the bottom left corner of the server’s form.</p>
+<p>What’s next? You are invited to install other Asterisk Plus modules, and play with it!</p>
+<p>Enjoy!</p>
+<p>P.S. You can also open your browser at <a class="reference external" href="https://your.server.address:81">https://your.server.address:81</a> and create a production SSL based deploy.</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../install.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="middleware.html" class="btn btn-neutral float-right" title="The OdooPBX middlware Agent installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Odooist.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
