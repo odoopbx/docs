@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>What is OdooPBX? &mdash; OdooPBX 1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>What is OdooPBX &mdash; OdooPBX 2.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="_static/logo.png"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -35,13 +35,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">What is OdooPBX?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#odoopbx-apps">OdooPBX Apps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#installation-types">Installation types</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">What is OdooPBX</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="administration.html">Administration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
-<li class="toctree-l1"><a class="reference internal" href="common.html">Common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
 </ul>
 
         </div>
@@ -58,7 +54,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a></li>
-      <li class="breadcrumb-item active">What is OdooPBX?</li>
+      <li class="breadcrumb-item active">What is OdooPBX</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -67,17 +63,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="contents topic" id="contents">
-<p class="topic-title">Contents</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="#what-is-odoopbx" id="id1">What is OdooPBX?</a></p></li>
-<li><p><a class="reference internal" href="#odoopbx-apps" id="id2">OdooPBX Apps</a></p></li>
-<li><p><a class="reference internal" href="#installation-types" id="id3">Installation types</a></p></li>
-</ul>
-</div>
-<div class="section" id="what-is-odoopbx">
-<h1><a class="toc-backref" href="#id1">What is OdooPBX?</a><a class="headerlink" href="#what-is-odoopbx" title="Permalink to this headline">¶</a></h1>
-<p>OdooPBX is a telephony platform built upon Odoo &amp; Asterisk using Nameko microservices as a middleware layer:</p>
+  <div class="section" id="what-is-odoopbx">
+<h1>What is OdooPBX<a class="headerlink" href="#what-is-odoopbx" title="Permalink to this headline">¶</a></h1>
+<p>OdooPBX is a telephony platform built upon Odoo &amp; Asterisk using Nameko microservices as a middleware layer.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://odoo.com">Odoo</a> (former OpenERP / TinyERP) is a modern WEB business platform that rapidly spreads over the world.</p></li>
 <li><p><a class="reference external" href="https://asterisk.org">Asterisk PBX</a> is the most popular open source PBX software.</p></li>
@@ -86,38 +74,29 @@
 <p>Odoo as a business platform comes with a plenty of ready to use business oriented modules like CRM, Projects, Warehouse,
 Sales, Events, Website and much more.</p>
 <p>OdooPBX adds a layer of telephony to these business modules and thus integrates close telephone communication with the places where it takes place.</p>
-<p>Finally, a special middleware <strong>Agent</strong> is used to connect Odoo and Asterisk together in a proper way.</p>
+<p>Finally, a special middleware <strong>Agent</strong> is used to connect Odoo and Asterisk together in a special way.</p>
 <p>The Agent itself is built upon the Nameko framework and performs the following functions:</p>
 <ul class="simple">
 <li><p>Forwards Asterisk AMI events to Odoo according to the downloaded events map.</p></li>
 <li><p>Executes Asterisk AMI actions received from Odoo.</p></li>
-<li><p>Protects Asterisk from DDoS and password bruteforce attacks.</p></li>
-<li><p>Provides a backend part for a WEB based Asterisk CLI.</p></li>
+<li><p>Protects Asterisk from DDoS and password bruteforce attacks (optionally).</p></li>
+<li><p>Provides a backend part for a WEB based Asterisk CLI (optionally).</p></li>
 </ul>
-<p>Read the <a class="reference external" href="../development">Developers guide</a> for more information on how to build telephony applications on the OdooPBX platform.</p>
-</div>
-<div class="section" id="odoopbx-apps">
-<h1><a class="toc-backref" href="#id2">OdooPBX Apps</a><a class="headerlink" href="#odoopbx-apps" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="odoopbx-modules">
+<h2>OdooPBX modules<a class="headerlink" href="#odoopbx-modules" title="Permalink to this headline">¶</a></h2>
 <p>As OdooPBX is based on Odoo it has modular architecture.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The list of modules can be found in <a class="reference external" href="https://github.com/odoopbx/addons">addons repo</a></p>
-</div>
 <p>The main module is named <strong>Asterisk Plus</strong> and it is inherited by all other OdooPBX modules.</p>
 <p>Other modules add some integration between Asterisk Plus module and different Odoo componoents. For example, Asterisk Plus CRM app requires CRM module to be installed
 and brings the integration of CRM and telephony.</p>
-</div>
-<div class="section" id="installation-types">
-<h1><a class="toc-backref" href="#id3">Installation types</a><a class="headerlink" href="#installation-types" title="Permalink to this headline">¶</a></h1>
-<p>Depending on your existing environment there can be different installation types.</p>
+<p>Currenly the following modules are available:</p>
 <ul class="simple">
-<li><p>If you have Odoo &amp; Asterisk already running you need to install the OdooPBX agent and configure it for your Odoo and Asterisk instances.</p></li>
-<li><p>If you have only Odoo running then you need to also install Asterisk and the Agent.</p></li>
-<li><p>If you have Asterisk running then you should install the Agent on the Asterisk server and also install an Odoo instance near it.</p></li>
-<li><p>Finally, you might start from zero and would want to install everything from scratch.</p></li>
+<li><p>Asterisk Plus CRM</p></li>
+<li><p>Asterisk Plus Helpdesk</p></li>
+<li><p>Asterisk Plus Sale</p></li>
+<li><p>Asterisk Plus HR</p></li>
+<li><p>Asterisk Plus Project</p></li>
 </ul>
-<p>The OdooPBX software is distributed using Docker Compose style.</p>
-<p>All these topics are covered in the <a class="reference internal" href="install.html"><span class="doc">Installation</span></a> section.</p>
+</div>
 </div>
 
 
@@ -131,7 +110,7 @@ and brings the integration of CRM and telephony.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Odooist.</p>
+    <p>&#169; Copyright 2023, Odooist OU.</p>
   </div>
 
    

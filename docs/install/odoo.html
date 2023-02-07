@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Odoo configuration &mdash; OdooPBX 2.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="../_static/logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Asterisk configuration" href="asterisk.html" />
+    <link rel="prev" title="Installation" href="../install.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> OdooPBX<img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">What is OdooPBX</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../install.html">Installation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Odoo configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asterisk.html">Asterisk configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent.html">The middlware Agent</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">OdooPBX</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../install.html">Installation</a></li>
+      <li class="breadcrumb-item active">Odoo configuration</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="odoo-configuration">
+<h1>Odoo configuration<a class="headerlink" href="#odoo-configuration" title="Permalink to this headline">¶</a></h1>
+<p>Odoo should be configured in the right way in order to be ready for Asterisk Plus module.</p>
+<div class="section" id="workers">
+<h2>Workers<a class="headerlink" href="#workers" title="Permalink to this headline">¶</a></h2>
+<p>Workers are Odoo processes that handle requests.</p>
+<p>Asterisk modules make many short-running requests.</p>
+<p>So your Odoo should be configured with at least 2 workers
+(but 4 workers is the minimal recommended starting value).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you use odoo.sh with 1 worker configured it is possible to get issues related to performance.</p>
+</div>
+</div>
+<div class="section" id="long-polling">
+<h2>Long polling<a class="headerlink" href="#long-polling" title="Permalink to this headline">¶</a></h2>
+<p>Internal gevent-based server must be enabled (aka long polling) for popup notifications
+and live channels reload to work.</p>
+<p>When you enable workers gevent server is also enabled.</p>
+<p>By default port 8072 is used and you can check it with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">netstat</span> <span class="o">-</span><span class="n">an</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">LISTEN</span> <span class="o">|</span> <span class="n">grep</span> <span class="mi">8072</span>
+</pre></div>
+</div>
+<p>on your Odoo server.</p>
+<p>If you don’t use a proxy (apache / nginx / etc) then you should open Odoo
+on gevent’s port e.g.: <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8072/web</span></code>.</p>
+<p>If you run Odoo behind a proxy be sure to add a different proxy handler for the <code class="docutils literal notranslate"><span class="pre">/longpolling/poll</span></code> URL.</p>
+<p>Here is a snippet for Nginx:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">location</span> <span class="o">/</span><span class="n">longpolling</span><span class="o">/</span><span class="n">poll</span> <span class="p">{</span>
+  <span class="n">proxy_pass</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">8072</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you see <code class="docutils literal notranslate"><span class="pre">Exception:</span> <span class="pre">bus.Bus</span> <span class="pre">unavailable</span></code> in your Odoo log then it means you
+did not set long polling right.</p>
+</div>
+<div class="section" id="single-multi-database-setup">
+<h2>Single / multi database setup<a class="headerlink" href="#single-multi-database-setup" title="Permalink to this headline">¶</a></h2>
+<p>There is one thing your should know.</p>
+<p>It’s a good configuration when your Odoo is limited to just one database with dbfilter
+configuration option and list_db set to False.</p>
+<p>But when you run Odoo with multiple databases some special configuration must be enabled.</p>
+<p>You should add asterisk_plus to <code class="docutils literal notranslate"><span class="pre">server_wide_modules</span></code> parameter in order to be able
+to make CURL requests from the Asterisk dialplan (see below).</p>
+<p>Here is an example of such a configuration line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">server_wide_modules</span> <span class="o">=</span> <span class="n">web</span><span class="p">,</span><span class="n">asterisk_plus</span>
+</pre></div>
+</div>
+<p>If your Odoo is in a single-mode setup there is no need to configure the <code class="docutils literal notranslate"><span class="pre">server_wide_modules</span></code> parameter.</p>
+<div class="section" id="addons">
+<h3>Addons<a class="headerlink" href="#addons" title="Permalink to this headline">¶</a></h3>
+<p>Install <a class="reference external" href="https://github.com/odoopbx/addons">addons</a> in the same way you install any other Odoo module.</p>
+<p>Do a database backup before installation or upgrade and also make a backup of previous version of the module
+if you have it (just in case to be able to restore quicky).</p>
+<p>Make sure that <code class="docutils literal notranslate"><span class="pre">addons_path</span></code> is set correctly to include OdooPBX addons.</p>
+<p>The module dependencies are localed in <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file located in the addons folder.</p>
+<p>If you use odoo.sh make sure you copy the requirements to your modules top folder so that odoo.sh can
+install the required dependencies.</p>
+<p>If you use python virtualenv make sure you install the requirements there and not system wide.</p>
+</div>
+<div class="section" id="troubleshooting">
+<h3>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="i-don-t-get-popup-notifications">
+<h3>I don’t get popup notifications<a class="headerlink" href="#i-don-t-get-popup-notifications" title="Permalink to this headline">¶</a></h3>
+<p>The most likely you the long polling mode is not enabled.</p>
+<p>Check <code class="docutils literal notranslate"><span class="pre">workers</span></code> settings in your <code class="docutils literal notranslate"><span class="pre">odoo.conf</span></code>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../install.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="asterisk.html" class="btn btn-neutral float-right" title="Asterisk configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Odooist OU.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

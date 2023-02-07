@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The middlware Agent &mdash; OdooPBX 2.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="../_static/logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Configuration" href="../configuration.html" />
+    <link rel="prev" title="Asterisk configuration" href="asterisk.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> OdooPBX<img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">What is OdooPBX</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../install.html">Installation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="odoo.html">Odoo configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asterisk.html">Asterisk configuration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The middlware Agent</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">OdooPBX</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../install.html">Installation</a></li>
+      <li class="breadcrumb-item active">The middlware Agent</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="the-middlware-agent">
+<h1>The middlware Agent<a class="headerlink" href="#the-middlware-agent" title="Permalink to this headline">¶</a></h1>
+<p>This documentation assumes that the following components are already installed:</p>
+<ul class="simple">
+<li><p>Odoo: Odoo is already deployed and properly configured (see <a class="reference internal" href="odoo.html"><span class="doc">Odoo configuration</span></a>).</p></li>
+<li><p>Asterisk: Asterisk PBX is also deployed and AMI account is configured (see <a class="reference internal" href="asterisk.html"><span class="doc">Asterisk configuration</span></a>).</p></li>
+</ul>
+<p>Now the Agent middlware should be installed to connect them together.</p>
+<p>The Agent does the following jobs:</p>
+<ul class="simple">
+<li><p>Forwards Asterisk events to Odoo according to the downloaded events map.</p></li>
+<li><p>Executes Asterisk actions received from Odoo.</p></li>
+<li><p>Protects Asterisk from DDoS and password bruteforce attacks (if enabled).</p></li>
+</ul>
+<p>The best place to install the Agent is <strong>the same server</strong> where Asterisk runs because in this case
+it has direct access to local file system  and can access call recordings and forward it into Odoo.</p>
+<p>If you don’t need call recordings in Odoo you can setup the Asterisk agent on a different computer but
+it is advised to place it at least near the Asterisk server. But depending on your company size you can also
+have your Asterisk in America and Odoo in Europe datacenter.</p>
+<div class="section" id="the-agent-middleware">
+<h2>The Agent middleware<a class="headerlink" href="#the-agent-middleware" title="Permalink to this headline">¶</a></h2>
+<p>The Agent middleware is based on the Nameko microservices framework and uses RabbitMQ server as the internal
+message broker.</p>
+<p>Also it uses Nginx Proxy Manager (NPM) to add SSL encryption layer to the communication between
+Odoo and the Agent. After the installation open your server’s address in the WEB browser on port <code class="docutils literal notranslate"><span class="pre">81</span></code> and
+configure the NPM host. Set it either to IP address or DNS hostname.</p>
+<p>After that you go to Odoo and enter there the Agent URL. Here is an example:</p>
+<ul class="simple">
+<li><p>Agent URL: <a class="reference external" href="https://x.x.x.x/rpc/">https://x.x.x.x/rpc/</a></p></li>
+</ul>
+<p>Use the following <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> file to deploy:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span> <span class="s">&#39;3&#39;</span>
+<span class="nt">services</span><span class="p">:</span>
+
+    <span class="nt">agent</span><span class="p">:</span>
+        <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">odoopbx/middleware</span>
+        <span class="nt">restart</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+        <span class="nt">depends_on</span><span class="p">:</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">rabbitmq</span>
+        <span class="nt">volumes</span><span class="p">:</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/etc/asterisk:/etc/asterisk/</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/var/spool/asterisk:/var/spool/asterisk</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/var/run/asterisk:/var/run/asterisk</span>
+        <span class="nt">environment</span><span class="p">:</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ODOO_URL=https://your.odoo.addr</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ODOO_DB=odoopbx_15</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ODOO_USER=asterisk1</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ODOO_PASSWORD=asterisk1</span>
+          <span class="c1"># - ODOO_IP=1.2.3.4 # Optionally restrict access to only Odoo&#39;s IP address.</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AMI_USER=odoo</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AMI_PASS=odoo</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ASTERISK_AMI_HOST=localhost</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">TZ=Europe/London</span>
+
+    <span class="nt">npm</span><span class="p">:</span>
+        <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">odoopbx/npm</span>
+        <span class="nt">restart</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+        <span class="nt">ports</span><span class="p">:</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">80:80</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">81:81</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">443:443</span>
+        <span class="nt">volumes</span><span class="p">:</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">npm_data:/data</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">letsencrypt:/etc/letsencrypt</span>
+
+    <span class="nt">rabbitmq</span><span class="p">:</span>
+        <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rabbitmq</span>
+
+    <span class="nt">volumes</span><span class="p">:</span>
+    <span class="nt">letsencrypt</span><span class="p">:</span>
+    <span class="nt">npm_data</span><span class="p">:</span>
+
+    <span class="nt">networks</span><span class="p">:</span>
+    <span class="nt">default</span><span class="p">:</span>
+        <span class="nt">driver</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">bridge</span>
+        <span class="nt">ipam</span><span class="p">:</span>
+        <span class="nt">config</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="nt">subnet</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">172.172.0.0/16</span>
+</pre></div>
+</div>
+<p>Now run it and do a Test Ping from the Odoo server’s form.</p>
+</div>
+<div class="section" id="asterisk-dialplan-configuration">
+<h2>Asterisk Dialplan configuration<a class="headerlink" href="#asterisk-dialplan-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Asterisk Plus exposes additional functionality by providing the following controllers:</p>
+<ol class="arabic simple">
+<li><p>You can get the contact’s name by accessing <code class="docutils literal notranslate"><span class="pre">asterisk_plus/get_caller_name?number=${CALLERID(number)}</span></code></p></li>
+<li><p>If the Contact for the phone number has a manager set, use <code class="docutils literal notranslate"><span class="pre">asterisk_plus/get_partner_manager?number=${CALLERID(number)}</span></code> to get the manager’s number</p></li>
+<li><p>You can get the Contact’s tags by using <code class="docutils literal notranslate"><span class="pre">/asterisk_plus/get_caller_tags?number=${CALLERID(number)}</span></code></p></li>
+</ol>
+<p>Here are some examples of integration, using Asterisk dialplans.</p>
+<p><code class="docutils literal notranslate"><span class="pre">extensions.conf</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[globals]
+ODOO_URL=http://odoo:8069
+
+; Set connection options for curl.
+[sub-setcurlopt]
+exten =&gt; _X.,1,Set(CURLOPT(conntimeout)=3)
+exten =&gt; _X.,n,Set(CURLOPT(dnstimeout)=3)
+exten =&gt; _X.,n,Set(CURLOPT(httptimeout)=3)
+exten =&gt; _X.,n,Set(CURLOPT(ssl_verifypeer)=0)
+exten =&gt; _X.,n,Return
+
+; Partner&#39;s extension click2call e.g. +1234567890##101
+[post-dial-send-dtmf]
+exten =&gt; s,1,NoOp(DTMF digits: ${dtmf_digits})
+same =&gt; n,ExecIf($[&quot;${dtmf_digits}&quot; = &quot;&quot;]?Return)
+same =&gt; n,Wait(${dtmf_delay})
+same =&gt; n,SendDTMF(${dtmf_digits})
+same =&gt; n,Return
+
+
+;Set Caller ID name from Odoo
+; Get caller ID name from Odoo, replace odoo to your Odoo&#39;s hostname / IP address
+; Arguments:
+; - number: calling number, strip + if comes with +.
+; - db: Odoo&#39;s database name, ommit if you have one db or use dbfilter.
+; - country: 2 letters country code, See https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+; If country code is omitted Asterisk Agent&#39;s Odoo account&#39;s country settings will be used for phonenumbers parsing.
+
+[sub-setcallerid]
+exten =&gt; _X.,1,Gosub(sub-setcurlopt,${EXTEN},1)
+;   You need to cut leading + on numbers incoming from trunks before passing it to get_caller_name.
+exten =&gt; _X.,n,Set(CALLERID(name)=${CURL(${ODOO_URL}/asterisk_plus/get_caller_name?number=${CALLERID(number)})})
+exten =&gt; _X.,n,Return
+
+
+; Get partner’s manager (salesperson) channel
+
+[sub-dialmanager]
+exten =&gt; _X.,1,Set(manager_channel=${CURL(${ODOO_URL}/asterisk_plus/get_partner_manager?number=${CALLERID(number)})})
+exten =&gt; _X.,n,ExecIf($[&quot;${manager_channel}&quot; != &quot;&quot;]?Dial(${manager_channel}/${EXTEN},60,t))
+exten =&gt; _X.,n,Return
+
+; Get partner&#39;s tags to create a special call routing (e.g. VIP queue)
+; You can also get caller tags from Odoo with the following controller Here is an example:
+
+; Partner tags
+; VIP - tag name in this example.
+
+[partner-vip-tag-lookup]
+exten =&gt; _X.,1,Set(CURLOPT(conntimeout)=3)
+exten =&gt; _X.,n,Set(CURLOPT(dnstimeout)=3)
+exten =&gt; _X.,n,Set(CURLOPT(httptimeout)=3)
+exten =&gt; _X.,n,Set(CURLOPT(ssl_verifypeer)=0)
+exten =&gt; _X.,n,Set(tags=${CURL(${ODOO_URL}/asterisk_plus/get_caller_tags?number=${CALLERID(number)})})
+exten =&gt; _X.,n,NoOp(Tags: ${tags})
+exten =&gt; _X.,n,Set(match=${REGEX(&quot;VIP&quot; ${tags})})
+exten =&gt; _X.,n,NoOp(Match: ${match})
+exten =&gt; _X.,n,Return(${match})
+
+; Check VIP tag
+[check-vip]
+exten =&gt; _X.,1,Gosub(partner-vip-tag-lookup,${EXTEN},1,VIP)
+exten =&gt; _X.,n,GotoIf($[&quot;${GOSUB_RETVAL}&quot; = &quot;1&quot;]?vip-queue,${EXTEN},1)
+
+
+; Incoming call handling
+
+[from-sip-external]
+exten =&gt; _X.,1,Gosub(sub-setcallerid,${EXTEN},1) ; Set partner&#39;s caller name
+exten =&gt; _X.,n,MixMonitor(${UNIQUEID}.wav) ; Record call
+exten =&gt; _X.,n,Gosub(sub-dialmanager,${EXTEN},1) ; Try to connect to manager
+; Put here some login to handle if manager channel is busy for example put in the queue.
+exten =&gt; _X.,n,Queue(sales)
+
+[from-internal]
+exten =&gt; _X.,1,MixMonitor(${UNIQUEID}.wav) ; Activate call recording.
+exten =&gt; _XXXX,2,Dial(SIP/${EXTEN},30) ; Local users calling
+exten =&gt; _XXXXX.,2,Dial(SIP/provider/${EXTEN},30,TU(post-dial-send-dtmf) ; Outgoing calls pattern
+</pre></div>
+</div>
+<p>Enjoy!</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="asterisk.html" class="btn btn-neutral float-left" title="Asterisk configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../configuration.html" class="btn btn-neutral float-right" title="Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Odooist OU.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
