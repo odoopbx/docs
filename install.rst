@@ -5,5 +5,8 @@ Installation
 .. toctree::
    :titlesonly:
 
-   install/middleware
+   install/odoo
+   install/asterisk
+   install/agent   
+
 

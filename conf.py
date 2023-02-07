@@ -18,15 +18,11 @@ DIR = os.path.dirname(__file__)
 sys.path.insert(
     0, os.path.abspath(
         os.path.join(DIR, '_extensions')))
-import odoo
-odoo.addons.__path__.append('/srv/addons')
-import odoo.addons
-
 
 project = 'OdooPBX'
-copyright = '2022, Odooist'
+copyright = '2023, Odooist OU'
 author = 'Odooist'
-release = '1.0'
+release = '2.0'
 
 extensions_path = '_extensions'
 extensions = [

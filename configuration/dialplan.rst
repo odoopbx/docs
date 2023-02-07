@@ -1,6 +1,6 @@
----------------
-Tips and Tricks
----------------
+-----------------------------
+Asterisk Dialplan Integration
+-----------------------------
 
 Play a message to unknown partners
 ----------------------------------

@@ -1,4 +1,6 @@
+=======================
 RabbitMQ administration
+=======================
 
 # Purge all queues
 
