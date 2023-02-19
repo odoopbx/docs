@@ -76,7 +76,9 @@
   <div class="section" id="rabbitmq-administration">
 <h1>RabbitMQ administration<a class="headerlink" href="#rabbitmq-administration" title="Permalink to this headline">¶</a></h1>
 <p># Purge all queues</p>
-<p>rabbitmqctl list_queues | awk ‘{ print $1 }’ | xargs -L1 rabbitmqctl purge_queue</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rabbitmqctl</span> <span class="n">list_queues</span> <span class="o">|</span> <span class="n">awk</span> <span class="s1">&#39;{ print $1 }&#39;</span> <span class="o">|</span> <span class="n">xargs</span> <span class="o">-</span><span class="n">L1</span> <span class="n">rabbitmqctl</span> <span class="n">purge_queue</span>
+</pre></div>
+</div>
 </div>
 
 
