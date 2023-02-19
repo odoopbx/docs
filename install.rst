@@ -7,6 +7,6 @@ Installation
 
    install/odoo
    install/asterisk
-   install/agent   
+
 
 

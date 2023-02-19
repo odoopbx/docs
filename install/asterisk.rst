@@ -17,19 +17,19 @@ to your Asterisk server AMI port (usually 5038) using the login ``odoo`` with th
 
     [general]
     enabled = yes
-    webenabled = no ; Asterisk calls does not use HTTP interface
+    webenabled = no
     port = 5038
-    bindaddr = 127.0.0.1
+    bindaddr = 0.0.0.0 # Pay attention it binds to public interfaces so yuo must restrict acces only to the Agent IP address.
 
     [odoo]
     secret=odoo
     allowmultiplelogin=no
     displayconnects = yes
-    read=all
-    write=all
+    read=call
+    write=originate
     deny=0.0.0.0/0.0.0.0
-    permit=127.0.0.1/255.255.255.0
-    permit=172.172.0.0/255.255.0.0 # Docker network
+    permit=1.2.3.4/255.255.255.255 # Put here Agent IP address.
+    
 
 Asterisk-based distributions such as **FreePBX**  offer a web GUI interface for managing your
 AMI users. You can use that interface to create one, or you can add the account configuration data in
@@ -58,8 +58,8 @@ Open the Asterisk console using ``asterisk -r`` as root and see if the Odoo mana
      username: odoo
      secret: <Set>
      ACL: yes
-     read perm: system,call,log,verbose,command,agent,user,config,dtmf,reporting,cdr,dialplan,originate,agi,cc,aoc,test,security,message,all
-     write perm: system,call,log,verbose,command,agent,user,config,dtmf,reporting,cdr,dialplan,originate,agi,cc,aoc,test,security,message,all
+     read perm: call
+     write perm: originate
      displayconnects: yes
      allowmultiplelogin: yes
      Variables:
