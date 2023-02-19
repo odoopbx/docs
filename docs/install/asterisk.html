@@ -15,7 +15,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="The middlware Agent" href="agent.html" />
+    <link rel="next" title="Configuration" href="../configuration.html" />
     <link rel="prev" title="Odoo configuration" href="odoo.html" /> 
 </head>
 
@@ -39,7 +39,6 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../install.html">Installation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="odoo.html">Odoo configuration</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Asterisk configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="agent.html">The middlware Agent</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
@@ -80,19 +79,18 @@ to your Asterisk server AMI port (usually 5038) using the login <code class="doc
 <p><code class="docutils literal notranslate"><span class="pre">manager.conf</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">general</span><span class="p">]</span>
 <span class="n">enabled</span> <span class="o">=</span> <span class="n">yes</span>
-<span class="n">webenabled</span> <span class="o">=</span> <span class="n">no</span> <span class="p">;</span> <span class="n">Asterisk</span> <span class="n">calls</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">use</span> <span class="n">HTTP</span> <span class="n">interface</span>
+<span class="n">webenabled</span> <span class="o">=</span> <span class="n">no</span>
 <span class="n">port</span> <span class="o">=</span> <span class="mi">5038</span>
-<span class="n">bindaddr</span> <span class="o">=</span> <span class="mf">127.0.0.1</span>
+<span class="n">bindaddr</span> <span class="o">=</span> <span class="mf">0.0.0.0</span> <span class="c1"># Pay attention it binds to public interfaces so yuo must restrict acces only to the Agent IP address.</span>
 
 <span class="p">[</span><span class="n">odoo</span><span class="p">]</span>
 <span class="n">secret</span><span class="o">=</span><span class="n">odoo</span>
 <span class="n">allowmultiplelogin</span><span class="o">=</span><span class="n">no</span>
 <span class="n">displayconnects</span> <span class="o">=</span> <span class="n">yes</span>
-<span class="n">read</span><span class="o">=</span><span class="nb">all</span>
-<span class="n">write</span><span class="o">=</span><span class="nb">all</span>
+<span class="n">read</span><span class="o">=</span><span class="n">call</span>
+<span class="n">write</span><span class="o">=</span><span class="n">originate</span>
 <span class="n">deny</span><span class="o">=</span><span class="mf">0.0.0.0</span><span class="o">/</span><span class="mf">0.0.0.0</span>
-<span class="n">permit</span><span class="o">=</span><span class="mf">127.0.0.1</span><span class="o">/</span><span class="mf">255.255.255.0</span>
-<span class="n">permit</span><span class="o">=</span><span class="mf">172.172.0.0</span><span class="o">/</span><span class="mf">255.255.0.0</span> <span class="c1"># Docker network</span>
+<span class="n">permit</span><span class="o">=</span><span class="mf">1.2.3.4</span><span class="o">/</span><span class="mf">255.255.255.255</span> <span class="c1"># Put here Agent IP address.</span>
 </pre></div>
 </div>
 <p>Asterisk-based distributions such as <strong>FreePBX</strong>  offer a web GUI interface for managing your
@@ -117,8 +115,8 @@ Open the Asterisk console using <code class="docutils literal notranslate"><span
   <span class="n">username</span><span class="p">:</span> <span class="n">odoo</span>
   <span class="n">secret</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">Set</span><span class="o">&gt;</span>
   <span class="n">ACL</span><span class="p">:</span> <span class="n">yes</span>
-  <span class="n">read</span> <span class="n">perm</span><span class="p">:</span> <span class="n">system</span><span class="p">,</span><span class="n">call</span><span class="p">,</span><span class="n">log</span><span class="p">,</span><span class="n">verbose</span><span class="p">,</span><span class="n">command</span><span class="p">,</span><span class="n">agent</span><span class="p">,</span><span class="n">user</span><span class="p">,</span><span class="n">config</span><span class="p">,</span><span class="n">dtmf</span><span class="p">,</span><span class="n">reporting</span><span class="p">,</span><span class="n">cdr</span><span class="p">,</span><span class="n">dialplan</span><span class="p">,</span><span class="n">originate</span><span class="p">,</span><span class="n">agi</span><span class="p">,</span><span class="n">cc</span><span class="p">,</span><span class="n">aoc</span><span class="p">,</span><span class="n">test</span><span class="p">,</span><span class="n">security</span><span class="p">,</span><span class="n">message</span><span class="p">,</span><span class="nb">all</span>
-  <span class="n">write</span> <span class="n">perm</span><span class="p">:</span> <span class="n">system</span><span class="p">,</span><span class="n">call</span><span class="p">,</span><span class="n">log</span><span class="p">,</span><span class="n">verbose</span><span class="p">,</span><span class="n">command</span><span class="p">,</span><span class="n">agent</span><span class="p">,</span><span class="n">user</span><span class="p">,</span><span class="n">config</span><span class="p">,</span><span class="n">dtmf</span><span class="p">,</span><span class="n">reporting</span><span class="p">,</span><span class="n">cdr</span><span class="p">,</span><span class="n">dialplan</span><span class="p">,</span><span class="n">originate</span><span class="p">,</span><span class="n">agi</span><span class="p">,</span><span class="n">cc</span><span class="p">,</span><span class="n">aoc</span><span class="p">,</span><span class="n">test</span><span class="p">,</span><span class="n">security</span><span class="p">,</span><span class="n">message</span><span class="p">,</span><span class="nb">all</span>
+  <span class="n">read</span> <span class="n">perm</span><span class="p">:</span> <span class="n">call</span>
+  <span class="n">write</span> <span class="n">perm</span><span class="p">:</span> <span class="n">originate</span>
   <span class="n">displayconnects</span><span class="p">:</span> <span class="n">yes</span>
   <span class="n">allowmultiplelogin</span><span class="p">:</span> <span class="n">yes</span>
   <span class="n">Variables</span><span class="p">:</span>
@@ -134,7 +132,7 @@ This can be solved by running inside the Asterisk console the command <code clas
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="odoo.html" class="btn btn-neutral float-left" title="Odoo configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="agent.html" class="btn btn-neutral float-right" title="The middlware Agent" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../configuration.html" class="btn btn-neutral float-right" title="Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

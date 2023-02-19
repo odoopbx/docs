@@ -14,9 +14,7 @@
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Configuration" href="../configuration.html" />
-    <link rel="prev" title="Asterisk configuration" href="asterisk.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -34,14 +32,9 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">What is OdooPBX</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../install.html">Installation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="odoo.html">Odoo configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="asterisk.html">Asterisk configuration</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">The middlware Agent</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
 </ul>
 
@@ -59,7 +52,6 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a></li>
-          <li class="breadcrumb-item"><a href="../install.html">Installation</a></li>
       <li class="breadcrumb-item active">The middlware Agent</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -106,6 +98,7 @@ configure the NPM host. Set it either to IP address or DNS hostname.</p>
     <span class="nt">agent</span><span class="p">:</span>
         <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">odoopbx/middleware</span>
         <span class="nt">restart</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+        <span class="nt">network_mode</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
         <span class="nt">depends_on</span><span class="p">:</span>
           <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">rabbitmq</span>
         <span class="nt">volumes</span><span class="p">:</span>
@@ -118,10 +111,11 @@ configure the NPM host. Set it either to IP address or DNS hostname.</p>
           <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ODOO_USER=asterisk1</span>
           <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ODOO_PASSWORD=asterisk1</span>
           <span class="c1"># - ODOO_IP=1.2.3.4 # Optionally restrict access to only Odoo&#39;s IP address.</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AMI_USER=odoo</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AMI_PASS=odoo</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ASTERISK_AMI_USER=odoo</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ASTERISK_AMI_PASSWORD=odoo</span>
           <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ASTERISK_AMI_HOST=localhost</span>
           <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">TZ=Europe/London</span>
+          <span class="p p-Indicator">-</span> <span class="nt">AMQP_URI</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pyamqp://guest:guest@localhost</span>
 
     <span class="nt">npm</span><span class="p">:</span>
         <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">odoopbx/npm</span>
@@ -136,17 +130,19 @@ configure the NPM host. Set it either to IP address or DNS hostname.</p>
 
     <span class="nt">rabbitmq</span><span class="p">:</span>
         <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rabbitmq</span>
+        <span class="nt">ports</span><span class="p">:</span>
+           <span class="p p-Indicator">-</span> <span class="s">&quot;127.0.0.1:5672:5672&quot;</span>
 
-    <span class="nt">volumes</span><span class="p">:</span>
-    <span class="nt">letsencrypt</span><span class="p">:</span>
-    <span class="nt">npm_data</span><span class="p">:</span>
+<span class="nt">volumes</span><span class="p">:</span>
+  <span class="nt">letsencrypt</span><span class="p">:</span>
+  <span class="nt">npm_data</span><span class="p">:</span>
 
-    <span class="nt">networks</span><span class="p">:</span>
-    <span class="nt">default</span><span class="p">:</span>
-        <span class="nt">driver</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">bridge</span>
-        <span class="nt">ipam</span><span class="p">:</span>
-        <span class="nt">config</span><span class="p">:</span>
-        <span class="p p-Indicator">-</span> <span class="nt">subnet</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">172.172.0.0/16</span>
+<span class="nt">networks</span><span class="p">:</span>
+  <span class="nt">default</span><span class="p">:</span>
+    <span class="nt">driver</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">bridge</span>
+    <span class="nt">ipam</span><span class="p">:</span>
+    <span class="nt">config</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">subnet</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">172.172.0.0/16</span>
 </pre></div>
 </div>
 <p>Now run it and do a Test Ping from the Odoo server’s form.</p>
@@ -248,10 +244,7 @@ exten =&gt; _XXXXX.,2,Dial(SIP/provider/${EXTEN},30,TU(post-dial-send-dtmf) ; Ou
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="asterisk.html" class="btn btn-neutral float-left" title="Asterisk configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../configuration.html" class="btn btn-neutral float-right" title="Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

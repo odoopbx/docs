@@ -45,6 +45,7 @@ Use the following ``docker-compose.yml`` file to deploy:
         agent:
             image: odoopbx/middleware
             restart: unless-stopped
+            network_mode: host
             depends_on:
               - rabbitmq
             volumes:
@@ -57,10 +58,11 @@ Use the following ``docker-compose.yml`` file to deploy:
               - ODOO_USER=asterisk1
               - ODOO_PASSWORD=asterisk1
               # - ODOO_IP=1.2.3.4 # Optionally restrict access to only Odoo's IP address.
-              - AMI_USER=odoo
-              - AMI_PASS=odoo
+              - ASTERISK_AMI_USER=odoo
+              - ASTERISK_AMI_PASSWORD=odoo
               - ASTERISK_AMI_HOST=localhost
               - TZ=Europe/London
+              - AMQP_URI: pyamqp://guest:guest@localhost
 
         npm:
             image: odoopbx/npm
@@ -75,17 +77,19 @@ Use the following ``docker-compose.yml`` file to deploy:
 
         rabbitmq:
             image: rabbitmq
+            ports:
+               - "127.0.0.1:5672:5672"
 
-        volumes:
-        letsencrypt:
-        npm_data:
+    volumes:
+      letsencrypt:
+      npm_data:
 
-        networks:
-        default:
-            driver: bridge
-            ipam:
-            config:
-            - subnet: 172.172.0.0/16
+    networks:
+      default:
+        driver: bridge
+        ipam:
+        config:
+          - subnet: 172.172.0.0/16
 
 
 Now run it and do a Test Ping from the Odoo server's form.
