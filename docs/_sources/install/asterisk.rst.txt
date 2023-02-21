@@ -25,7 +25,7 @@ to your Asterisk server AMI port (usually 5038) using the login ``odoo`` with th
     secret=odoo
     allowmultiplelogin=no
     displayconnects = yes
-    read=call
+    read=call,dialplan
     write=originate
     deny=0.0.0.0/0.0.0.0
     permit=1.2.3.4/255.255.255.255 # Put here Agent IP address.
