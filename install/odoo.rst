@@ -1,4 +1,9 @@
-------------------
+-----------------------------
+Odoo Application Installation
+-----------------------------
+Odoo application requires a simple process for basic installation depending on your operating system.
+The most commonly used distro is linux ubuntu. For straight forward installation, you can use this bash install `script <https://github.com/Yenthe666/InstallScript>`_.
+
 Odoo configuration
 ------------------
 Odoo should be configured in the right way in order to be ready for Asterisk Plus module.
@@ -71,18 +76,23 @@ Addons
 ======
 Install `addons <https://github.com/odoopbx/addons>`_ in the same way you install any other Odoo module.
 
-Do a database backup before installation or upgrade and also make a backup of previous version of the module
+Make sure you do a database backup before installation or upgrade and also make a backup of previous version of the module
 if you have it (just in case to be able to restore quicky).
 
-Make sure that ``addons_path`` is set correctly to include OdooPBX addons.
+Make sure that ``addons_path`` is set correctly to include OdooPBX addons. `E.g addons_path=/odoo/enterprise/addons,/odoo/odoo-server/addons,/odoo/custom/addons`.
 
-The module dependencies are localed in ``requirements.txt`` file located in the addons folder.
+The module dependencies are located in ``requirements.txt`` file located in the addons folder.
 
 If you use odoo.sh make sure you copy the requirements to your modules top folder so that odoo.sh can 
 install the required dependencies.
 
 If you use python virtualenv make sure you install the requirements there and not system wide.
 
+Incase the module dependencies are not properly loaded during the module installation, you can install them using the following command from the command line.
+
+.. code::
+
+         pip install phonenumbers
 
 Troubleshooting
 ===============
