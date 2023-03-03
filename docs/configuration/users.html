@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PBX Users &mdash; OdooPBX 2.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="../_static/logo.png"/>
+  <title>PBX Users &mdash; OdooPBX 2.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -24,7 +28,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> OdooPBX<img src="../_static/logo.png" class="logo" alt="Logo"/>
+            <a href="../index.html" class="icon icon-home"> OdooPBX
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -62,9 +67,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
-          <li class="breadcrumb-item"><a href="../configuration.html">Configuration</a></li>
-      <li class="breadcrumb-item active">PBX Users</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../configuration.html">Configuration</a> &raquo;</li>
+      <li>PBX Users</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -73,8 +78,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="pbx-users">
-<h1>PBX Users<a class="headerlink" href="#pbx-users" title="Permalink to this headline">¶</a></h1>
+  <section id="pbx-users">
+<h1>PBX Users<a class="headerlink" href="#pbx-users" title="Permalink to this headline"></a></h1>
 <p>PBX Users are Odoo users connected to Asterisk channels and extensions.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -91,23 +96,23 @@ has a hardware deskphone and also a softphone with a headset.</p>
 <p>But when a user wants to make a series of calls to partners it’s much handy to use a headset and click to dial
 function instead of manual phone number dialing.</p>
 <p>Let’s review channel settings:</p>
-<div class="section" id="channel">
-<h2>Channel<a class="headerlink" href="#channel" title="Permalink to this headline">¶</a></h2>
+<section id="channel">
+<h2>Channel<a class="headerlink" href="#channel" title="Permalink to this headline"></a></h2>
 <p>Asterisk channel, e.g. SIP/101 or SIP/mypeername</p>
-</div>
-<div class="section" id="context">
-<h2>Context<a class="headerlink" href="#context" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="context">
+<h2>Context<a class="headerlink" href="#context" title="Permalink to this headline"></a></h2>
 <p>Asterisk context to use to place the outgoing call. In FreePBX  related systems it is usually <code class="docutils literal notranslate"><span class="pre">from-internal</span></code>.
 Some other systems define individual context for each user.</p>
-</div>
-<div class="section" id="originate">
-<h2>Originate<a class="headerlink" href="#originate" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="originate">
+<h2>Originate<a class="headerlink" href="#originate" title="Permalink to this headline"></a></h2>
 <p>If Originate slider is <code class="docutils literal notranslate"><span class="pre">on</span></code> the channel will be used on click to dial operation. Usually when user a deskphone
 and a softphone only softphone channel has <code class="docutils literal notranslate"><span class="pre">Originate</span></code> enabled so that when click to dial is used the deskphone
 does not ring.</p>
-</div>
-<div class="section" id="auto-answer-header">
-<h2>Auto-answer header<a class="headerlink" href="#auto-answer-header" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="auto-answer-header">
+<h2>Auto-answer header<a class="headerlink" href="#auto-answer-header" title="Permalink to this headline"></a></h2>
 <p>Auto answer is a very important business feature.</p>
 <p>When click to dial is used to originate call to a partner Asterisk first makes
 a call to user (1-st call leg) and after user answered his phone the 2-nd call leg
@@ -118,8 +123,8 @@ Different phones use different headers.</p>
 <p class="admonition-title">See also</p>
 <p>For more details see <a class="reference internal" href="auto_answer.html"><span class="doc">Auto-Answer</span></a></p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

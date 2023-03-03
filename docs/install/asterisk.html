@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Asterisk configuration &mdash; OdooPBX 2.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="../_static/logo.png"/>
+  <title>Asterisk configuration &mdash; OdooPBX 2.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -24,7 +28,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> OdooPBX<img src="../_static/logo.png" class="logo" alt="Logo"/>
+            <a href="../index.html" class="icon icon-home"> OdooPBX
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -57,9 +62,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
-          <li class="breadcrumb-item"><a href="../install.html">Installation</a></li>
-      <li class="breadcrumb-item active">Asterisk configuration</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../install.html">Installation</a> &raquo;</li>
+      <li>Asterisk configuration</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -68,10 +73,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="asterisk-configuration">
-<h1>Asterisk configuration<a class="headerlink" href="#asterisk-configuration" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="ami-account">
-<h2>AMI account<a class="headerlink" href="#ami-account" title="Permalink to this headline">¶</a></h2>
+  <section id="asterisk-configuration">
+<h1>Asterisk configuration<a class="headerlink" href="#asterisk-configuration" title="Permalink to this headline"></a></h1>
+<section id="ami-account">
+<h2>AMI account<a class="headerlink" href="#ami-account" title="Permalink to this headline"></a></h2>
 <p>Prepare an Asterisk Manager Interface (AMI) account to allow the Agent to connect to Asterisk.</p>
 <p>Vanilla Asterisk requires editing the  <code class="docutils literal notranslate"><span class="pre">manager.conf</span></code> file, which is usually found in <code class="docutils literal notranslate"><span class="pre">/etc/asterisk</span></code>.</p>
 <p>A sample configuration is provided below, which lets the Agent to connect
@@ -81,16 +86,16 @@ to your Asterisk server AMI port (usually 5038) using the login <code class="doc
 <span class="n">enabled</span> <span class="o">=</span> <span class="n">yes</span>
 <span class="n">webenabled</span> <span class="o">=</span> <span class="n">no</span>
 <span class="n">port</span> <span class="o">=</span> <span class="mi">5038</span>
-<span class="n">bindaddr</span> <span class="o">=</span> <span class="mf">0.0.0.0</span> <span class="c1"># Pay attention it binds to public interfaces so yuo must restrict acces only to the Agent IP address.</span>
+<span class="n">bindaddr</span> <span class="o">=</span> <span class="mf">0.0.0.0</span> <span class="c1"># Pay attention it binds to public interfaces so you must restrict access only to the Agent IP address.</span>
 
 <span class="p">[</span><span class="n">odoo</span><span class="p">]</span>
-<span class="n">secret</span><span class="o">=</span><span class="n">odoo</span>
+<span class="n">secret</span><span class="o">=</span><span class="n">odoo</span> <span class="c1"># Make sure you change this password as per the OdooPBX server&#39;s configuration.</span>
 <span class="n">allowmultiplelogin</span><span class="o">=</span><span class="n">no</span>
 <span class="n">displayconnects</span> <span class="o">=</span> <span class="n">yes</span>
 <span class="n">read</span><span class="o">=</span><span class="n">call</span><span class="p">,</span><span class="n">dialplan</span>
 <span class="n">write</span><span class="o">=</span><span class="n">originate</span>
 <span class="n">deny</span><span class="o">=</span><span class="mf">0.0.0.0</span><span class="o">/</span><span class="mf">0.0.0.0</span>
-<span class="n">permit</span><span class="o">=</span><span class="mf">1.2.3.4</span><span class="o">/</span><span class="mf">255.255.255.255</span> <span class="c1"># Put here Agent IP address.</span>
+<span class="n">permit</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">x</span><span class="mf">.3.4</span><span class="o">/</span><span class="mf">255.255.255.255</span> <span class="c1"># Put here Agent IP address. This IP address will be available from Odoopbx server settings after activating subscription.</span>
 </pre></div>
 </div>
 <p>Asterisk-based distributions such as <strong>FreePBX</strong>  offer a web GUI interface for managing your
@@ -99,15 +104,15 @@ a custom file, which will not be managed by the distro, usually <code class="doc
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>For security reasons always use deny/permit options in your manager.conf.
-Change permit option to IP address of your Asterisk server if agent is not started on the same box.</p>
+Change permit option to IP address of the agent.</p>
 </div>
 <p>Make sure that you applied new configuration by checking the Asterisk console:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">manager</span> <span class="n">show</span> <span class="n">user</span> <span class="n">odoo</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline"></a></h2>
 <p>After the AMI account is created, you need to make sure that it’s updated inside Asterisk configuration.
 Open the Asterisk console using <code class="docutils literal notranslate"><span class="pre">asterisk</span> <span class="pre">-r</span></code> as root and see if the Odoo manager user is available:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">manager</span> <span class="n">show</span> <span class="n">user</span> <span class="n">odoo</span>
@@ -124,8 +129,8 @@ Open the Asterisk console using <code class="docutils literal notranslate"><span
 </div>
 <p>If you don’t see the user, maybe the AMI configuration file hasn’t been read by Asterisk after being modified.
 This can be solved by running inside the Asterisk console the command <code class="docutils literal notranslate"><span class="pre">core</span> <span class="pre">reload</span></code>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

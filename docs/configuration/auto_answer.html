@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Auto-Answer &mdash; OdooPBX 2.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="../_static/logo.png"/>
+  <title>Auto-Answer &mdash; OdooPBX 2.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -24,7 +28,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> OdooPBX<img src="../_static/logo.png" class="logo" alt="Logo"/>
+            <a href="../index.html" class="icon icon-home"> OdooPBX
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -62,9 +67,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
-          <li class="breadcrumb-item"><a href="../configuration.html">Configuration</a></li>
-      <li class="breadcrumb-item active">Auto-Answer</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../configuration.html">Configuration</a> &raquo;</li>
+      <li>Auto-Answer</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -73,10 +78,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="auto-answer">
-<h1>Auto-Answer<a class="headerlink" href="#auto-answer" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+  <section id="auto-answer">
+<h1>Auto-Answer<a class="headerlink" href="#auto-answer" title="Permalink to this headline"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h2>
 <p>Auto-answer is a phone feature that allows to automatically answer a call
 without any action by the user, such as pressing the Accept Call button.</p>
 <p>Not all phones support auto-answer feature.</p>
@@ -106,27 +111,27 @@ on SIP header. In this case when click to dial button is pressed Odoo sets a <st
 call progress tone coming from his phone.</p>
 <p>The auto-answer feature is set in <code class="docutils literal notranslate"><span class="pre">PBX</span> <span class="pre">-&gt;</span> <span class="pre">Users</span></code> menu:</p>
 <img alt="../_images/user_auto_answer.png" src="../_images/user_auto_answer.png" />
-</div>
-<div class="section" id="phones-with-auto-answer-support">
-<h2>Phones with auto-answer support<a class="headerlink" href="#phones-with-auto-answer-support" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="zoiper">
-<h3>Zoiper<a class="headerlink" href="#zoiper" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="phones-with-auto-answer-support">
+<h2>Phones with auto-answer support<a class="headerlink" href="#phones-with-auto-answer-support" title="Permalink to this headline"></a></h2>
+<section id="zoiper">
+<h3>Zoiper<a class="headerlink" href="#zoiper" title="Permalink to this headline"></a></h3>
 <p>Only Zoiper paid editions supports auto-answer header. Here is its SIP header: <code class="docutils literal notranslate"><span class="pre">Call-Info:&lt;sip:&gt;;answer-after=0</span></code>.</p>
 <ul class="simple">
 <li><p>Zoiper 5:  Zoiper Options window; Automation; Enable the “Accept server-side auto answer”.</p></li>
 </ul>
-</div>
-<div class="section" id="microsip">
-<h3>Microsip<a class="headerlink" href="#microsip" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="microsip">
+<h3>Microsip<a class="headerlink" href="#microsip" title="Permalink to this headline"></a></h3>
 <p>MicroSIP will play short tone and popup.</p>
 <p>SIP header: <code class="docutils literal notranslate"><span class="pre">Call-Info:</span> <span class="pre">Auto</span> <span class="pre">Answer</span></code> or <code class="docutils literal notranslate"><span class="pre">Call-Info:</span> <span class="pre">answer-after=0</span></code> or <code class="docutils literal notranslate"><span class="pre">X-AUTOANSWER:</span> <span class="pre">TRUE</span></code></p>
 <p>Source - <a class="reference external" href="https://www.microsip.org/help">https://www.microsip.org/help</a></p>
-</div>
-<div class="section" id="to-be-continued">
-<h3>To be continued…<a class="headerlink" href="#to-be-continued" title="Permalink to this headline">¶</a></h3>
-</div>
-</div>
-</div>
+</section>
+<section id="to-be-continued">
+<h3>To be continued…<a class="headerlink" href="#to-be-continued" title="Permalink to this headline"></a></h3>
+</section>
+</section>
+</section>
 
 
            </div>

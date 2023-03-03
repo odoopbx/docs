@@ -27,16 +27,14 @@ As OdooPBX is based on Odoo it has modular architecture.
 
 The main module is named **Asterisk Plus** and it is inherited by all other OdooPBX modules. 
 
-Other modules add some integration between Asterisk Plus module and different Odoo componoents. For example, Asterisk Plus CRM app requires CRM module to be installed
+Other modules add some integration between Asterisk Plus module and different Odoo components. For example, Asterisk Plus CRM app requires CRM module to be installed
 and brings the integration of CRM and telephony.
 
-Currenly the following modules are available:
+Currently the following modules are available:
 
 * Asterisk Plus CRM
 * Asterisk Plus Helpdesk
 * Asterisk Plus Sale
 * Asterisk Plus HR
 * Asterisk Plus Project
-
-
 
