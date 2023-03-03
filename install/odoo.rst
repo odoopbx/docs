@@ -1,9 +1,4 @@
------------------------------
-Odoo Application Installation
------------------------------
-Odoo application requires a simple process for basic installation depending on your operating system.
-The most commonly used distro is linux ubuntu. For straight forward installation, you can use this bash install `script <https://github.com/Yenthe666/InstallScript>`_.
-
+------------------
 Odoo configuration
 ------------------
 Odoo should be configured in the right way in order to be ready for Asterisk Plus module.
@@ -90,6 +85,7 @@ If you use python virtualenv make sure you install the requirements there and no
 
 Incase the module dependencies are not properly loaded during the module installation, you can install them using the following command from the command line.
 
+For Odoo 10 you need to install *phonenumbers* library:
 .. code::
 
          pip install phonenumbers

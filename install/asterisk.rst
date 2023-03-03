@@ -19,16 +19,16 @@ to your Asterisk server AMI port (usually 5038) using the login ``odoo`` with th
     enabled = yes
     webenabled = no
     port = 5038
-    bindaddr = 0.0.0.0 # Pay attention it binds to public interfaces so you must restrict acces only to the Agent IP address.
+    bindaddr = 0.0.0.0 # Pay attention it binds to public interfaces so you must restrict access only to the Agent IP address.
 
     [odoo]
-    secret=odoo # Make sure you change this password as per the Odoopbx configuration
+    secret=odoo # Make sure you change this password as per the OdooPBX server's configuration.
     allowmultiplelogin=no
     displayconnects = yes
     read=call,dialplan
     write=originate
     deny=0.0.0.0/0.0.0.0
-    permit=1.2.3.4/255.255.255.255 # Put here Agent IP address. This IP address will be available from Odoopbx server settings after activating subscription.
+    permit=x.x.3.4/255.255.255.255 # Put here Agent IP address. This IP address will be available from Odoopbx server settings after activating subscription.
     
 
 Asterisk-based distributions such as **FreePBX**  offer a web GUI interface for managing your
