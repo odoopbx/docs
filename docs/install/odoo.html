@@ -118,7 +118,7 @@ configuration option and list_db set to False.</p>
 <p>You should add asterisk_plus to <code class="docutils literal notranslate"><span class="pre">server_wide_modules</span></code> parameter in order to be able
 to make CURL requests from the Asterisk dialplan (see below).</p>
 <p>Here is an example of such a configuration line:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">server_wide_modules</span> <span class="o">=</span> <span class="n">web</span><span class="p">,</span><span class="n">asterisk_plus</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">server_wide_modules</span> <span class="o">=</span> <span class="n">base</span><span class="p">,</span><span class="n">web</span><span class="p">,</span><span class="n">asterisk_plus</span>
 </pre></div>
 </div>
 <p>If your Odoo is in a single-mode setup there is no need to configure the <code class="docutils literal notranslate"><span class="pre">server_wide_modules</span></code> parameter.</p>
