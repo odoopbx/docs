@@ -63,7 +63,7 @@ Here is an example of such a configuration line:
 
 .. code::
 
-    server_wide_modules = web,asterisk_plus
+    server_wide_modules = base,web,asterisk_plus
 
 If your Odoo is in a single-mode setup there is no need to configure the ``server_wide_modules`` parameter.
 
