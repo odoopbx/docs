@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The middlware Agent &mdash; OdooPBX 2.0 documentation</title>
@@ -12,10 +12,10 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -26,12 +26,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> OdooPBX
-            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            OdooPBX
+              <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -56,8 +60,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>The middlware Agent</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">The middlware Agent</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -67,10 +71,10 @@
            <div itemprop="articleBody">
              
   <section id="the-middlware-agent">
-<h1>The middlware Agent<a class="headerlink" href="#the-middlware-agent" title="Permalink to this headline"></a></h1>
+<h1>The middlware Agent<a class="headerlink" href="#the-middlware-agent" title="Permalink to this heading"></a></h1>
 <p>This documentation assumes that the following components are already installed:</p>
 <ul class="simple">
-<li><p>Odoo: Odoo is already deployed and properly configured (see <a class="reference internal" href="odoo.html"><span class="doc">Odoo configuration</span></a>).</p></li>
+<li><p>Odoo: Odoo is already deployed and properly configured (see <a class="reference internal" href="odoo.html"><span class="doc">Odoo preconfiguration</span></a>).</p></li>
 <li><p>Asterisk: Asterisk PBX is also deployed and AMI account is configured (see <a class="reference internal" href="asterisk.html"><span class="doc">Asterisk configuration</span></a>).</p></li>
 </ul>
 <p>Now the Agent middlware should be installed to connect them together.</p>
@@ -86,7 +90,7 @@ it has direct access to local file system  and can access call recordings and fo
 it is advised to place it at least near the Asterisk server. But depending on your company size you can also
 have your Asterisk in America and Odoo in Europe datacenter.</p>
 <section id="the-agent-middleware">
-<h2>The Agent middleware<a class="headerlink" href="#the-agent-middleware" title="Permalink to this headline"></a></h2>
+<h2>The Agent middleware<a class="headerlink" href="#the-agent-middleware" title="Permalink to this heading"></a></h2>
 <p>The Agent middleware is based on the Nameko microservices framework and uses RabbitMQ server as the internal
 message broker.</p>
 <p>Also it uses Nginx Proxy Manager (NPM) to add SSL encryption layer to the communication between
@@ -97,63 +101,63 @@ configure the NPM host. Set it either to IP address or DNS hostname.</p>
 <li><p>Agent URL: <a class="reference external" href="https://x.x.x.x/rpc/">https://x.x.x.x/rpc/</a></p></li>
 </ul>
 <p>Use the following <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> file to deploy:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span> <span class="s">&#39;3&#39;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3&#39;</span>
 <span class="nt">services</span><span class="p">:</span>
 
-    <span class="nt">agent</span><span class="p">:</span>
-        <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">odoopbx/middleware</span>
-        <span class="nt">restart</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
-        <span class="nt">network_mode</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">host</span>
-        <span class="nt">depends_on</span><span class="p">:</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">rabbitmq</span>
-        <span class="nt">volumes</span><span class="p">:</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/etc/asterisk:/etc/asterisk/</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/var/spool/asterisk:/var/spool/asterisk</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/var/run/asterisk:/var/run/asterisk</span>
-        <span class="nt">environment</span><span class="p">:</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ODOO_URL=https://your.odoo.addr</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ODOO_DB=odoopbx_15</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ODOO_USER=asterisk1</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ODOO_PASSWORD=asterisk1</span>
-          <span class="c1"># - ODOO_IP=1.2.3.4 # Optionally restrict access to only Odoo&#39;s IP address.</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ASTERISK_AMI_USER=odoo</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ASTERISK_AMI_PASSWORD=odoo</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ASTERISK_AMI_HOST=localhost</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">TZ=Europe/London</span>
-          <span class="p p-Indicator">-</span> <span class="nt">AMQP_URI</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pyamqp://guest:guest@localhost</span>
+<span class="w">    </span><span class="nt">agent</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">odoopbx/middleware</span>
+<span class="w">        </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+<span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span>
+<span class="w">        </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rabbitmq</span>
+<span class="w">        </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/asterisk:/etc/asterisk/</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/spool/asterisk:/var/spool/asterisk</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/run/asterisk:/var/run/asterisk</span>
+<span class="w">        </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ODOO_URL=https://your.odoo.addr</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ODOO_DB=odoopbx_15</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ODOO_USER=asterisk1</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ODOO_PASSWORD=asterisk1</span>
+<span class="w">          </span><span class="c1"># - ODOO_IP=1.2.3.4 # Optionally restrict access to only Odoo&#39;s IP address.</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ASTERISK_AMI_USER=odoo</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ASTERISK_AMI_PASSWORD=odoo</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ASTERISK_AMI_HOST=localhost</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TZ=Europe/London</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">AMQP_URI</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pyamqp://guest:guest@localhost</span>
 
-    <span class="nt">npm</span><span class="p">:</span>
-        <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">odoopbx/npm</span>
-        <span class="nt">restart</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
-        <span class="nt">ports</span><span class="p">:</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">80:80</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">81:81</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">443:443</span>
-        <span class="nt">volumes</span><span class="p">:</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">npm_data:/data</span>
-          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">letsencrypt:/etc/letsencrypt</span>
+<span class="w">    </span><span class="nt">npm</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">odoopbx/npm</span>
+<span class="w">        </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+<span class="w">        </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80:80</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">81:81</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">443:443</span>
+<span class="w">        </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm_data:/data</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">letsencrypt:/etc/letsencrypt</span>
 
-    <span class="nt">rabbitmq</span><span class="p">:</span>
-        <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rabbitmq</span>
-        <span class="nt">ports</span><span class="p">:</span>
-           <span class="p p-Indicator">-</span> <span class="s">&quot;127.0.0.1:5672:5672&quot;</span>
+<span class="w">    </span><span class="nt">rabbitmq</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rabbitmq</span>
+<span class="w">        </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">           </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;127.0.0.1:5672:5672&quot;</span>
 
 <span class="nt">volumes</span><span class="p">:</span>
-  <span class="nt">letsencrypt</span><span class="p">:</span>
-  <span class="nt">npm_data</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">letsencrypt</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">npm_data</span><span class="p">:</span>
 
 <span class="nt">networks</span><span class="p">:</span>
-  <span class="nt">default</span><span class="p">:</span>
-    <span class="nt">driver</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">bridge</span>
-    <span class="nt">ipam</span><span class="p">:</span>
-    <span class="nt">config</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="nt">subnet</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">172.172.0.0/16</span>
+<span class="w">  </span><span class="nt">default</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bridge</span>
+<span class="w">    </span><span class="nt">ipam</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">config</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">subnet</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">172.172.0.0/16</span>
 </pre></div>
 </div>
 <p>Now run it and do a Test Ping from the Odoo server’s form.</p>
 </section>
 <section id="asterisk-dialplan-configuration">
-<h2>Asterisk Dialplan configuration<a class="headerlink" href="#asterisk-dialplan-configuration" title="Permalink to this headline"></a></h2>
+<h2>Asterisk Dialplan configuration<a class="headerlink" href="#asterisk-dialplan-configuration" title="Permalink to this heading"></a></h2>
 <p>Asterisk Plus exposes additional functionality by providing the following controllers:</p>
 <ol class="arabic simple">
 <li><p>You can get the contact’s name by accessing <code class="docutils literal notranslate"><span class="pre">asterisk_plus/get_caller_name?number=${CALLERID(number)}</span></code></p></li>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Asterisk Server &mdash; OdooPBX 2.0 documentation</title>
@@ -12,10 +12,10 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -28,12 +28,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> OdooPBX
-            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            OdooPBX
+              <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -67,9 +71,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../configuration.html">Configuration</a> &raquo;</li>
-      <li>Asterisk Server</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../configuration.html">Configuration</a></li>
+      <li class="breadcrumb-item active">Asterisk Server</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -79,17 +83,17 @@
            <div itemprop="articleBody">
              
   <section id="asterisk-server">
-<h1>Asterisk Server<a class="headerlink" href="#asterisk-server" title="Permalink to this headline"></a></h1>
+<h1>Asterisk Server<a class="headerlink" href="#asterisk-server" title="Permalink to this heading"></a></h1>
 <section id="buttons">
-<h2>Buttons<a class="headerlink" href="#buttons" title="Permalink to this headline"></a></h2>
+<h2>Buttons<a class="headerlink" href="#buttons" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>Test and Asterisk ping</strong> - to check the connection between Odoo and Asterisk use these buttons.</p></li>
 </ul>
 </section>
 <section id="settings">
-<h2>Settings<a class="headerlink" href="#settings" title="Permalink to this headline"></a></h2>
+<h2>Settings<a class="headerlink" href="#settings" title="Permalink to this heading"></a></h2>
 <section id="asterisk-system-account">
-<h3>Asterisk system account<a class="headerlink" href="#asterisk-system-account" title="Permalink to this headline"></a></h3>
+<h3>Asterisk system account<a class="headerlink" href="#asterisk-system-account" title="Permalink to this heading"></a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>During the installation process <strong>a new odoo account is created</strong> named <code class="docutils literal notranslate"><span class="pre">asterisk1</span></code> with default password <code class="docutils literal notranslate"><span class="pre">asterisk1</span></code>.</p>
@@ -101,7 +105,7 @@ it is <strong>strictly recommended</strong> to change the default password of th
 <p>You can change the password of the Asterisk account by entering a new value in the <code class="docutils literal notranslate"><span class="pre">Password</span></code> field.</p>
 </section>
 <section id="country-settings-and-timezone">
-<h3>Country settings and timezone<a class="headerlink" href="#country-settings-and-timezone" title="Permalink to this headline"></a></h3>
+<h3>Country settings and timezone<a class="headerlink" href="#country-settings-and-timezone" title="Permalink to this heading"></a></h3>
 <p>It is important to set the correct country for the Asterisk server because it is required to
 correctly process caller ID numbers that usually come in local format.</p>
 <p>Internally all partner numbers in Odoo are stored in E.164 format. So country settings are used to
