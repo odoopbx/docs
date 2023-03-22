@@ -71,7 +71,7 @@ Here is an example of such a configuration line:
 
 .. code::
 
-    server_wide_modules = web,asterisk_plus
+    server_wide_modules = base,web,asterisk_plus
 
 Prepair a directory for a new addon
 -----------------------------------
