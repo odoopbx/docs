@@ -44,6 +44,7 @@ If you run Odoo behind a proxy be sure to add a different proxy handler for the 
 Here is a snippet for Nginx:
 
 .. code::
+  
     # Odoo up to  15.0 version
     location /longpolling/poll {
       proxy_pass http://127.0.0.1:8072;
