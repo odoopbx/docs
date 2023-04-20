@@ -1,6 +1,11 @@
 ----------------------
 Asterisk configuration
 ----------------------
+.. warning::
+
+  Network access to your Asterisk AMI / HTTP ports must be restricted!
+  Make sure you open your AMI & HTTP ports only for the Agent IP address that is displayed in PBX -> Settings -> Server page.
+
 AMI account
 -----------
 Prepare an Asterisk Manager Interface (AMI) account to allow the Agent to connect to Asterisk.
@@ -44,6 +49,60 @@ Make sure that you applied new configuration by checking the Asterisk console:
 .. code::
     
     manager show user odoo
+
+Static HTTP server
+------------------
+Asterisk has a built-in static HTTP server that is used to get call recordings. 
+
+To enable it the following steps shold be done:
+
+* Configure http.conf to enable it.
+* Create a symbolic link for the *monitor* folder.
+* Restart the Asterisk and make a test. 
+
+Configure http.conf
+===================
+The following options must be added there:
+
+* enabled=yes
+* enablestatic=yes
+  
+Symbolic link
+=============
+Usually call recordings are stored in ``/var/spool/asterisk/monitor`` and 
+static root folder is ``/var/lib/asterisk/static-http/``.
+
+Create the link like in the following example:
+
+.. code:: bash
+
+    cd /var/lib/asterisk/static-http/
+    ln -s /var/spool/asterisk/monitor .
+
+Make sure the link is correct:
+
+.. code:: bash
+
+    ls -l
+    ...
+    lrwxrwxrwx 1 root     root      27 Mar 16 10:45 monitor -> /var/spool/asterisk/monitor
+
+Test
+====
+Get a recording name from the monitor folder:
+
+.. code:: bash
+
+  ls /var/spool/asterisk/monitor/ | head -1
+  1b504b46-929b-4c2b-9ed4-28863d685bf3.wav
+
+Now try to download this file from your browser (make sure HTTP access is open for your IP otherwise you'll get 403 Access Denied):
+
+.. code::
+
+    wget http://asterisk.host:8088/static/monitor/1b504b46-929b-4c2b-9ed4-28863d685bf3.wav
+
+If you can get the file then HTTP server is setup correctly. Don't forget to restrict the access to it.
 
 Troubleshooting
 ---------------
