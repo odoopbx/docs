@@ -4,6 +4,13 @@ Odoo preconfiguration
 
 Odoo should be configured correctly for Asterisk Plus module.
 
+HTTPS Redirect
+--------------
+If you use Nginx or other proxy to automatically redirect from http to https make sure 
+to use "308 Permanent Redirect" and not "301 Moved Permanently" otherwise the Agent will not be able
+to connect.
+This issue happens because of request body modification, for details see `HTTP / Redirections <https://developer.mozilla.org/en-US/docs/Web/HTTP/Redirections>`__.
+
 Workers
 -------
 Workers are Odoo processes that handle requests.

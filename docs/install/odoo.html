@@ -77,6 +77,13 @@
   <section id="odoo-preconfiguration">
 <h1>Odoo preconfiguration<a class="headerlink" href="#odoo-preconfiguration" title="Permalink to this headline"></a></h1>
 <p>Odoo should be configured correctly for Asterisk Plus module.</p>
+<section id="https-redirect">
+<h2>HTTPS Redirect<a class="headerlink" href="#https-redirect" title="Permalink to this headline"></a></h2>
+<p>If you use Nginx or other proxy to automatically redirect from http to https make sure
+to use “308 Permanent Redirect” and not “301 Moved Permanently” otherwise the Agent will not be able
+to connect.
+This issue happens because of request body modification, for details see <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Redirections">HTTP / Redirections</a>.</p>
+</section>
 <section id="workers">
 <h2>Workers<a class="headerlink" href="#workers" title="Permalink to this headline"></a></h2>
 <p>Workers are Odoo processes that handle requests.</p>
