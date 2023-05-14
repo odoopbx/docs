@@ -48,6 +48,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo/index.html">OdooPBX demo installation</a></li>
 </ul>
 
         </div>
@@ -115,8 +116,8 @@ on gevent’s port e.g.: <code class="docutils literal notranslate"><span class=
   <span class="n">proxy_pass</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">8072</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="c1"># Odoo from 16.0 version</span>
-<span class="n">location</span> <span class="o">/</span><span class="n">longpolling</span><span class="o">/</span><span class="n">poll</span> <span class="p">{</span>
+<span class="c1"># Odoo from 16.0 version, check full config here - https://www.odoo.com/documentation/16.0/administration/install/deploy.html</span>
+<span class="n">location</span> <span class="o">/</span><span class="n">websocket</span> <span class="p">{</span>
   <span class="n">proxy_pass</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">8072</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
@@ -140,6 +141,15 @@ to make CURL requests from the Asterisk dialplan (see below).</p>
 <h2>Prepair a directory for a new addon<a class="headerlink" href="#prepair-a-directory-for-a-new-addon" title="Permalink to this headline"></a></h2>
 <p>Preapair a folder where you will place Asterisk Plus module.
 Make sure this folder is listed in <code class="docutils literal notranslate"><span class="pre">addons_path</span></code> configuration option.</p>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline"></a></h2>
+<section id="i-don-t-get-popup-notifications">
+<h3>I don’t get popup notifications<a class="headerlink" href="#i-don-t-get-popup-notifications" title="Permalink to this headline"></a></h3>
+<p>The most likely you the long polling mode is not enabled or nginx proxy is not correctly setup for
+long polling.</p>
+<p>Check <code class="docutils literal notranslate"><span class="pre">workers</span></code> settings in your <code class="docutils literal notranslate"><span class="pre">odoo.conf</span></code>.</p>
+</section>
 </section>
 </section>
 

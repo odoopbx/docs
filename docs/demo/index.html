@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OdooPBX demo installation &mdash; OdooPBX 2.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Auto-Answer" href="../configuration/auto_answer.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> OdooPBX
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">What is OdooPBX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">OdooPBX demo installation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">OdooPBX</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>OdooPBX demo installation</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="odoopbx-demo-installation">
+<h1>OdooPBX demo installation<a class="headerlink" href="#odoopbx-demo-installation" title="Permalink to this headline"></a></h1>
+<section id="odoo-docker-depoyment">
+<h2>Odoo Docker depoyment<a class="headerlink" href="#odoo-docker-depoyment" title="Permalink to this headline"></a></h2>
+<p>To setup a demo Odoo CRM with Asterisk Plus module installed use the following <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span> <span class="s">&#39;3&#39;</span>
+<span class="nt">services</span><span class="p">:</span>
+<span class="nt">odoo</span><span class="p">:</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">odoopbx/odoo</span>
+    <span class="nt">command</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">odoo -d odoopbx --workers=3 -i asterisk_plus,crm</span>
+    <span class="nt">ports</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">8069:8069</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">8072:8072</span>
+    <span class="nt">depends_on</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">db</span>
+    <span class="nt">environment</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">USER=odoo</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">PASSWORD=odoo</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ODOO_HTTP_SOCKET_TIMEOUT=10</span>
+    <span class="nt">volumes</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">odoo_data:/var/lib/odoo</span>
+<span class="nt">db</span><span class="p">:</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">postgres:12</span>
+    <span class="nt">volumes</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">db_data:/var/lib/postgresql/data/pgdata</span>
+    <span class="nt">environment</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">POSTGRES_USER=odoo</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">POSTGRES_PASSWORD=odoo</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">PGDATA=/var/lib/postgresql/data/pgdata</span>
+
+<span class="nt">volumes</span><span class="p">:</span>
+    <span class="nt">db_data</span><span class="p">:</span>
+    <span class="nt">odoo_data</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>Start this docker compose and use your browser to visit Odoo on port 8072:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">docker</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">address</span><span class="p">:</span><span class="mi">8072</span><span class="o">/</span>
+</pre></div>
+</div>
+</section>
+<section id="asterisk-connection">
+<h2>Asterisk connection<a class="headerlink" href="#asterisk-connection" title="Permalink to this headline"></a></h2>
+<p>Check <span class="xref std std-doc">install/asterisk</span> on how to configure your Asterisk server for Asterisk Plus module.</p>
+</section>
+<section id="demo-subscription">
+<h2>Demo subscription<a class="headerlink" href="#demo-subscription" title="Permalink to this headline"></a></h2>
+<p>Visit <a class="reference external" href="https://apps.odoopbx.com">apps.odoopbx.com</a> and get a trial subscription code.</p>
+<p>Use it to activate your instance in Odoo <code class="docutils literal notranslate"><span class="pre">PBX</span> <span class="pre">-&gt;</span> <span class="pre">Settings</span> <span class="pre">-&gt;</span> <span class="pre">Server</span></code>.</p>
+</section>
+<section id="production">
+<h2>Production<a class="headerlink" href="#production" title="Permalink to this headline"></a></h2>
+<p>You can use our Odoo docker image for production. To do this you should do the following:</p>
+<ul class="simple">
+<li><p>Create your custom odoo.conf and map it into Odoo container. This configuration should define
+the following:</p>
+<ul>
+<li><p>Disable loading of demo data.</p></li>
+<li><p>Set Odoo database administrator password.</p></li>
+<li><p>Disable database listing (optionally).</p></li>
+<li><p>Set number of worker twice more then you have CPU cores.</p></li>
+</ul>
+</li>
+<li><p>Remove custom command from the <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> not to update on every start.</p></li>
+<li><p>Setup a HTTPS proxy using Nginx or similar. For more information see <a class="reference internal" href="../install/odoo.html"><span class="doc">Odoo preconfiguration</span></a>.</p></li>
+</ul>
+<p>Here is an example of odoo.conf:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">options</span><span class="p">]</span>
+<span class="n">addons_path</span> <span class="o">=</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">extra</span><span class="o">-</span><span class="n">addons</span>
+<span class="n">admin_passwd</span> <span class="o">=</span> <span class="nb">set</span><span class="o">-</span><span class="n">your</span><span class="o">-</span><span class="n">db</span><span class="o">-</span><span class="n">admin</span><span class="o">-</span><span class="k">pass</span>
+<span class="n">list_db</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">proxy_mode</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">xmlrpc_interface</span> <span class="o">=</span> <span class="mf">0.0.0.0</span>
+<span class="n">xmlrpc_port</span> <span class="o">=</span> <span class="mi">8069</span>
+<span class="n">gevent_port</span> <span class="o">=</span> <span class="mi">8072</span>
+<span class="n">without_demo</span> <span class="o">=</span> <span class="nb">all</span>
+<span class="n">workers</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">max_cron_threads</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">server_wide_modules</span> <span class="o">=</span> <span class="n">base</span><span class="p">,</span><span class="n">web</span>
+</pre></div>
+</div>
+<p>Map the file above inside your container (a snippet from the <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code>):</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../configuration/auto_answer.html" class="btn btn-neutral float-left" title="Auto-Answer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Odooist OU.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

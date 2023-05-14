@@ -27,11 +27,11 @@ Odoo version 10 additionally requires ``phonenumbers`` library:
     pip install phonenumbers
 
 
-
 Configure settings
 ==================
 Go to ``PBX -> Settings -> Server`` and make sure all settings are correct for your environment,
 especially:
+
  * ``AMI Host`` and ``AMI Port`` for connecton from cloud service to your PBX AMI interface
  * ``Built-in HTTP URL`` for connection from cloud service to your PBX HTTP interface
  * ``WEB Base URL`` for connection from cloud serivce to your Odoo

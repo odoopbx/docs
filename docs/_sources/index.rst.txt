@@ -7,7 +7,8 @@ OdooPBX Documentation
 .. toctree::
     :titlesonly:
 
-    intro
+    intro    
     install
     configuration
+    demo/index
 
