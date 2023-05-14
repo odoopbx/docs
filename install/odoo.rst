@@ -57,8 +57,8 @@ Here is a snippet for Nginx:
       proxy_pass http://127.0.0.1:8072;
     }
 
-    # Odoo from 16.0 version
-    location /longpolling/poll {
+    # Odoo from 16.0 version, check full config here - https://www.odoo.com/documentation/16.0/administration/install/deploy.html
+    location /websocket {
       proxy_pass http://127.0.0.1:8072;
     }
 
@@ -85,4 +85,15 @@ Prepair a directory for a new addon
 -----------------------------------
 Preapair a folder where you will place Asterisk Plus module.
 Make sure this folder is listed in ``addons_path`` configuration option.
+
+
+Troubleshooting
+---------------
+
+I don't get popup notifications
+===============================
+The most likely you the long polling mode is not enabled or nginx proxy is not correctly setup for
+long polling.
+
+Check ``workers`` settings in your ``odoo.conf``.
 

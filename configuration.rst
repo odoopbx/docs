@@ -10,5 +10,3 @@ Configuration
    configuration/users
    configuration/dialplan
    configuration/auto_answer
-   configuration/rabbitmq
-   configuration/reactor
