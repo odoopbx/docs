@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OdooPBX demo installation &mdash; OdooPBX 2.0 documentation</title>
@@ -12,10 +12,10 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -27,12 +27,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> OdooPBX
-            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            OdooPBX
+              <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -58,8 +62,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>OdooPBX demo installation</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">OdooPBX demo installation</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -69,38 +73,38 @@
            <div itemprop="articleBody">
              
   <section id="odoopbx-demo-installation">
-<h1>OdooPBX demo installation<a class="headerlink" href="#odoopbx-demo-installation" title="Permalink to this headline"></a></h1>
+<h1>OdooPBX demo installation<a class="headerlink" href="#odoopbx-demo-installation" title="Permalink to this heading"></a></h1>
 <section id="odoo-docker-depoyment">
-<h2>Odoo Docker depoyment<a class="headerlink" href="#odoo-docker-depoyment" title="Permalink to this headline"></a></h2>
+<h2>Odoo Docker depoyment<a class="headerlink" href="#odoo-docker-depoyment" title="Permalink to this heading"></a></h2>
 <p>To setup a demo Odoo CRM with Asterisk Plus module installed use the following <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> file:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span> <span class="s">&#39;3&#39;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3&#39;</span>
 <span class="nt">services</span><span class="p">:</span>
 <span class="nt">odoo</span><span class="p">:</span>
-    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">odoopbx/odoo</span>
-    <span class="nt">command</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">odoo -d odoopbx --workers=3 -i asterisk_plus,crm</span>
-    <span class="nt">ports</span><span class="p">:</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">8069:8069</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">8072:8072</span>
-    <span class="nt">depends_on</span><span class="p">:</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">db</span>
-    <span class="nt">environment</span><span class="p">:</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">USER=odoo</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">PASSWORD=odoo</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ODOO_HTTP_SOCKET_TIMEOUT=10</span>
-    <span class="nt">volumes</span><span class="p">:</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">odoo_data:/var/lib/odoo</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">odoopbx/odoo</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">odoo -d odoopbx --workers=3 -i asterisk_plus,crm</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8069:8069</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8072:8072</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">USER=odoo</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PASSWORD=odoo</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ODOO_HTTP_SOCKET_TIMEOUT=10</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">odoo_data:/var/lib/odoo</span>
 <span class="nt">db</span><span class="p">:</span>
-    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">postgres:12</span>
-    <span class="nt">volumes</span><span class="p">:</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">db_data:/var/lib/postgresql/data/pgdata</span>
-    <span class="nt">environment</span><span class="p">:</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">POSTGRES_USER=odoo</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">POSTGRES_PASSWORD=odoo</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">PGDATA=/var/lib/postgresql/data/pgdata</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:12</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db_data:/var/lib/postgresql/data/pgdata</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">POSTGRES_USER=odoo</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">POSTGRES_PASSWORD=odoo</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PGDATA=/var/lib/postgresql/data/pgdata</span>
 
 <span class="nt">volumes</span><span class="p">:</span>
-    <span class="nt">db_data</span><span class="p">:</span>
-    <span class="nt">odoo_data</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">db_data</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">odoo_data</span><span class="p">:</span>
 </pre></div>
 </div>
 <p>Start this docker compose and use your browser to visit Odoo on port 8072:</p>
@@ -109,16 +113,16 @@
 </div>
 </section>
 <section id="asterisk-connection">
-<h2>Asterisk connection<a class="headerlink" href="#asterisk-connection" title="Permalink to this headline"></a></h2>
+<h2>Asterisk connection<a class="headerlink" href="#asterisk-connection" title="Permalink to this heading"></a></h2>
 <p>Check <span class="xref std std-doc">install/asterisk</span> on how to configure your Asterisk server for Asterisk Plus module.</p>
 </section>
 <section id="demo-subscription">
-<h2>Demo subscription<a class="headerlink" href="#demo-subscription" title="Permalink to this headline"></a></h2>
+<h2>Demo subscription<a class="headerlink" href="#demo-subscription" title="Permalink to this heading"></a></h2>
 <p>Visit <a class="reference external" href="https://apps.odoopbx.com">apps.odoopbx.com</a> and get a trial subscription code.</p>
 <p>Use it to activate your instance in Odoo <code class="docutils literal notranslate"><span class="pre">PBX</span> <span class="pre">-&gt;</span> <span class="pre">Settings</span> <span class="pre">-&gt;</span> <span class="pre">Server</span></code>.</p>
 </section>
 <section id="production">
-<h2>Production<a class="headerlink" href="#production" title="Permalink to this headline"></a></h2>
+<h2>Production<a class="headerlink" href="#production" title="Permalink to this heading"></a></h2>
 <p>You can use our Odoo docker image for production. To do this you should do the following:</p>
 <ul class="simple">
 <li><p>Create your custom odoo.conf and map it into Odoo container. This configuration should define

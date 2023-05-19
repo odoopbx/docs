@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Asterisk configuration &mdash; OdooPBX 2.0 documentation</title>
@@ -12,10 +12,10 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -28,12 +28,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> OdooPBX
-            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            OdooPBX
+              <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -64,9 +68,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../install.html">Installation</a> &raquo;</li>
-      <li>Asterisk configuration</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../install.html">Installation</a></li>
+      <li class="breadcrumb-item active">Asterisk configuration</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -76,14 +80,14 @@
            <div itemprop="articleBody">
              
   <section id="asterisk-configuration">
-<h1>Asterisk configuration<a class="headerlink" href="#asterisk-configuration" title="Permalink to this headline"></a></h1>
+<h1>Asterisk configuration<a class="headerlink" href="#asterisk-configuration" title="Permalink to this heading"></a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Network access to your Asterisk AMI / HTTP ports must be restricted!
 Make sure you open your AMI &amp; HTTP ports only for the Agent IP address that is displayed in PBX -&gt; Settings -&gt; Server page.</p>
 </div>
 <section id="ami-account">
-<h2>AMI account<a class="headerlink" href="#ami-account" title="Permalink to this headline"></a></h2>
+<h2>AMI account<a class="headerlink" href="#ami-account" title="Permalink to this heading"></a></h2>
 <p>Prepare an Asterisk Manager Interface (AMI) account to allow the Agent to connect to Asterisk.</p>
 <p>Vanilla Asterisk requires editing the  <code class="docutils literal notranslate"><span class="pre">manager.conf</span></code> file, which is usually found in <code class="docutils literal notranslate"><span class="pre">/etc/asterisk</span></code>.</p>
 <p>A sample configuration is provided below, which lets the Agent to connect
@@ -99,7 +103,7 @@ to your Asterisk server AMI port (usually 5038) using the login <code class="doc
 <span class="n">secret</span><span class="o">=</span><span class="n">odoo</span> <span class="c1"># Make sure you change this password as per the OdooPBX server&#39;s configuration.</span>
 <span class="n">allowmultiplelogin</span><span class="o">=</span><span class="n">no</span>
 <span class="n">displayconnects</span> <span class="o">=</span> <span class="n">yes</span>
-<span class="n">read</span><span class="o">=</span><span class="n">call</span><span class="p">,</span><span class="n">dialplan</span>
+<span class="n">read</span><span class="o">=</span><span class="n">call</span><span class="p">,</span><span class="n">dialplan</span><span class="p">,</span><span class="n">user</span>
 <span class="n">write</span><span class="o">=</span><span class="n">originate</span>
 <span class="n">deny</span><span class="o">=</span><span class="mf">0.0.0.0</span><span class="o">/</span><span class="mf">0.0.0.0</span>
 <span class="n">permit</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">x</span><span class="mf">.3.4</span><span class="o">/</span><span class="mf">255.255.255.255</span> <span class="c1"># Put here Agent IP address. This IP address will be available from Odoopbx server settings after activating subscription.</span>
@@ -119,7 +123,7 @@ Change permit option to IP address of the agent.</p>
 </div>
 </section>
 <section id="static-http-server">
-<h2>Static HTTP server<a class="headerlink" href="#static-http-server" title="Permalink to this headline"></a></h2>
+<h2>Static HTTP server<a class="headerlink" href="#static-http-server" title="Permalink to this heading"></a></h2>
 <p>Asterisk has a built-in static HTTP server that is used to get call recordings.</p>
 <p>To enable it the following steps shold be done:</p>
 <ul class="simple">
@@ -128,7 +132,7 @@ Change permit option to IP address of the agent.</p>
 <li><p>Restart the Asterisk and make a test.</p></li>
 </ul>
 <section id="configure-http-conf">
-<h3>Configure http.conf<a class="headerlink" href="#configure-http-conf" title="Permalink to this headline"></a></h3>
+<h3>Configure http.conf<a class="headerlink" href="#configure-http-conf" title="Permalink to this heading"></a></h3>
 <p>The following options must be added there:</p>
 <ul class="simple">
 <li><p>enabled=yes</p></li>
@@ -136,25 +140,25 @@ Change permit option to IP address of the agent.</p>
 </ul>
 </section>
 <section id="symbolic-link">
-<h3>Symbolic link<a class="headerlink" href="#symbolic-link" title="Permalink to this headline"></a></h3>
+<h3>Symbolic link<a class="headerlink" href="#symbolic-link" title="Permalink to this heading"></a></h3>
 <p>Usually call recordings are stored in <code class="docutils literal notranslate"><span class="pre">/var/spool/asterisk/monitor</span></code> and
 static root folder is <code class="docutils literal notranslate"><span class="pre">/var/lib/asterisk/static-http/</span></code>.</p>
 <p>Create the link like in the following example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /var/lib/asterisk/static-http/
-ln -s /var/spool/asterisk/monitor .
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/var/lib/asterisk/static-http/
+ln<span class="w"> </span>-s<span class="w"> </span>/var/spool/asterisk/monitor<span class="w"> </span>.
 </pre></div>
 </div>
 <p>Make sure the link is correct:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls -l
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>-l
 ...
-lrwxrwxrwx <span class="m">1</span> root     root      <span class="m">27</span> Mar <span class="m">16</span> <span class="m">10</span>:45 monitor -&gt; /var/spool/asterisk/monitor
+lrwxrwxrwx<span class="w"> </span><span class="m">1</span><span class="w"> </span>root<span class="w">     </span>root<span class="w">      </span><span class="m">27</span><span class="w"> </span>Mar<span class="w"> </span><span class="m">16</span><span class="w"> </span><span class="m">10</span>:45<span class="w"> </span>monitor<span class="w"> </span>-&gt;<span class="w"> </span>/var/spool/asterisk/monitor
 </pre></div>
 </div>
 </section>
 <section id="test">
-<h3>Test<a class="headerlink" href="#test" title="Permalink to this headline"></a></h3>
+<h3>Test<a class="headerlink" href="#test" title="Permalink to this heading"></a></h3>
 <p>Get a recording name from the monitor folder:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls /var/spool/asterisk/monitor/ <span class="p">|</span> head -1
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>/var/spool/asterisk/monitor/<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-1
 1b504b46-929b-4c2b-9ed4-28863d685bf3.wav
 </pre></div>
 </div>
@@ -166,7 +170,7 @@ lrwxrwxrwx <span class="m">1</span> root     root      <span class="m">27</span>
 </section>
 </section>
 <section id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline"></a></h2>
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h2>
 <p>After the AMI account is created, you need to make sure that it’s updated inside Asterisk configuration.
 Open the Asterisk console using <code class="docutils literal notranslate"><span class="pre">asterisk</span> <span class="pre">-r</span></code> as root and see if the Odoo manager user is available:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">manager</span> <span class="n">show</span> <span class="n">user</span> <span class="n">odoo</span>
