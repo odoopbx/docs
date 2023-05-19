@@ -6,26 +6,34 @@ This article explains how to install ``Asterisk Plus`` Odoo addon from `OdooPBX 
 
 Install the addon in Odoo
 =========================
-First, buy the addon from `Odoo market <https://apps.odoo.com/apps/modules/16.0/asterisk_plus/>`_
+First, download the addon from `Odoo market <https://apps.odoo.com/apps/modules/16.0/asterisk_plus/>`_
 
 Install the addon as any other Odoo module, refer to `Odoo documentation <https://www.odoo.com/documentation/16.0/applications/general/apps_modules.html#>`_
 for details if needed.
 
 Install python requirements
 ---------------------------
-The module dependencies are located in ``requirements.txt`` file located in the addons folder.
-
-If you use odoo.sh make sure you copy the requirements to your modules top folder so that odoo.sh can 
-install the required dependencies.
-
-If you use python virtualenv make sure you install the requirements there and not system wide.
-
-Odoo version 10 additionally requires ``phonenumbers`` library:
+Install python dependancy libraries with command:
 
 .. code-block:: bash
 
-    pip install phonenumbers
+    pip3 install humanize lameenc phonenumbers nats-python
 
+
+If you use odoo.sh make sure you have ``requirements.txt`` file in your modules top folder containing:
+
+.. code::
+
+    humanize
+    lameenc
+    phonenumbers
+    nats-python
+    
+So that odoo.sh can install the required dependencies.
+
+If you use python virtualenv make sure you install the requirements there and not system wide.
+
+Odoo version 10 uses python2, so use command ``pip`` instead of ``pip3``.
 
 Configure settings
 ==================
