@@ -80,19 +80,25 @@
 <p>This article explains how to install <code class="docutils literal notranslate"><span class="pre">Asterisk</span> <span class="pre">Plus</span></code> Odoo addon from <a class="reference external" href="http://odoopbx.com">OdooPBX</a>.</p>
 <section id="install-the-addon-in-odoo">
 <h2>Install the addon in Odoo<a class="headerlink" href="#install-the-addon-in-odoo" title="Permalink to this headline"></a></h2>
-<p>First, buy the addon from <a class="reference external" href="https://apps.odoo.com/apps/modules/16.0/asterisk_plus/">Odoo market</a></p>
+<p>First, download the addon from <a class="reference external" href="https://apps.odoo.com/apps/modules/16.0/asterisk_plus/">Odoo market</a></p>
 <p>Install the addon as any other Odoo module, refer to <a class="reference external" href="https://www.odoo.com/documentation/16.0/applications/general/apps_modules.html#">Odoo documentation</a>
 for details if needed.</p>
 <section id="install-python-requirements">
 <h3>Install python requirements<a class="headerlink" href="#install-python-requirements" title="Permalink to this headline"></a></h3>
-<p>The module dependencies are located in <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file located in the addons folder.</p>
-<p>If you use odoo.sh make sure you copy the requirements to your modules top folder so that odoo.sh can
-install the required dependencies.</p>
-<p>If you use python virtualenv make sure you install the requirements there and not system wide.</p>
-<p>Odoo version 10 additionally requires <code class="docutils literal notranslate"><span class="pre">phonenumbers</span></code> library:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install phonenumbers
+<p>Install python dependancy libraries with command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3 install humanize lameenc phonenumbers nats-python
 </pre></div>
 </div>
+<p>If you use odoo.sh make sure you have <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file in your modules top folder containing:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">humanize</span>
+<span class="n">lameenc</span>
+<span class="n">phonenumbers</span>
+<span class="n">nats</span><span class="o">-</span><span class="n">python</span>
+</pre></div>
+</div>
+<p>So that odoo.sh can install the required dependencies.</p>
+<p>If you use python virtualenv make sure you install the requirements there and not system wide.</p>
+<p>Odoo version 10 uses python2, so use command <code class="docutils literal notranslate"><span class="pre">pip</span></code> instead of <code class="docutils literal notranslate"><span class="pre">pip3</span></code>.</p>
 </section>
 </section>
 <section id="configure-settings">
