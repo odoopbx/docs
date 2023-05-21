@@ -1,8 +1,38 @@
 =====================
 Odoo preconfiguration
 =====================
-
 Odoo should be configured correctly for Asterisk Plus module.
+
+Requirements
+============
+Asterisk Plus uses `NATs <https://nats.io/>`__ technology to communicate with the Agent middleware so must be installed
+before trying to install the Asterisk Plus module. 
+
+Different Python versions use different Python NATs implementations:
+
+* Odoo 10, 11, 12: Python < 3.7
+* Odoo 13, 14, 15, 16: Python >= 3.7
+
+
+Odoo version 10, 11, 12
+-----------------------
+These versions use the following NATs library: https://github.com/mcuadros/pynats.
+
+It can be installed like in the example below:
+
+.. code:: 
+
+  # Odoo 10
+  pip install https://github.com/mcuadros/pynats/archive/refs/heads/master.zip
+  # Odoo 11, 12
+  pip3 install https://github.com/mcuadros/pynats/archive/refs/heads/master.zip
+  
+Odoo version 13 and above
+-------------------------
+.. code:: 
+
+  pip3 install nats-py
+
 
 HTTPS Redirect
 --------------

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>What is OdooPBX &mdash; OdooPBX 2.0 documentation</title>
@@ -12,10 +12,10 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -28,16 +28,12 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-
-          
-          
-          <a href="index.html" class="icon icon-home">
-            OdooPBX
-              <img src="_static/logo.png" class="logo" alt="Logo"/>
+            <a href="index.html" class="icon icon-home"> OdooPBX
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -63,8 +59,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">What is OdooPBX</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>What is OdooPBX</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -74,7 +70,7 @@
            <div itemprop="articleBody">
              
   <section id="what-is-odoopbx">
-<h1>What is OdooPBX<a class="headerlink" href="#what-is-odoopbx" title="Permalink to this heading"></a></h1>
+<h1>What is OdooPBX<a class="headerlink" href="#what-is-odoopbx" title="Permalink to this headline"></a></h1>
 <p>OdooPBX is a telephony platform built upon Odoo &amp; Asterisk using Nameko microservices as a middleware layer.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://odoo.com">Odoo</a> (former OpenERP / TinyERP) is a modern WEB business platform that rapidly spreads over the world.</p></li>
@@ -93,7 +89,7 @@ Sales, Events, Website and much more.</p>
 <li><p>Provides a backend part for a WEB based Asterisk CLI (optionally).</p></li>
 </ul>
 <section id="odoopbx-modules">
-<h2>OdooPBX modules<a class="headerlink" href="#odoopbx-modules" title="Permalink to this heading"></a></h2>
+<h2>OdooPBX modules<a class="headerlink" href="#odoopbx-modules" title="Permalink to this headline"></a></h2>
 <p>As OdooPBX is based on Odoo it has modular architecture.</p>
 <p>The main module is named <strong>Asterisk Plus</strong> and it is inherited by all other OdooPBX modules.</p>
 <p>Other modules add some integration between Asterisk Plus module and different Odoo components. For example, Asterisk Plus CRM app requires CRM module to be installed

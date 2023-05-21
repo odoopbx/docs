@@ -30,7 +30,7 @@ to your Asterisk server AMI port (usually 5038) using the login ``odoo`` with th
     secret=odoo # Make sure you change this password as per the OdooPBX server's configuration.
     allowmultiplelogin=no
     displayconnects = yes
-    read=call,dialplan,user
+    read=call,dialplan
     write=originate
     deny=0.0.0.0/0.0.0.0
     permit=x.x.3.4/255.255.255.255 # Put here Agent IP address. This IP address will be available from Odoopbx server settings after activating subscription.
