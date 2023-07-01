@@ -29,19 +29,19 @@ To start initialization procedure you should start the agent with ``init`` optio
     --volume ./config.yaml:/etc/asterisk_plus_agent.yaml \
     --network=host odoopbx/agent:latest init http://localhost:8069
 
-  #  We map /etc/asterisk folder so that initialization procedure can place AMI account under 
-  # /etc/asterisk/manager.conf.d and /var/run/asterisk so that it can connect to the running Asterisk to check the configuration.
+  # We map /etc/asterisk folder so that initialization procedure can place AMI account under 
+  # /etc/asterisk/manager.conf.d and /var/run/asterisk so that it can connect to the 
+  # running Asterisk to check the configuration.
 
 .. code:: bash
 
-  # Direct installation fron Pypi.
+  # Direct installation from Pypi.
   pip3 install asterisk-plus-agent
   asterisk-plus-agent init http://localhost:8069
 
 
 Replace ``localhost:8069`` to your Odoo instance WEB URL and run the commands above. 
-You must get ``config.yaml`` file located in the current directory if docker was used 
-or ``/etc/asterisk_plus_agent.yaml`` if direct installation was used.
+You must get ``config.yaml`` file located in the current directory if docker was used or ``/etc/asterisk_plus_agent.yaml`` if direct installation was used.
 
 Now use the following command to run the Agent:
 
@@ -71,7 +71,7 @@ Prepare an Asterisk Manager Interface (AMI) account to allow the Agent to connec
 Vanilla Asterisk requires editing the  ``manager.conf`` file, which is usually found in ``/etc/asterisk``.
 
 A sample configuration is provided below, which lets the Agent to connect
-to your Asterisk server AMI port (usually 5038) using the login ``odoo`` with the password ``odoo``.
+to your Asterisk server AMI port (usually 5038) using the login ``asterisk_plus_agent`` with the password ``odoo``.
 
 
 ``manager.conf``:
@@ -84,7 +84,7 @@ to your Asterisk server AMI port (usually 5038) using the login ``odoo`` with th
     port = 5038
     bindaddr = 127.0.0.1
 
-    [odoo]
+    [asterisk_plus_agent]
     secret=odoo
     allowmultiplelogin=no
     displayconnects = yes
@@ -106,7 +106,21 @@ Make sure that you applied new configuration by checking the Asterisk console:
 
 .. code::
     
-    manager show user odoo
+    manager show user asterisk_plus_agent
+
+
+After creating an AMI account manually you can init Agent again using ``--skip-ami-setup`` flag enabled.
+After Odoo initialization part is done, open ``asterisk_plus_agent.yaml`` config and add AMI
+settings there like in the example below:
+
+.. code:: yaml
+
+  ami_host: localhost
+  ami_password: 9013f239-2bcd-426e-82b1-c1d58b0c2f17
+  ami_port: 5038
+  ami_user: asterisk_plus_agent
+
+Save the file, and run the Agent.
 
 
 Troubleshooting

@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Asterisk Plus Agent installation &mdash; OdooPBX 2.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="../_static/logo.png"/>
+  <title>Asterisk Plus Agent installation &mdash; OdooPBX 2.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -24,7 +28,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> OdooPBX<img src="../_static/logo.png" class="logo" alt="Logo"/>
+            <a href="../index.html" class="icon icon-home"> OdooPBX
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -59,9 +64,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
-          <li class="breadcrumb-item"><a href="../install.html">Installation</a></li>
-      <li class="breadcrumb-item active">Asterisk Plus Agent installation</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../install.html">Installation</a> &raquo;</li>
+      <li>Asterisk Plus Agent installation</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -70,10 +75,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="asterisk-plus-agent-installation">
-<h1>Asterisk Plus Agent installation<a class="headerlink" href="#asterisk-plus-agent-installation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="automatic-initialization">
-<h2>Automatic initialization<a class="headerlink" href="#automatic-initialization" title="Permalink to this headline">¶</a></h2>
+  <section id="asterisk-plus-agent-installation">
+<h1>Asterisk Plus Agent installation<a class="headerlink" href="#asterisk-plus-agent-installation" title="Permalink to this headline"></a></h1>
+<section id="automatic-initialization">
+<h2>Automatic initialization<a class="headerlink" href="#automatic-initialization" title="Permalink to this headline"></a></h2>
 <p>We have created the ability to automatically configure the Agent for the most typical scenario.
 The following requirements are necessary for its execution:</p>
 <ul class="simple">
@@ -95,18 +100,18 @@ touch config.yaml <span class="o">&amp;&amp;</span> docker run --rm --volume /et
   --volume ./config.yaml:/etc/asterisk_plus_agent.yaml <span class="se">\</span>
   --network<span class="o">=</span>host odoopbx/agent:latest init http://localhost:8069
 
-<span class="c1">#  We map /etc/asterisk folder so that initialization procedure can place AMI account under</span>
-<span class="c1"># /etc/asterisk/manager.conf.d and /var/run/asterisk so that it can connect to the running Asterisk to check the configuration.</span>
+<span class="c1"># We map /etc/asterisk folder so that initialization procedure can place AMI account under</span>
+<span class="c1"># /etc/asterisk/manager.conf.d and /var/run/asterisk so that it can connect to the</span>
+<span class="c1"># running Asterisk to check the configuration.</span>
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Direct installation fron Pypi.</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Direct installation from Pypi.</span>
 pip3 install asterisk-plus-agent
 asterisk-plus-agent init http://localhost:8069
 </pre></div>
 </div>
 <p>Replace <code class="docutils literal notranslate"><span class="pre">localhost:8069</span></code> to your Odoo instance WEB URL and run the commands above.
-You must get <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> file located in the current directory if docker was used
-or <code class="docutils literal notranslate"><span class="pre">/etc/asterisk_plus_agent.yaml</span></code> if direct installation was used.</p>
+You must get <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> file located in the current directory if docker was used or <code class="docutils literal notranslate"><span class="pre">/etc/asterisk_plus_agent.yaml</span></code> if direct installation was used.</p>
 <p>Now use the following command to run the Agent:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run -d --name agent  --restart<span class="o">=</span>unless-stopped --network<span class="o">=</span>host <span class="se">\</span>
   --volume ./config.yaml:/etc/asterisk_plus_agent.yaml  odoopbx/agent:latest run
@@ -120,13 +125,13 @@ docker logs agent
 <p>Now you should be able to Ping the Agent and Asterisk.</p>
 <p>You can reload the page and make sure Agent Initialized checkbox is set.
 If you ever need to re-initialize the Agent unset it and repeat the procedure.</p>
-</div>
-<div class="section" id="manual-installation">
-<h2>Manual installation<a class="headerlink" href="#manual-installation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="manual-installation">
+<h2>Manual installation<a class="headerlink" href="#manual-installation" title="Permalink to this headline"></a></h2>
 <p>Prepare an Asterisk Manager Interface (AMI) account to allow the Agent to connect to Asterisk.</p>
 <p>Vanilla Asterisk requires editing the  <code class="docutils literal notranslate"><span class="pre">manager.conf</span></code> file, which is usually found in <code class="docutils literal notranslate"><span class="pre">/etc/asterisk</span></code>.</p>
 <p>A sample configuration is provided below, which lets the Agent to connect
-to your Asterisk server AMI port (usually 5038) using the login <code class="docutils literal notranslate"><span class="pre">odoo</span></code> with the password <code class="docutils literal notranslate"><span class="pre">odoo</span></code>.</p>
+to your Asterisk server AMI port (usually 5038) using the login <code class="docutils literal notranslate"><span class="pre">asterisk_plus_agent</span></code> with the password <code class="docutils literal notranslate"><span class="pre">odoo</span></code>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">manager.conf</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">general</span><span class="p">]</span>
 <span class="n">enabled</span> <span class="o">=</span> <span class="n">yes</span>
@@ -134,7 +139,7 @@ to your Asterisk server AMI port (usually 5038) using the login <code class="doc
 <span class="n">port</span> <span class="o">=</span> <span class="mi">5038</span>
 <span class="n">bindaddr</span> <span class="o">=</span> <span class="mf">127.0.0.1</span>
 
-<span class="p">[</span><span class="n">odoo</span><span class="p">]</span>
+<span class="p">[</span><span class="n">asterisk_plus_agent</span><span class="p">]</span>
 <span class="n">secret</span><span class="o">=</span><span class="n">odoo</span>
 <span class="n">allowmultiplelogin</span><span class="o">=</span><span class="n">no</span>
 <span class="n">displayconnects</span> <span class="o">=</span> <span class="n">yes</span>
@@ -153,12 +158,22 @@ a custom file, which will not be managed by the distro, usually <code class="doc
 Change permit option to IP address of the agent.</p>
 </div>
 <p>Make sure that you applied new configuration by checking the Asterisk console:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">manager</span> <span class="n">show</span> <span class="n">user</span> <span class="n">odoo</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">manager</span> <span class="n">show</span> <span class="n">user</span> <span class="n">asterisk_plus_agent</span>
 </pre></div>
 </div>
+<p>After creating an AMI account manually you can init Agent again using <code class="docutils literal notranslate"><span class="pre">--skip-ami-setup</span></code> flag enabled.
+After Odoo initialization part is done, open <code class="docutils literal notranslate"><span class="pre">asterisk_plus_agent.yaml</span></code> config and add AMI
+settings there like in the example below:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ami_host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">localhost</span>
+<span class="nt">ami_password</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9013f239-2bcd-426e-82b1-c1d58b0c2f17</span>
+<span class="nt">ami_port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5038</span>
+<span class="nt">ami_user</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">asterisk_plus_agent</span>
+</pre></div>
 </div>
-<div class="section" id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<p>Save the file, and run the Agent.</p>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline"></a></h2>
 <p>After the AMI account is created, you need to make sure that it’s updated inside Asterisk configuration.
 Open the Asterisk console using <code class="docutils literal notranslate"><span class="pre">asterisk</span> <span class="pre">-r</span></code> as root and see if the Odoo manager user is available:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">manager</span> <span class="n">show</span> <span class="n">user</span> <span class="n">odoo</span>
@@ -175,12 +190,12 @@ Open the Asterisk console using <code class="docutils literal notranslate"><span
 </div>
 <p>If you don’t see the user, maybe the AMI configuration file hasn’t been read by Asterisk after being modified.
 This can be solved by running inside the Asterisk console the command <code class="docutils literal notranslate"><span class="pre">core</span> <span class="pre">reload</span></code>.</p>
-</div>
-<div class="section" id="support">
-<h2>Support<a class="headerlink" href="#support" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="support">
+<h2>Support<a class="headerlink" href="#support" title="Permalink to this headline"></a></h2>
 <p>If you need any assistance or cannot use docker feel free to submit a support ticket at our <a class="reference external" href="https://odoopbx.com/helpdesk">Helpdesk</a>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

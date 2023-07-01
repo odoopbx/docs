@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Asterisk Dialplan Integration &mdash; OdooPBX 2.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="../_static/logo.png"/>
+  <title>Asterisk Dialplan Integration &mdash; OdooPBX 2.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -24,7 +28,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> OdooPBX<img src="../_static/logo.png" class="logo" alt="Logo"/>
+            <a href="../index.html" class="icon icon-home"> OdooPBX
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -61,9 +66,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
-          <li class="breadcrumb-item"><a href="../configuration.html">Configuration</a></li>
-      <li class="breadcrumb-item active">Asterisk Dialplan Integration</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../configuration.html">Configuration</a> &raquo;</li>
+      <li>Asterisk Dialplan Integration</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -72,10 +77,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="asterisk-dialplan-integration">
-<h1>Asterisk Dialplan Integration<a class="headerlink" href="#asterisk-dialplan-integration" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="play-a-message-to-unknown-partners">
-<h2>Play a message to unknown partners<a class="headerlink" href="#play-a-message-to-unknown-partners" title="Permalink to this headline">¶</a></h2>
+  <section id="asterisk-dialplan-integration">
+<h1>Asterisk Dialplan Integration<a class="headerlink" href="#asterisk-dialplan-integration" title="Permalink to this headline"></a></h1>
+<section id="play-a-message-to-unknown-partners">
+<h2>Play a message to unknown partners<a class="headerlink" href="#play-a-message-to-unknown-partners" title="Permalink to this headline"></a></h2>
 <p>Imagine a case when you accept calls only from your partners.</p>
 <p>So existing partners can be directly connected but new customers must first be
 acknowledged. To make this work you can create a special dialplan where the system
@@ -104,9 +109,9 @@ same =&gt; n(found),Playback(welcome-customer)
 same =&gt; n,Queue(support)
 </pre></div>
 </div>
-</div>
-<div class="section" id="dialplan-configuration">
-<h2>Dialplan configuration<a class="headerlink" href="#dialplan-configuration" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="dialplan-configuration">
+<h2>Dialplan configuration<a class="headerlink" href="#dialplan-configuration" title="Permalink to this headline"></a></h2>
 <p>Asterisk Plus exposes additional functionality by providing the following controllers:</p>
 <ol class="arabic simple">
 <li><p>You can get the contact’s name by accessing <code class="docutils literal notranslate"><span class="pre">asterisk_plus/get_caller_name?number=${CALLERID(number)}</span></code></p></li>
@@ -195,8 +200,8 @@ exten =&gt; _XXXX,2,Dial(SIP/${EXTEN},30) ; Local users calling
 exten =&gt; _XXXXX.,2,Dial(SIP/provider/${EXTEN},30,TU(post-dial-send-dtmf) ; Outgoing calls pattern
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
