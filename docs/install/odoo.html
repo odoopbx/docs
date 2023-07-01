@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Odoo preconfiguration &mdash; OdooPBX 2.0 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="shortcut icon" href="../_static/logo.png"/>
+  <title>Odoo preconfiguration &mdash; OdooPBX 2.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="../_static/logo.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -28,8 +24,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> OdooPBX
-            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+            <a href="../index.html" class="icon icon-home"> OdooPBX<img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -44,7 +39,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../install.html">Installation</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Odoo preconfiguration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="asterisk_plus.html">Asterisk Plus</a></li>
-<li class="toctree-l2"><a class="reference internal" href="asterisk.html">Asterisk configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent.html">Asterisk Plus Agent installation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
@@ -64,9 +59,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../install.html">Installation</a> &raquo;</li>
-      <li>Odoo preconfiguration</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../install.html">Installation</a></li>
+      <li class="breadcrumb-item active">Odoo preconfiguration</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -75,44 +70,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="odoo-preconfiguration">
-<h1>Odoo preconfiguration<a class="headerlink" href="#odoo-preconfiguration" title="Permalink to this headline"></a></h1>
+  <div class="section" id="odoo-preconfiguration">
+<h1>Odoo preconfiguration<a class="headerlink" href="#odoo-preconfiguration" title="Permalink to this headline">¶</a></h1>
 <p>Odoo should be configured correctly for Asterisk Plus module.</p>
-<section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline"></a></h2>
-<p>Asterisk Plus uses <a class="reference external" href="https://nats.io/">NATs</a> technology to communicate with the Agent middleware so must be installed
-before trying to install the Asterisk Plus module.</p>
-<p>Different Python versions use different Python NATs implementations:</p>
-<ul class="simple">
-<li><p>Odoo 10, 11, 12: Python &lt; 3.7</p></li>
-<li><p>Odoo 13, 14, 15, 16: Python &gt;= 3.7</p></li>
-</ul>
-<section id="odoo-version-10-11-12">
-<h3>Odoo version 10, 11, 12<a class="headerlink" href="#odoo-version-10-11-12" title="Permalink to this headline"></a></h3>
-<p>These versions use the following NATs library: <a class="reference external" href="https://github.com/mcuadros/pynats">https://github.com/mcuadros/pynats</a>.</p>
-<p>It can be installed like in the example below:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Odoo 10</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">mcuadros</span><span class="o">/</span><span class="n">pynats</span><span class="o">/</span><span class="n">archive</span><span class="o">/</span><span class="n">refs</span><span class="o">/</span><span class="n">heads</span><span class="o">/</span><span class="n">master</span><span class="o">.</span><span class="n">zip</span>
-<span class="c1"># Odoo 11, 12</span>
-<span class="n">pip3</span> <span class="n">install</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">mcuadros</span><span class="o">/</span><span class="n">pynats</span><span class="o">/</span><span class="n">archive</span><span class="o">/</span><span class="n">refs</span><span class="o">/</span><span class="n">heads</span><span class="o">/</span><span class="n">master</span><span class="o">.</span><span class="n">zip</span>
-</pre></div>
-</div>
-</section>
-<section id="odoo-version-13-and-above">
-<h3>Odoo version 13 and above<a class="headerlink" href="#odoo-version-13-and-above" title="Permalink to this headline"></a></h3>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">nats</span><span class="o">-</span><span class="n">py</span>
-</pre></div>
-</div>
-</section>
-<section id="https-redirect">
-<h3>HTTPS Redirect<a class="headerlink" href="#https-redirect" title="Permalink to this headline"></a></h3>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="https-redirect">
+<h3>HTTPS Redirect<a class="headerlink" href="#https-redirect" title="Permalink to this headline">¶</a></h3>
 <p>If you use Nginx or other proxy to automatically redirect from http to https make sure
 to use “308 Permanent Redirect” and not “301 Moved Permanently” otherwise the Agent will not be able
 to connect.
 This issue happens because of request body modification, for details see <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Redirections">HTTP / Redirections</a>.</p>
-</section>
-<section id="workers">
-<h3>Workers<a class="headerlink" href="#workers" title="Permalink to this headline"></a></h3>
+</div>
+<div class="section" id="workers">
+<h3>Workers<a class="headerlink" href="#workers" title="Permalink to this headline">¶</a></h3>
 <p>Workers are Odoo processes that handle requests.</p>
 <p>Asterisk Plus module handles many short-running requests coming from Asterisk.</p>
 <p>So your Odoo should be configured with at least 2 workers
@@ -121,9 +92,9 @@ This issue happens because of request body modification, for details see <a clas
 <p class="admonition-title">Warning</p>
 <p>If you use odoo.sh with 1 worker configured it is possible to get issues related to performance.</p>
 </div>
-</section>
-<section id="long-polling">
-<h3>Long polling<a class="headerlink" href="#long-polling" title="Permalink to this headline"></a></h3>
+</div>
+<div class="section" id="live-notifications-popups-and-automatic-form-opening">
+<h3>Live notifications, popups and automatic form opening<a class="headerlink" href="#live-notifications-popups-and-automatic-form-opening" title="Permalink to this headline">¶</a></h3>
 <p id="longpolling">Internal gevent-based server must be enabled (aka long polling) for popup notifications
 and live channels reload to work.</p>
 <p>When you enable workers gevent server is also enabled.</p>
@@ -150,9 +121,10 @@ on gevent’s port e.g.: <code class="docutils literal notranslate"><span class=
 </div>
 <p>If you see <code class="docutils literal notranslate"><span class="pre">Exception:</span> <span class="pre">bus.Bus</span> <span class="pre">unavailable</span></code> in your Odoo log then it means you
 did not set long polling right.</p>
-</section>
-<section id="multi-database-setup">
-<h3>Multi database setup<a class="headerlink" href="#multi-database-setup" title="Permalink to this headline"></a></h3>
+<p>For more details see <a class="reference external" href="https://www.odoo.com/documentation/16.0/administration/install/deploy.html">Odoo deployment documentation</a>.</p>
+</div>
+<div class="section" id="multi-database-setup">
+<h3>Multi database setup<a class="headerlink" href="#multi-database-setup" title="Permalink to this headline">¶</a></h3>
 <p>If your Odoo is limited to just one database
 (<code class="docutils literal notranslate"><span class="pre">dbfilter</span></code> configuration option is set and <code class="docutils literal notranslate"><span class="pre">list_db</span></code> is set to False)
 then you can skip this step.</p>
@@ -162,23 +134,23 @@ to make CURL requests from the Asterisk dialplan (see below).</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">server_wide_modules</span> <span class="o">=</span> <span class="n">base</span><span class="p">,</span><span class="n">web</span><span class="p">,</span><span class="n">asterisk_plus</span>
 </pre></div>
 </div>
-</section>
-<section id="prepair-a-directory-for-a-new-addon">
-<h3>Prepair a directory for a new addon<a class="headerlink" href="#prepair-a-directory-for-a-new-addon" title="Permalink to this headline"></a></h3>
+</div>
+<div class="section" id="prepair-a-directory-for-a-new-addon">
+<h3>Prepair a directory for a new addon<a class="headerlink" href="#prepair-a-directory-for-a-new-addon" title="Permalink to this headline">¶</a></h3>
 <p>Preapair a folder where you will place Asterisk Plus module.
 Make sure this folder is listed in <code class="docutils literal notranslate"><span class="pre">addons_path</span></code> configuration option.</p>
-</section>
-<section id="troubleshooting">
-<h3>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline"></a></h3>
-</section>
-</section>
-<section id="i-don-t-get-popup-notifications">
-<h2>I don’t get popup notifications<a class="headerlink" href="#i-don-t-get-popup-notifications" title="Permalink to this headline"></a></h2>
+</div>
+<div class="section" id="troubleshooting">
+<h3>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="i-don-t-get-popup-notifications">
+<h2>I don’t get popup notifications<a class="headerlink" href="#i-don-t-get-popup-notifications" title="Permalink to this headline">¶</a></h2>
 <p>The most likely you the long polling mode is not enabled or nginx proxy is not correctly setup for
 long polling.</p>
 <p>Check <code class="docutils literal notranslate"><span class="pre">workers</span></code> settings in your <code class="docutils literal notranslate"><span class="pre">odoo.conf</span></code>.</p>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

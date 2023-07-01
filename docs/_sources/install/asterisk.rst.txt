@@ -1,126 +1,192 @@
-----------------------
-Asterisk configuration
-----------------------
-.. warning::
-
-  Network access to your Asterisk AMI / HTTP ports must be restricted!
-  Make sure you open your AMI & HTTP ports only for the Agent IP address that is displayed in PBX -> Settings -> Server page.
-
-AMI account
------------
-Prepare an Asterisk Manager Interface (AMI) account to allow the Agent to connect to Asterisk.
-
-Vanilla Asterisk requires editing the  ``manager.conf`` file, which is usually found in ``/etc/asterisk``.
-
-A sample configuration is provided below, which lets the Agent to connect
-to your Asterisk server AMI port (usually 5038) using the login ``odoo`` with the password ``odoo``.
-
-
-``manager.conf``:
-
-.. code::
-
-    [general]
-    enabled = yes
-    webenabled = no
-    port = 5038
-    bindaddr = 0.0.0.0 # Pay attention it binds to public interfaces so you must restrict access only to the Agent IP address.
-
-    [odoo]
-    secret=odoo # Make sure you change this password as per the OdooPBX server's configuration.
-    allowmultiplelogin=no
-    displayconnects = yes
-    read=call,dialplan,user
-    write=originate
-    deny=0.0.0.0/0.0.0.0
-    permit=x.x.3.4/255.255.255.255 # Put here Agent IP address. This IP address will be available from Odoopbx server settings after activating subscription.
-    
-
-Asterisk-based distributions such as **FreePBX**  offer a web GUI interface for managing your
-AMI users. You can use that interface to create one, or you can add the account configuration data in
-a custom file, which will not be managed by the distro, usually ``/etc/asterisk/manager_custom.conf``
-
-.. warning::
-   For security reasons always use deny/permit options in your manager.conf.
-   Change permit option to IP address of the agent. 
-
-Make sure that you applied new configuration by checking the Asterisk console:
-
-.. code::
-    
-    manager show user odoo
-
-Static HTTP server
-------------------
-Asterisk has a built-in static HTTP server that is used to get call recordings. 
-
-To enable it the following steps shold be done:
-
-* Configure http.conf to enable it.
-* Create a symbolic link for the *monitor* folder.
-* Restart the Asterisk and make a test. 
-
-Configure http.conf
 ===================
-The following options must be added there:
+The middlware Agent
+===================
+This documentation assumes that the following components are already installed:
 
-* enabled=yes
-* enablestatic=yes
-  
-Symbolic link
-=============
-Usually call recordings are stored in ``/var/spool/asterisk/monitor`` and 
-static root folder is ``/var/lib/asterisk/static-http/``.
+* Odoo: Odoo is already deployed and properly configured (see :doc:`odoo`).
+* Asterisk: Asterisk PBX is also deployed and AMI account is configured (see :doc:`asterisk`).
 
-Create the link like in the following example:
+Now the Agent middlware should be installed to connect them together.
 
-.. code:: bash
+The Agent does the following jobs:
 
-    cd /var/lib/asterisk/static-http/
-    ln -s /var/spool/asterisk/monitor .
+* Forwards Asterisk events to Odoo according to the downloaded events map.
+* Executes Asterisk actions received from Odoo.
+* Protects Asterisk from DDoS and password bruteforce attacks (if enabled).
 
-Make sure the link is correct:
+The best place to install the Agent is **the same server** where Asterisk runs because in this case
+it has direct access to local file system  and can access call recordings and forward it into Odoo.
 
-.. code:: bash
+If you don't need call recordings in Odoo you can setup the Asterisk agent on a different computer but
+it is advised to place it at least near the Asterisk server. But depending on your company size you can also
+have your Asterisk in America and Odoo in Europe datacenter.
 
-    ls -l
-    ...
-    lrwxrwxrwx 1 root     root      27 Mar 16 10:45 monitor -> /var/spool/asterisk/monitor
+The Agent middleware
+====================
+The Agent middleware is based on the Nameko microservices framework and uses RabbitMQ server as the internal
+message broker. 
 
-Test
-====
-Get a recording name from the monitor folder:
+Also it uses Nginx Proxy Manager (NPM) to add SSL encryption layer to the communication between
+Odoo and the Agent. After the installation open your server's address in the WEB browser on port ``81`` and
+configure the NPM host. Set it either to IP address or DNS hostname.
 
-.. code:: bash
+After that you go to Odoo and enter there the Agent URL. Here is an example:
 
-  ls /var/spool/asterisk/monitor/ | head -1
-  1b504b46-929b-4c2b-9ed4-28863d685bf3.wav
+* Agent URL: https://x.x.x.x/rpc/
 
-Now try to download this file from your browser (make sure HTTP access is open for your IP otherwise you'll get 403 Access Denied):
+
+Use the following ``docker-compose.yml`` file to deploy:
+
+.. code:: yaml
+
+    version: '3'
+    services:
+
+        agent:
+            image: odoopbx/middleware
+            restart: unless-stopped
+            network_mode: host
+            depends_on:
+              - rabbitmq
+            volumes:
+              - /etc/asterisk:/etc/asterisk/
+              - /var/spool/asterisk:/var/spool/asterisk
+              - /var/run/asterisk:/var/run/asterisk
+            environment:
+              - ODOO_URL=https://your.odoo.addr
+              - ODOO_DB=odoopbx_15
+              - ODOO_USER=asterisk1
+              - ODOO_PASSWORD=asterisk1
+              # - ODOO_IP=1.2.3.4 # Optionally restrict access to only Odoo's IP address.
+              - ASTERISK_AMI_USER=odoo
+              - ASTERISK_AMI_PASSWORD=odoo
+              - ASTERISK_AMI_HOST=localhost
+              - TZ=Europe/London
+              - AMQP_URI: pyamqp://guest:guest@localhost
+
+        npm:
+            image: odoopbx/npm
+            restart: unless-stopped
+            ports:
+              - 80:80
+              - 81:81
+              - 443:443
+            volumes:
+              - npm_data:/data
+              - letsencrypt:/etc/letsencrypt
+
+        rabbitmq:
+            image: rabbitmq
+            ports:
+               - "127.0.0.1:5672:5672"
+
+    volumes:
+      letsencrypt:
+      npm_data:
+
+    networks:
+      default:
+        driver: bridge
+        ipam:
+        config:
+          - subnet: 172.172.0.0/16
+
+
+Now run it and do a Test Ping from the Odoo server's form.
+
+Asterisk Dialplan configuration
+===============================
+Asterisk Plus exposes additional functionality by providing the following controllers:
+
+#. You can get the contact's name by accessing ``asterisk_plus/get_caller_name?number=${CALLERID(number)}``
+#. If the Contact for the phone number has a manager set, use ``asterisk_plus/get_partner_manager?number=${CALLERID(number)}`` to get the manager's number
+#. You can get the Contact's tags by using ``/asterisk_plus/get_caller_tags?number=${CALLERID(number)}``
+
+Here are some examples of integration, using Asterisk dialplans.
+
+
+``extensions.conf``:
 
 .. code::
 
-    wget http://asterisk.host:8088/static/monitor/1b504b46-929b-4c2b-9ed4-28863d685bf3.wav
+    [globals]
+    ODOO_URL=http://odoo:8069
 
-If you can get the file then HTTP server is setup correctly. Don't forget to restrict the access to it.
+    ; Set connection options for curl.
+    [sub-setcurlopt]
+    exten => _X.,1,Set(CURLOPT(conntimeout)=3)
+    exten => _X.,n,Set(CURLOPT(dnstimeout)=3)
+    exten => _X.,n,Set(CURLOPT(httptimeout)=3)
+    exten => _X.,n,Set(CURLOPT(ssl_verifypeer)=0)
+    exten => _X.,n,Return
 
-Troubleshooting
----------------
-After the AMI account is created, you need to make sure that it's updated inside Asterisk configuration.
-Open the Asterisk console using ``asterisk -r`` as root and see if the Odoo manager user is available:
+    ; Partner's extension click2call e.g. +1234567890##101
+    [post-dial-send-dtmf]
+    exten => s,1,NoOp(DTMF digits: ${dtmf_digits})
+    same => n,ExecIf($["${dtmf_digits}" = ""]?Return)
+    same => n,Wait(${dtmf_delay})
+    same => n,SendDTMF(${dtmf_digits})
+    same => n,Return
 
-.. code::
 
-   > manager show user odoo
+    ;Set Caller ID name from Odoo
+    ; Get caller ID name from Odoo, replace odoo to your Odoo's hostname / IP address
+    ; Arguments:
+    ; - number: calling number, strip + if comes with +.
+    ; - db: Odoo's database name, ommit if you have one db or use dbfilter.
+    ; - country: 2 letters country code, See https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+    ; If country code is omitted Asterisk Agent's Odoo account's country settings will be used for phonenumbers parsing.
+    
+    [sub-setcallerid]
+    exten => _X.,1,Gosub(sub-setcurlopt,${EXTEN},1)
+    ;   You need to cut leading + on numbers incoming from trunks before passing it to get_caller_name.
+    exten => _X.,n,Set(CALLERID(name)=${CURL(${ODOO_URL}/asterisk_plus/get_caller_name?number=${CALLERID(number)})})
+    exten => _X.,n,Return
 
-     username: odoo
-     secret: <Set>
-     ACL: yes
-     read perm: call
-     write perm: originate
-     displayconnects: yes
-     allowmultiplelogin: yes
-     Variables:
 
-If you don't see the user, maybe the AMI configuration file hasn't been read by Asterisk after being modified.
-This can be solved by running inside the Asterisk console the command ``core reload``.
+    ; Get partner’s manager (salesperson) channel
+
+    [sub-dialmanager]
+    exten => _X.,1,Set(manager_channel=${CURL(${ODOO_URL}/asterisk_plus/get_partner_manager?number=${CALLERID(number)})})
+    exten => _X.,n,ExecIf($["${manager_channel}" != ""]?Dial(${manager_channel}/${EXTEN},60,t))
+    exten => _X.,n,Return
+    
+    ; Get partner's tags to create a special call routing (e.g. VIP queue)
+    ; You can also get caller tags from Odoo with the following controller Here is an example:
+    
+    ; Partner tags
+    ; VIP - tag name in this example.
+
+    [partner-vip-tag-lookup] 
+    exten => _X.,1,Set(CURLOPT(conntimeout)=3)
+    exten => _X.,n,Set(CURLOPT(dnstimeout)=3)
+    exten => _X.,n,Set(CURLOPT(httptimeout)=3)
+    exten => _X.,n,Set(CURLOPT(ssl_verifypeer)=0)
+    exten => _X.,n,Set(tags=${CURL(${ODOO_URL}/asterisk_plus/get_caller_tags?number=${CALLERID(number)})})
+    exten => _X.,n,NoOp(Tags: ${tags})
+    exten => _X.,n,Set(match=${REGEX("VIP" ${tags})})
+    exten => _X.,n,NoOp(Match: ${match})
+    exten => _X.,n,Return(${match})
+
+    ; Check VIP tag
+    [check-vip]
+    exten => _X.,1,Gosub(partner-vip-tag-lookup,${EXTEN},1,VIP)
+    exten => _X.,n,GotoIf($["${GOSUB_RETVAL}" = "1"]?vip-queue,${EXTEN},1)
+
+
+    ; Incoming call handling
+
+    [from-sip-external]    
+    exten => _X.,1,Gosub(sub-setcallerid,${EXTEN},1) ; Set partner's caller name    
+    exten => _X.,n,MixMonitor(${UNIQUEID}.wav) ; Record call    
+    exten => _X.,n,Gosub(sub-dialmanager,${EXTEN},1) ; Try to connect to manager
+    ; Put here some login to handle if manager channel is busy for example put in the queue.
+    exten => _X.,n,Queue(sales)
+
+    [from-internal]
+    exten => _X.,1,MixMonitor(${UNIQUEID}.wav) ; Activate call recording.
+    exten => _XXXX,2,Dial(SIP/${EXTEN},30) ; Local users calling    
+    exten => _XXXXX.,2,Dial(SIP/provider/${EXTEN},30,TU(post-dial-send-dtmf) ; Outgoing calls pattern
+
+
+Enjoy!

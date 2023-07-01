@@ -1,25 +1,21 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Asterisk Plus &mdash; OdooPBX 2.0 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="shortcut icon" href="../_static/logo.png"/>
+  <title>Asterisk Plus &mdash; OdooPBX 2.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="../_static/logo.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Asterisk configuration" href="asterisk.html" />
+    <link rel="next" title="Asterisk Plus Agent installation" href="agent.html" />
     <link rel="prev" title="Odoo preconfiguration" href="odoo.html" /> 
 </head>
 
@@ -28,8 +24,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> OdooPBX
-            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+            <a href="../index.html" class="icon icon-home"> OdooPBX<img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -44,7 +39,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../install.html">Installation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="odoo.html">Odoo preconfiguration</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Asterisk Plus</a></li>
-<li class="toctree-l2"><a class="reference internal" href="asterisk.html">Asterisk configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent.html">Asterisk Plus Agent installation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
@@ -64,9 +59,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../install.html">Installation</a> &raquo;</li>
-      <li>Asterisk Plus</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../install.html">Installation</a></li>
+      <li class="breadcrumb-item active">Asterisk Plus</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -75,66 +70,52 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="asterisk-plus">
-<h1>Asterisk Plus<a class="headerlink" href="#asterisk-plus" title="Permalink to this headline"></a></h1>
+  <div class="section" id="asterisk-plus">
+<h1>Asterisk Plus<a class="headerlink" href="#asterisk-plus" title="Permalink to this headline">¶</a></h1>
 <p>This article explains how to install <code class="docutils literal notranslate"><span class="pre">Asterisk</span> <span class="pre">Plus</span></code> Odoo addon from <a class="reference external" href="http://odoopbx.com">OdooPBX</a>.</p>
-<section id="install-the-addon-in-odoo">
-<h2>Install the addon in Odoo<a class="headerlink" href="#install-the-addon-in-odoo" title="Permalink to this headline"></a></h2>
-<p>First, download the addon from <a class="reference external" href="https://apps.odoo.com/apps/modules/16.0/asterisk_plus/">Odoo market</a></p>
+<div class="section" id="install-the-addon-in-odoo">
+<h2>Install the addon in Odoo<a class="headerlink" href="#install-the-addon-in-odoo" title="Permalink to this headline">¶</a></h2>
+<p>First, download the addon from the <a class="reference external" href="https://apps.odoo.com/apps/modules/16.0/asterisk_plus/">Odoo market</a>.</p>
 <p>Install the addon as any other Odoo module, refer to <a class="reference external" href="https://www.odoo.com/documentation/16.0/applications/general/apps_modules.html#">Odoo documentation</a>
 for details if needed.</p>
-<section id="install-python-requirements">
-<h3>Install python requirements<a class="headerlink" href="#install-python-requirements" title="Permalink to this headline"></a></h3>
+<div class="section" id="install-python-requirements">
+<h3>Install python requirements<a class="headerlink" href="#install-python-requirements" title="Permalink to this headline">¶</a></h3>
 <p>Install python dependancy libraries with command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3 install humanize lameenc phonenumbers nats-python
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3 install humanize phonenumbers
 </pre></div>
 </div>
 <p>If you use odoo.sh make sure you have <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file in your modules top folder containing:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">humanize</span>
-<span class="n">lameenc</span>
 <span class="n">phonenumbers</span>
-<span class="n">nats</span><span class="o">-</span><span class="n">python</span>
 </pre></div>
 </div>
 <p>So that odoo.sh can install the required dependencies.</p>
 <p>If you use python virtualenv make sure you install the requirements there and not system wide.</p>
 <p>Odoo version 10 uses python2, so use command <code class="docutils literal notranslate"><span class="pre">pip</span></code> instead of <code class="docutils literal notranslate"><span class="pre">pip3</span></code>.</p>
-</section>
-</section>
-<section id="configure-settings">
-<h2>Configure settings<a class="headerlink" href="#configure-settings" title="Permalink to this headline"></a></h2>
-<p>Go to <code class="docutils literal notranslate"><span class="pre">PBX</span> <span class="pre">-&gt;</span> <span class="pre">Settings</span> <span class="pre">-&gt;</span> <span class="pre">Server</span></code> and make sure all settings are correct for your environment,
-especially:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">AMI</span> <span class="pre">Host</span></code> and <code class="docutils literal notranslate"><span class="pre">AMI</span> <span class="pre">Port</span></code> for connecton from cloud service to your PBX AMI interface</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Built-in</span> <span class="pre">HTTP</span> <span class="pre">URL</span></code> for connection from cloud service to your PBX HTTP interface</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">WEB</span> <span class="pre">Base</span> <span class="pre">URL</span></code> for connection from cloud serivce to your Odoo</p></li>
-</ul>
-</div></blockquote>
-<p>Then press <span class="guilabel">Activate</span> button.
-You will directed to <a class="reference external" href="https://apps.odoopbx.com">apps.odoopbx.com</a>
-for choosing and purchasing your subsription plan.</p>
-<p>Upon success you get your  subscription code, which looks like
-<em>9f058258-1e63-4937-b2a1-a2eaa4dbcb11</em>, and enter it in activation form.</p>
-</section>
-<section id="check-connectivity">
-<h2>Check connectivity<a class="headerlink" href="#check-connectivity" title="Permalink to this headline"></a></h2>
-<p>Press <span class="guilabel">Agent Ping</span> button  and you should get pop-up notification.</p>
-<img alt="../_images/agent_ping.png" src="../_images/agent_ping.png" />
-<p>Press <span class="guilabel">ASTERISK PING</span> button  and you should get another pop-up notificaiton:</p>
-<img alt="../_images/asterisk_ping.png" src="../_images/asterisk_ping.png" />
-<p>If neither pop-up notification nor errors are displayed, check
-<a class="reference external" href="../install/odoo.html#long-polling">Odoo longpolling</a> settings.</p>
-</section>
-</section>
+</div>
+</div>
+<div class="section" id="get-your-registration-code">
+<h2>Get your Registration code<a class="headerlink" href="#get-your-registration-code" title="Permalink to this headline">¶</a></h2>
+<p>Go to <code class="docutils literal notranslate"><span class="pre">PBX</span> <span class="pre">-&gt;</span> <span class="pre">Settings</span> <span class="pre">-&gt;</span> <span class="pre">Billing</span></code>, update your instance settings and click <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">REGISTRATION</span> <span class="pre">CODE</span></code> button.</p>
+<p>You must receive an email with subject <code class="docutils literal notranslate"><span class="pre">[OdooPBX]</span> <span class="pre">Registration</span> <span class="pre">code</span></code> to the address specified as admin’s email with the registration code.</p>
+<p>Enter your instance registration code and click <code class="docutils literal notranslate"><span class="pre">SUBMIT</span> <span class="pre">REGISTRATION</span></code> button.</p>
+<p>Make sure your WEB Base URL is correctly set as this is the address where the Asterisk Plus agent and billing accounting connect.</p>
+</div>
+<div class="section" id="update-your-payment-profile">
+<h2>Update your Payment Profile<a class="headerlink" href="#update-your-payment-profile" title="Permalink to this headline">¶</a></h2>
+<p>In order to start using Asterisk Plus you must enter your billing details by clicking on <code class="docutils literal notranslate"><span class="pre">PAYMENT</span> <span class="pre">PROFILE</span></code> button.</p>
+<p>First specify your address and after that enter your payment source.</p>
+<p>After that click on the <code class="docutils literal notranslate"><span class="pre">SUBSCRIBE</span></code> button to create your subscription.</p>
+<p>Next you should proceed with <a class="reference internal" href="agent.html"><span class="doc">Asterisk Plus Agent installation</span></a>.</p>
+</div>
+</div>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="odoo.html" class="btn btn-neutral float-left" title="Odoo preconfiguration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="asterisk.html" class="btn btn-neutral float-right" title="Asterisk configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="agent.html" class="btn btn-neutral float-right" title="Asterisk Plus Agent installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

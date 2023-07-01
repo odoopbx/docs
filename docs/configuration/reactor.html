@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Security Reactor &mdash; OdooPBX 2.0 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="shortcut icon" href="../_static/logo.png"/>
+  <title>Security Reactor &mdash; OdooPBX 2.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="../_static/logo.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -26,8 +22,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> OdooPBX
-            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+            <a href="../index.html" class="icon icon-home"> OdooPBX<img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -57,8 +52,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Security Reactor</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Security Reactor</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -67,10 +62,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="security-reactor">
-<h1>Security Reactor<a class="headerlink" href="#security-reactor" title="Permalink to this headline"></a></h1>
-<section id="reactor-introduction">
-<h2>Reactor Introduction<a class="headerlink" href="#reactor-introduction" title="Permalink to this headline"></a></h2>
+  <div class="section" id="security-reactor">
+<h1>Security Reactor<a class="headerlink" href="#security-reactor" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="reactor-introduction">
+<h2>Reactor Introduction<a class="headerlink" href="#reactor-introduction" title="Permalink to this headline">¶</a></h2>
 <p>In order to protect the Asterisk server a Security Reactor is implemented and enabled by default.</p>
 <p>If any SIP user enters a wrong password his IP address is immediatly blocked on the firewall.</p>
 <p>The Reactor is managed from the Odoo PBX -&gt; Settings -&gt; Security menu.</p>
@@ -83,8 +78,8 @@ ipset list
 <p>When the reactor is enabled all unsuccessful SIP registrations will cause the incoming IP address to be added to the <code class="docutils literal notranslate"><span class="pre">banned</span></code> ipset.</p>
 <p>You can check that manually using <code class="docutils literal notranslate"><span class="pre">ipset</span> <span class="pre">list</span> <span class="pre">banned</span></code> or though the Odoo UI in <code class="docutils literal notranslate"><span class="pre">Settins</span> <span class="pre">-&gt;</span> <span class="pre">Security</span> <span class="pre">-&gt;</span> <span class="pre">Banned</span></code> menu (use the Refresh button to first load the
 entries from the Agent).</p>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>
