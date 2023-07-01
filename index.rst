@@ -9,6 +9,7 @@ OdooPBX Documentation
 
     intro    
     install
+    upgrade
     configuration
     demo/index
 

@@ -5,34 +5,6 @@ Odoo should be configured correctly for Asterisk Plus module.
 
 Requirements
 ============
-Asterisk Plus uses `NATs <https://nats.io/>`__ technology to communicate with the Agent middleware so must be installed
-before trying to install the Asterisk Plus module. 
-
-Different Python versions use different Python NATs implementations:
-
-* Odoo 10, 11, 12: Python < 3.7
-* Odoo 13, 14, 15, 16: Python >= 3.7
-
-
-Odoo version 10, 11, 12
------------------------
-These versions use the following NATs library: https://github.com/mcuadros/pynats.
-
-It can be installed like in the example below:
-
-.. code:: 
-
-  # Odoo 10
-  pip install https://github.com/mcuadros/pynats/archive/refs/heads/master.zip
-  # Odoo 11, 12
-  pip3 install https://github.com/mcuadros/pynats/archive/refs/heads/master.zip
-  
-Odoo version 13 and above
--------------------------
-.. code:: 
-
-  pip3 install nats-py
-
 
 HTTPS Redirect
 --------------
@@ -54,8 +26,8 @@ So your Odoo should be configured with at least 2 workers
     If you use odoo.sh with 1 worker configured it is possible to get issues related to performance.
 
 
-Long polling
-------------
+Live notifications, popups and automatic form opening
+-----------------------------------------------------
 
 .. _longpolling:
 
@@ -94,6 +66,8 @@ Here is a snippet for Nginx:
 
 If you see ``Exception: bus.Bus unavailable`` in your Odoo log then it means you
 did not set long polling right.
+
+For more details see `Odoo deployment documentation <https://www.odoo.com/documentation/16.0/administration/install/deploy.html>`__.
 
 Multi database setup
 --------------------

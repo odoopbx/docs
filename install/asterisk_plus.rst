@@ -6,7 +6,7 @@ This article explains how to install ``Asterisk Plus`` Odoo addon from `OdooPBX 
 
 Install the addon in Odoo
 =========================
-First, download the addon from `Odoo market <https://apps.odoo.com/apps/modules/16.0/asterisk_plus/>`_
+First, download the addon from the `Odoo market <https://apps.odoo.com/apps/modules/16.0/asterisk_plus/>`_.
 
 Install the addon as any other Odoo module, refer to `Odoo documentation <https://www.odoo.com/documentation/16.0/applications/general/apps_modules.html#>`_
 for details if needed.
@@ -17,7 +17,7 @@ Install python dependancy libraries with command:
 
 .. code-block:: bash
 
-    pip3 install humanize lameenc phonenumbers nats-python
+    pip3 install humanize phonenumbers
 
 
 If you use odoo.sh make sure you have ``requirements.txt`` file in your modules top folder containing:
@@ -25,9 +25,7 @@ If you use odoo.sh make sure you have ``requirements.txt`` file in your modules 
 .. code::
 
     humanize
-    lameenc
     phonenumbers
-    nats-python
     
 So that odoo.sh can install the required dependencies.
 
@@ -35,37 +33,22 @@ If you use python virtualenv make sure you install the requirements there and no
 
 Odoo version 10 uses python2, so use command ``pip`` instead of ``pip3``.
 
-Configure settings
-==================
-Go to ``PBX -> Settings -> Server`` and make sure all settings are correct for your environment,
-especially:
+Get your Registration code
+==========================
+Go to ``PBX -> Settings -> Billing``, update your instance settings and click ``GET REGISTRATION CODE`` button.
 
- * ``AMI Host`` and ``AMI Port`` for connecton from cloud service to your PBX AMI interface
- * ``Built-in HTTP URL`` for connection from cloud service to your PBX HTTP interface
- * ``WEB Base URL`` for connection from cloud serivce to your Odoo
+You must receive an email with subject ``[OdooPBX] Registration code`` to the address specified as admin's email with the registration code.
 
-Then press :guilabel:`Activate` button.
-You will directed to `apps.odoopbx.com <https://apps.odoopbx.com>`_
-for choosing and purchasing your subsription plan.
+Enter your instance registration code and click ``SUBMIT REGISTRATION`` button.
 
-Upon success you get your  subscription code, which looks like
-*9f058258-1e63-4937-b2a1-a2eaa4dbcb11*, and enter it in activation form.
+Make sure your WEB Base URL is correctly set as this is the address where the Asterisk Plus agent and billing accounting connect.
 
+Update your Payment Profile
+===========================
+In order to start using Asterisk Plus you must enter your billing details by clicking on ``PAYMENT PROFILE`` button.
 
-Check connectivity
-==================
-Press :guilabel:`Agent Ping` button  and you should get pop-up notification.
+First specify your address and after that enter your payment source. 
 
-.. image:: media/agent_ping.png
+After that click on the ``SUBSCRIBE`` button to create your subscription.
 
-Press :guilabel:`ASTERISK PING` button  and you should get another pop-up notificaiton:
-
-.. image:: media/asterisk_ping.png
-
-If neither pop-up notification nor errors are displayed, check 
-`Odoo longpolling <../install/odoo.html#long-polling>`_ settings.
-
-
-
-
-
+Next you should proceed with :doc:`agent`.
