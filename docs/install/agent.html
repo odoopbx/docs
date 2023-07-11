@@ -100,10 +100,10 @@ The following requirements are necessary for its execution:</p>
 <p>If your Asterisk server cannot run neither docker nor python3 please contact us for installation assistance.</p>
 <p>To start initialization procedure you should start the agent with <code class="docutils literal notranslate"><span class="pre">init</span></code> option:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Docker style, create an empty file otherwise docker will create a directory instead of a file.</span>
-touch<span class="w"> </span>config.yaml<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--volume<span class="w"> </span>/etc/asterisk:/etc/asterisk<span class="w"> </span><span class="se">\</span>
+touch<span class="w"> </span>/etc/asterisk_plus_agent.yaml<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--volume<span class="w"> </span>/etc/asterisk:/etc/asterisk<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--volume<span class="w"> </span>/var/run/asterisk:/var/run/asterisk<span class="w">  </span><span class="se">\</span>
-<span class="w">  </span>--volume<span class="w"> </span>./config.yaml:/etc/asterisk_plus_agent.yaml<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--network<span class="o">=</span>host<span class="w"> </span>odoopbx/agent:latest<span class="w"> </span>init<span class="w"> </span>http://localhost:8069
+<span class="w">  </span>--volume<span class="w"> </span>/etc/asterisk_plus_agent.yaml:/etc/asterisk_plus_agent.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--network<span class="o">=</span>host<span class="w"> </span>odoopbx/agent<span class="w"> </span>init<span class="w"> </span>http://localhost:8069
 
 <span class="c1"># We map /etc/asterisk folder so that initialization procedure can place AMI account under</span>
 <span class="c1"># /etc/asterisk/manager.conf.d and /var/run/asterisk so that it can connect to the</span>
@@ -116,10 +116,30 @@ asterisk-plus-agent<span class="w"> </span>init<span class="w"> </span>http://lo
 </pre></div>
 </div>
 <p>Replace <code class="docutils literal notranslate"><span class="pre">localhost:8069</span></code> to your Odoo instance WEB URL and run the commands above.
-You must get <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> file located in the current directory if docker was used or <code class="docutils literal notranslate"><span class="pre">/etc/asterisk_plus_agent.yaml</span></code> if direct installation was used.</p>
+You <code class="docutils literal notranslate"><span class="pre">/etc/asterisk_plus_agent.yaml</span></code> config.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You can use –skip-ami-setup init option to just get API keys from Odoo and setup AMI account manually.</p>
+</div>
+<p>Here is an example of <code class="docutils literal notranslate"><span class="pre">/etc/asterisk_plus_agent.yaml</span></code> file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ami_host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span>
+<span class="nt">ami_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xxxxxxxxxxxxxx</span>
+<span class="nt">ami_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5038</span>
+<span class="nt">ami_user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">asterisk_plus_agent</span>
+<span class="nt">odoo_user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">asterisk1</span>
+<span class="nt">odoo_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xxxxxxxxxxxxx</span>
+<span class="nt">odoo_url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://odoo.server</span>
+<span class="nt">odoo_db</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">odoopbx_16</span>
+<span class="nt">api_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xxxxxxxxxxxxxxxxx</span>
+<span class="nt">api_url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://api.odoopbx.eu-central-1.odooist.com/</span>
+<span class="nt">instance_uid</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xxxxxxxxxxxxxx</span>
+</pre></div>
+</div>
 <p>Now use the following command to run the Agent:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>agent<span class="w">  </span>--restart<span class="o">=</span>unless-stopped<span class="w"> </span>--network<span class="o">=</span>host<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--volume<span class="w"> </span>./config.yaml:/etc/asterisk_plus_agent.yaml<span class="w">  </span>odoopbx/agent:latest<span class="w"> </span>run
+<span class="w">  </span>--volume<span class="w"> </span>/etc/asterisk_plus_agent.yaml:/etc/asterisk_plus_agent.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--<span class="w"> </span>volume<span class="w"> </span>/var/spool/asterisk:/var/spool/asterisk<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>odoopbx/agent:latest<span class="w"> </span>run
 docker<span class="w"> </span>logs<span class="w"> </span>agent
 </pre></div>
 </div>
@@ -186,10 +206,10 @@ Open the Asterisk console using <code class="docutils literal notranslate"><span
   <span class="n">username</span><span class="p">:</span> <span class="n">odoo</span>
   <span class="n">secret</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">Set</span><span class="o">&gt;</span>
   <span class="n">ACL</span><span class="p">:</span> <span class="n">yes</span>
-  <span class="n">read</span> <span class="n">perm</span><span class="p">:</span> <span class="n">call</span>
+  <span class="n">read</span> <span class="n">perm</span><span class="p">:</span> <span class="n">call</span><span class="p">,</span><span class="n">dialplan</span>
   <span class="n">write</span> <span class="n">perm</span><span class="p">:</span> <span class="n">originate</span>
   <span class="n">displayconnects</span><span class="p">:</span> <span class="n">yes</span>
-  <span class="n">allowmultiplelogin</span><span class="p">:</span> <span class="n">yes</span>
+  <span class="n">allowmultiplelogin</span><span class="p">:</span> <span class="n">no</span>
   <span class="n">Variables</span><span class="p">:</span>
 </pre></div>
 </div>

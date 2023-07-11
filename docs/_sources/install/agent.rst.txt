@@ -24,10 +24,10 @@ To start initialization procedure you should start the agent with ``init`` optio
 .. code:: bash
 
   # Docker style, create an empty file otherwise docker will create a directory instead of a file.
-  touch config.yaml && docker run --rm --volume /etc/asterisk:/etc/asterisk \
+  touch /etc/asterisk_plus_agent.yaml && docker run --rm --volume /etc/asterisk:/etc/asterisk \
     --volume /var/run/asterisk:/var/run/asterisk  \
-    --volume ./config.yaml:/etc/asterisk_plus_agent.yaml \
-    --network=host odoopbx/agent:latest init http://localhost:8069
+    --volume /etc/asterisk_plus_agent.yaml:/etc/asterisk_plus_agent.yaml \
+    --network=host odoopbx/agent init http://localhost:8069
 
   # We map /etc/asterisk folder so that initialization procedure can place AMI account under 
   # /etc/asterisk/manager.conf.d and /var/run/asterisk so that it can connect to the 
@@ -41,14 +41,37 @@ To start initialization procedure you should start the agent with ``init`` optio
 
 
 Replace ``localhost:8069`` to your Odoo instance WEB URL and run the commands above. 
-You must get ``config.yaml`` file located in the current directory if docker was used or ``/etc/asterisk_plus_agent.yaml`` if direct installation was used.
+You ``/etc/asterisk_plus_agent.yaml`` config.
+
+.. warning::
+
+  You can use --skip-ami-setup init option to just get API keys from Odoo and setup AMI account manually.
+
+Here is an example of ``/etc/asterisk_plus_agent.yaml`` file:
+
+.. code:: yaml
+
+  ami_host: localhost
+  ami_password: xxxxxxxxxxxxxx
+  ami_port: 5038
+  ami_user: asterisk_plus_agent
+  odoo_user: asterisk1
+  odoo_password: xxxxxxxxxxxxx
+  odoo_url: https://odoo.server
+  odoo_db: odoopbx_16
+  api_key: xxxxxxxxxxxxxxxxx
+  api_url: https://api.odoopbx.eu-central-1.odooist.com/
+  instance_uid: xxxxxxxxxxxxxx
+
 
 Now use the following command to run the Agent:
 
 .. code:: bash
 
   docker run -d --name agent  --restart=unless-stopped --network=host \
-    --volume ./config.yaml:/etc/asterisk_plus_agent.yaml  odoopbx/agent:latest run
+    --volume /etc/asterisk_plus_agent.yaml:/etc/asterisk_plus_agent.yaml \
+    -- volume /var/spool/asterisk:/var/spool/asterisk \
+    odoopbx/agent:latest run
   docker logs agent
 
 or
@@ -135,10 +158,10 @@ Open the Asterisk console using ``asterisk -r`` as root and see if the Odoo mana
      username: odoo
      secret: <Set>
      ACL: yes
-     read perm: call
+     read perm: call,dialplan
      write perm: originate
      displayconnects: yes
-     allowmultiplelogin: yes
+     allowmultiplelogin: no
      Variables:
 
 If you don't see the user, maybe the AMI configuration file hasn't been read by Asterisk after being modified.
