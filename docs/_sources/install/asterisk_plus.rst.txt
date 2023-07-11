@@ -43,6 +43,8 @@ Enter your instance registration code and click ``SUBMIT REGISTRATION`` button.
 
 Make sure your WEB Base URL is correctly set as this is the address where the Asterisk Plus agent and billing accounting connect.
 
+Check this short manual for more information: `Register_your_Odoo_instance <https://scribehow.com/shared/Register_your_Odoo_instance__yczyIZtZQZycdXLSSlp6NQ>`__.
+
 Update your Payment Profile
 ===========================
 In order to start using Asterisk Plus you must enter your billing details by clicking on ``PAYMENT PROFILE`` button.
@@ -50,5 +52,7 @@ In order to start using Asterisk Plus you must enter your billing details by cli
 First specify your address and after that enter your payment source. 
 
 After that click on the ``SUBSCRIBE`` button to create your subscription.
+
+Check this manual for more information: `Updating_Payment_Profile_and_Subscribing_to_a_product <https://scribehow.com/shared/Updating_Payment_Profile_and_Subscribing_to_a_product__3_GiJbTBSLmkCmmr5fy6VQ>`__.
 
 Next you should proceed with :doc:`agent`.
