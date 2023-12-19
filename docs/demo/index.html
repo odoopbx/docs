@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OdooPBX demo installation &mdash; OdooPBX 2.0 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
     <link rel="shortcut icon" href="../_static/logo.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=60dbed4a"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -74,9 +76,9 @@
            <div itemprop="articleBody">
              
   <section id="odoopbx-demo-installation">
-<h1>OdooPBX demo installation<a class="headerlink" href="#odoopbx-demo-installation" title="Permalink to this heading"></a></h1>
+<h1>OdooPBX demo installation<a class="headerlink" href="#odoopbx-demo-installation" title="Link to this heading"></a></h1>
 <section id="odoo-docker-depoyment">
-<h2>Odoo Docker depoyment<a class="headerlink" href="#odoo-docker-depoyment" title="Permalink to this heading"></a></h2>
+<h2>Odoo Docker depoyment<a class="headerlink" href="#odoo-docker-depoyment" title="Link to this heading"></a></h2>
 <p>To setup a demo Odoo CRM with Asterisk Plus module installed use the following <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> file:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3&#39;</span>
 <span class="nt">services</span><span class="p">:</span>
@@ -114,16 +116,16 @@
 </div>
 </section>
 <section id="asterisk-connection">
-<h2>Asterisk connection<a class="headerlink" href="#asterisk-connection" title="Permalink to this heading"></a></h2>
+<h2>Asterisk connection<a class="headerlink" href="#asterisk-connection" title="Link to this heading"></a></h2>
 <p>Check <span class="xref std std-doc">install/asterisk</span> on how to configure your Asterisk server for Asterisk Plus module.</p>
 </section>
 <section id="demo-subscription">
-<h2>Demo subscription<a class="headerlink" href="#demo-subscription" title="Permalink to this heading"></a></h2>
+<h2>Demo subscription<a class="headerlink" href="#demo-subscription" title="Link to this heading"></a></h2>
 <p>Visit <a class="reference external" href="https://apps.odoopbx.com">apps.odoopbx.com</a> and get a trial subscription code.</p>
 <p>Use it to activate your instance in Odoo <code class="docutils literal notranslate"><span class="pre">PBX</span> <span class="pre">-&gt;</span> <span class="pre">Settings</span> <span class="pre">-&gt;</span> <span class="pre">Server</span></code>.</p>
 </section>
 <section id="production">
-<h2>Production<a class="headerlink" href="#production" title="Permalink to this heading"></a></h2>
+<h2>Production<a class="headerlink" href="#production" title="Link to this heading"></a></h2>
 <p>You can use our Odoo docker image for production. To do this you should do the following:</p>
 <ul class="simple">
 <li><p>Create your custom odoo.conf and map it into Odoo container. This configuration should define

@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The middlware Agent &mdash; OdooPBX 2.0 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
     <link rel="shortcut icon" href="../_static/logo.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=60dbed4a"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -73,7 +75,7 @@
            <div itemprop="articleBody">
              
   <section id="the-middlware-agent">
-<h1>The middlware Agent<a class="headerlink" href="#the-middlware-agent" title="Permalink to this heading"></a></h1>
+<h1>The middlware Agent<a class="headerlink" href="#the-middlware-agent" title="Link to this heading"></a></h1>
 <p>This documentation assumes that the following components are already installed:</p>
 <ul class="simple">
 <li><p>Odoo: Odoo is already deployed and properly configured (see <a class="reference internal" href="odoo.html"><span class="doc">Odoo preconfiguration</span></a>).</p></li>
@@ -92,7 +94,7 @@ it has direct access to local file system  and can access call recordings and fo
 it is advised to place it at least near the Asterisk server. But depending on your company size you can also
 have your Asterisk in America and Odoo in Europe datacenter.</p>
 <section id="the-agent-middleware">
-<h2>The Agent middleware<a class="headerlink" href="#the-agent-middleware" title="Permalink to this heading"></a></h2>
+<h2>The Agent middleware<a class="headerlink" href="#the-agent-middleware" title="Link to this heading"></a></h2>
 <p>The Agent middleware is based on the Nameko microservices framework and uses RabbitMQ server as the internal
 message broker.</p>
 <p>Also it uses Nginx Proxy Manager (NPM) to add SSL encryption layer to the communication between
@@ -159,7 +161,7 @@ configure the NPM host. Set it either to IP address or DNS hostname.</p>
 <p>Now run it and do a Test Ping from the Odoo server’s form.</p>
 </section>
 <section id="asterisk-dialplan-configuration">
-<h2>Asterisk Dialplan configuration<a class="headerlink" href="#asterisk-dialplan-configuration" title="Permalink to this heading"></a></h2>
+<h2>Asterisk Dialplan configuration<a class="headerlink" href="#asterisk-dialplan-configuration" title="Link to this heading"></a></h2>
 <p>Asterisk Plus exposes additional functionality by providing the following controllers:</p>
 <ol class="arabic simple">
 <li><p>You can get the contact’s name by accessing <code class="docutils literal notranslate"><span class="pre">asterisk_plus/get_caller_name?number=${CALLERID(number)}</span></code></p></li>
