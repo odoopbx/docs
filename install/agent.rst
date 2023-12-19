@@ -111,8 +111,8 @@ to your Asterisk server AMI port (usually 5038) using the login ``asterisk_plus_
     secret=odoo
     allowmultiplelogin=no
     displayconnects = yes
-    read=call,dialplan,user
-    write=originate
+    read=call,dialplan,security
+    write=originate,system
     deny=0.0.0.0/0.0.0.0
     permit=127.0.0.1/255.255.255.255
     
