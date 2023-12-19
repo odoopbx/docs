@@ -5,6 +5,7 @@ set -e
 git checkout public
 git pull
 rm -rf docs
+rm _build/html
 cp -r _build docs
 [ -e docs/html ] && rm docs/html
 touch docs/.nojekyll
