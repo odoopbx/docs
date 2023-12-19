@@ -67,6 +67,7 @@ Sample transport settings for ``pjsip.conf``
 Here are ``pjsip_wizard.conf`` templates for all transports
 
 .. code::
+  
     [webrtc-user](!)
     type = wizard
     transport = transport-wss
