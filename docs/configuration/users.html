@@ -114,6 +114,10 @@ function instead of manual phone number dialing.</p>
 <p>Typically desktop softphones (MicroSIP, Zoiper, Linphone, etc) use <code class="docutils literal notranslate"><span class="pre">udp</span></code>. Browser softphones (sipml5, sip.js, jssip) are for <code class="docutils literal notranslate"><span class="pre">webrtc</span></code>.
 Also there is a <code class="docutils literal notranslate"><span class="pre">tcp</span></code> pre-configured transport, sometimes it’s necessary to use this transport, e.g. for Microsoft Lync.</p>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In order to be able to choose transport template turn of <code class="docutils literal notranslate"><span class="pre">Autocreate</span> <span class="pre">PBX</span> <span class="pre">Users</span></code> and <code class="docutils literal notranslate"><span class="pre">Autocreate</span> <span class="pre">PBX</span> <span class="pre">Users</span></code> in <cite>PBX -&gt; Settings - Server</cite></p>
+</div>
 <p>Sample transport settings for <code class="docutils literal notranslate"><span class="pre">pjsip.conf</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">transport</span><span class="o">-</span><span class="n">wss</span><span class="p">]</span>
 <span class="nb">type</span><span class="o">=</span><span class="n">transport</span>

@@ -33,6 +33,9 @@ Choose what transport to use for SIP account.
   Typically desktop softphones (MicroSIP, Zoiper, Linphone, etc) use ``udp``. Browser softphones (sipml5, sip.js, jssip) are for ``webrtc``.
   Also there is a ``tcp`` pre-configured transport, sometimes it's necessary to use this transport, e.g. for Microsoft Lync.
 
+.. warning::
+  In order to be able to choose transport template turn of ``Autocreate PBX Users`` and ``Autocreate PBX Users`` in `PBX -> Settings - Server`
+
 Sample transport settings for ``pjsip.conf``
 
 .. code::
@@ -67,7 +70,7 @@ Sample transport settings for ``pjsip.conf``
 Here are ``pjsip_wizard.conf`` templates for all transports
 
 .. code::
-  
+
     [webrtc-user](!)
     type = wizard
     transport = transport-wss
