@@ -1,3 +1,4 @@
+Sphinx==6.2.1
 sphinxcontrib-autoyaml
 sphinx-rtd-theme
 sphinx-serve

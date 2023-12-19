@@ -31,7 +31,7 @@ Choose what transport to use for SIP account.
 
 .. note::
   Typically desktop softphones (MicroSIP, Zoiper, Linphone, etc) use ``udp``. Browser softphones (sipml5, sip.js, jssip) are for ``webrtc``.
-  Also there is a ```tcp`` pre-configured transport, sometimes it's necessary to use this transport, for example for Microsoft Lync.
+  Also there is a ``tcp`` pre-configured transport, sometimes it's necessary to use this transport, for example for Microsoft Lync.
 
 Context
 -------
