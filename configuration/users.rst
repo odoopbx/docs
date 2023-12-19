@@ -25,6 +25,14 @@ Channel
 -------
 Asterisk channel, e.g. SIP/101 or SIP/mypeername
 
+SIP Transport
+-------
+Choose what transport to use for SIP account.
+
+.. note::
+  Typically desktop softphones (MicroSIP, Zoiper, Linphone, etc) use ``udp``. Browser softphones (sipml5, sip.js, jssip) are for ``webrtc``.
+  Also there is a ```tcp`` pre-configured transport, sometimes it's necessary to use this transport, for example for Microsoft Lync.
+
 Context
 -------
 Asterisk context to use to place the outgoing call. In FreePBX  related systems it is usually ``from-internal``.
