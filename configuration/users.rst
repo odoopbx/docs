@@ -26,7 +26,7 @@ Channel
 Asterisk channel, e.g. SIP/101 or SIP/mypeername
 
 SIP Transport
--------
+-------------
 Choose what transport to use for SIP account.
 
 .. note::
