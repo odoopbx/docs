@@ -146,7 +146,7 @@ Sample docker-compose.yml
           - ./addons/:/mnt/extra-addons
           - "/etc/localtime:/etc/localtime:ro"
         command: ["odoo", "--log-level=info", "--workers=2", "-d", "odoo16"]
-        #command: sleep 10000000000 ``possible to use for debug purposes to start odoo manually inside container``
+        #command: sleep 10000000000 possible to use for debug purposes to start odoo manually inside container
 
       db:
         container_name: db
@@ -159,6 +159,13 @@ Sample docker-compose.yml
         volumes:
           - ./database:/var/lib/postgresql/data
           - /etc/localtime:/etc/localtime:ro
+
+Run docker-compose
+------------------
+
+``docker compose up -d``
+
+.. note:: 
 
 If you prefer to use nginx-proxy-manager as proxy - navigate to ``http://{your_server_ip}:81`` and configure appropriate proxy settings.
 Otherwise navigate to ``http://{your_server_ip}:8072``.
