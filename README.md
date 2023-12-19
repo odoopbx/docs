@@ -92,3 +92,13 @@ I have no name!@f2559b118194:/srv/docs$ sphinx-serve
 :: Serving documentation at http://0.0.0.0:8081
 :: Terminate with Ctrl-C
 ```
+
+## CURRENT docs workflow
+
+```
+git clone this repo
+git checkout master
+make changes
+./build.sh
+./publish.sh
+```
