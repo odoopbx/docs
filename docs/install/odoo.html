@@ -201,7 +201,7 @@ long polling.</p>
       <span class="o">-</span> <span class="o">./</span><span class="n">addons</span><span class="o">/</span><span class="p">:</span><span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">extra</span><span class="o">-</span><span class="n">addons</span>
       <span class="o">-</span> <span class="s2">&quot;/etc/localtime:/etc/localtime:ro&quot;</span>
     <span class="n">command</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;odoo&quot;</span><span class="p">,</span> <span class="s2">&quot;--log-level=info&quot;</span><span class="p">,</span> <span class="s2">&quot;--workers=2&quot;</span><span class="p">,</span> <span class="s2">&quot;-d&quot;</span><span class="p">,</span> <span class="s2">&quot;odoo16&quot;</span><span class="p">]</span>
-    <span class="c1">#command: sleep 10000000000 ``possible to use for debug purposes to start odoo manually inside container``</span>
+    <span class="c1">#command: sleep 10000000000 possible to use for debug purposes to start odoo manually inside container</span>
 
   <span class="n">db</span><span class="p">:</span>
     <span class="n">container_name</span><span class="p">:</span> <span class="n">db</span>
@@ -216,8 +216,15 @@ long polling.</p>
       <span class="o">-</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">localtime</span><span class="p">:</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">localtime</span><span class="p">:</span><span class="n">ro</span>
 </pre></div>
 </div>
+</section>
+<section id="run-docker-compose">
+<h3>Run docker-compose<a class="headerlink" href="#run-docker-compose" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">compose</span> <span class="pre">up</span> <span class="pre">-d</span></code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>If you prefer to use nginx-proxy-manager as proxy - navigate to <code class="docutils literal notranslate"><span class="pre">http://{your_server_ip}:81</span></code> and configure appropriate proxy settings.
 Otherwise navigate to <code class="docutils literal notranslate"><span class="pre">http://{your_server_ip}:8072</span></code>.</p>
+</div>
 </section>
 </section>
 </section>
