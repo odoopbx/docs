@@ -104,6 +104,15 @@ function instead of manual phone number dialing.</p>
 <h2>Channel<a class="headerlink" href="#channel" title="Permalink to this heading"></a></h2>
 <p>Asterisk channel, e.g. SIP/101 or SIP/mypeername</p>
 </section>
+<section id="sip-transport">
+<h2>SIP Transport<a class="headerlink" href="#sip-transport" title="Permalink to this heading"></a></h2>
+<p>Choose what transport to use for SIP account.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Typically desktop softphones (MicroSIP, Zoiper, Linphone, etc) use <code class="docutils literal notranslate"><span class="pre">udp</span></code>. Browser softphones (sipml5, sip.js, jssip) are for <code class="docutils literal notranslate"><span class="pre">webrtc</span></code>.
+Also there is a <code class="docutils literal notranslate"><span class="pre">`tcp</span></code> pre-configured transport, sometimes it’s necessary to use this transport, for example for Microsoft Lync.</p>
+</div>
+</section>
 <section id="context">
 <h2>Context<a class="headerlink" href="#context" title="Permalink to this heading"></a></h2>
 <p>Asterisk context to use to place the outgoing call. In FreePBX  related systems it is usually <code class="docutils literal notranslate"><span class="pre">from-internal</span></code>.

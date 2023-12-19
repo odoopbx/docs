@@ -117,6 +117,9 @@ to your Asterisk server AMI port (usually 5038) using the login ``asterisk_plus_
     permit=127.0.0.1/255.255.255.255
     
 
+If you use PBX Users auto provision feature then enable also 'system' write privilege in
+order to execute AMI Reload action.
+
 Asterisk-based distributions such as **FreePBX**  offer a web GUI interface for managing your
 AMI users. You can use that interface to create one, or you can add the account configuration data in
 a custom file, which will not be managed by the distro, usually ``/etc/asterisk/manager_custom.conf``
