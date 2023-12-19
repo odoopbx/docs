@@ -99,6 +99,7 @@ I have no name!@f2559b118194:/srv/docs$ sphinx-serve
 git clone this repo
 git checkout master
 make changes
+git commit -a -m 'changes description'
 ./build.sh
 ./publish.sh
 ```
