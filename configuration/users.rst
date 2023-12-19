@@ -27,7 +27,7 @@ Asterisk channel, e.g. SIP/101 or SIP/mypeername
 
 SIP Transport
 -------------
-Choose what transport to use for SIP account.
+Choose what transport to use for SIP account. 
 
 .. note::
   Typically desktop softphones (MicroSIP, Zoiper, Linphone, etc) use ``udp``. Browser softphones (sipml5, sip.js, jssip) are for ``webrtc``.
