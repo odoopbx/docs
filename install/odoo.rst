@@ -167,5 +167,5 @@ Run docker-compose
 
 .. note:: 
 
-If you prefer to use nginx-proxy-manager as proxy - navigate to ``http://{your_server_ip}:81`` and configure appropriate proxy settings.
-Otherwise navigate to ``http://{your_server_ip}:8072``.
+  If you prefer to use nginx-proxy-manager as proxy - navigate to ``http://{your_server_ip}:81`` and configure appropriate proxy settings.
+  Otherwise navigate to ``http://{your_server_ip}:8072``.
