@@ -35,7 +35,7 @@ Odoo version 10 uses python2, so use command ``pip`` instead of ``pip3``.
 
 Get your Registration code
 ==========================
-Go to ``PBX -> Settings -> Billing``, update your instance settings and click ``GET REGISTRATION CODE`` button.
+Go to ``PBX -> Settings -> General``, update your instance settings and click ``GET REGISTRATION CODE`` button.
 
 You must receive an email with subject ``[OdooPBX] Registration code`` to the address specified as admin's email with the registration code.
 
