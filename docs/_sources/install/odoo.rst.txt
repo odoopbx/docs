@@ -119,7 +119,7 @@ Sample docker-compose.yml
 -------------------------
 
 .. code::
-  
+
     version: '2'
     services:
       npm:
@@ -160,5 +160,5 @@ Sample docker-compose.yml
           - ./database:/var/lib/postgresql/data
           - /etc/localtime:/etc/localtime:ro
 
-If you prefer to nginx-proxy-manager as proxy - navigate to ``http://{your_server_ip}:81`` and configure appropriate proxy settings.
+If you prefer to use nginx-proxy-manager as proxy - navigate to ``http://{your_server_ip}:81`` and configure appropriate proxy settings.
 Otherwise navigate to ``http://{your_server_ip}:8072``.
