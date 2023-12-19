@@ -114,6 +114,124 @@ function instead of manual phone number dialing.</p>
 <p>Typically desktop softphones (MicroSIP, Zoiper, Linphone, etc) use <code class="docutils literal notranslate"><span class="pre">udp</span></code>. Browser softphones (sipml5, sip.js, jssip) are for <code class="docutils literal notranslate"><span class="pre">webrtc</span></code>.
 Also there is a <code class="docutils literal notranslate"><span class="pre">tcp</span></code> pre-configured transport, sometimes it’s necessary to use this transport, e.g. for Microsoft Lync.</p>
 </div>
+<p>Sample transport settings for <code class="docutils literal notranslate"><span class="pre">pjsip.conf</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">transport</span><span class="o">-</span><span class="n">wss</span><span class="p">]</span>
+<span class="nb">type</span><span class="o">=</span><span class="n">transport</span>
+<span class="n">protocol</span><span class="o">=</span><span class="n">wss</span>
+<span class="n">bind</span><span class="o">=</span><span class="mf">0.0.0.0</span><span class="p">:</span><span class="mi">65060</span>
+<span class="n">external_media_address</span><span class="o">=</span><span class="p">{{</span><span class="n">your_server_ip</span><span class="p">}}</span>
+<span class="n">external_signaling_address</span><span class="o">=</span><span class="p">{{</span><span class="n">your_server_ip</span><span class="p">}}</span>
+<span class="n">local_net</span><span class="o">=</span><span class="mf">127.0.0.1</span><span class="o">/</span><span class="mi">8</span>
+<span class="n">allow_reload</span><span class="o">=</span><span class="n">true</span>
+
+<span class="p">[</span><span class="n">transport</span><span class="o">-</span><span class="n">udp</span><span class="p">]</span>
+<span class="nb">type</span><span class="o">=</span><span class="n">transport</span>
+<span class="n">protocol</span><span class="o">=</span><span class="n">udp</span>    <span class="p">;</span><span class="n">udp</span><span class="p">,</span><span class="n">tcp</span><span class="p">,</span><span class="n">tls</span><span class="p">,</span><span class="n">ws</span><span class="p">,</span><span class="n">wss</span>
+<span class="n">bind</span><span class="o">=</span><span class="mf">0.0.0.0</span><span class="p">:</span><span class="mi">65060</span>
+<span class="n">allow_reload</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">external_media_address</span><span class="o">=</span><span class="p">{{</span><span class="n">your_server_ip</span><span class="p">}}</span>
+<span class="n">external_signaling_address</span><span class="o">=</span><span class="p">{{</span><span class="n">your_server_ip</span><span class="p">}}</span>
+<span class="n">local_net</span><span class="o">=</span><span class="mf">127.0.0.1</span><span class="o">/</span><span class="mi">8</span>
+
+<span class="p">[</span><span class="n">transport</span><span class="o">-</span><span class="n">tcp</span><span class="p">]</span>
+<span class="nb">type</span><span class="o">=</span><span class="n">transport</span>
+<span class="n">protocol</span><span class="o">=</span><span class="n">tcp</span>    <span class="p">;</span><span class="n">udp</span><span class="p">,</span><span class="n">tcp</span><span class="p">,</span><span class="n">tls</span><span class="p">,</span><span class="n">ws</span><span class="p">,</span><span class="n">wss</span>
+<span class="n">bind</span><span class="o">=</span><span class="mf">0.0.0.0</span><span class="p">:</span><span class="mi">65060</span>
+<span class="n">allow_reload</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">external_media_address</span><span class="o">=</span><span class="p">{{</span><span class="n">your_server_ip</span><span class="p">}}</span>
+<span class="n">external_signaling_address</span><span class="o">=</span><span class="p">{{</span><span class="n">your_server_ip</span><span class="p">}}</span>
+<span class="n">local_net</span><span class="o">=</span><span class="mf">127.0.0.1</span><span class="o">/</span><span class="mi">8</span>
+</pre></div>
+</div>
+<p>Here are <code class="docutils literal notranslate"><span class="pre">pjsip_wizard.conf</span></code> templates for all transports</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[webrtc-user](!)
+type = wizard
+transport = transport-wss
+accepts_registrations = yes
+sends_registrations = no
+accepts_auth = yes
+sends_auth = no
+endpoint/webrtc = yes
+endpoint/dtls_auto_generate_cert = yes
+endpoint/context = from-internal
+endpoint/allow = !all,alaw,ulaw
+endpoint/direct_media = no
+endpoint/force_rport = yes
+endpoint/rewrite_contact = yes
+endpoint/rtp_symmetric = yes
+endpoint/allow_transfer = yes
+endpoint/send_diversion = yes
+endpoint/ice_support = yes
+aor/qualify_frequency = 30
+aor/authenticate_qualify = no
+aor/max_contacts = 1
+aor/remove_existing = yes
+aor/minimum_expiration = 30
+aor/support_path = yes
+endpoint/inband_progress = yes
+
+[udp-user](!)
+type = wizard
+endpoint/rtp_symmetric=yes
+transport = transport-udp
+accepts_registrations = yes
+sends_registrations = no
+accepts_auth = yes
+sends_auth = no
+endpoint/context = from-internal
+endpoint/allow_subscribe = yes
+endpoint/allow = !all,ulaw,gsm,alaw
+endpoint/direct_media = no
+endpoint/force_rport = yes
+endpoint/ice_support = yes
+endpoint/moh_suggest = default
+endpoint/send_rpid = yes
+endpoint/rewrite_contact = yes
+endpoint/send_pai = yes
+endpoint/allow_transfer = yes
+endpoint/trust_id_inbound = yes
+endpoint/device_state_busy_at = 1
+endpoint/trust_id_outbound = yes
+endpoint/send_diversion = yes
+aor/qualify_frequency = 30
+aor/authenticate_qualify = no
+aor/max_contacts = 1
+aor/remove_existing = yes
+aor/minimum_expiration = 30
+aor/support_path = yes
+
+
+[tcp-user](!)
+type = wizard
+endpoint/rtp_symmetric=yes
+transport = transport-tcp
+accepts_registrations = yes
+sends_registrations = no
+accepts_auth = yes
+sends_auth = no
+endpoint/context = from-internal
+endpoint/allow_subscribe = yes
+endpoint/allow = !all,ulaw,gsm,alaw
+endpoint/direct_media = no
+endpoint/force_rport = yes
+endpoint/ice_support = yes
+endpoint/moh_suggest = default
+endpoint/send_rpid = yes
+endpoint/rewrite_contact = yes
+endpoint/send_pai = yes
+endpoint/allow_transfer = yes
+endpoint/trust_id_inbound = yes
+endpoint/device_state_busy_at = 1
+endpoint/trust_id_outbound = yes
+endpoint/send_diversion = yes
+aor/qualify_frequency = 30
+aor/authenticate_qualify = no
+aor/max_contacts = 1
+aor/remove_existing = yes
+aor/minimum_expiration = 30
+aor/support_path = yes
+</pre></div>
+</div>
 </section>
 <section id="context">
 <h2>Context<a class="headerlink" href="#context" title="Link to this heading"></a></h2>

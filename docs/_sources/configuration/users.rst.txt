@@ -33,6 +33,129 @@ Choose what transport to use for SIP account.
   Typically desktop softphones (MicroSIP, Zoiper, Linphone, etc) use ``udp``. Browser softphones (sipml5, sip.js, jssip) are for ``webrtc``.
   Also there is a ``tcp`` pre-configured transport, sometimes it's necessary to use this transport, e.g. for Microsoft Lync.
 
+Sample transport settings for ``pjsip.conf``
+
+.. code::
+
+    [transport-wss]
+    type=transport
+    protocol=wss
+    bind=0.0.0.0:65060
+    external_media_address={{your_server_ip}}
+    external_signaling_address={{your_server_ip}}
+    local_net=127.0.0.1/8
+    allow_reload=true
+
+    [transport-udp]
+    type=transport
+    protocol=udp    ;udp,tcp,tls,ws,wss
+    bind=0.0.0.0:65060
+    allow_reload=yes
+    external_media_address={{your_server_ip}}
+    external_signaling_address={{your_server_ip}}
+    local_net=127.0.0.1/8
+
+    [transport-tcp]
+    type=transport
+    protocol=tcp    ;udp,tcp,tls,ws,wss
+    bind=0.0.0.0:65060
+    allow_reload=yes
+    external_media_address={{your_server_ip}}
+    external_signaling_address={{your_server_ip}}
+    local_net=127.0.0.1/8
+
+Here are ``pjsip_wizard.conf`` templates for all transports
+
+.. code::
+  
+    [webrtc-user](!)
+    type = wizard
+    transport = transport-wss
+    accepts_registrations = yes
+    sends_registrations = no
+    accepts_auth = yes
+    sends_auth = no
+    endpoint/webrtc = yes
+    endpoint/dtls_auto_generate_cert = yes
+    endpoint/context = from-internal
+    endpoint/allow = !all,alaw,ulaw
+    endpoint/direct_media = no
+    endpoint/force_rport = yes
+    endpoint/rewrite_contact = yes
+    endpoint/rtp_symmetric = yes
+    endpoint/allow_transfer = yes
+    endpoint/send_diversion = yes
+    endpoint/ice_support = yes
+    aor/qualify_frequency = 30
+    aor/authenticate_qualify = no
+    aor/max_contacts = 1
+    aor/remove_existing = yes
+    aor/minimum_expiration = 30
+    aor/support_path = yes
+    endpoint/inband_progress = yes
+
+    [udp-user](!)
+    type = wizard
+    endpoint/rtp_symmetric=yes
+    transport = transport-udp
+    accepts_registrations = yes
+    sends_registrations = no
+    accepts_auth = yes
+    sends_auth = no
+    endpoint/context = from-internal
+    endpoint/allow_subscribe = yes
+    endpoint/allow = !all,ulaw,gsm,alaw
+    endpoint/direct_media = no
+    endpoint/force_rport = yes
+    endpoint/ice_support = yes
+    endpoint/moh_suggest = default
+    endpoint/send_rpid = yes
+    endpoint/rewrite_contact = yes
+    endpoint/send_pai = yes
+    endpoint/allow_transfer = yes
+    endpoint/trust_id_inbound = yes
+    endpoint/device_state_busy_at = 1
+    endpoint/trust_id_outbound = yes
+    endpoint/send_diversion = yes
+    aor/qualify_frequency = 30
+    aor/authenticate_qualify = no
+    aor/max_contacts = 1
+    aor/remove_existing = yes
+    aor/minimum_expiration = 30
+    aor/support_path = yes
+
+
+    [tcp-user](!)
+    type = wizard
+    endpoint/rtp_symmetric=yes
+    transport = transport-tcp
+    accepts_registrations = yes
+    sends_registrations = no
+    accepts_auth = yes
+    sends_auth = no
+    endpoint/context = from-internal
+    endpoint/allow_subscribe = yes
+    endpoint/allow = !all,ulaw,gsm,alaw
+    endpoint/direct_media = no
+    endpoint/force_rport = yes
+    endpoint/ice_support = yes
+    endpoint/moh_suggest = default
+    endpoint/send_rpid = yes
+    endpoint/rewrite_contact = yes
+    endpoint/send_pai = yes
+    endpoint/allow_transfer = yes
+    endpoint/trust_id_inbound = yes
+    endpoint/device_state_busy_at = 1
+    endpoint/trust_id_outbound = yes
+    endpoint/send_diversion = yes
+    aor/qualify_frequency = 30
+    aor/authenticate_qualify = no
+    aor/max_contacts = 1
+    aor/remove_existing = yes
+    aor/minimum_expiration = 30
+    aor/support_path = yes
+
+
 Context
 -------
 Asterisk context to use to place the outgoing call. In FreePBX  related systems it is usually ``from-internal``.
